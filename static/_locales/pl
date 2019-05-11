@@ -1,0 +1,266 @@
+{
+  "ext_name": {
+    "message": "Wizualne zakładki"
+  },
+  "ext_desc": {
+    "message": "Prosta strona szybkiego wybierania z możliwością wyszukiwania, dodawania, edytowania, usuwania i przeciągania zakładek."
+  },
+  "default_title": {
+    "message": "Wizualne zakładki"
+  },
+  "dark_theme": {
+    "message": "Ciemny motyw"
+  },
+  "placeholder_input_search": {
+    "message": "Wyszukaj w zakładkach"
+  },
+  "placeholder_input_title": {
+    "message": "Wpisz tytuł zakładki"
+  },
+  "label_title": {
+    "message": "Tytuł"
+  },
+  "label_url": {
+    "message": "Adres URL"
+  },
+  "label_folder": {
+    "message": "Folder"
+  },
+  "url_field_tip": {
+    "message": "Wpisz adres URL lub pozostaw to pole puste, jeśli chcesz utworzyć folder."
+  },
+  "btn_close": {
+    "message": "Anuluj"
+  },
+  "btn_save": {
+    "message": "Zapisz"
+  },
+  "btn_back": {
+    "message": "Gotowe"
+  },
+  "btn_apply": {
+    "message": "Zastosuj"
+  },
+  "contextmenu_tab": {
+    "message": "Otwórz w nowej karcie"
+  },
+  "contextmenu_window": {
+    "message": "Otwórz w nowym oknie"
+  },
+  "contextmenu_open_all": {
+    "message": "Otwórz wszystkie"
+  },
+  "contextmenu_open_all_window": {
+    "message": "Otwórz wszystkie w nowym oknie"
+  },
+  "contextmenu_incognito": {
+    "message": "Otwórz w trybie incognito"
+  },
+  "contextmenu_copy_link": {
+    "message": "Kopiuj adres linku"
+  },
+  "contextmenu_edit": {
+    "message": "Edytuj"
+  },
+  "contextmenu_capture": {
+    "message": "Odśwież miniaturę"
+  },
+  "contextmenu_upload": {
+    "message": "Prześlij z komputera"
+  },
+  "contextmenu_remove": {
+    "message": "Usuń"
+  },
+  "confirm_delete_image": {
+    "message": "Usunąć ten obraz?"
+  },
+  "confirm_delete_images": {
+    "message": "Czy na pewno? Wszystkie lokalne obrazy zostaną usunięte."
+  },
+  "confirm_delete_bookmark": {
+    "message": "Czy na pewno chcesz usunąć zakładkę?"
+  },
+  "confirm_delete_folder": {
+    "message": "Czy na pewno chcesz usunąć folder i całą jego zawartość?"
+  },
+  "confirm_restore_default_settings": {
+    "message": "Czy na pewno chcesz przywrócić ustawienia domyślne?"
+  },
+  "confirm_clear_sync_settings": {
+    "message": "Czy na pewno chcesz usunąć wszystkie zsynchronizowane dane?"
+  },
+  "confirm_sync_remote_settings": {
+    "message": "Posiadasz już zsynchronizowano dane!\nCzy chcesz zastąpić bieżące ustawienia lokalne uprzednio zsynchronizowanymi ustawieniami?"
+  },
+  "notice_image_removed": {
+    "message": "Obraz został usunięty"
+  },
+  "notice_thumb_image_updated": {
+    "message": "Miniaturka zakładki została zaktualizowana"
+  },
+  "notice_bookmark_exist": {
+    "message": "Zakładka już istnieje"
+  },
+  "notice_bookmark_created": {
+    "message": "Utworzono zakładkę"
+  },
+  "notice_bookmark_updated": {
+    "message": "Zaktualizowano zakładkę"
+  },
+  "notice_bookmark_removed": {
+    "message": "Zakładka została usunięta"
+  },
+  "notice_folder_removed": {
+    "message": "Folder został usunięty"
+  },
+  "notice_images_removed": {
+    "message": "Wszystkie zdjęcia zostały usunięte"
+  },
+  "notice_cant_find_id": {
+    "message": "Nie odnaleziono identyfikatora folderu. Być może nie posiadasz zsynchronizowanych zakładek."
+  },
+  "notice_save_settings_success": {
+    "message": "Ustawienia zostały zapisane"
+  },
+  "notice_reset_default_settings": {
+    "message": "Ustawienia lokalne zostały zresetowane"
+  },
+  "notice_sync_settings_cleared": {
+    "message": "Usunięto zsynchronizowane dane"
+  },
+  "notice_bg_image_updated": {
+    "message": "Obraz tła został zmieniony"
+  },
+  "notice_thumbnails_update_complete": {
+    "message": "Zakończono aktualizację miniatur"
+  },
+  "alert_create_fail_bookmark": {
+    "message": "- Aby dodać nowy folder wpisz tylko tytułu \n- Aby dodać nową zakładkę wpisz zarówno tytułu, jak i adres URL"
+  },
+  "alert_update_fail_bookmark": {
+    "message": "Edycja istniejącej zakładki wymaga podania zarówno tytułu, jak i prawidłowego adresu URL.\n\n Prawidłowy adres URL zaczyna się od: \n - http:// \n - https:// \n - ftp://"
+  },
+  "alert_file_type_fail": {
+    "message": "Nieprawidłowy format pliku\nPrawidłowe formaty (jpg | jpeg | png | webp)"
+  },
+  "not_found_text": {
+    "message": "Nie odnaleziono identyfikatora folderu. Być może nie posiadasz zsynchronizowanych zakładek lub folder został przeniesiony | usunięty."
+  },
+  "not_found_link_text": {
+    "message": "Pasek zakładek"
+  },
+  "add_bookmark": {
+    "message": "Dodaj do zakładek"
+  },
+  "edit_bookmark": {
+    "message": "Edytuj zakładkę"
+  },
+  "options": {
+    "message": "Opcje"
+  },
+  "view_setting": {
+    "message": "Widok"
+  },
+  "general_setting": {
+    "message": "Ogólne"
+  },
+  "advanced_setting": {
+    "message": "Zaawansowane"
+  },
+  "dial_width": {
+    "message": "Szerokość panelu"
+  },
+  "number_of_columns": {
+    "message": "Liczba kolumn"
+  },
+  "vertical_center": {
+    "message": "Wyśrodkowanie pionowe"
+  },
+  "default_folder_show": {
+    "message": "Folder do wyświetlenia"
+  },
+  "low_transparency_thumbs": {
+    "message": "Niewielka przezroczystość"
+  },
+  "background": {
+    "message": "Tło"
+  },
+  "color": {
+    "message": "Kolor"
+  },
+  "no_image": {
+    "message": "Bez obrazu tła"
+  },
+  "no_image_text": {
+    "message": "Motyw bez obrazu tła"
+  },
+  "url_image": {
+    "message": "Obraz z adresu URL"
+  },
+  "local_image": {
+    "message": "Obraz z komputera"
+  },
+  "choose_file": {
+    "message": "Wybierz plik"
+  },
+  "show_settings_icon": {
+    "message": "Pokaż ikonę ustawień"
+  },
+  "show_header_bar": {
+    "message": "Pokaż pasek wyszukiwania i folderu"
+  },
+  "show_create_column": {
+    "message": "Pokaż przycisk dodaj do zakładek"
+  },
+  "show_favicon": {
+    "message": "Pokaż ikonę ulubionych obok tytułu"
+  },
+  "show_contextmenu_item": {
+    "message": "Pokaż w menu kontekstowym"
+  },
+  "drag_and_drop": {
+    "message": "Włącz przeciąganie i upuszczanie"
+  },
+  "auto_generate_thumbnail": {
+    "message": "Generuj miniatury podczas tworzenia zakładek"
+  },
+  "enable_synchronization": {
+    "message": "Włącz synchronizację"
+  },
+  "advanced_settings": {
+    "message": "Zaawansowane ustawienia"
+  },
+  "thumbnail_service": {
+    "message": "Usługa miniatur"
+  },
+  "thumbnail_help": {
+    "message": "[URL] Token zostanie zastąpiony przez adres URL"
+  },
+  "careful_change": {
+    "message": "Bądź ostrożny, jeśli chcesz zmienić tę opcję"
+  },
+  "clear_local_images": {
+    "message": "Wyczyść folder z lokalnymi obrazami"
+  },
+  "reset_local_default": {
+    "message": "Zresetuj ustawienia lokalne do wartości domyślnych"
+  },
+  "reset_sync_text": {
+    "message": "Usuń zsynchronizowane dane z serwera"
+  },
+  "option_not_sync": {
+    "message": "Opcja nie jest synchronizowana"
+  },
+  "version": {
+    "message": "Wersja"
+  },
+  "google_services": {
+    "message": "Usługi Google"
+  },
+  "thumbnails_update_warn": {
+    "message": "Aktualizacja miniatur może wpłynąć na wydajność (zależy od liczby zakładek w folderze i wydajności komputera)"
+  },
+  "thumbnails_update_button": {
+    "message": "Przycisk aktualizacji miniatur"
+  }
+}
