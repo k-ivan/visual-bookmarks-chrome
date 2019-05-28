@@ -21,6 +21,7 @@ const Bookmarks = (() => {
   const container = document.getElementById('bookmarks');
   let sort = null;
   let isGeneratedThumbs = false;
+  let thumbnailWidth = parseInt(localStorage.getItem('thumbnail_width'));
 
   function init() {
     if (!container) return;
@@ -302,12 +303,14 @@ const Bookmarks = (() => {
     for (let img of thumbs) {
       Helpers.imageLoaded(img.dataset.externalThumb, {
         done(data) {
+          img.style.backgroundSize = `${thumbnailWidth}% auto`;
           img.style.backgroundImage = `url(${data})`;
         },
         fail() {
           img.classList.remove('bookmark__img--external');
           img.classList.add('bookmark__img--broken');
-          img.style.backgroundImage = `url(${img.dataset.failThumb})`;
+          img.style.backgroundSize = `100% auto`;
+          img.style.backgroundImage = `url(${thumbnailWidth})`;
         }
       });
     }

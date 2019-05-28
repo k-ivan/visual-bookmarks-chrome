@@ -44,6 +44,9 @@ export default {
     const lsGridWidth = parseInt(localStorage.getItem('dial_width'));
     const gridWidth = Math.floor(window.innerWidth * (lsGridWidth / 100));
 
+    // const lsGridWidth = parseInt(localStorage.getItem('dial_width'));
+    // const gridWidth = Math.floor(window.innerWidth * (lsGridWidth / 100));
+
     doc.style.setProperty('--container-width', `${gridWidth}px`);
 
     // Calculate column dimensions

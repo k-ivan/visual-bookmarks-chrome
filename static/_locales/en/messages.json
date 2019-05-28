@@ -170,6 +170,9 @@
   "dial_width": {
     "message": "Panel width"
   },
+  "thumbnail_width": {
+    "message": "Thumbnail width"
+  },
   "number_of_columns": {
     "message": "Number of Columns"
   },
