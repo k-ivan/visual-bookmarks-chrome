@@ -1,26 +1,18 @@
 export const storage = {
   local: {
     get(key) {
-      return new Promise(resolve => {
-        chrome.storage.local.get(key, resolve);
-      });
+      return chrome.storage.local.get(key);
     },
-    set(obj) {
-      return new Promise(resolve => {
-        chrome.storage.local.set(obj, resolve);
-      });
+    set(payload) {
+      return chrome.storage.local.set(payload);
     }
   },
   sync: {
     get(key) {
-      return new Promise(resolve => {
-        chrome.storage.sync.get(key, resolve);
-      });
+      return chrome.storage.sync.get(key);
     },
-    set(obj) {
-      return new Promise(resolve => {
-        chrome.storage.sync.set(obj, resolve);
-      });
+    set(payload) {
+      return chrome.storage.sync.set(payload);
     }
   }
 };

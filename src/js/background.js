@@ -1,8 +1,7 @@
-import { settings } from './settings';
-import FS from './api/fs';
 import ImageDB from './api/imageDB';
-import { storage } from './api/storage';
 import browserContextMenu from './plugins/browserContextMenu';
+import { settings } from './settings';
+import { storage } from './api/storage';
 import {
   $notifications,
   $base64ToBlob,
@@ -16,27 +15,6 @@ import {
   THUMBNAIL_POPUP_HEIGHT,
   THUMBNAIL_POPUP_WIDTH
 } from './constants';
-
-// TODO: transfer current thumbnails to indexDB
-// preparing to move to manifest
-function convertImageToDB(path) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => {
-      const canvas = new OffscreenCanvas(image.width, image.height);
-      const ctx = canvas.getContext('2d');
-
-      ctx.drawImage(image, 0, 0, image.width, image.height);
-
-      resolve(canvas.convertToBlob({
-        type: 'image/webp',
-        quality: 0.75
-      }));
-    };
-    image.onerror = reject;
-    image.src = path;
-  });
-}
 
 function browserActionHandler() {
   // TODO: need current hash folder
@@ -112,8 +90,11 @@ async function captureScreen(link, callback) {
 
       chrome.tabs.get(tab.id, function(tabInfo) {
         if (tabInfo.status === 'complete') {
-          chrome.tabs.insertCSS(tab.id, {
-            code: 'html, body { overflow-y: hidden !important; }'
+          chrome.scripting.insertCSS({
+            target: {
+              tabId: tab.id
+            },
+            css: 'html, body { overflow-y: hidden !important; }'
           });
           chrome.windows.update(w.id, {
             left: screen.availWidth - THUMBNAIL_POPUP_WIDTH,
@@ -212,96 +193,10 @@ chrome.storage.onChanged.addListener((changes, area) => {
 chrome.runtime.onInstalled.addListener(async(event) => {
   if (event.reason === 'install') {
     await settings.init();
-    await storage.local.set({ upgraded_settings: true });
   }
   initContextMenu();
   if (event.reason === 'update') {
-    // TODO: temporary code to migrate existing settings to new storage
-    // trying to transfer existing settings from localStorage to new chrome.storage
-    // to further prepare the migration to manifest v3
-
-    // in order to mark users whose settings have already been transferred,
-    // we will create a temporary flag in the repository upgraded_settings
-    // if the flag does not exist, then we try to transfer the settings to the new storage
-    const { upgraded_settings } = await storage.local.get('upgraded_settings');
-    if (!upgraded_settings) {
-      await settings.init();
-      await storage.local.set({ upgraded_settings: true });
-      // transfer only those parameters that exist in the new settings object
-      const restoreLegacySettings = Object.keys(settings.$).reduce((acc, key) => {
-        if (localStorage[key]) {
-          // translate options with boolean values to boolean type
-          if (['true', 'false'].includes(localStorage[key])) {
-            acc[key] = localStorage[key] === 'true';
-          } else {
-            // an object with services_list needs to be parsed into a JSON
-            acc[key] = (key === 'services_list')
-              ? JSON.parse(localStorage[key])
-              : localStorage[key];
-          }
-          // cleared setting from old storage
-          localStorage.removeItem(key);
-        }
-        return acc;
-      }, {});
-      // save the transferred settings in the new storage
-      await storage.local.set({ settings: restoreLegacySettings });
-    }
-
-    // TODO: transfer current thumbnails to indexDB
-    // preparing to move to manifest
-    // if (localStorage.custom_dials || localStorage.background_local) {
-    if (localStorage.custom_dials || localStorage.background_local) {
-      const images = [];
-      const customDials = JSON.parse(localStorage.custom_dials);
-
-      $notifications(
-        chrome.i18n.getMessage('transferring_thumbnails_notification'),
-        'changelog',
-        [{ title: chrome.i18n.getMessage('transferring_thumbnails_notification_btn') }]
-      );
-
-      for (const [key, value] of Object.entries(customDials)) {
-        try {
-          const blob = await convertImageToDB(value.image);
-          images.push({
-            id: key,
-            custom: value.custom,
-            blob
-          });
-        } catch (error) {
-          console.error(error);
-          if (error.target?.src) {
-            console.error('load error - ' + error.target.src);
-          }
-        }
-      }
-      localStorage.removeItem('custom_dials');
-
-      if (localStorage.background_local) {
-        const blob = await convertImageToDB(localStorage.background_local);
-        images.push({
-          id: 'background',
-          blob,
-          blobThumbnail: blob
-        });
-        localStorage.removeItem('background_local');
-      }
-
-      try {
-        await FS.init();
-        FS.purge();
-      } catch (error) {
-        console.warn('error: failed to clean up the images folder');
-      }
-
-      if (images.length) {
-        await ImageDB.add(images);
-        chrome.runtime.sendMessage({
-          event: 'transfered_thumbnails'
-        });
-      }
-    }
+    return chrome.tabs.create({ url: chrome.runtime.getURL('options.html#changelog') });
   }
 });
 
@@ -311,7 +206,7 @@ chrome.bookmarks.onRemoved.addListener(initContextMenu);
 chrome.bookmarks.onMoved.addListener(initContextMenu);
 
 chrome.contextMenus.onClicked.addListener(handlerCreateBookmark);
-chrome.browserAction.onClicked.addListener(browserActionHandler);
+chrome.action.onClicked.addListener(browserActionHandler);
 chrome.notifications.onClicked.addListener(browserActionHandler);
 chrome.notifications.onButtonClicked.addListener((id) => {
   // TODO: updates info

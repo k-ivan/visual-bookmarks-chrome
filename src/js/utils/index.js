@@ -277,3 +277,10 @@ export async function $filePicker(pickerOpts = {
   }
   return file;
 }
+
+export function faviconURL(url, size = 16) {
+  const favUrl = new URL(chrome.runtime.getURL('/_favicon/'));
+  favUrl.searchParams.set('pageUrl', url);
+  favUrl.searchParams.set('size', size);
+  return favUrl.toString();
+}

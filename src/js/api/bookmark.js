@@ -1,6 +1,10 @@
 const API = chrome.bookmarks;
-const RUNTIME = chrome.runtime;
 
+/**
+ * Get three folders
+ * @param {Array} arr
+ * @returns {Array} folders[]
+ */
 const recurseFolders = (arr) => {
   return arr.reduce((accum, current) => {
     if (current.children) {
@@ -15,135 +19,157 @@ const recurseFolders = (arr) => {
   }, []);
 };
 
+/**
+ * Get three
+ * @returns {Promise<BookmarkTreeNode[]>} BookmarkTreeNode
+ */
 export function getThree() {
-  return new Promise((resolve, reject) => {
-    API.getTree(function(rootNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
+  return API.getTree()
+    .then(rootNode => {
       const rootFolders = rootNode[0].children.map(item => item);
-      resolve(rootFolders);
+      return rootFolders;
     });
-  });
 }
 
-// Retrieves folders
+/**
+ * Retrieves folders
+ * @returns {Promise<BookmarkTreeNode[]>} BookmarkTreeNode
+ */
 export function getFolders() {
-  return new Promise((resolve, reject) => {
-    API.getTree(function(rootNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      const root = rootNode[0].children.map(item => item);
-      const folders = recurseFolders(root);
-      resolve(folders);
-    });
-  });
+  try {
+    return API.getTree()
+      .then(rootNode => {
+        const root = rootNode[0].children.map(item => item);
+        const folders = recurseFolders(root);
+        return folders;
+      });
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
+/**
+ * Retrieves the specified BookmarkTreeNode(s).
+ * @param {string} id
+ * @returns {Promise<BookmarkTreeNode[]>} BookmarkTreeNode
+ */
 export function get(id) {
-  return new Promise((resolve, reject) => {
-    API.get(id, function(BookmarkTreeNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkTreeNode);
-    });
-  });
+  try {
+    return API.get(id);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Retrieves the children of the specified BookmarkTreeNode id.
+/**
+ * Retrieves the children of the specified BookmarkTreeNode id.
+ * @param {string} id
+ * @returns {Promise<BookmarkTreeNode[]>} BookmarkTreeNode
+ */
 export function getChildren(id) {
-  return new Promise((resolve, reject) => {
-    API.getChildren(id, function(BookmarkTreeNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkTreeNode);
-    });
-  });
+  try {
+    return API.getChildren(id);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Retrieves part of the Bookmarks hierarchy, starting at the specified node.
+/**
+ * Retrieves part of the Bookmarks hierarchy, starting at the specified node.
+ * @param {string} id
+ * @returns {Promise<BookmarkTreeNode[]>} BookmarkTreeNode
+ */
 export function getSubTree(id) {
-  return new Promise((resolve, reject) => {
-    API.getSubTree(id, function(BookmarkTreeNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkTreeNode);
-    });
-  });
+  try {
+    return API.getSubTree(id);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Creates a bookmark or folder under the specified parentId. If url is NULL or missing, it will be a folder.
+/**
+ * Creates a bookmark or folder under the specified parentId. If url is NULL or missing, it will be a folder.
+ * @param {{
+ *  index?: number,
+ *  parentId?: string,
+ *  title?: string,
+ *  url?: string
+ * }} bookmark
+ * @returns {Promise<BookmarkTreeNode>} BookmarkTreeNode
+ */
 export function create(bookmark) {
-  return new Promise((resolve, reject) => {
-    API.create(bookmark, function(BookmarkNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkNode);
-    });
-  });
+  try {
+    return API.create(bookmark);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Updates the properties of a bookmark or folder. Specify only the properties that you want to change; unspecified properties will be left unchanged. Note: Currently, only 'title' and 'url' are supported.
+/**
+ * Updates the properties of a bookmark or folder.
+ * Specify only the properties that you want to change; unspecified properties will be left unchanged.
+ * Note: Currently, only 'title' and 'url' are supported.
+ * @param {string} id
+ * @param {{ title: string, url: string }} bookmark
+ * @returns {Promise<BookmarkTreeNode>} BookmarkTreeNode
+ */
 export function update(id, bookmark) {
-  return new Promise((resolve, reject) => {
-    API.update(id, bookmark, function(BookmarkNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkNode);
-    });
-  });
+  try {
+    return API.update(id, bookmark);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Moves the specified BookmarkTreeNode to the provided location.
+/**
+ * Moves the specified BookmarkTreeNode to the provided location.
+ * @param {string} id
+ * @param {string} destination
+ * @returns {Promise<BookmarkTreeNode>} BookmarkTreeNode
+ */
 export function move(id, destination) {
-  return new Promise((resolve, reject) => {
-    API.move(id, destination, function(BookmarkNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkNode);
-    });
-  });
+  try {
+    return API.move(id, destination);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Removes a bookmark or an empty bookmark folder.
+/**
+ * Removes a bookmark
+ * @param {string} id
+ * @returns {Promise<void>}
+ */
 export function remove(id) {
-  return new Promise((resolve, reject) => {
-    API.remove(id, function() {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve();
-    });
-  });
+  try {
+    return API.remove(id);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Recursively removes a bookmark folder.
+/**
+ * Recursively removes a bookmark folder.
+ * @param {string} id
+ * @returns {Promise<void>}
+ */
 export function removeTree(id) {
-  return new Promise((resolve, reject) => {
-    API.removeTree(id, function() {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve();
-    });
-  });
+  try {
+    return API.removeTree(id);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-// Search
+/**
+ * Search
+ * @param {string} query
+ * @returns {Promise<BookmarkTreeNode[]>} BookmarkTreeNode
+ */
 export function search(query) {
-  return new Promise((resolve, reject) => {
-    API.search(query, function(BookmarkTreeNode) {
-      if (RUNTIME.lastError) {
-        reject(RUNTIME.lastError);
-      }
-      resolve(BookmarkTreeNode);
-    });
-  });
+  try {
+    return API.search(query);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }

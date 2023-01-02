@@ -1,4 +1,4 @@
-export const FAVICON_SRC = `chrome://favicon/size/16@2x`;
+export const FAVICON_GOOGLE = 'https://www.google.com/s2/favicons?sz=32&amp;domain_url=';
 export const LOGO_CLEARBIT = `https://logo.clearbit.com/`;
 
 export const SVG_LOADER =

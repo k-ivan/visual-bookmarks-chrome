@@ -112,7 +112,9 @@ module.exports = (env, arg) => {
             transform(content, path) {
               if (path.includes('manifest.json') && arg.mode === 'development') {
                 const manifest = JSON.parse(content.toString());
-                manifest.content_security_policy = `script-src 'self' 'unsafe-eval'; object-src 'self'`
+                manifest.content_security_policy = {
+                  extension_pages: `script-src 'self'; object-src 'self'`,
+                }
                 return JSON.stringify(manifest, null, 2);
               }
               return content

@@ -3,7 +3,7 @@ import Validator from 'form-validation-plugin';
 import styles from './index.css';
 import html from './template.html';
 import {
-  FAVICON_SRC,
+  FAVICON_GOOGLE,
   SERVICES_COUNT
 } from '../../constants';
 import {
@@ -131,7 +131,7 @@ class VBServices extends HTMLElement {
   #addService() {
     if (this.hasOverLimit) return;
 
-    const {name, link} = this.settingsFormEl;
+    const { name, link } = this.settingsFormEl;
     const service = {
       id: $uid(),
       name: $escapeHtml(name.value),
@@ -226,8 +226,8 @@ class VBServices extends HTMLElement {
     this.grid.classList.toggle('is-empty', !hasServices);
   }
 
-  #templateItem({id, name, link}) {
-    const logo = `${FAVICON_SRC}/${link}`;
+  #templateItem({ id, name, link }) {
+    const logo = `${FAVICON_GOOGLE}${link}`;
     const nameText = document.createTextNode(name).textContent;
 
     return /* html */`
