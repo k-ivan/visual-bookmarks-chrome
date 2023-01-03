@@ -45,7 +45,7 @@
   text-decoration: none;
   border: 0;
   padding: 0;
-  background: rgba(33, 33, 33, 0.5);
+  background: rgb(33 33 33 / 50%);
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
@@ -68,13 +68,8 @@
   }
 }
 
-.update-thumbnails {
-  bottom: 12px;
-  left: 10px;
-  top: auto;
-  &::after {
-    background-image: url(/img/camera.svg);
-  }
+.update-thumbnails::after {
+  background-image: url("/img/camera.svg");
 }
 
 /* background image */
@@ -83,9 +78,9 @@
   z-index: -1;
   top: 0;
   right: 0;
-  /* right: -20px; */
   bottom: 0;
   left: 0;
+  pointer-events: none;
   will-change: opacity;
   transition: opacity 0.5s linear;
   opacity: 0;
@@ -100,25 +95,26 @@
     top: 0;
     right: 0;
     height: 280px;
-    background-image: linear-gradient(
-      to bottom,
-      hsla(0, 0%, 0%, 0.42) 0%,
-      hsla(0, 0%, 0%, 0.341) 1.1%,
-      hsla(0, 0%, 0%, 0.273) 4.4%,
-      hsla(0, 0%, 0%, 0.215) 9.3%,
-      hsla(0, 0%, 0%, 0.166) 15.8%,
-      hsla(0, 0%, 0%, 0.124) 23.5%,
-      hsla(0, 0%, 0%, 0.091) 32%,
-      hsla(0, 0%, 0%, 0.064) 41.2%,
-      hsla(0, 0%, 0%, 0.043) 50.6%,
-      hsla(0, 0%, 0%, 0.027) 60%,
-      hsla(0, 0%, 0%, 0.016) 69.2%,
-      hsla(0, 0%, 0%, 0.008) 77.7%,
-      hsla(0, 0%, 0%, 0.003) 85.4%,
-      hsla(0, 0%, 0%, 0.001) 91.8%,
-      hsla(0, 0%, 0%, 0) 96.8%,
-      hsla(0, 0%, 0%, 0) 100%
-    );
+    background-image:
+      linear-gradient(
+        to bottom,
+        hsl(0deg 0% 0% / 42%) 0%,
+        hsl(0deg 0% 0% / 34.1%) 1.1%,
+        hsl(0deg 0% 0% / 27.3%) 4.4%,
+        hsl(0deg 0% 0% / 21.5%) 9.3%,
+        hsl(0deg 0% 0% / 16.6%) 15.8%,
+        hsl(0deg 0% 0% / 12.4%) 23.5%,
+        hsl(0deg 0% 0% / 9.1%) 32%,
+        hsl(0deg 0% 0% / 6.4%) 41.2%,
+        hsl(0deg 0% 0% / 4.3%) 50.6%,
+        hsl(0deg 0% 0% / 2.7%) 60%,
+        hsl(0deg 0% 0% / 1.6%) 69.2%,
+        hsl(0deg 0% 0% / 0.8%) 77.7%,
+        hsl(0deg 0% 0% / 0.3%) 85.4%,
+        hsl(0deg 0% 0% / 0.1%) 91.8%,
+        hsl(0deg 0% 0% / 0%) 96.8%,
+        hsl(0deg 0% 0% / 0%) 100%
+      );
   }
 }
 
@@ -129,6 +125,7 @@
   font-weight: 600;
   font-size: 15px;
   border-radius: var(--base-radius);
+
   @nest .has-image & {
     background-color: var(--theme-background-3-alpha-65);
   }

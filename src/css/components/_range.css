@@ -13,7 +13,7 @@
 .range::-webkit-slider-runnable-track {
   height: 8px;
   background-image: linear-gradient(var(--color-primary), var(--color-primary));
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgb(0 0 0 / 15%);
   background-repeat: no-repeat;
   background-size: var(--range-track-fill) 100%;
   border-radius: 10px;
@@ -28,6 +28,6 @@
   appearance: none;
   background-color: var(--switch-active-circle);
   border-radius: 50%;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 60%);
   transition: 0.5s all ease;
 }

@@ -11,7 +11,7 @@ body.gmodal-open {
   right: 0;
   bottom: 0;
   z-index: 9998;
-  background: rgba(21, 21, 21, 0.75);
+  background: rgb(21 21 21 / 75%);
   &.has-animate {
     transition: opacity 0.15s linear;
     will-change: opacity;
@@ -109,7 +109,7 @@ body.gmodal-open {
   min-height: auto;
   border-radius: var(--base-radius);
   background-color: var(--modal-background);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
 }
 
 .gmodal__dialog {
@@ -125,7 +125,7 @@ body.gmodal-open {
     position: relative;
     min-height: auto;
     border-radius: var(--base-radius);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
   }
 }
 
@@ -259,7 +259,7 @@ body.gmodal-open {
     opacity: 0.7;
   }
   & svg {
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 

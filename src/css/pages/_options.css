@@ -63,7 +63,7 @@
   height: 50px;
   line-height: 50px;
   padding: 0 15px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
   border-radius: var(--base-radius);
 }
 
@@ -178,9 +178,9 @@ kbd {
 }
 
 code {
-  color: rgb(67, 135, 244);
+  color: rgb(67 135 244);
   background-color: rgb(40 107 215 / 16%);
-  border: 1px solid rgba(67, 135, 244, 0.15);
+  border: 1px solid rgb(67 135 244 / 15%);
 }
 
 code,

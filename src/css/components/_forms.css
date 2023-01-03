@@ -151,20 +151,20 @@ textarea {
     height: var(--switch-circle-size);
     background-color: var(--switch-inactive-circle);
     border-radius: 50%;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 60%);
   }
 }
 
 .switch__input:focus + .switch__label::after {
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6), 0 0 0 10px rgba(33, 150, 243, 0.2);
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 60%), 0 0 0 10px rgb(33 150 243 / 20%);
 }
 
 .switch__input:active + .switch__label::after {
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6), 0 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px 0 rgba(0 0 0 / 60%), 0 0 0 10px rgb(0 0 0 / 10%);
 }
 
 .switch__input:active:checked + .switch__label::after {
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6), 0 0 0 10px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 60%), 0 0 0 10px rgb(33 150 243 / 30%);
 }
 
 .switch__input:checked + .switch__label::before {

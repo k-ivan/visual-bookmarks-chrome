@@ -1,25 +1,25 @@
 :root {
   /* Colors */
-  --color-primary: rgb(67, 135, 244);
-  --color-primary-dark: rgb(40, 107, 215);
-  --color-primary-alpha-40: rgba(40, 107, 215, 0.4);
-  --color-muted: rgb(168, 168, 168);
-  --color-warning: rgb(221, 75, 57);
-  --color-warning-alpha-20: rgb(221, 75, 57, 0.2);
+  --color-primary: rgb(67 135 244);
+  --color-primary-dark: rgb(40 107 215);
+  --color-primary-alpha-40: rgb(40 107 215 / 40%);
+  --color-muted: rgb(168 168 168);
+  --color-warning: rgb(221 75 57);
+  --color-warning-alpha-20: rgb(221 75 57 / 20%);
 
   /* Theme */
-  --theme-background: rgb(255, 255, 255);
-  --theme-background-alpha-0: rgba(255, 255, 255, 0);
-  --theme-background-alpha-95: rgb(255, 255, 255, 0.95);
-  --theme-background-2: rgb(248, 249, 250);
-  --theme-background-3: rgb(242, 242, 242);
-  --theme-background-3-alpha-0: rgba(242, 242, 242, 0);
-  --theme-background-3-alpha-65: rgba(242, 242, 242, 0.65);
-  --theme-background-3-alpha-95: rgba(242, 242, 242, 0.95);
+  --theme-background: rgb(255 255 255);
+  --theme-background-alpha-0: rgb(255 255 255 / 0%);
+  --theme-background-alpha-95: rgb(255 255 255 / 95%);
+  --theme-background-2: rgb(248 249 250);
+  --theme-background-3: rgb(242 242 242);
+  --theme-background-3-alpha-0: rgba(242 242 242 / 0%);
+  --theme-background-3-alpha-65: rgba(242 242 242 / 65%);
+  --theme-background-3-alpha-95: rgba(242 242 242 / 95%);
   --theme-background-input: var(--theme-background);
   --theme-text-color: #212121;
-  --theme-invert-alpha-10: rgba(0, 0, 0, 0.1);
-  --theme-invert-alpha-50: rgba(0, 0, 0, 0.5);
+  --theme-invert-alpha-10: rgba(0 0 0 / 10%);
+  --theme-invert-alpha-50: rgba(0 0 0 / 50%);
 
   /* body */
   --body-background: var(--theme-background);
@@ -60,14 +60,14 @@
   --search-reset-btn-color: #000;
   --input-border: 1px solid #ddd;
   --input-padding: 7px 10px;
-  --input-shadow-color: hsla(217, 89%, 61%, 0.2);
+  --input-shadow-color: hsl(217deg 89% 61% / 20%);
   --input-shadow: 0 0 7px 2px var(--input-shadow-color);
   --input-shadow-error: 0 0 7px 2px var(--color-warning-alpha-20);
-  --input-placeholder-color: hsl(0, 0%, 66%);
-  --input-placeholder-focus-color: hsla(0, 0%, 80%);
+  --input-placeholder-color: hsl(0deg 0% 66%);
+  --input-placeholder-focus-color: hsl(0deg 0% 80%);
   --input-bg: var(--theme-background-input);
   --input-text-color: inherit;
-  --select-icon: url(/img/select-arrow.svg);
+  --select-icon: url("/img/select-arrow.svg");
   --input-radius: var(--base-radius);
 
   /* Buttons */
@@ -87,7 +87,7 @@
   --switch-height: 12px;
   --switch-inactive-bar: #9e9e9e;
   --switch-inactive-circle: #fff;
-  --switch-active-bar-color: hsla(217, 89%, 61%, 0.4);
+  --switch-active-bar-color: hsl(217deg 89% 61% / 40%);
   --switch-active-bar: var(--switch-active-bar-color);
   --switch-active-circle: var(--color-primary);
   --switch-circle-size: 16px;
@@ -111,8 +111,8 @@
   --options-background: #f8f9fa;
   --option-tbl-hover-bg: #f7f7f7;
   --tabs-control-background: var(--theme-background-3);
-  --tabs-control-gradient-background-alpha-0: rgba(249, 249, 249, 0);
-  --tabs-control-gradient-background: rgba(249, 249, 249, 0.95);
+  --tabs-control-gradient-background-alpha-0: rgb(249 249 249 / 0%);
+  --tabs-control-gradient-background: rgb(249 249 249 / 95%);
   --tabs-content-background: var(--theme-background);
 
   /* not found */
@@ -123,21 +123,21 @@
   /* Context menu */
   --context-menu-bg: var(--theme-background-3);
   --context-menu-color: var(--theme-text-color);
-  --context-menu-divider: rgba(0, 0, 0, 0.1);
+  --context-menu-divider: rgb(0 0 0 / 10%);
 }
 
 .dark {
-  --theme-background: rgb(33, 33, 33);
-  --theme-background-alpha-0: rgba(33, 33, 33, 0);
-  --theme-background-alpha-95: rgba(33, 33, 33, 0.95);
-  --theme-background-2: rgb(48, 48, 48);
-  --theme-background-3: rgb(64, 64, 64);
-  --theme-background-3-alpha-0: rgba(64, 64, 64, 0);
-  --theme-background-3-alpha-65: rgba(64, 64, 64, 0.65);
-  --theme-background-3-alpha-95: rgba(64, 64, 64, 0.95);
+  --theme-background: rgb(33 33 33);
+  --theme-background-alpha-0: rgb(33 33 33 / 0%);
+  --theme-background-alpha-95: rgb(33 33 33 / 95%);
+  --theme-background-2: rgb(48 48 48);
+  --theme-background-3: rgb(64 64 64);
+  --theme-background-3-alpha-0: rgb(64 64 64 / 0%);
+  --theme-background-3-alpha-65: rgb(64 64 64 / 65%);
+  --theme-background-3-alpha-95: rgb(64 64 64 / 95%);
   --theme-background-input: var(--theme-background-3);
-  --theme-invert-alpha-10: rgba(255, 255, 255, 0.1);
-  --theme-invert-alpha-50: rgba(255, 255, 255, 0.5);
+  --theme-invert-alpha-10: rgb(255 255 255 / 10%);
+  --theme-invert-alpha-50: rgb(255 255 255 / 50%);
 
   /* body */
   --body-background: var(--theme-background);
@@ -158,21 +158,21 @@
   /* Forms  dark theme */
   --header-input-color-controls: #fff;
   --search-reset-btn-color: #fff;
-  --input-text-color: rgba(255, 255, 255, 0.8);
-  --input-placeholder-color: hsl(0, 0%, 50%);
-  --input-placeholder-focus-color: hsla(0, 0%, 50%, 0.7);
+  --input-text-color: rgb(255 255 255 / 80%);
+  --input-placeholder-color: hsl(0deg 0% 50%);
+  --input-placeholder-focus-color: hsl(0deg 0% 50% / 70%);
   --input-border: 1px solid transparent;
-  --select-icon: url(/img/select-arrow-light.svg);
+  --select-icon: url("/img/select-arrow-light.svg");
 
   /* Options  dark theme */
   --options-background: var(--theme-background);
-  --option-tbl-hover-bg: hsla(0, 0%, 0%, 0.07);
+  --option-tbl-hover-bg: hsl(0deg 0% 0% / 7%);
   --tabs-content-background: var(--theme-background-2);
   --tabs-control-gradient-background-alpha: var(--theme-background-alpha-0);
-  --tabs-control-gradient-background: hsla(0, 0%, 13%, 0.95);
+  --tabs-control-gradient-background: hsl(0deg 0% 13% / 95%);
 
   /* Modal dark theme */
-  --modal-header-border-color: rgb(220, 220, 220, 0.1);
+  --modal-header-border-color: rgb(220 220 220 / 10%);
   --modal-close-fill: #fff;
   --modal-custom-image-bg: var(--theme-bg-200);
   --modal-custom-image-filter: none;
@@ -182,5 +182,5 @@
   --notfound-icon-filter: var(--filter-invert-image);
 
   /* Context menu */
-  --context-menu-divider: rgba(255, 255, 255, 0.1);
+  --context-menu-divider: rgb(255 255 255 / 10%);
 }

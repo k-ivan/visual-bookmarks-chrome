@@ -9,6 +9,10 @@
   grid-auto-rows: var(--grid-row-height);
   grid-gap: var(--grid-gap);
   justify-content: center;
+
+  & .not-found {
+    grid-column: 1 / -1;
+  }
 }
 
 .grid--vcenter {
@@ -18,11 +22,5 @@
 
   @nest .hidden-toolbar & {
     min-height: calc(100vh - 60px);
-  }
-}
-
-.grid {
-  & .not-found {
-    grid-column: 1 / -1;
   }
 }

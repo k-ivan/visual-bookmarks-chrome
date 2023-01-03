@@ -42,7 +42,7 @@
 }
 
 .search-icon {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .field-icon {
@@ -91,14 +91,14 @@
   }
   & svg {
     display: block;
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 
 .has-image .header .back {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(255 255 255 / 70%);
   border-color: transparent;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 25%);
 }
 
 .has-image .header select {
@@ -110,9 +110,9 @@
 }
 
 .has-image .header .form-control:not(:focus) {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(255 255 255 / 70%);
   border-color: transparent;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgb(255 255 255 / 25%);
 }
 
 .has-image .header .form-control:focus {
@@ -122,11 +122,11 @@
 
 .has-image .search-label,
 .has-image .search-reset-btn {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(255 255 255 / 80%);
 }
 
 .has-image .header .form-control:not(:focus)::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(255 255 255 / 70%);
 }
 
 .header input {
