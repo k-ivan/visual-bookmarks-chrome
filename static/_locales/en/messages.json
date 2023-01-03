@@ -394,5 +394,8 @@
   },
   "delete_thumbnail": {
     "message": "Delete thumbnail"
+  },
+  "show_back_column": {
+    "message": "Show back column in bookmarks"
   }
 }

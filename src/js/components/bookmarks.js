@@ -207,7 +207,7 @@ const Bookmarks = (() => {
           to.classList.add('has-highlight');
         }
         // do not sort create column
-        if (related.classList.contains('bookmark--nosort')) {
+        if (related.classList.contains('bookmark-btn')) {
           return false;
         }
       },
@@ -265,7 +265,7 @@ const Bookmarks = (() => {
           await move(item.getAttribute('data-id'), {
             'parentId': container.dataset.folder,
             'index': index
-          }).catch(err => console.warn(err));
+          }).catch(console.warn);
         });
       }
     });
@@ -423,9 +423,9 @@ const Bookmarks = (() => {
   /**
    * Render bookmarks
    * @param {Array<BookmarkTreeNode>} arr - array of bookmarks
-   * @param {boolean} [isCreate=false] - show add bookmark button
+   * @param {boolean} [hasCreate=false] - show add bookmark button
    */
-  async function render(arr, isCreate = false) {
+  async function render(arr, hasCreate = false) {
     dialLoading.hidden = false;
     clearContainer();
 
@@ -476,10 +476,21 @@ const Bookmarks = (() => {
 
     container.appendChild(fragment);
 
-    isCreate && container.appendChild(
+    const hasBack = (window.location.hash !== '')
+      && String(settings.$.default_folder_id) !== window.location.hash.slice(1)
+      && settings.$.show_back_column;
+
+    hasBack && container.prepend(
+      $createElement('button', {
+        id: 'bookmark-back',
+        class: 'bookmark-btn bookmark-btn--back md-ripple'
+      })
+    );
+
+    hasCreate && container.append(
       $createElement('button', {
         id: 'add',
-        class: 'bookmark--create bookmark--nosort md-ripple',
+        class: 'bookmark-btn bookmark-btn--create md-ripple',
         'data-create': 'New'
       })
     );
@@ -815,7 +826,7 @@ const Bookmarks = (() => {
         } else {
           bookmark = genFolder(result);
         }
-        container.querySelector('.bookmark--nosort').insertAdjacentElement('beforeBegin', bookmark);
+        container.querySelector('.bookmark--create').insertAdjacentElement('beforeBegin', bookmark);
 
         if (result.url) {
           if (settings.$.auto_generate_thumbnail) {

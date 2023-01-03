@@ -394,5 +394,8 @@
   },
   "delete_thumbnail": {
     "message": "Miniatűr törlése"
+  },
+  "show_back_column": {
+    "message": "Oszlop megjelenítése a könyvjelzőkben"
   }
 }

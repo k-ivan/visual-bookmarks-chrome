@@ -394,5 +394,8 @@
   },
   "delete_thumbnail": {
     "message": "Usuń miniaturę"
+  },
+  "show_back_column": {
+    "message": "Pokaż tylną kolumnę w zakładkach"
   }
 }

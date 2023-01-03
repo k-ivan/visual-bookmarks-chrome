@@ -186,7 +186,7 @@
     "message": "Ширина панели"
   },
   "number_of_columns": {
-    "message": "Кол-во колонок в ряду"
+    "message": "Показывать колонку назад в "
   },
   "vertical_center": {
     "message": "Вертикальное центрирование"
@@ -394,5 +394,8 @@
   },
   "delete_thumbnail": {
     "message": "Удалить миниатюру"
+  },
+  "show_back_column": {
+    "message": "Показывать колонку назад в закладках"
   }
 }

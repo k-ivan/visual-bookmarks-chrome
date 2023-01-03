@@ -21,6 +21,7 @@ const DEFAULTS = Object.freeze({
   show_toolbar: true,
   show_contextmenu_item: true,
   show_settings_icon: true,
+  show_back_column: true,
   show_create_column: true,
   show_bookmark_title: true,
   show_favicon: true,

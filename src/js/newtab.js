@@ -35,6 +35,7 @@ const urlWrap = document.getElementById('urlWrap');
 const customScreen = document.getElementById('customScreen');
 const ctxMenuEl = document.getElementById('context-menu');
 const upload = document.getElementById('upload');
+const windowInitialHash = window.location.hash;
 let isGenerateThumbs = false;
 let modalApi;
 let generateThumbsBtn = null;
@@ -230,7 +231,14 @@ function handlePageVisibility(id) {
 }
 
 function handleDelegateClick(evt) {
-  if (evt.target.closest('#add')) {
+  if (evt.target.closest('#bookmark-back')) {
+    evt.preventDefault();
+    if (windowInitialHash === window.location.hash) {
+      window.location.hash = settings.$.default_folder_id;
+    } else {
+      window.history.back();
+    }
+  } else if (evt.target.closest('#add')) {
     evt.preventDefault();
     prepareModal();
     modalApi.open();
