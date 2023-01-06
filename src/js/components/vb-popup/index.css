@@ -9,7 +9,7 @@
   height: 100%;
   padding: 0;
   border: none;
-  border-radius: var(--popup-btn-radius, var(--base-radius));
+  border-radius: var(--vb-popup-btn-radius, var(--base-radius));
   background-color: transparent;
   outline: none;
   cursor: pointer;

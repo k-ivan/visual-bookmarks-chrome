@@ -2,14 +2,12 @@
 @import "../../../css/components/_ripple.css";
 
 :host {
-  --popup-background: var(--theme-background);
-  --popup-color: var(--theme-color-text);
-  --popup-item-background-hover: var(--theme-background-3);
-  --popup-skeleton-background: #ddd;
   --vb-popup-left: auto;
   --vb-popup-right: -5px;
-  --popup-btn-radius: 50%;
   --vb-popup-top: calc(100% + 10px);
+  --vb-popup-btn-radius: 50%;
+  --vb-services-background: var(--theme-background);
+  --vb-services-skeleton-background: #ddd;
 
   position: fixed;
   z-index: 999;
@@ -21,10 +19,8 @@
   }
 }
 :host-context(.dark) {
-  --popup-background: var(--theme-background-2);
-  --popup-color: var(--theme-color-text);
-  --popup-item-background-hover: var(--theme-background-3);
-  --popup-skeleton-background: var(--theme-background-3);
+  --vb-services-background: var(--theme-background-2);
+  --vb-services-skeleton-background: var(--theme-background-3);
 }
 
 .services-popup {
@@ -75,7 +71,7 @@
   width: 10px;
   height: 10px;
   transform: rotate(45deg);
-  background-color: var(--popup-background);
+  background-color: var(--vb-services-background);
   box-shadow: -1px -1px 0 rgb(0 0 0 / 10%);
 }
 .list {
@@ -107,7 +103,7 @@
       content: "";
       width: 84px;
       height: 84px;
-      background-color: var(--popup-skeleton-background);
+      background-color: var(--vb-services-skeleton-background);
       background-image:
         radial-gradient(circle, var(--theme-background-2) 50%, transparent 50%),
         radial-gradient(circle, var(--theme-background-2) 50%, transparent 50%);
@@ -141,7 +137,7 @@
 }
 .item:focus,
 .item:hover {
-  background-color: var(--popup-item-background-hover);
+  background-color: var(--theme-background-3);
 }
 .item-img-wrap {
   display: flex;
