@@ -826,7 +826,7 @@ const Bookmarks = (() => {
         } else {
           bookmark = genFolder(result);
         }
-        container.querySelector('.bookmark--create').insertAdjacentElement('beforeBegin', bookmark);
+        container.querySelector('.bookmark-btn--create').insertAdjacentElement('beforeBegin', bookmark);
 
         if (result.url) {
           if (settings.$.auto_generate_thumbnail) {
