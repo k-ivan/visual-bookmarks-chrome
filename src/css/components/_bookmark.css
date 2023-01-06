@@ -46,7 +46,7 @@
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-image: url("/img/return-back.svg");
+  background-image: url("/img/turn-up.svg");
 }
 
 .bookmark-btn--create::after {

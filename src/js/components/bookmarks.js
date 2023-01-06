@@ -477,7 +477,7 @@ const Bookmarks = (() => {
     container.appendChild(fragment);
 
     const hasBack = (window.location.hash !== '')
-      && String(settings.$.default_folder_id) !== window.location.hash.slice(1)
+      && container.dataset?.parentFolder
       && settings.$.show_back_column;
 
     hasBack && container.prepend(
@@ -522,6 +522,12 @@ const Bookmarks = (() => {
         // folder by id exists
         render(item[0].children, settings.$.show_create_column);
         container.setAttribute('data-folder', id);
+
+        if (Number(item[0].parentId)) {
+          container.setAttribute('data-parent-folder', item[0].parentId);
+        } else {
+          container.removeAttribute('data-parent-folder');
+        }
       })
       .catch(() => {
         Toast.show(chrome.i18n.getMessage('notice_cant_find_id'));
