@@ -124,6 +124,9 @@
   --context-menu-bg: var(--theme-background-3);
   --context-menu-color: var(--theme-text-color);
   --context-menu-divider: rgb(0 0 0 / 10%);
+
+  /* search engines */
+  --engine-svg-color: #555;
 }
 
 .dark {
@@ -183,4 +186,7 @@
 
   /* Context menu */
   --context-menu-divider: rgb(255 255 255 / 10%);
+
+  /* search engines */
+  --engine-svg-color: #fafafa;
 }

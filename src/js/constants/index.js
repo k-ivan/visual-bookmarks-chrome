@@ -79,3 +79,52 @@ export const CONTEXT_MENU = [
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#delete_outline"/></svg>'
   }
 ];
+
+export const SEARCH_ENGINES = [
+  {
+    title: 'Bookmarks',
+    value: 'bookmarks'
+  },
+  {
+    title: 'Google',
+    url: 'https://www.google.com/search',
+    name: 'q',
+    value: 'google'
+  },
+  {
+    title: 'Bing',
+    url: 'https://bing.com/search',
+    name: 'q',
+    value: 'bing'
+  },
+  {
+    title: 'Yandex',
+    url: 'https://yandex.com/search/',
+    name: 'text',
+    value: 'yandex'
+  },
+  {
+    title: 'DuckDuckGo',
+    url: 'https://duckduckgo.com/',
+    name: 'q',
+    value: 'duckduckgo'
+  },
+  {
+    title: 'YouTube',
+    url: 'https://www.youtube.com/results',
+    name: 'search_query',
+    value: 'youtube'
+  },
+  {
+    title: 'Baidu',
+    url: 'https://www.baidu.com/s',
+    name: 'wd',
+    value: 'baidu'
+  },
+  {
+    title: 'Yahoo',
+    url: 'https://search.yahoo.com/search',
+    name: 'p',
+    value: 'yahoo'
+  }
+];

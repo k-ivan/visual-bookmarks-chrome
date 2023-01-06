@@ -24,7 +24,15 @@
     "message": "Adja meg az egyéni CSS-t (haladó felhasználók számára)"
   },
   "placeholder_input_search": {
-    "message": "Keresés a könyvjelzőkben"
+    "message": "Keresés a $engine$",
+    "placeholders": {
+      "engine": {
+        "content": "$1"
+      }
+    }
+  },
+  "placeholder_input_search_bookmarks": {
+    "message": "könyvjelzőkben"
   },
   "placeholder_input_title": {
     "message": "Adja meg a könyvjelző címét"
@@ -397,5 +405,8 @@
   },
   "show_back_column": {
     "message": "Oszlop megjelenítése a könyvjelzőkben"
+  },
+  "default_search_engine": {
+    "message": "Alapértelmezett kereső"
   }
 }

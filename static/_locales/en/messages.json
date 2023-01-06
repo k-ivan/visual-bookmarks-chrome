@@ -24,7 +24,15 @@
     "message": "Enter your custom CSS(For advanced users)"
   },
   "placeholder_input_search": {
-    "message": "Search bookmarks"
+    "message": "Search in $engine$",
+    "placeholders": {
+      "engine": {
+        "content": "$1"
+      }
+    }
+  },
+  "placeholder_input_search_bookmarks": {
+    "message": "bookmarks"
   },
   "placeholder_input_title": {
     "message": "Enter bookmark title"
@@ -397,5 +405,8 @@
   },
   "show_back_column": {
     "message": "Show back column in bookmarks"
+  },
+  "default_search_engine": {
+    "message": "Default search engine"
   }
 }

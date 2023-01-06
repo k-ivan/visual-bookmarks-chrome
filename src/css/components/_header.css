@@ -1,12 +1,15 @@
 .header {
   position: relative;
-  margin: -7px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   padding: 10px 0;
+  z-index: 1001;
 }
 
 @media (min-width: 480px) {
   .header {
-    display: flex;
+    flex-direction: row;
   }
 
   .header__items--search {
@@ -18,8 +21,74 @@
   }
 }
 
-.header > * {
-  margin: 7px;
+.header__engine {
+  --vb-popup-top: calc(100% + 10px);
+
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  bottom: 5px;
+}
+
+.header__engine-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  color: var(--engine-svg-color);
+  background-color: var(--theme-background-2);
+
+  & svg {
+    fill: currentcolor;
+  }
+}
+
+.has-image .search-wrap form:not(:focus-within) + .header__engine:not(:focus-within) .header__engine-button {
+  color: #fff;
+  background-color: rgb(255 255 255 / 25%);
+}
+
+.header__engine-content {
+  padding: 10px;
+  min-width: 150px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 17px;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    background-color: var(--theme-background-2);
+    box-shadow: -1px -1px 0 rgb(0 0 0 / 10%);
+  }
+}
+
+.header__engine-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 10px;
+  border-radius: var(--base-radius);
+  color: var(--theme-text-color);
+  cursor: pointer;
+  &:not(:last-child) {
+    margin-bottom: 3px;
+  }
+  &:hover,
+  &.is-active {
+    background-color: var(--theme-background-3);
+  }
+  &.is-active::after {
+    content: "✓";
+    margin-left: auto;
+  }
+  & svg {
+    fill: currentcolor;
+  }
 }
 
 .header__items {
@@ -36,8 +105,7 @@
   pointer-events: none;
 }
 
-.search-wrap input:focus + .search-label,
-.search-wrap input:focus ~ .search-reset-btn {
+.search-wrap form:focus-within ~ .search-reset-btn {
   color: var(--header-input-color-controls);
 }
 
@@ -130,7 +198,7 @@
 }
 
 .header input {
-  padding-left: 40px;
+  padding-left: 55px;
   padding-right: 40px;
 }
 

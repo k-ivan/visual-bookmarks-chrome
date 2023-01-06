@@ -2,7 +2,6 @@ import '../css/options.css';
 import './components/vb-select';
 import Gmodal from 'glory-modal';
 import TabsSlider from 'tabs-slider';
-import FS from './api/fs';
 import { settings } from './settings';
 import UI from './components/ui';
 import Localization from './plugins/localization';
@@ -18,6 +17,7 @@ import {
 } from './utils';
 import Range from './components/range';
 import ImageDB from './api/imageDB';
+import { SEARCH_ENGINES } from './constants';
 
 let modalInstance = null;
 let tabsSliderInstance = null;
@@ -166,6 +166,7 @@ function handleExportSettings() {
 
 function getOptions() {
   generateFolderList();
+  generateSearchEngineList();
 
   const optionBackgroundSelect = document.getElementById('background_image');
   optionBackgroundSelect.value = settings.$.background_image;
@@ -363,6 +364,13 @@ async function generateFolderList() {
     vbSelect.value = settings.$.default_folder_id;
     vbSelect.folders = folders;
   }
+}
+
+function generateSearchEngineList() {
+  const select = document.getElementById('search_engine');
+  select.innerHTML = SEARCH_ENGINES.map(engine => {
+    return `<option value="${engine.value}">${engine.title}</option>`;
+  }).join('');
 }
 
 init();

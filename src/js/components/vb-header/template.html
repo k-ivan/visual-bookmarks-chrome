@@ -1,12 +1,22 @@
 <div class="header">
   <div class="header__items header__items--search">
     <div class="search-wrap">
-      <input type="text" class="form-control" placeholder="Search bookmarks" id="bookmarkSearch" required spellcheck="false" data-locale-message="placeholder_input_search">
-      <label class="field-icon search-label" for="bookmarkSearch">
-        <svg class="search-icon" width="18" height="18" fill="currentColor">
-          <use xlink:href="/img/symbol.svg#search"/>
-        </svg>
-      </label>
+      <form method="get" action="">
+        <input
+          type="text"
+          id="bookmarkSearch"
+          class="form-control"
+          placeholder="Search"
+          spellcheck="false"
+          data-locale-message="placeholder_input_search"
+          autocomplete="off"
+        >
+      </form>
+      <vb-popup class="header__engine">
+        <span class="header__engine-button" slot="button">btn</span>
+        <div class="header__engine-content" slot="content"></div>
+      </vb-popup>
+
       <button class="field-icon search-reset-btn" id="searchReset">
         <svg class="search-icon" width="20" height="20">
           <use xlink:href="/img/symbol.svg#close"/>
