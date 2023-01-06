@@ -1,0 +1,44 @@
+:host {
+  position: relative;
+  z-index: 100;
+  display: block;
+}
+.button {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  border-radius: var(--popup-btn-radius, var(--base-radius));
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-40);
+  }
+}
+.content {
+  display: none;
+  position: absolute;
+  left: var(--vb-popup-left, 0);
+  right: var(--vb-popup-right, auto);
+  top: var(--vb-popup-top, 100%);
+  max-width: 300px;
+  opacity: 0;
+  color: var(--theme-text-color);
+  background-color: var(--theme-background-2);
+  border-radius: var(--base-radius);
+  transform: translateY(10px);
+  visibility: hidden;
+  transition-property: visibility, opacity, transform;
+  transition-duration: 0.15s, 0.15s, 0.15s;
+  transition-timing-function: ease-in-out;
+
+  &.is-show {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
