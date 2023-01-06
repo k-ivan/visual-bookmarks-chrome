@@ -195,9 +195,9 @@ chrome.runtime.onInstalled.addListener(async(event) => {
     await settings.init();
   }
   initContextMenu();
-  if (event.reason === 'update') {
-    return chrome.tabs.create({ url: chrome.runtime.getURL('options.html#changelog') });
-  }
+  // if (event.reason === 'update') {
+  //   return chrome.tabs.create({ url: chrome.runtime.getURL('options.html#changelog') });
+  // }
 });
 
 chrome.bookmarks.onCreated.addListener(initContextMenu);
