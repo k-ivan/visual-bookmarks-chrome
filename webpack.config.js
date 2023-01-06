@@ -87,6 +87,23 @@ module.exports = (env, arg) => {
       ]
     },
     optimization: {
+      // splitChunks: {
+      //   cacheGroups: {
+      //     // defaultVendors: {
+      //     //   test: /[\\/]node_modules[\\/]/,
+      //     //   priority: -10,
+      //     //   chunks: 'initial',
+      //     // }
+      //     // vbComponents: {
+      //     //     test: /[\\/]src[\\/]js[\\/]components[\\/]vb-[a-z]+[\\/]/,
+      //     //     test: path.resolve(__dirname, 'src/js/components/vb-popup'),
+      //     //     name: 'vb-components',
+      //     //     chunks: 'all',
+      //     //     minSize: 10000,
+      //     //     reuseExistingChunk: true,
+      //     // }
+      //   }
+      // },
       minimizer: [
         new TerserPlugin({
           // do not extract to separate file

@@ -8,6 +8,9 @@
     "no-descending-specificity": null,
     "function-comma-space-before": "never",
     "function-comma-space-after": "always-single-line",
+    "comment-empty-line-before": ["always", {
+      "except": ["first-nested"]
+    }],
     "color-hex-case": "lower",
     "color-hex-length": "short",
     "selector-class-pattern": "^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\[.+\\])?$",
