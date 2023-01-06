@@ -1,10 +1,10 @@
-<div class="services">
-  <button class="trigger">
+<vb-popup class="services">
+  <span class="trigger" slot="button">
     <svg width="20" height="20">
       <use xlink:href="/img/symbol.svg#apps"/>
     </svg>
-  </button>
-  <div class="popup">
+  </span>
+  <div class="popup-content" slot="content">
     <div class="list"></div>
     <button class="settings-trigger" data-locale-message="service_settings_btn">Tune</button>
     <div class="settings" hidden>
@@ -30,4 +30,4 @@
       <div class="settings-limit" data-locale-message="{services_limit_message}" hidden></div>
     </div>
   </div>
-</div>
+</vb-popup>

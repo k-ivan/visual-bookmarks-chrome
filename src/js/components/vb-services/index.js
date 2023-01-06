@@ -2,6 +2,7 @@ import Sortable from 'sortablejs';
 import Validator from 'form-validation-plugin';
 import styles from './index.css';
 import html from './template.html';
+import '../vb-popup';
 import {
   FAVICON_GOOGLE,
   SERVICES_COUNT
@@ -27,15 +28,72 @@ class VBServices extends HTMLElement {
       template.content.cloneNode(true)
     );
 
-    this.trigger = this.shadowRoot.querySelector('.trigger');
-    this.popup = this.shadowRoot.querySelector('.popup');
+    // this.trigger = this.shadowRoot.querySelector('.trigger');
+    // this.popup = this.shadowRoot.querySelector('.popup');
     this.grid = this.shadowRoot.querySelector('.list');
 
+    this.vbPopup = this.shadowRoot.querySelector('vb-popup');
     this.settingsTriggerEl = this.shadowRoot.querySelector('.settings-trigger');
     this.settingsEl = this.shadowRoot.querySelector('.settings');
     this.settingsFormEl = this.shadowRoot.querySelector('.settings-form');
     this.settingsLimitEl = this.shadowRoot.querySelector('.settings-limit');
     this.settingsCloseEl = this.shadowRoot.querySelector('.settings-close');
+  }
+
+  connectedCallback() {
+    // render component
+    this.#render();
+
+    Localization(this.popup);
+
+    // attach Events
+    this.#attachEvents();
+
+    // external plugin
+    this.sortableInstance = new Sortable(this.grid, {
+      animation: 150,
+      ghostClass: 'ghost',
+      onUpdate: (e) => {
+        this.services = this.#reorderArray(e, this.services);
+        this.dispatchEvent(
+          new CustomEvent('update', {
+            detail: {
+              services: this.services
+            },
+            bubbles: true,
+            cancelable: true
+          })
+        );
+      }
+    });
+
+    Validator.i18n = {
+      required: chrome.i18n.getMessage('error_input_required'),
+      url: chrome.i18n.getMessage('error_input_url')
+    };
+
+    Validator.run(this.settingsFormEl, {
+      showErrors: true,
+      checkChange: true,
+      checkInput: true,
+      containerSelector: '.group',
+      errorClass: 'has-error',
+      errorHintClass: 'error-hint',
+      onSuccess: (event) => {
+        event.preventDefault();
+        this.#addService();
+      },
+      onError: (err) => {
+        err[0].el.focus();
+      }
+    });
+  }
+
+  disconnectedCallback() {
+    this.#dettachEvents();
+    this.sortableInstance.destroy();
+    delete this.sortableInstance;
+    Validator.destroy();
   }
 
   set servicesList(services) {
@@ -54,26 +112,45 @@ class VBServices extends HTMLElement {
     return html.replace(`{services_limit_message}`, `services_limit:${SERVICES_COUNT}`);
   }
 
-  _attachEvents() {
-    this.handlerToggle = this.#toggle.bind(this);
-    this.handlerKeyClose = this.#closeByKey.bind(this);
-    this.handlerClickClose = this.#closeByClick.bind(this);
-    this.handleShowSettings = this.#showSettings.bind(this);
-    this.handleCancelForm = this.#cancelForm.bind(this);
-    this.handleRemove = this.#removeService.bind(this);
+  #render() {
+    const htmlList = this.services.map(this.#templateItem).join('');
+    this.grid.innerHTML = htmlList;
+    this.#toggleListEmpty();
+  }
 
-    this.trigger.addEventListener('click', this.handlerToggle);
-    document.addEventListener('click', this.handlerClickClose);
-    document.addEventListener('keydown', this.handlerKeyClose);
+  #templateItem({ id, name, link }) {
+    const logo = `${FAVICON_GOOGLE}${link}`;
+    const nameText = document.createTextNode(name).textContent;
+
+    return /* html */`
+      <a class="item" href="${link}" id="${id}">
+        <div class="item-img-wrap">
+          <img class="item-logo" alt="${nameText}" src="${logo}"/>
+        </div>
+        <div class="item-name">${nameText}</div>
+        <button class="item-remove" data-id="${id}">
+          <svg height="14" width="14">
+            <use xlink:href="/img/symbol.svg#minus"/>
+          </svg>
+        </button>
+      </a>`;
+  }
+
+  #attachEvents() {
+    this.handleShowSettings = this.#showSettings.bind(this);
     this.settingsTriggerEl.addEventListener('click', this.handleShowSettings);
+
+    this.handleCancelForm = this.#cancelForm.bind(this);
     this.settingsCloseEl.addEventListener('click', this.handleCancelForm);
+
+    this.handleRemove = this.#removeService.bind(this);
     this.grid.addEventListener('click', this.handleRemove);
+
+    this.handleHidePopup = this.#hideSettings.bind(this);
+    this.vbPopup.addEventListener('vb:popup:close', this.handleHidePopup);
   }
 
   #dettachEvents() {
-    this.trigger.removeEventListener('click', this.handlerToggle);
-    document.removeEventListener('click', this.handlerClickClose);
-    document.removeEventListener('keydown', this.handlerKeyClose);
     this.settingsTriggerEl.removeEventListener('click', this.handleShowSettings);
     this.settingsCloseEl.removeEventListener('click', this.handleCancelForm);
     this.grid.removeEventListener('click', this.handleRemove);
@@ -179,131 +256,9 @@ class VBServices extends HTMLElement {
     );
   }
 
-  #closeByClick(e) {
-    if (this.isActive && this !== e.target) {
-      this.#hide();
-    }
-  }
-
-  #closeByKey(e) {
-    if (e.which === 27 && this.isActive) {
-      this.#hide();
-    }
-  }
-
-  #show() {
-    this.trigger.classList.add('is-active');
-    this.popup.classList.add('is-open');
-    this.isActive = true;
-    this.dispatchEvent(new CustomEvent('open'), {
-      bubbles: true,
-      cancelable: true
-    });
-  }
-
-  #hide() {
-    this.trigger.classList.remove('is-active');
-    this.popup.classList.remove('is-open');
-    this.isActive = false;
-    this.dispatchEvent(new CustomEvent('close'), {
-      bubbles: true,
-      cancelable: true
-    });
-    // TODO: better use event(transitionend)
-    setTimeout(() => {
-      this.#hideSettings();
-    }, 150);
-  }
-
-  #toggle() {
-    !this.isActive
-      ? this.#show()
-      : this.#hide();
-  }
-
   #toggleListEmpty() {
     const hasServices = Boolean(this.servicesLength);
     this.grid.classList.toggle('is-empty', !hasServices);
-  }
-
-  #templateItem({ id, name, link }) {
-    const logo = `${FAVICON_GOOGLE}${link}`;
-    const nameText = document.createTextNode(name).textContent;
-
-    return /* html */`
-      <a class="item" href="${link}" id="${id}">
-        <div class="item-img-wrap">
-          <img class="item-logo" alt="${nameText}" src="${logo}"/>
-        </div>
-        <div class="item-name">${nameText}</div>
-        <button class="item-remove" data-id="${id}">
-          <svg height="14" width="14">
-            <use xlink:href="/img/symbol.svg#minus"/>
-          </svg>
-        </button>
-      </a>`;
-  }
-
-  #render() {
-    const htmlList = this.services.map(this.#templateItem).join('');
-    this.grid.innerHTML = htmlList;
-    this.#toggleListEmpty();
-  }
-
-  connectedCallback() {
-    // render component
-    this.#render();
-
-    Localization(this.popup);
-
-    // attach Events
-    this._attachEvents();
-
-    // external plugin
-    this.sortableInstance = new Sortable(this.grid, {
-      animation: 150,
-      ghostClass: 'ghost',
-      onUpdate: (e) => {
-        this.services = this.#reorderArray(e, this.services);
-        this.dispatchEvent(
-          new CustomEvent('update', {
-            detail: {
-              services: this.services
-            },
-            bubbles: true,
-            cancelable: true
-          })
-        );
-      }
-    });
-
-    Validator.i18n = {
-      required: chrome.i18n.getMessage('error_input_required'),
-      url: chrome.i18n.getMessage('error_input_url')
-    };
-
-    Validator.run(this.settingsFormEl, {
-      showErrors: true,
-      checkChange: true,
-      checkInput: true,
-      containerSelector: '.group',
-      errorClass: 'has-error',
-      errorHintClass: 'error-hint',
-      onSuccess: (event) => {
-        event.preventDefault();
-        this.#addService();
-      },
-      onError: (err) => {
-        err[0].el.focus();
-      }
-    });
-  }
-
-  disconnectedCallback() {
-    this.#dettachEvents();
-    this.sortableInstance.destroy();
-    delete this.sortableInstance;
-    Validator.destroy();
   }
 }
 
