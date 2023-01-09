@@ -79,6 +79,19 @@ export default {
 
     doc.style.setProperty('--container-width', `${gridWidth}px`);
 
+    // if there is at least one button and the width of the container is greater than 95
+    // set container inline padding
+    // to avoid overlaying the container on the buttons
+    // on the right the padding is larger due to the scrollbar
+    if ((
+      settings.$.show_settings_icon ||
+      settings.$.thumbnails_update_button ||
+      settings.$.services_enable
+    ) && lsGridWidth >= 95
+    ) {
+      doc.style.setProperty('--container-padding-inline', '50px 60px');
+    }
+
     // Calculate column dimensions
     const colWidth = Math.floor((grid.offsetWidth - ((columns - 1) * gap)) / columns);
     const colHeight = Math.floor(colWidth / ratio);
