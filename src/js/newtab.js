@@ -85,6 +85,10 @@ async function init() {
     stickySelectors: ['.sticky'],
     closeBackdrop: false
   });
+  modalApi.element.addEventListener('gmodal:beforeopen', () => {
+    // reset form and validation errors
+    form.reset();
+  });
   modalApi.element.addEventListener('gmodal:open', () => {
     // UX focus when modal open
     if (form.getAttribute('data-action') === 'New') {
