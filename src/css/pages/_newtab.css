@@ -40,8 +40,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: var(--circ-btn-size);
+  height: var(--circ-btn-size);
   text-decoration: none;
   border: 0;
   padding: 0;

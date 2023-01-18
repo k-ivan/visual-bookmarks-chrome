@@ -76,6 +76,7 @@
   --btn-color: #fff;
   --btn-padding: 7px 15px;
   --btn-radius: var(--base-radius);
+  --circ-btn-size: 30px;
 
   /* Scrollbar */
   --scrollbar-width: 12px;

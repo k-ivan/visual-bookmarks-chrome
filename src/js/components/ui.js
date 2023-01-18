@@ -89,7 +89,11 @@ export default {
       settings.$.services_enable
     ) && lsGridWidth >= 95
     ) {
-      doc.style.setProperty('--container-padding-inline', '50px 60px');
+      const circBtnSize = parseInt(window.getComputedStyle(doc).getPropertyValue('--circ-btn-size'), 10);
+      // button size + small padding
+      // value = left right(increased padding for the scrollbar)
+      const paddingInline = `${circBtnSize + 20}px ${circBtnSize + 30}px`;
+      doc.style.setProperty('--container-padding-inline', paddingInline);
     }
 
     // Calculate column dimensions
