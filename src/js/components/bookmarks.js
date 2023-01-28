@@ -31,6 +31,7 @@ import './vb-bookmark';
 const Bookmarks = (() => {
   const THUMBNAILS_MAP = new Map();
   const THUMBNAILS_CREATION_QUEUE = [];
+  const DROPZONE_SELECTOR = '.dropzone-bookmark';
   const container = document.getElementById('bookmarks');
   const dialLoading = document.getElementById('dial_loading');
   let isGeneratedThumbs = false;
@@ -134,7 +135,7 @@ const Bookmarks = (() => {
         for (let node of mutation.addedNodes) {
           if (!(node instanceof HTMLElement)) continue;
 
-          const dropzone = node.querySelector('.bookmark__dropzone');
+          const dropzone = node.querySelector(DROPZONE_SELECTOR);
           if (!dropzone) continue;
           initDrag(dropzone);
         }
@@ -142,7 +143,7 @@ const Bookmarks = (() => {
         for (let node of mutation.removedNodes) {
           if (!(node instanceof HTMLElement)) continue;
 
-          const dropzone = node.querySelector('.bookmark__dropzone');
+          const dropzone = node.querySelector(DROPZONE_SELECTOR);
           if (!dropzone) continue;
 
           dropzone.sortInstance?.destroy();
@@ -158,9 +159,9 @@ const Bookmarks = (() => {
 
   // helper to turn on the dropzone lighting
   function showDropzone(target) {
-    [...container.querySelectorAll('.bookmark__dropzone')]
+    [...container.querySelectorAll(DROPZONE_SELECTOR)]
       .forEach(el => {
-        const bookmark = el.closest('.bookmark');
+        const bookmark = el.closest('.bookmark') || el.closest('.bookmark-btn--back');
         if (bookmark.dataset.id !== target.dataset.id) {
           el.classList.add('is-activate');
         }
@@ -203,7 +204,7 @@ const Bookmarks = (() => {
        */
       onMove({ to, related }) {
         container.querySelector('.has-highlight')?.classList.remove('has-highlight');
-        if (to.matches('.bookmark__dropzone')) {
+        if (to.matches(DROPZONE_SELECTOR)) {
           to.classList.add('has-highlight');
         }
         // do not sort create column
@@ -487,7 +488,10 @@ const Bookmarks = (() => {
       $createElement('button', {
         id: 'bookmark-back',
         class: 'bookmark-btn bookmark-btn--back md-ripple'
-      })
+      }, $createElement('span', {
+        class: DROPZONE_SELECTOR.replace('.', ''),
+        'data-id': container.dataset?.parentFolder
+      }))
     );
 
     hasCreate && container.append(

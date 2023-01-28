@@ -159,7 +159,7 @@ class VbBookmark extends HTMLAnchorElement {
       }
       ${
         // if dnd create a dropzone
-        (this.isDND) ? /* html */`<div class="bookmark__dropzone" data-id="${this.id}"></div>` : ``
+        (this.isDND) ? /* html */`<div class="dropzone-bookmark" data-id="${this.id}"></div>` : ``
       }
     </div>`;
   }

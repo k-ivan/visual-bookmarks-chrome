@@ -210,7 +210,7 @@
   border-radius: var(--bookmark-radius);
 }
 
-.bookmark__dropzone {
+.dropzone-bookmark {
   visibility: hidden;
   opacity: 0;
   position: absolute;
@@ -224,6 +224,7 @@
   background-color: var(--bookmark-dropzone-background);
   z-index: 1;
   transition: opacity 0.15s linear, visibility 0.15s linear;
+  overflow: hidden;
   &:empty::after {
     content: "";
     background-image: url("/img/folder-open.svg");
@@ -248,15 +249,19 @@
   }
 }
 
-.bookmark__dropzone .bookmark {
+.bookmark-btn .dropzone-bookmark {
+  bottom: 0;
+}
+
+.dropzone-bookmark .bookmark {
   pointer-events: none;
 }
 
-.bookmark__dropzone .bookmark .bookmark__img--logo {
+.dropzone-bookmark .bookmark .bookmark__img--logo {
   background-size: min(30%, var(--bookmark-logo-size));
 }
 
-.bookmark__dropzone .bookmark__action,
-.bookmark__dropzone .bookmark__caption {
+.dropzone-bookmark .bookmark__action,
+.dropzone-bookmark .bookmark__caption {
   display: none;
 }
