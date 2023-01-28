@@ -408,5 +408,8 @@
   },
   "default_search_engine": {
     "message": "Default search engine"
+  },
+  "move_to_start": {
+    "message": "Move a bookmark to the top of the list inside a folder"
   }
 }

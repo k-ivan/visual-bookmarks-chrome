@@ -408,5 +408,8 @@
   },
   "default_search_engine": {
     "message": "Domyślna wyszukiwarka"
+  },
+  "move_to_start": {
+    "message": "Przenieś zakładkę na początek listy w folderze"
   }
 }

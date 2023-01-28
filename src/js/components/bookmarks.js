@@ -221,7 +221,10 @@ const Bookmarks = (() => {
        */
       onAdd({ item, clone, target }) {
         const id = item.dataset.id;
-        const parentId = target.dataset.id;
+        const destination = {
+          parentId: target.dataset.id,
+          ...(settings.$.move_to_start && { index: 0 })
+        };
 
         // preparation for animation
         item.style.transformOrigin = 'center bottom';
@@ -248,7 +251,7 @@ const Bookmarks = (() => {
           // hide highlight dropzone
           hideDropzone();
           // move the bookmark to the target folder
-          move(id, { parentId })
+          move(id, destination)
             .then(() => {
               const isFolder = item.hasAttribute('is-folder');
               // if the folder run the updateFolderList trigger
@@ -856,7 +859,11 @@ const Bookmarks = (() => {
       .then(result => {
         // if the bookmark is moved to another folder
         if (moveId !== id && moveId !== result.parentId) {
-          move(id, { parentId: moveId })
+          const destination = {
+            parentId: moveId,
+            ...(settings.$.move_to_start && { index: 0 })
+          };
+          move(id, destination)
             .then(() => {
               // if it is a folder update folderList
               if (!result.url) {

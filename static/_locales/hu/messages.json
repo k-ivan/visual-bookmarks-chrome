@@ -408,5 +408,8 @@
   },
   "default_search_engine": {
     "message": "Alapértelmezett kereső"
+  },
+  "move_to_start": {
+    "message": "Helyezzen át egy könyvjelzőt a lista elejére egy mappán belül"
   }
 }
