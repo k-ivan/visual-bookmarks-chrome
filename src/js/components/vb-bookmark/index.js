@@ -213,7 +213,7 @@ class VbBookmark extends HTMLAnchorElement {
   #logoUrl(url) {
     return this.#externalLogo
       ? `${LOGO_CLEARBIT}/${$getDomain(url)}`
-      : faviconURL(url, 64);
+      : faviconURL(url, 32);
   }
 
   get serviceLogo() {
