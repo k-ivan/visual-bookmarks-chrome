@@ -1,0 +1,37 @@
+:host {
+  position: fixed;
+  left: 12px;
+  bottom: 20px;
+  transform: translateX(-100%);
+  opacity: 0;
+  will-change: transform;
+  transition: 0.15s ease-in-out;
+  transition-property: transform, opacity;
+}
+
+:host(.is-shown) {
+  opacity: 1;
+  transform: none;
+}
+
+.vb-scrollup__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background-color: var(--theme-background-3);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  & svg {
+    fill: var(--theme-text-color);
+  }
+}

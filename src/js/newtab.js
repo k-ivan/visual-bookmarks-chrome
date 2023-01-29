@@ -1,6 +1,7 @@
 import '../css/newtab.css';
 import './components/vb-select';
 import './components/vb-context-menu';
+import './components/vb-scrollup';
 import Gmodal from 'glory-modal';
 import Validator from 'form-validation-plugin';
 import { settings } from './settings';
@@ -131,6 +132,9 @@ async function init() {
   ctxMenuEl.addEventListener('vb:contextmenu:open', handleMenuOpen);
   document.getElementById('resetCustomImage').addEventListener('click', handleResetThumb);
   modal.addEventListener('gmodal:close', handleCloseModal);
+
+  // scrollup button component
+  document.getElementById('aside_controls').insertAdjacentElement('afterend', $createElement('vb-scrollup'));
 
   // If thumbnail generation button
   if (settings.$.thumbnails_update_button) {
