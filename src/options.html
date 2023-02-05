@@ -235,19 +235,6 @@
             <div class="tbl">
               <div class="tbl__row">
                 <div class="tbl__setting">
-                  <div data-locale-message="thumbnails_update_delay">Delay when capture thumbnail</div>
-                  <small class="text-muted" data-locale-message="thumbnails_update_delay_note"></small>
-                </div>
-                <div class="tbl__value">
-                  <div class="tbl__sub">
-                    <input type="range" class="range js-range" name="delay_range" id="thumbnails_update_delay" min="0.5" max="15" step="0.5" data-selector-output="#thumbnail_delay_output" data-output-postfix="s">
-                    <span id="thumbnail_delay_output"></span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tbl__row">
-                <div class="tbl__setting">
                   <div data-locale-message="thumbnails_update_button"></div>
                   <small class="text-muted" data-locale-message="thumbnails_update_warn"></small>
                 </div>
@@ -255,6 +242,19 @@
                   <div class="switch">
                     <input type="checkbox" class="switch__input js-change" name="thumbnails_update_button" id="thumbnails_update_button">
                     <label class="switch__label" for="thumbnails_update_button"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tbl__row">
+                <div class="tbl__setting">
+                  <div data-locale-message="thumbnails_update_delay">Delay when capture thumbnail</div>
+                  <small class="text-muted" data-locale-message="thumbnails_update_delay_note"></small>
+                </div>
+                <div class="tbl__value">
+                  <div class="tbl__sub">
+                    <input type="range" class="range js-range" name="delay_range" id="thumbnails_update_delay" min="0.5" max="15" step="0.5" data-selector-output="#thumbnail_delay_output" data-output-postfix="s">
+                    <span id="thumbnail_delay_output"></span>
                   </div>
                 </div>
               </div>

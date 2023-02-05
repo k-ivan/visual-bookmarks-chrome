@@ -239,7 +239,7 @@
     "message": "Show the Favicon next to the title"
   },
   "open_link_newtab": {
-    "message": "Open bookmark in a new tab"
+    "message": "Open bookmarks and search in a new tab"
   },
   "show_contextmenu_item": {
     "message": "Show in context menu"
@@ -378,15 +378,6 @@
   },
   "close_tab_after_adding_bookmark_note": {
     "message": "Only when adding via the context menu"
-  },
-  "transferring_thumbnails_notification": {
-    "message": "Transferring thumbnails from the file system to storage. After that, the visual bookmarks page will be reloaded."
-  },
-  "transferring_thumbnails_notification_btn": {
-    "message": "More"
-  },
-  "transferring_thumbnails_notification_done": {
-    "message": "Thumbnail transfer process completed"
   },
   "empty_search": {
     "message": "Bookmarks not found"

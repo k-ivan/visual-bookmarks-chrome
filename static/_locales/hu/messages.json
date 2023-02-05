@@ -239,7 +239,7 @@
     "message": "A kedvencek ikon megjelenítése a cím mellett"
   },
   "open_link_newtab": {
-    "message": "Könyvjelző megnyitása új lapon"
+    "message": "Nyissa meg a könyvjelzőket, és keressen egy új lapon"
   },
   "show_contextmenu_item": {
     "message": "Megjelenítés a helyi menüben"
@@ -378,15 +378,6 @@
   },
   "close_tab_after_adding_bookmark_note": {
     "message": "Csak a helyi menün keresztül történő hozzáadásakor"
-  },
-  "transferring_thumbnails_notification": {
-    "message": "Bélyegképek átvitele a fájlrendszerből a tárolóba. Ezt követően a vizuális könyvjelzők oldala újra betöltődik."
-  },
-  "transferring_thumbnails_notification_btn": {
-    "message": "Több"
-  },
-  "transferring_thumbnails_notification_done": {
-    "message": "A miniatűrök átviteli folyamata befejeződött"
   },
   "empty_search": {
     "message": "A könyvjelzők nem találhatók"

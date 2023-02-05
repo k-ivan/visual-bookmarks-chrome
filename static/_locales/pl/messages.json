@@ -239,7 +239,7 @@
     "message": "Pokaż ikonę ulubionych obok tytułu"
   },
   "open_link_newtab": {
-    "message": "Otwórz zakładkę w nowej karcie"
+    "message": "Otwórz zakładki i wyszukaj w nowej karcie"
   },
   "show_contextmenu_item": {
     "message": "Pokaż w menu kontekstowym"
@@ -378,15 +378,6 @@
   },
   "close_tab_after_adding_bookmark_note": {
     "message": "Tylko w przypadku dodania za pomocą menu kontekstowego"
-  },
-  "transferring_thumbnails_notification": {
-    "message": "Przenoszenie miniatur z systemu plików do magazynu danych. Po zakończeniu strona wizualnych zakładek zostanie ponownie załadowana."
-  },
-  "transferring_thumbnails_notification_btn": {
-    "message": "Więcej"
-  },
-  "transferring_thumbnails_notification_done": {
-    "message": "Proces przenoszenia miniatur zakończony"
   },
   "empty_search": {
     "message": "Nie znaleziono zakładek"
