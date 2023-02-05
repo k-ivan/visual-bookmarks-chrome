@@ -19,11 +19,12 @@ import {
   $getDomain,
   $createElement,
   $copyStr,
-  $unescapeHtml,
-  $notifications
+  $unescapeHtml
 } from './utils';
 import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU } from './constants';
+import Toast from './components/toast';
+import { storage } from './api/storage';
 
 const container = document.getElementById('bookmarks');
 const modal = document.getElementById('modal');
@@ -42,14 +43,6 @@ let generateThumbsBtn = null;
 
 
 async function init() {
-  // TODO: while transferring thumbnails from the folder to the database
-  chrome.runtime.onMessage.addListener(request => {
-    if (request.event === 'transfered_thumbnails') {
-      $notifications(chrome.i18n.getMessage('transferring_thumbnails_notification_done'));
-      location.reload();
-    }
-  });
-
   // Set lang attr
   // Replacement underscore on the dash because underscore is not a valid language subtag
   document.documentElement.setAttribute(
@@ -170,6 +163,7 @@ async function init() {
   window.addEventListener('beforeunload', handleBeforeUnload);
   window.addEventListener('unload', handleUnload);
   window.addEventListener('storage', handleUpdateStorage);
+  window.addEventListener('load', handleLoad);
 
   // if support Page Visibility API
   // if the tab is open but not active, then when you change bookmarks from other places,
@@ -191,6 +185,20 @@ async function init() {
           window.location.reload();
         }
       });
+  }
+}
+
+async function handleLoad() {
+  // show a notification with a link to the description of the update
+  const { updated } = await storage.local.get('updated');
+  if (updated) {
+    Toast.show({
+      message: `Extension has been updated. <a href="/options.html#changelog">What's new</a>`,
+      delay: 0,
+      onClose() {
+        storage.local.remove('updated');
+      }
+    });
   }
 }
 

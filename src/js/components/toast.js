@@ -3,12 +3,14 @@ const Toast = (() => {
     position: 'bottom-left',
     modClass: '',
     hideByClick: true,
-    delay: 5000
+    delay: 5000,
+    onClose: null
   };
 
   let toast = null;
   let closeBtn = null;
   let timer = null;
+  let settings = null;
 
   function createElement(tag, options) {
     return Object.assign(document.createElement(tag), options);
@@ -19,7 +21,7 @@ const Toast = (() => {
       return hide(() => show(data));
     }
 
-    const settings = { ...defaults };
+    settings = { ...defaults };
     if (typeof data === 'string') {
       settings.message = data;
     } else {
@@ -68,12 +70,13 @@ const Toast = (() => {
     if (!toast) return;
     if (timer) clearTimeout(timer);
 
+    settings.onClose && settings.onClose();
     toast.classList.remove('toast-enter');
 
     const handler = (e) => {
       if (e.target !== toast) return;
       try {
-        closeBtn && closeBtn.removeEventListener('click', closeHandler);
+        closeBtn?.removeEventListener('click', closeHandler);
         toast.remove();
       } catch (error) {}
       toast = null;

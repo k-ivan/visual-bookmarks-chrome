@@ -5,6 +5,9 @@ export const storage = {
     },
     set(payload) {
       return chrome.storage.local.set(payload);
+    },
+    remove(key) {
+      return chrome.storage.local.remove(key);
     }
   },
   sync: {
@@ -13,6 +16,9 @@ export const storage = {
     },
     set(payload) {
       return chrome.storage.sync.set(payload);
+    },
+    remove(key) {
+      return chrome.storage.sync.remove(key);
     }
   }
 };
