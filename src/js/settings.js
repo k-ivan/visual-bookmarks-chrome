@@ -96,14 +96,14 @@ const settingsStore = () => {
      * @param {<any>} value
      * @returns
      */
-    updateKey(key, value) {
+    async updateKey(key, value) {
       if (!$settings) {
         throw Error('Settings store must be initialized with the init method');
       }
 
       $settings[key] = value;
       // resave settings in local storage
-      storage.local.set({ settings: $settings });
+      await storage.local.set({ settings: $settings });
 
       if ($settings.enable_sync) {
         if (!SETTINGS_NOT_SYNCED.includes(key)) {

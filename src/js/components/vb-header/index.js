@@ -84,12 +84,18 @@ class VbHeader extends HTMLElement {
       ? chrome.i18n.getMessage('placeholder_input_search_bookmarks')
       : engineObject.title;
 
-
-    this.inputNode.placeholder = chrome.i18n.getMessage('placeholder_input_search', [placeholderEngine]);
-    this.inputNode.name = engineObject.name ?? 'bookmarks';
-    this.formNode.action = engineObject.url ?? '';
-
-    settings.updateKey('search_engine', engine);
+    settings
+      .updateKey('search_engine', engine)
+      .then(() => {
+        this.inputNode.placeholder = chrome.i18n.getMessage('placeholder_input_search', [placeholderEngine]);
+        this.inputNode.name = engineObject.name ?? 'bookmarks';
+        this.formNode.action = engineObject.url ?? '';
+        if (settings.$.open_link_newtab) {
+          !this.isBookmarksEngine
+            ? this.formNode.setAttribute('target', '_blank')
+            : this.formNode.removeAttribute('target');
+        }
+      });
   }
 
   #setSearchEngines() {
