@@ -18,6 +18,7 @@ import {
 import Range from './components/range';
 import ImageDB from './api/imageDB';
 import { SEARCH_ENGINES } from './constants';
+import { storage } from './api/storage';
 
 let modalInstance = null;
 let tabsSliderInstance = null;
@@ -76,6 +77,9 @@ async function init() {
   // Modal
   modalInstance = new Gmodal(document.getElementById('modal'), {
     closeBackdrop: false
+  });
+  modalInstance.element.addEventListener('gmodal:open', function() {
+    storage.local.remove('updated');
   });
 
   const manifest = chrome.runtime.getManifest();
@@ -218,6 +222,49 @@ function toggleBackgroundControls(value) {
   tabsSliderInstance.recalcStyles();
 }
 
+function relationToggleOption(target) {
+  // Settings that depend on each other.
+  // When enabling one setting, the related setting must be disabled
+  if (target.dataset.relationToggleId) {
+    const checkedRegexp = /checkbox|radio/;
+    // association can be with multiple selectors
+    // create an array of settings IDs from the string
+    const ids = target.dataset.relationToggleId.split(',');
+    // get value regardless of element type
+    const value = checkedRegexp.test(target.type) ? target.checked : target.value;
+    ids.forEach(id => {
+      const relationEl = document.getElementById(id);
+      // disable the related option only if it was initially enabled
+      // if relation element => checkbox|radio
+      if (checkedRegexp.test(relationEl.type) && relationEl.checked) {
+        // if relation with boolean type
+        if (typeof value === 'boolean') {
+          relationEl.checked = !target.checked;
+        } else {
+        // otherwise we try to get the string value of the data attribute
+        // convert string to array
+        // and search by keyword
+        // if array includes keyword, we need to turn off the setting
+          const values = target.dataset.relationToggleValues.split(',');
+          relationEl.checked = !values.includes(value);
+        }
+        // update extension setting
+        settings.updateKey(id, relationEl.checked);
+      } else {
+        // if relation element => select
+        if (relationEl.tagName === 'SELECT') {
+          relationEl.selectedIndex = 0;
+        } else {
+        // if relation element => input
+          relationEl.value = '';
+        }
+        // update extension setting
+        settings.updateKey(id, relationEl.value);
+      }
+    });
+  }
+}
+
 function handleSetOptions(e) {
   const target = e.target.closest('.js-change');
   if (!target) return;
@@ -226,22 +273,11 @@ function handleSetOptions(e) {
 
   if (/checkbox|radio/.test(target.type)) {
     settings.updateKey(id, target.checked);
-
-    // Settings that depend on each other.
-    // When enabling one setting, the related setting must be disabled
-    if (target.dataset.relationToggleId) {
-      const id = target.dataset.relationToggleId;
-      const relationEl = document.getElementById(id);
-      // disable the related option only if it was initially enabled
-      if (relationEl.checked) {
-        relationEl.checked = !target.checked;
-        settings.updateKey(id, !target.checked);
-      }
-    }
   } else {
-    // localStorage.setItem(id, target.value);
     settings.updateKey(id, target.value);
   }
+
+  relationToggleOption(target);
 
   // dark theme
   if (target.id === 'color_theme') {
