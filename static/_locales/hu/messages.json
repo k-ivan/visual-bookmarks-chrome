@@ -335,12 +335,6 @@
   "import_settings_failed": {
     "message": "Nem sikerült elemezni a beállításfájlt!"
   },
-  "sort_by_newest": {
-    "message": "Rendezés a legújabbak szerint"
-  },
-  "sort_by_newest_warning": {
-    "message": "A húzás és ejtés rendezése le lesz tiltva, amíg ez az opció engedélyezve van"
-  },
   "without_confirmation": {
     "message": "Törléskor ne kérjen megerősítést"
   },
@@ -411,5 +405,23 @@
   },
   "move_to_start": {
     "message": "Helyezzen át egy könyvjelzőt a lista elejére egy mappán belül"
+  },
+  "bookmarks_sorting": {
+    "message": "Könyvjelzők rendezése"
+  },
+  "not_sorting": {
+    "message": "Nincs válogatva"
+  },
+  "sort_by_date": {
+    "message": "Dátum szerint"
+  },
+  "folders_on_top": {
+    "message": "Mappák a tetején"
+  },
+  "folders_at_the_bottom": {
+    "message": "Alul mappák"
+  },
+  "bookmarks_sorting_warning": {
+    "message": "A fogd és vidd rendezés le lesz tiltva, ha valamelyik rendezési opciót kiválasztja"
   }
 }

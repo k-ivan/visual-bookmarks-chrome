@@ -335,12 +335,6 @@
   "import_settings_failed": {
     "message": "Nie udało się przetworzyć pliku z ustawieniami"
   },
-  "sort_by_newest": {
-    "message": "Sortuj według najnowszych"
-  },
-  "sort_by_newest_warning": {
-    "message": "Gdy ta opcja jest włączona, sortowanie metodą „przeciągnij i upuść” zostanie wyłączone"
-  },
   "without_confirmation": {
     "message": "Nie pytaj o potwierdzenie przy usuwaniu"
   },
@@ -411,5 +405,23 @@
   },
   "move_to_start": {
     "message": "Przenieś zakładkę na początek listy w folderze"
+  },
+  "bookmarks_sorting": {
+    "message": "Sortowanie zakładek"
+  },
+  "not_sorting": {
+    "message": "Nie posortowane"
+  },
+  "sort_by_date": {
+    "message": "Według daty"
+  },
+  "folders_on_top": {
+    "message": "Foldery na górze"
+  },
+  "folders_at_the_bottom": {
+    "message": "Foldery na dole"
+  },
+  "bookmarks_sorting_warning": {
+    "message": "Sortowanie metodą „przeciągnij i upuść” zostanie wyłączone, jeśli wybrana zostanie jedna z opcji sortowania"
   }
 }

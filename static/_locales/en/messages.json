@@ -335,12 +335,6 @@
   "import_settings_failed": {
     "message": "Failed to parse settings file"
   },
-  "sort_by_newest": {
-    "message": "Sort by newest"
-  },
-  "sort_by_newest_warning": {
-    "message": "The drag-and-drop sort will be disabled while this option is enabled"
-  },
   "without_confirmation": {
     "message": "Do not ask for confirmation when deleting"
   },
@@ -411,5 +405,23 @@
   },
   "move_to_start": {
     "message": "Move a bookmark to the top of the list inside a folder"
+  },
+  "bookmarks_sorting": {
+    "message": "Bookmark sorting"
+  },
+  "not_sorting": {
+    "message": "Not sorted"
+  },
+  "sort_by_date": {
+    "message": "By date"
+  },
+  "folders_on_top": {
+    "message": "Folders on top"
+  },
+  "folders_at_the_bottom": {
+    "message": "Folders at the bottom"
+  },
+  "bookmarks_sorting_warning": {
+    "message": "Drag-and-drop sorting will be disabled if one of the sorting options is selected"
   }
 }

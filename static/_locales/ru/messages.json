@@ -335,12 +335,6 @@
   "import_settings_failed": {
     "message": "Неудалось распарсить файл с настройками"
   },
-  "sort_by_newest": {
-    "message": "Сортировать по новым"
-  },
-  "sort_by_newest_warning": {
-    "message": "Сортировка перетаскиванием будет отключена, пока этот параметр включен."
-  },
   "without_confirmation": {
     "message": "Не спрашивать потвержждения при удалении"
   },
@@ -411,5 +405,23 @@
   },
   "move_to_start": {
     "message": "Перемещать закладку в начало списка внутри папки"
+  },
+  "bookmarks_sorting": {
+    "message": "Сортировка закладок"
+  },
+  "not_sorting": {
+    "message": "Не сортировать"
+  },
+  "sort_by_date": {
+    "message": "По дате"
+  },
+  "folders_on_top": {
+    "message": "Папки наверху списка"
+  },
+  "folders_at_the_bottom": {
+    "message": "Папки внизу списка"
+  },
+  "bookmarks_sorting_warning": {
+    "message": "Сортировка перетаскиванием будет отключена, если выбран один из пунктов сортировки"
   }
 }

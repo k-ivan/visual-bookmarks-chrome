@@ -170,6 +170,10 @@ li:not(:last-child) {
   margin-bottom: 12px;
 }
 
+li ul {
+  margin-block: 12px;
+}
+
 code,
 kbd {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

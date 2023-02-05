@@ -44,7 +44,8 @@ const DEFAULTS = Object.freeze({
   close_tab_after_adding_bookmark: false,
   logo_external: false,
   search_engine: 'bookmarks',
-  move_to_start: false
+  move_to_start: false,
+  bookmarks_sorting: ''
 });
 
 const SETTINGS_NOT_SYNCED = ['default_folder_id', 'enable_sync'];

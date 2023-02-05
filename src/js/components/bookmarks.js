@@ -468,6 +468,18 @@ const Bookmarks = (() => {
       setChildrenThumbnails(childrenThumbnails, childrenBookmarks);
     }
 
+    // sorting selected in the settings
+    if (settings.$.bookmarks_sorting === 'folders_top') {
+      // folders at the top
+      arr.sort((a, b) => Object.hasOwn(a, 'url') ? 1 : Object.hasOwn(b, 'url') ? -1 : 0);
+    } else if (settings.$.bookmarks_sorting === 'folders_bottom') {
+      // folders at the bottom
+      arr.sort((a, b) => !Object.hasOwn(a, 'url') ? 0 : Object.hasOwn(b, 'url') ? 1 : -1);
+    } else if (settings.$.bookmarks_sorting === 'date') {
+      // by date(new top)
+      arr.sort((a, b) => b.dateAdded - a.dateAdded);
+    }
+
     const fragment = document.createDocumentFragment();
 
     for (let bookmark of arr) {
@@ -522,10 +534,7 @@ const Bookmarks = (() => {
         if (!item[0].children) {
           throw new Error('not_folder');
         }
-        // sort by newest
-        if (settings.$.sort_by_newest) {
-          item[0].children.sort((a, b) => b.dateAdded - a.dateAdded);
-        }
+
         // folder by id exists
         render(item[0].children, settings.$.show_create_column);
         container.setAttribute('data-folder', id);
