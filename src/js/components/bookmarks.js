@@ -468,16 +468,17 @@ const Bookmarks = (() => {
       setChildrenThumbnails(childrenThumbnails, childrenBookmarks);
     }
 
-    // sorting selected in the settings
-    if (settings.$.bookmarks_sorting === 'folders_top') {
+    // sorting by newest
+    if (settings.$.sort_by_date) {
+      arr.sort((a, b) => b.dateAdded - a.dateAdded);
+    }
+    // sorting by type
+    if (settings.$.bookmarks_sorting_type === 'folders_top') {
       // folders at the top
       arr.sort((a, b) => Object.hasOwn(a, 'url') ? 1 : Object.hasOwn(b, 'url') ? -1 : 0);
-    } else if (settings.$.bookmarks_sorting === 'folders_bottom') {
+    } else if (settings.$.bookmarks_sorting_type === 'folders_bottom') {
       // folders at the bottom
       arr.sort((a, b) => !Object.hasOwn(a, 'url') ? 0 : Object.hasOwn(b, 'url') ? 1 : -1);
-    } else if (settings.$.bookmarks_sorting === 'date') {
-      // by date(new top)
-      arr.sort((a, b) => b.dateAdded - a.dateAdded);
     }
 
     const fragment = document.createDocumentFragment();

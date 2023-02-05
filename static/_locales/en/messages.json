@@ -397,14 +397,14 @@
   "move_to_start": {
     "message": "Move a bookmark to the top of the list inside a folder"
   },
-  "bookmarks_sorting": {
-    "message": "Bookmark sorting"
+  "bookmarks_sorting_type": {
+    "message": "Sort by type"
+  },
+  "sort_by_date": {
+    "message": "Sort by date"
   },
   "not_sorting": {
     "message": "Not sorted"
-  },
-  "sort_by_date": {
-    "message": "By date"
   },
   "folders_on_top": {
     "message": "Folders on top"

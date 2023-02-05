@@ -14,7 +14,6 @@ const DEFAULTS = Object.freeze({
   dial_columns: 7,
   dial_width: 70, // value in percent (50,60,70,80,90)
   vertical_center: false,
-  sort_by_newest: false,
   drag_and_drop: true,
   auto_generate_thumbnail: true,
   enable_sync: false,
@@ -45,7 +44,8 @@ const DEFAULTS = Object.freeze({
   logo_external: false,
   search_engine: 'bookmarks',
   move_to_start: false,
-  bookmarks_sorting: ''
+  sort_by_date: false,
+  bookmarks_sorting_type: ''
 });
 
 const SETTINGS_NOT_SYNCED = ['default_folder_id', 'enable_sync'];

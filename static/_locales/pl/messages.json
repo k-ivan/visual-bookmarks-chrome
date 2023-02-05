@@ -397,14 +397,14 @@
   "move_to_start": {
     "message": "Przenieś zakładkę na początek listy w folderze"
   },
-  "bookmarks_sorting": {
-    "message": "Sortowanie zakładek"
+  "bookmarks_sorting_type": {
+    "message": "Sortuj według typu"
+  },
+  "sort_by_date": {
+    "message": "Sortowanie według daty"
   },
   "not_sorting": {
     "message": "Nie posortowane"
-  },
-  "sort_by_date": {
-    "message": "Według daty"
   },
   "folders_on_top": {
     "message": "Foldery na górze"

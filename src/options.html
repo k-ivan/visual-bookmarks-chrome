@@ -284,21 +284,6 @@
             </div>
 
             <div class="tbl">
-              <div class="tbl__setting">
-                <div data-locale-message="bookmarks_sorting"></div>
-                <small class="text-muted" data-locale-message="bookmarks_sorting_warning"></small>
-              </div>
-              <div class="tbl__value">
-                <select class="form-control js-change" id="bookmarks_sorting" data-relation-toggle-id="drag_and_drop" data-relation-toggle-values="date,folders_top,folders_bottom">
-                  <option value="" data-locale-message="not_sorting"></option>
-                  <option value="date" data-locale-message="sort_by_date"></option>
-                  <option value="folders_top" data-locale-message="folders_on_top"></option>
-                  <option value="folders_bottom" data-locale-message="folders_at_the_bottom"></option>
-                </select>
-              </div>
-            </div>
-
-            <div class="tbl">
               <div class="tbl__setting" data-locale-message="move_to_start"></div>
               <div class="tbl__value">
                 <div class="switch">
@@ -312,8 +297,35 @@
               <div class="tbl__setting" data-locale-message="drag_and_drop">Enable Drag &amp; Drop</div>
               <div class="tbl__value">
                 <div class="switch">
-                  <input type="checkbox" class="switch__input js-change" name="dnd" id="drag_and_drop" data-relation-toggle-id="bookmarks_sorting">
+                  <input type="checkbox" class="switch__input js-change" name="dnd" id="drag_and_drop" data-relation-toggle-id="sort_by_date,bookmarks_sorting_type">
                   <label class="switch__label" for="drag_and_drop"></label>
+                </div>
+              </div>
+            </div>
+            <div class="tbl">
+              <div class="tbl__row">
+                <div class="tbl__setting">
+                  <div data-locale-message="sort_by_date">sort_by_date</div>
+                  <small class="text-muted" data-locale-message="bookmarks_sorting_warning"></small>
+                </div>
+                <div class="tbl__value">
+                  <div class="switch">
+                    <input type="checkbox" class="switch__input js-change" name="sort_by_date" id="sort_by_date" data-relation-toggle-id="drag_and_drop">
+                    <label class="switch__label" for="sort_by_date"></label>
+                  </div>
+                </div>
+              </div>
+              <div class="tbl__row">
+                <div class="tbl__setting">
+                  <div data-locale-message="bookmarks_sorting_type">type</div>
+                  <small class="text-muted" data-locale-message="bookmarks_sorting_warning"></small>
+                </div>
+                <div class="tbl__value">
+                  <select class="form-control js-change" id="bookmarks_sorting_type" data-relation-toggle-id="drag_and_drop" data-relation-toggle-values="folders_top,folders_bottom">
+                    <option value="" data-locale-message="not_sorting"></option>
+                    <option value="folders_top" data-locale-message="folders_on_top"></option>
+                    <option value="folders_bottom" data-locale-message="folders_at_the_bottom"></option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -462,9 +474,8 @@
             <li>Added quick back to top button</li>
             <li>Sort parameter changes:
               <ul>
-                <li>Removed the option to sort by newest (instead of it now there are 3 options)</li>
+                <li>Sort by date</li>
                 <li>Sort by folder type (folders at the top of the list, folders at the bottom of the list)</li>
-                <li>Sort by date (replacing the old sorting option by newest)</li>
               </ul>
               <span class="badge">Note:</span> if you had the old option enabled "Sort by newest", you will need to select in the settings in the list "By date".
               If one of the sort items is selected, drag and drop sorting will be disabled

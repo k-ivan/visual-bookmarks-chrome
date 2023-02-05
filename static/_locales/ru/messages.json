@@ -397,14 +397,14 @@
   "move_to_start": {
     "message": "Перемещать закладку в начало списка внутри папки"
   },
-  "bookmarks_sorting": {
-    "message": "Сортировка закладок"
+  "bookmarks_sorting_type": {
+    "message": "Сортировка по типу"
+  },
+  "sort_by_date": {
+    "message": "Сортировка по дате"
   },
   "not_sorting": {
     "message": "Не сортировать"
-  },
-  "sort_by_date": {
-    "message": "По дате"
   },
   "folders_on_top": {
     "message": "Папки наверху списка"
