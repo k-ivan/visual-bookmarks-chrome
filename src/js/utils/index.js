@@ -184,7 +184,7 @@ export async function $resizeThumbnail(
     });
   }
 
-  const canvas = new OffscreenCanvas(500, 500);
+  const canvas = new OffscreenCanvas(imageBitmap.width, imageBitmap.height);
   const ctx = canvas.getContext('bitmaprenderer');
   ctx.transferFromImageBitmap(imageBitmap);
   imageBitmap.close();
