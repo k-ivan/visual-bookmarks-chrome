@@ -87,14 +87,14 @@ async function init() {
   document.getElementById('ext_version').textContent = `${chrome.i18n.getMessage('version')} ${manifest.version}`;
   document.getElementById('modal_changelog_version').textContent = manifest.version;
 
-  getOptions();
-
   tabs.addEventListener('tabChange', function(evt) {
     localStorage['option_tab_slide'] = evt.detail.currentIndex;
   });
   textareaInstance.el.addEventListener('textarea-autosize', function() {
     tabsSliderInstance.recalcStyles();
   });
+
+  getOptions();
 
   // Delegate change settings
   document.querySelector('.tabs').addEventListener('change', handleSetOptions);
