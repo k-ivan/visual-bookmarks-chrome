@@ -182,18 +182,23 @@ body.gmodal-open {
   letter-spacing: 0.03rem;
 }
 
+.gmodal__control-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 5px;
+
+  & .label {
+    margin-bottom: 0;
+  }
+}
+
 .gmodal__tip {
   display: none;
   font-size: 0.75rem;
   color: #999;
-}
-
-@media (min-width: 380px) {
-  .gmodal__tip {
-    position: absolute;
-    top: 1px;
-    right: 0;
-  }
 }
 
 .gmodal.has-add .gmodal__tip {
