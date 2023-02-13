@@ -57,9 +57,11 @@
                   spellcheck="false" data-valid="required">
               </div>
               <div class="group" id="urlWrap">
-                <label class="label" for="url" data-locale-message="label_url">URL</label>
+                <div class="gmodal__control-row">
+                  <label class="label" for="url" data-locale-message="label_url">URL</label>
+                  <span class="gmodal__tip" id="createTip" data-locale-message="url_field_tip">Enter URL or leave it blank if you want to create the folder</span>
+                </div>
                 <input type="text" class="form-control" id="url" placeholder="https://www.google.com" spellcheck="false" data-valid="regex(isValidUrl)">
-                <span class="gmodal__tip" id="createTip" data-locale-message="url_field_tip">Enter URL or leave it blank if you want to create the folder</span>
               </div>
               <div class="group gmodal__select" id="selFolder">
                 <label class="label" for="folderList" data-locale-message="label_folder"></label>
