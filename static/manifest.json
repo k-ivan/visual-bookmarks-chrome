@@ -18,7 +18,6 @@
     "default_title": "__MSG_default_title__"
   },
   "permissions": [
-    "favicon",
     "scripting",
     "background",
     "bookmarks",

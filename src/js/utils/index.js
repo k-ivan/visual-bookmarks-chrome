@@ -279,8 +279,9 @@ export async function $filePicker(pickerOpts = {
 }
 
 export function faviconURL(url, size = 16) {
-  const favUrl = new URL(chrome.runtime.getURL('/_favicon/'));
-  favUrl.searchParams.set('pageUrl', url);
-  favUrl.searchParams.set('size', size);
-  return favUrl.toString();
+  // const favUrl = new URL(chrome.runtime.getURL('/_favicon/'));
+  // favUrl.searchParams.set('pageUrl', url);
+  // favUrl.searchParams.set('size', size);
+  // return favUrl.toString();
+  return `https://www.google.com/s2/favicons?sz=${size}&domain_url=${url}`;
 }
