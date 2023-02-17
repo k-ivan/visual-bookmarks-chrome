@@ -414,5 +414,11 @@
   },
   "bookmarks_sorting_warning": {
     "message": "Sortowanie metodą „przeciągnij i upuść” zostanie wyłączone, jeśli wybrana zostanie jedna z opcji sortowania"
+  },
+  "extension_updated_notification": {
+    "message": "Rozszerzenie zostało zaktualizowane"
+  },
+  "whats_new": {
+    "message": "Co nowego"
   }
 }

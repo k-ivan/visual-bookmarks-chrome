@@ -196,7 +196,7 @@ chrome.runtime.onInstalled.addListener(async(event) => {
   }
   initContextMenu();
   if (event.reason === 'update') {
-    storage.local.set({ updated: true });
+    storage.local.set({ extension_updated: true });
     // return chrome.tabs.create({ url: chrome.runtime.getURL('options.html#changelog') });
   }
 });

@@ -414,5 +414,11 @@
   },
   "bookmarks_sorting_warning": {
     "message": "Сортировка перетаскиванием будет отключена, если выбран один из пунктов сортировки"
+  },
+  "extension_updated_notification": {
+    "message": "Расширение обновлено"
+  },
+  "whats_new": {
+    "message": "Что нового"
   }
 }

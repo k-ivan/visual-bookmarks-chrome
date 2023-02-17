@@ -190,13 +190,15 @@ async function init() {
 
 async function handleLoad() {
   // show a notification with a link to the description of the update
-  const { updated } = await storage.local.get('updated');
-  if (updated) {
+  const { extension_updated } = await storage.local.get('extension_updated');
+  if (extension_updated) {
+    const text = chrome.i18n.getMessage('extension_updated_notification');
+    const linkText = chrome.i18n.getMessage('whats_new');
     Toast.show({
-      message: `Extension has been updated. <a href="/options.html#changelog">What's new</a>`,
+      message: `${text}.&nbsp;&nbsp;<a href="/options.html#changelog">${linkText}</a>`,
       delay: 0,
       onClose() {
-        storage.local.remove('updated');
+        storage.local.remove('extension_updated');
       }
     });
   }

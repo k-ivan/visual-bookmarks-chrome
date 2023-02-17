@@ -414,5 +414,11 @@
   },
   "bookmarks_sorting_warning": {
     "message": "Drag-and-drop sorting will be disabled if one of the sorting options is selected"
+  },
+  "extension_updated_notification": {
+    "message": "Extension has been updated"
+  },
+  "whats_new": {
+    "message": "What's new"
   }
 }

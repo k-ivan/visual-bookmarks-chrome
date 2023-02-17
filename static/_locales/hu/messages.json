@@ -414,5 +414,11 @@
   },
   "bookmarks_sorting_warning": {
     "message": "A fogd és vidd rendezés le lesz tiltva, ha valamelyik rendezési opciót kiválasztja"
+  },
+  "extension_updated_notification": {
+    "message": "A bővítmény frissítve lett"
+  },
+  "whats_new": {
+    "message": "Mi újság"
   }
 }
