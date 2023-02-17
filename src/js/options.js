@@ -79,7 +79,7 @@ async function init() {
     closeBackdrop: false
   });
   modalInstance.element.addEventListener('gmodal:open', function() {
-    storage.local.remove('updated');
+    storage.local.remove('extension_updated');
   });
 
   const manifest = chrome.runtime.getManifest();
