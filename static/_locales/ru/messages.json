@@ -160,8 +160,21 @@
   "alert_update_fail_bookmark": {
     "message": "Редактирование существующей закладки требует как заголовка, так и действительного URL-адреса в Chrome\n\nНапример, действительные URL-адреса начинаются с\n - http:// \n - https:// \n - ftp://"
   },
-  "alert_file_type_fail": {
-    "message": "Недопустимый тип файла\nДопустимый формат (jpg | jpeg | png | webp)"
+  "alert_file_type_fail_type": {
+    "message": "Неверный тип файла\nДопустимый тип файла ($type$)",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "alert_file_type_fail_size": {
+    "message": "Максимальный размер загружаемого файла: $filesize$ MB",
+    "placeholders": {
+      "filesize": {
+        "content": "$1"
+      }
+    }
   },
   "not_found_text": {
     "message": "Папка не найдена. Возможно, у вас нет синхронизированных закладок или папка удалена|перемещена."
@@ -221,7 +234,7 @@
     "message": "Картинка с компьютера"
   },
   "choose_file": {
-    "message": "Выберите файл"
+    "message": "Изображение или видео"
   },
   "show_settings_icon": {
     "message": "Показывать иконку настроек"

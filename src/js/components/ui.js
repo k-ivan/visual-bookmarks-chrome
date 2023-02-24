@@ -1,4 +1,4 @@
-import { $imageLoaded } from '../utils';
+import { $createElement, $imageLoaded } from '../utils';
 import { settings } from '../settings';
 import ImageDB from '../api/imageDB';
 
@@ -40,10 +40,12 @@ export default {
     }
 
     let resource;
+    let hasVideo = false;
     if (bgState === 'background_local') {
       const image = await ImageDB.get('background');
       if (image?.blob) {
         resource = URL.createObjectURL(image.blob);
+        hasVideo = image.blob.type.startsWith('video');
       }
     } else {
       resource = settings.$.background_external;
@@ -51,19 +53,34 @@ export default {
 
     if (!resource) return;
 
-    bgEl.style.backgroundImage = `url('${resource}')`;
-
     if (resource && resource !== '') {
-      $imageLoaded(resource)
-        .then(() => {
-          (bgState === 'background_local') && URL.revokeObjectURL(resource);
-          document.body.classList.add('has-image');
-          bgEl.style.opacity = 1;
-        })
-        .catch(e => {
-          console.warn(`Local background image resource problem: ${e}`);
-          bgEl.style.opacity = 1;
+      if (hasVideo) {
+        const video = $createElement('video', {
+          muted: true,
+          loop: true,
+          autoplay: true,
+          src: resource
         });
+        bgEl.append(video);
+
+        video.addEventListener('canplay', () => {
+          bgEl.style.opacity = 1;
+          document.body.classList.add('has-image');
+        }, { once: true });
+      } else {
+        bgEl.style.backgroundImage = `url('${resource}')`;
+        $imageLoaded(resource)
+          .then(() => {
+            (bgState === 'background_local') && URL.revokeObjectURL(resource);
+            document.body.classList.add('has-image');
+          })
+          .catch(e => {
+            console.warn(`Local background image resource problem: ${e}`);
+          })
+          .finally(() => {
+            bgEl.style.opacity = 1;
+          });
+      }
     }
   },
   calculateStyles() {

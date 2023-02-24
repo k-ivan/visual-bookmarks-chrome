@@ -13,11 +13,16 @@ import { getFolders } from './api/bookmark';
 import {
   $notifications,
   $resizeThumbnail,
-  $trigger
+  $trigger,
+  getVideoPoster
 } from './utils';
 import Range from './components/range';
 import ImageDB from './api/imageDB';
-import { SEARCH_ENGINES } from './constants';
+import {
+  FILES_ALLOWED_EXTENSIONS,
+  MAX_FILE_SIZE_BYTES,
+  SEARCH_ENGINES
+} from './constants';
 import { storage } from './api/storage';
 
 let modalInstance = null;
@@ -108,6 +113,13 @@ async function init() {
   document.getElementById('export').addEventListener('click', handleExportSettings);
   document.getElementById('import').addEventListener('change', handleImportSettings);
   document.getElementById('bgFile').addEventListener('change', handleUploadFile);
+
+  // TODO until full support is available https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
+  document.getElementById('bgFile').setAttribute(
+    'accept',
+    FILES_ALLOWED_EXTENSIONS.map(ext => `.${ext}`).join(', ')
+  );
+
   document.querySelector('.info-btn').addEventListener('click', () => {
     modalInstance.open();
   });
@@ -286,18 +298,36 @@ function handleSetOptions(e) {
 }
 
 async function handleUploadFile() {
+  const form = this.closest('form');
   const file = this.files[0];
   if (!file) return;
 
-  this.closest('form').reset();
+  form.reset();
 
-  if (!/image\/(jpe?g|png|webp)$/.test(file.type)) {
-    return alert(chrome.i18n.getMessage('alert_file_type_fail'));
+  const isSizeExceeded = MAX_FILE_SIZE_BYTES < file.size;
+  const isAllowedType = FILES_ALLOWED_EXTENSIONS.some(type => file.type.endsWith(type));
+  if (!isAllowedType) {
+    return Toast.show(chrome.i18n.getMessage(
+      'alert_file_type_fail_type',
+      [FILES_ALLOWED_EXTENSIONS.join(' | ')]
+    ));
   }
+  if (isSizeExceeded) {
+    return Toast.show(chrome.i18n.getMessage(
+      'alert_file_type_fail_size',
+      [MAX_FILE_SIZE_BYTES / 10 ** 6]
+    ));
+  }
+
+  form.classList.add('is-upload');
+
   const blob = new Blob([new Uint8Array(await file.arrayBuffer())], {
     type: file.type
   });
-  const blobThumbnail = await $resizeThumbnail(blob);
+  const blobThumbnail = file.type.startsWith('video')
+    ? await getVideoPoster(file)
+    : await $resizeThumbnail(blob);
+
   if (backgroundImage) {
     URL.revokeObjectURL(backgroundImage);
   }
@@ -307,6 +337,8 @@ async function handleUploadFile() {
     blob,
     blobThumbnail
   });
+
+  form.classList.remove('is-upload');
 
   document.querySelector('.c-upload__preview').hidden = false;
   document.getElementById('preview_upload').innerHTML = /* html */

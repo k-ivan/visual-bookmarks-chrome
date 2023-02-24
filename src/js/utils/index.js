@@ -285,3 +285,33 @@ export function faviconURL(url, size = 16) {
   // return favUrl.toString();
   return `https://www.google.com/s2/favicons?sz=${size}&domain_url=${url}`;
 }
+
+export function getVideoPoster(file, height = 150) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+    // const blobUrl = URL.createObjectURL(file);
+      const video = document.createElement('video');
+      video.src = e.target.result;
+      video.muted = true;
+      // video.src = blobUrl;
+      video.currentTime = 1;
+      video.load();
+      // video.addEventListener('loadeddata', () => {
+      video.addEventListener('seeked', () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = video.videoWidth * (height / video.videoHeight);
+        canvas.height = height;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        // canvas.toBlob(resolve);
+        canvas.toBlob(blob => {
+          resolve(blob);
+          // URL.revokeObjectURL(blobUrl);
+        }, 'image/webp', 0.75);
+      }, { once: true });
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
