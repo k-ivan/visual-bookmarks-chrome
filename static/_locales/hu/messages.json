@@ -160,8 +160,21 @@
   "alert_update_fail_bookmark": {
     "message": "Egy meglévő könyvjelző szerkesztéséhez a Chrome-ban egy címre és egy érvényes URL-re is szükség van\n\n Például az érvényes URL-címek a következővel kezdődnek: \n - http:// \n - https:// \n - ftp://"
   },
-  "alert_file_type_fail": {
-    "message": "Rossz fájltípus\n Érvényes fájltípusok (jpg | jpeg | png | webp)"
+  "alert_file_type_fail_type": {
+    "message": "Rossz fájltípus\nÉrvényes fájltípus ($type$)",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "alert_file_type_fail_size": {
+    "message": "Maximális feltölthető fájlméret: $filesize$ MB",
+    "placeholders": {
+      "filesize": {
+        "content": "$1"
+      }
+    }
   },
   "not_found_text": {
     "message": "Nem találja a mappát az azonosító alapján. Lehet, hogy nem szinkronizálta a könyvjelzőket, vagy törölte vagy | áthelyezte ezt a mappát."
@@ -221,7 +234,7 @@
     "message": "Kép a számítógépről"
   },
   "choose_file": {
-    "message": "Válasszon ki egy fájlt"
+    "message": "Kép vagy videó"
   },
   "show_settings_icon": {
     "message": "A beállítások ikonjának megjelenítése"

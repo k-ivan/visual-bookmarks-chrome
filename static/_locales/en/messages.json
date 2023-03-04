@@ -160,8 +160,21 @@
   "alert_update_fail_bookmark": {
     "message": "Editing an existing Bookmark requires both a Title and a valid URL in Chrome\n\n For example, valid URL's start with: \n - http:// \n - https:// \n - ftp://"
   },
-  "alert_file_type_fail": {
-    "message": "Bad file type\nValid file type (jpg | jpeg | png | webp)"
+  "alert_file_type_fail_type": {
+    "message": "Bad file type\nValid file type ($type$)",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "alert_file_type_fail_size": {
+    "message": "Maximum upload file size: $filesize$ MB",
+    "placeholders": {
+      "filesize": {
+        "content": "$1"
+      }
+    }
   },
   "not_found_text": {
     "message": "Can not find the folder by id. You may not have synchronized bookmarks, or you deleted | moved this folder."
@@ -221,7 +234,7 @@
     "message": "Image from Computer"
   },
   "choose_file": {
-    "message": "Choose a file"
+    "message": "Image or video"
   },
   "show_settings_icon": {
     "message": "Show the settings icon"

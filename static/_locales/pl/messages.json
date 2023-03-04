@@ -160,8 +160,21 @@
   "alert_update_fail_bookmark": {
     "message": "Edycja istniejącej zakładki wymaga podania zarówno tytułu, jak i prawidłowego adresu URL.\n\n Prawidłowy adres URL zaczyna się od: \n - http:// \n - https:// \n - ftp://"
   },
-  "alert_file_type_fail": {
-    "message": "Nieprawidłowy format pliku\nPrawidłowe formaty (jpg | jpeg | png | webp)"
+  "alert_file_type_fail_type": {
+    "message": "Zły typ pliku\nPrawidłowy typ pliku ($type$)",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "alert_file_type_fail_size": {
+    "message": "Maksymalny rozmiar przesyłanego pliku: $filesize$ MB",
+    "placeholders": {
+      "filesize": {
+        "content": "$1"
+      }
+    }
   },
   "not_found_text": {
     "message": "Nie odnaleziono identyfikatora folderu. Możesz nie posiadać zsynchronizowanych zakładek lub folder został przeniesiony | usunięty."
@@ -221,7 +234,7 @@
     "message": "Obraz z komputera"
   },
   "choose_file": {
-    "message": "Wybierz plik"
+    "message": "Obraz lub wideo"
   },
   "show_settings_icon": {
     "message": "Pokaż ikonę ustawień"

@@ -19,6 +19,18 @@ export const REGEXP_URL_PATTERN = /^(https?|ftp|file|edge|chrome|(chrome-)?exten
 export const THUMBNAIL_POPUP_WIDTH = 1170;
 export const THUMBNAIL_POPUP_HEIGHT = 720;
 
+export const FILES_ALLOWED_EXTENSIONS = [
+  'avif',
+  'jpg',
+  'jpeg',
+  'webp',
+  'gif',
+  'png',
+  'svg',
+  'mp4'
+];
+export const MAX_FILE_SIZE_BYTES = 50 * (10 ** 6);
+
 export const CONTEXT_MENU = [
   {
     action: 'new_tab',
