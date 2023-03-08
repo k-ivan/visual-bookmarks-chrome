@@ -207,7 +207,7 @@
     "message": "Ширина панели"
   },
   "number_of_columns": {
-    "message": "Показывать колонку назад в "
+    "message": "Кол-во колонок в ряду"
   },
   "vertical_center": {
     "message": "Вертикальное центрирование"
