@@ -177,7 +177,7 @@ class VbHeader extends HTMLElement {
             class: 'back'
           },
           {
-            innerHTML: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#arrow_back"/></svg>`
+            html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#arrow_back"/></svg>`
           }
         );
         this.handleBack = this.handleBack.bind(this);

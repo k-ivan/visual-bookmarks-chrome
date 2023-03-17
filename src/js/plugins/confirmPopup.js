@@ -26,7 +26,7 @@ const popupEl = $createElement('div',
     id: 'popup'
   },
   {
-    innerHTML: template
+    html: template
   }
 );
 document.body.appendChild(popupEl);

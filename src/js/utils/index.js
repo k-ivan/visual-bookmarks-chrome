@@ -6,8 +6,8 @@ export function $createElement(tag, attributes = {}, ...children) {
       element.setAttribute(attribute, attributes[attribute]);
     }
   }
-  if (children.length && children[0].innerHTML) {
-    element.innerHTML = children[0].innerHTML;
+  if (children.length && children[0].html !== undefined) {
+    element.innerHTML = children[0].html;
   } else if (children.length) {
     const fragment = document.createDocumentFragment();
     children.forEach(child => {

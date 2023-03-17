@@ -44,7 +44,7 @@ class VbBookmark extends HTMLAnchorElement {
       this.#overlayEl = $createElement('div', {
         class: 'bookmark__overlay'
       }, {
-        innerHTML: SVG_LOADER
+        html: SVG_LOADER
       });
       this.appendChild(this.#overlayEl);
       this.classList.add('disable-events');

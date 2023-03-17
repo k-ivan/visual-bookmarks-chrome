@@ -20,12 +20,12 @@ class VbPopup extends HTMLElement {
     this.popupTriger = $createElement('button', {
       class: 'button'
     }, {
-      innerHTML: '<slot name="button"></slot>'
+      html: '<slot name="button"></slot>'
     });
     this.popupContent = $createElement('div', {
       class: 'content'
     }, {
-      innerHTML: '<slot name="content"></<slot>'
+      html: '<slot name="content"></<slot>'
     });
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `<style>${styles}</style>`;

@@ -18,7 +18,7 @@ class VbScrollup extends HTMLElement {
     this.scrollButton = $createElement('button', {
       class: 'vb-scrollup__button'
     }, {
-      innerHTML: /* html */
+      html: /* html */
         `<svg width="20" height="20">
           <use xlink:href="/img/symbol.svg#arrow_upward"/>
         </svg>`
