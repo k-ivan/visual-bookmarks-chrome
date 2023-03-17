@@ -212,7 +212,7 @@
   "vertical_center": {
     "message": "Вертикальное центрирование"
   },
-  "default_folder_show": {
+  "default_folder_id": {
     "message": "Отображать папку по умолчанию"
   },
   "background": {
@@ -221,16 +221,16 @@
   "color": {
     "message": "Цвет"
   },
-  "no_image": {
+  "background_noimage": {
     "message": "Без фонового изображения"
   },
-  "no_image_text": {
+  "background_noimage_text": {
     "message": "Тема без фонового изображения"
   },
-  "url_image": {
+  "background_external": {
     "message": "URL-адрес картинки"
   },
-  "local_image": {
+  "background_local": {
     "message": "Картинка с компьютера"
   },
   "choose_file": {
@@ -239,7 +239,7 @@
   "show_settings_icon": {
     "message": "Показывать иконку настроек"
   },
-  "show_header_bar": {
+  "show_toolbar": {
     "message": "Показывать панель поиска и выбора папки"
   },
   "show_create_column": {
@@ -263,7 +263,7 @@
   "auto_generate_thumbnail": {
     "message": "Генерация миниатюры при создании закладки"
   },
-  "enable_synchronization": {
+  "enable_sync": {
     "message": "Включить синхронизацию"
   },
   "advanced_settings": {
@@ -278,7 +278,7 @@
   "careful_change": {
     "message": "Будьте осторожны, если вы хотите изменить этот параметр"
   },
-  "clear_local_images": {
+  "clear_background_locals": {
     "message": "Очистить папку с локальными миниатюрами"
   },
   "reset_local_default": {
@@ -290,7 +290,7 @@
   "option_not_sync": {
     "message": "Параметр не синхронизируется"
   },
-  "option_customstyle": {
+  "custom_style": {
     "message": "Пользовательский CSS"
   },
   "version": {
@@ -404,7 +404,7 @@
   "show_back_column": {
     "message": "Показывать колонку назад в закладках"
   },
-  "default_search_engine": {
+  "search_engine": {
     "message": "Поисковая система"
   },
   "move_to_start": {

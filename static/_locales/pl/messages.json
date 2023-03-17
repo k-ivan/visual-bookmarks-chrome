@@ -212,7 +212,7 @@
   "vertical_center": {
     "message": "Wyrównanie w pionie"
   },
-  "default_folder_show": {
+  "default_folder_id": {
     "message": "Pokaż folder"
   },
   "background": {
@@ -221,16 +221,16 @@
   "color": {
     "message": "Kolor"
   },
-  "no_image": {
+  "background_noimage": {
     "message": "Bez obrazu tła"
   },
-  "no_image_text": {
+  "background_noimage_text": {
     "message": "Motyw bez obrazu tła"
   },
-  "url_image": {
+  "background_external": {
     "message": "Obraz z adresu URL"
   },
-  "local_image": {
+  "background_local": {
     "message": "Obraz z komputera"
   },
   "choose_file": {
@@ -239,7 +239,7 @@
   "show_settings_icon": {
     "message": "Pokaż ikonę ustawień"
   },
-  "show_header_bar": {
+  "show_toolbar": {
     "message": "Pokaż pasek wyszukiwania i wyboru folderu"
   },
   "show_create_column": {
@@ -263,7 +263,7 @@
   "auto_generate_thumbnail": {
     "message": "Generuj miniatury podczas tworzenia zakładek"
   },
-  "enable_synchronization": {
+  "enable_sync": {
     "message": "Włącz synchronizację"
   },
   "advanced_settings": {
@@ -278,7 +278,7 @@
   "careful_change": {
     "message": "Zachowaj ostrożność, jeśli chcesz zmienić tę opcję"
   },
-  "clear_local_images": {
+  "clear_background_locals": {
     "message": "Wyczyść folder z lokalnymi obrazami"
   },
   "reset_local_default": {
@@ -290,7 +290,7 @@
   "option_not_sync": {
     "message": "Opcja nie jest synchronizowana"
   },
-  "option_customstyle": {
+  "custom_style": {
     "message": "Niestandardowy CSS"
   },
   "version": {
@@ -404,7 +404,7 @@
   "show_back_column": {
     "message": "Pokaż przycisk „wstecz” w zakładkach"
   },
-  "default_search_engine": {
+  "search_engine": {
     "message": "Domyślna wyszukiwarka"
   },
   "move_to_start": {
