@@ -24,6 +24,8 @@ import {
   SEARCH_ENGINES
 } from './constants';
 import { storage } from './api/storage';
+import settingsList from './constants/settingsList';
+import { displaySettings } from './components/displaySettings';
 
 let modalInstance = null;
 let tabsSliderInstance = null;
@@ -37,6 +39,8 @@ async function init() {
     'lang',
     chrome.i18n.getMessage('@@ui_locale').replace('_', '-')
   );
+
+  window.settings.innerHTML = displaySettings(settingsList);
 
   await settings.init();
 

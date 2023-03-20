@@ -212,7 +212,7 @@
   "vertical_center": {
     "message": "Függőlegesen középre igazítás"
   },
-  "default_folder_show": {
+  "default_folder_id": {
     "message": "Megjelenítendő alapértelmezett mappa"
   },
   "background": {
@@ -221,16 +221,16 @@
   "color": {
     "message": "Szín"
   },
-  "no_image": {
+  "background_noimage": {
     "message": "Háttérkép nélkül"
   },
-  "no_image_text": {
+  "background_noimage_text": {
     "message": "Téma háttérkép nélkül"
   },
-  "url_image": {
+  "background_external": {
     "message": "Kép az URL-címről"
   },
-  "local_image": {
+  "background_local": {
     "message": "Kép a számítógépről"
   },
   "choose_file": {
@@ -239,7 +239,7 @@
   "show_settings_icon": {
     "message": "A beállítások ikonjának megjelenítése"
   },
-  "show_header_bar": {
+  "show_toolbar": {
     "message": "Keresősáv és mappaválasztás megjelenítése"
   },
   "show_create_column": {
@@ -263,7 +263,7 @@
   "auto_generate_thumbnail": {
     "message": "Miniatűrkép generálása könyvjelző létrehozásakor"
   },
-  "enable_synchronization": {
+  "enable_sync": {
     "message": "Szinkronizálás engedélyezése"
   },
   "advanced_settings": {
@@ -278,7 +278,7 @@
   "careful_change": {
     "message": "Legyen óvatos, ha meg akarja változtatni ezt az opciót"
   },
-  "clear_local_images": {
+  "clear_background_locals": {
     "message": "A helyi képeket tartalmazó mappa törlése"
   },
   "reset_local_default": {
@@ -290,7 +290,7 @@
   "option_not_sync": {
     "message": "Az opció nincs szinkronizálva"
   },
-  "option_customstyle": {
+  "custom_style": {
     "message": "Egyéni CSS"
   },
   "version": {
@@ -404,7 +404,7 @@
   "show_back_column": {
     "message": "Oszlop megjelenítése a könyvjelzőkben"
   },
-  "default_search_engine": {
+  "search_engine": {
     "message": "Alapértelmezett kereső"
   },
   "move_to_start": {

@@ -212,7 +212,7 @@
   "vertical_center": {
     "message": "Vertical centering"
   },
-  "default_folder_show": {
+  "default_folder_id": {
     "message": "Default Folder to Show"
   },
   "background": {
@@ -221,16 +221,16 @@
   "color": {
     "message": "Color"
   },
-  "no_image": {
+  "background_noimage": {
     "message": "Without background image"
   },
-  "no_image_text": {
+  "background_noimage_text": {
     "message": "Theme without background image"
   },
-  "url_image": {
+  "background_external": {
     "message": "Image from URL"
   },
-  "local_image": {
+  "background_local": {
     "message": "Image from Computer"
   },
   "choose_file": {
@@ -239,7 +239,7 @@
   "show_settings_icon": {
     "message": "Show the settings icon"
   },
-  "show_header_bar": {
+  "show_toolbar": {
     "message": "Show search bar and folder selection"
   },
   "show_create_column": {
@@ -263,7 +263,7 @@
   "auto_generate_thumbnail": {
     "message": "Generating a thumbnail when creating a bookmark"
   },
-  "enable_synchronization": {
+  "enable_sync": {
     "message": "Enable Synchronization"
   },
   "advanced_settings": {
@@ -278,7 +278,7 @@
   "careful_change": {
     "message": "Be careful if you want to change this option"
   },
-  "clear_local_images": {
+  "clear_background_locals": {
     "message": "Clear folder with local images"
   },
   "reset_local_default": {
@@ -290,7 +290,7 @@
   "option_not_sync": {
     "message": "Option is not synchronized"
   },
-  "option_customstyle": {
+  "custom_style": {
     "message": "Custom CSS"
   },
   "version": {
@@ -404,7 +404,7 @@
   "show_back_column": {
     "message": "Show back column in bookmarks"
   },
-  "default_search_engine": {
+  "search_engine": {
     "message": "Default search engine"
   },
   "move_to_start": {

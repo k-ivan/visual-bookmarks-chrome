@@ -1,8 +1,14 @@
 .range {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.range input {
   --range-track-fill: 0%;
 
   appearance: none;
   display: block;
+  flex: 1;
   height: 20px;
   margin: 0;
   outline: 0;
@@ -10,7 +16,7 @@
   background-color: transparent;
 }
 
-.range::-webkit-slider-runnable-track {
+.range input::-webkit-slider-runnable-track {
   height: 8px;
   background-image: linear-gradient(var(--color-primary), var(--color-primary));
   background-color: rgb(0 0 0 / 15%);
@@ -19,7 +25,7 @@
   border-radius: 10px;
 }
 
-.range::-webkit-slider-thumb {
+.range input::-webkit-slider-thumb {
   position: relative;
   top: -4px;
   width: var(--switch-circle-size);
