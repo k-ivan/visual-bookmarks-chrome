@@ -45,6 +45,7 @@ class VbHeader extends HTMLElement {
     this.formNode = this.querySelector('form');
     this.inputNode = this.querySelector('input');
     this.resetNode = this.querySelector('#searchReset');
+    this.buttonSubmitNode = this.querySelector('#searchSubmit');
     // get vb-select-folders component
     this.selectNode = this.querySelector('vb-select-folders');
     this.selectNode.setAttribute('folder-id', this.folderId);
@@ -90,6 +91,9 @@ class VbHeader extends HTMLElement {
         this.inputNode.placeholder = chrome.i18n.getMessage('placeholder_input_search', [placeholderEngine]);
         this.inputNode.name = engineObject.name ?? 'bookmarks';
         this.formNode.action = engineObject.url ?? '';
+
+        this.buttonSubmitNode.hidden = this.isBookmarksEngine;
+
         if (settings.$.open_link_newtab) {
           !this.isBookmarksEngine
             ? this.formNode.setAttribute('target', '_blank')

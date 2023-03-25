@@ -113,37 +113,38 @@
   fill: currentcolor;
 }
 
-.field-icon {
+.search-actions {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 40px;
+  right: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 5px;
 }
 
-.search-reset-btn {
-  right: 0;
-  padding: 5px 8px;
+.search-button {
   line-height: 0;
   border: 0;
   color: var(--search-reset-btn-color);
   background-color: transparent;
   outline: 0;
+  cursor: pointer;
+  &:focus-visible {
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-40);
+  }
+}
+
+.search-reset-btn {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
-  cursor: pointer;
-}
-
-.search-reset-btn.is-show {
-  opacity: 0.8;
-  visibility: visible;
-}
-
-.search-reset-btn.is-show:hover {
-  opacity: 1;
+  &.is-show {
+    opacity: 0.8;
+    visibility: visible;
+  }
+  &.is-show:hover {
+    opacity: 1;
+  }
 }
 
 .back {

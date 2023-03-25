@@ -1,7 +1,7 @@
 <div class="header">
   <div class="header__items header__items--search">
     <div class="search-wrap">
-      <form method="get" action="">
+      <form method="get" action="" id="searchForm">
         <input
           type="text"
           id="bookmarkSearch"
@@ -17,11 +17,18 @@
         <div class="header__engine-content" slot="content"></div>
       </vb-popup>
 
-      <button class="field-icon search-reset-btn" id="searchReset">
-        <svg class="search-icon" width="20" height="20">
-          <use xlink:href="/img/symbol.svg#close"/>
-        </svg>
-      </button>
+      <div class="search-actions">
+        <button class="search-button search-reset-btn" id="searchReset">
+          <svg class="search-icon" width="20" height="20">
+            <use xlink:href="/img/symbol.svg#close"/>
+          </svg>
+        </button>
+        <button class="search-button" form="searchForm" id="searchSubmit">
+          <svg class="search-icon" width="20" height="20">
+            <use xlink:href="/img/symbol.svg#search"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
   <div class="header__items header__items--select">
