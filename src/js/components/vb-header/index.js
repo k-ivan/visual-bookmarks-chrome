@@ -61,6 +61,10 @@ class VbHeader extends HTMLElement {
     this.#setSearchEngines();
     this.#attachEvents();
     this.hashchange();
+
+    if (settings.$.search_autofocus) {
+      this.inputNode.focus();
+    }
   }
 
   get isBookmarksEngine() {

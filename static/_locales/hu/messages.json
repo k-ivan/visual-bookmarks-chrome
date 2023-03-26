@@ -433,5 +433,8 @@
   },
   "whats_new": {
     "message": "Mi újság"
+  },
+  "search_autofocus": {
+    "message": "Fókuszáljon a keresősávra"
   }
 }

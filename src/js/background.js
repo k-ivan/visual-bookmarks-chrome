@@ -13,7 +13,8 @@ import {
 } from './api/bookmark';
 import {
   THUMBNAIL_POPUP_HEIGHT,
-  THUMBNAIL_POPUP_WIDTH
+  THUMBNAIL_POPUP_WIDTH,
+  NEWTAB_URLS
 } from './constants';
 
 function browserActionHandler() {
@@ -176,6 +177,16 @@ function handlerCreateBookmark(data) {
   });
 }
 
+async function handleCreatedTab(tab) {
+  const { settings } = await storage.local.get('settings');
+  if (settings.search_autofocus && NEWTAB_URLS.includes(tab.pendingUrl)) {
+    chrome.tabs.create({
+      url: '/newtab.html'
+    });
+    chrome.tabs.remove(tab.id);
+  }
+}
+
 chrome.storage.onChanged.addListener((changes, area) => {
   // if storage changes from local
   // watching the settings parameter
@@ -260,3 +271,5 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   // this will keep the message channel open to the other end until sendResponse is called
   return true;
 });
+
+chrome.tabs.onCreated.addListener(handleCreatedTab);

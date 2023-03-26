@@ -45,7 +45,8 @@ const DEFAULTS = Object.freeze({
   search_engine: 'bookmarks',
   move_to_start: false,
   sort_by_date: false,
-  bookmarks_sorting_type: ''
+  bookmarks_sorting_type: '',
+  search_autofocus: false
 });
 
 const SETTINGS_NOT_SYNCED = ['default_folder_id', 'enable_sync'];

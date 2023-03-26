@@ -52,9 +52,18 @@ export default [
         type: 'switch'
       },
       {
-        id: 'show_toolbar',
-        title: chrome.i18n.getMessage('show_toolbar'),
-        type: 'switch'
+        group: [
+          {
+            id: 'show_toolbar',
+            title: chrome.i18n.getMessage('show_toolbar'),
+            type: 'switch'
+          },
+          {
+            id: 'search_autofocus',
+            title: chrome.i18n.getMessage('search_autofocus'),
+            type: 'switch'
+          }
+        ]
       },
       {
         id: 'show_settings_icon',

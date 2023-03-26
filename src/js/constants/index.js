@@ -140,3 +140,8 @@ export const SEARCH_ENGINES = [
     value: 'yahoo'
   }
 ];
+
+export const NEWTAB_URLS = [
+  'edge://newtab/',
+  'chrome://newtab/'
+];

@@ -433,5 +433,8 @@
   },
   "whats_new": {
     "message": "Что нового"
+  },
+  "search_autofocus": {
+    "message": "Фокус на строке поиска"
   }
 }

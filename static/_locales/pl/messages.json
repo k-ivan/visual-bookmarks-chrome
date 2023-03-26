@@ -433,5 +433,8 @@
   },
   "whats_new": {
     "message": "Co nowego"
+  },
+  "search_autofocus": {
+    "message": "Skoncentruj się na pasku wyszukiwania"
   }
 }

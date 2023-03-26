@@ -433,5 +433,8 @@
   },
   "whats_new": {
     "message": "What's new"
+  },
+  "search_autofocus": {
+    "message": "Focus on the search bar"
   }
 }
