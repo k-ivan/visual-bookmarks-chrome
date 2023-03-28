@@ -579,7 +579,7 @@ const Bookmarks = (() => {
         class: 'progress-toast'
       },
       {
-        innerHTML:
+        html:
           `<div class="progress-toast__icon">${SVG_LOADER}</div>` +
           `<div class="progress-toast__text">${i18n}</div>`
       }
