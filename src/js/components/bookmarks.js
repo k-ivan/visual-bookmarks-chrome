@@ -743,13 +743,14 @@ const Bookmarks = (() => {
       const image = await ImageDB.get(bookmark.id);
       const thumbnail = THUMBNAILS_MAP.get(bookmark.id);
 
-      bookmark.isCustomImage = false;
-      bookmark.image = URL.createObjectURL(image.blob);
-
       if (thumbnail) {
         // если миниатюра объекта существует удалить его из памяти
         URL.revokeObjectURL(thumbnail.blobUrl);
       }
+
+      bookmark.isCustomImage = false;
+      bookmark.image = URL.createObjectURL(image.blob);
+
       // write to the thumbnails map on the page a new blobUrl
       THUMBNAILS_MAP.set(bookmark.id, {
         ...image,
@@ -901,6 +902,11 @@ const Bookmarks = (() => {
           // else update bookmark view
           bookmark.title = result.title;
           bookmark.url = result.url ? result.url : `#${result.id}`;
+
+          // update thumbnail if thumbnail generation option is enabled and if it is not a folder
+          if (result.url && settings.$.auto_generate_thumbnail) {
+            createScreen(bookmark, result.id, result.url);
+          }
         }
         Toast.show(chrome.i18n.getMessage('notice_bookmark_updated'));
         return true;
