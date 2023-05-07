@@ -1,7 +1,6 @@
 import Gmodal from 'glory-modal';
 import { $createElement } from '../utils';
 
-let confirm = false;
 const template = /* html */
 `<div class="gmodal__container gmodal__container--popup has-center">
   <div class="gmodal__dialog">
@@ -20,6 +19,7 @@ const template = /* html */
     </div>
   </div>
 </div>`;
+
 const popupEl = $createElement('div',
   {
     class: 'gmodal gmodal--popup',
@@ -29,24 +29,23 @@ const popupEl = $createElement('div',
     html: template
   }
 );
-document.body.appendChild(popupEl);
-
-const popupBody = document.getElementById('popupBody');
-const controls = Array.from(popupEl.querySelectorAll('[data-popup]'));
-const resolveControl = popupEl.querySelector('[data-popup="resolve"]');
-const popupInstance = new Gmodal(popupEl, {
-  closeBackdrop: false
-});
-popupInstance.element.addEventListener('gmodal:open', () => {
-  resolveControl.focus();
-});
-
-function preparePopup(message) {
-  popupBody.textContent = message;
-}
 
 function confirmPopup(message) {
-  preparePopup(message);
+  let confirm = false;
+  document.body.appendChild(popupEl);
+
+  const popupBody = document.getElementById('popupBody');
+  const controls = Array.from(popupEl.querySelectorAll('[data-popup]'));
+  const resolveControl = popupEl.querySelector('[data-popup="resolve"]');
+  const popupInstance = new Gmodal(popupEl, {
+    closeBackdrop: false
+  });
+  popupInstance.element.addEventListener('gmodal:open', () => {
+    resolveControl.focus();
+  });
+
+
+  popupBody.textContent = message;
   popupInstance.open();
 
   return new Promise((resolve) => {
@@ -63,6 +62,8 @@ function confirmPopup(message) {
       popupInstance.element.removeEventListener('gmodal:close', closePopup);
       (confirm) ? resolve(true) : resolve(false);
       confirm = false;
+      popupInstance.destroy();
+      popupEl.remove();
     };
     controls.forEach(control => {
       control.addEventListener('click', handleClick);
