@@ -128,7 +128,7 @@ async function captureScreen(link, callback) {
   });
 }
 
-function handlerCreateBookmark(data) {
+function handleCreateBookmark(data) {
   chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs){
     const matches = await search(data.pageUrl);
     if (!matches) return;
@@ -160,15 +160,6 @@ function handlerCreateBookmark(data) {
       // do not generate a thumbnail if you could not create a bookmark or the auto-generation option is turned off
       if (!response) return;
 
-      if (settings.auto_generate_thumbnail) {
-        captureScreen(response.url, async function(data) {
-          const fileBlob = $base64ToBlob(data.capture, 'image/webp');
-          const blob = await $resizeThumbnail(fileBlob);
-          await ImageDB.update({ id: response.id, blob, custom: false });
-          chrome.runtime.sendMessage({ autoGenerateThumbnail: true });
-        });
-      }
-
       if (settings.close_tab_after_adding_bookmark) {
         chrome.tabs.remove(tabs[0].id);
       }
@@ -184,6 +175,24 @@ async function handleCreatedTab(tab) {
       url: '/newtab.html'
     });
     chrome.tabs.remove(tab.id);
+  }
+}
+
+async function handleCreatedBookmark(id, bookmark) {
+  const { importingBookmarks } = await storage.local.get('importingBookmarks');
+  if (importingBookmarks) return;
+
+  const { settings } = await storage.local.get('settings');
+
+  initContextMenu();
+
+  if (settings.auto_generate_thumbnail) {
+    captureScreen(bookmark.url, async function(data) {
+      const fileBlob = $base64ToBlob(data.capture, 'image/webp');
+      const blob = await $resizeThumbnail(fileBlob);
+      await ImageDB.update({ id: bookmark.id, blob, custom: false });
+      chrome.runtime.sendMessage({ autoGenerateThumbnail: true });
+    });
   }
 }
 
@@ -212,12 +221,19 @@ chrome.runtime.onInstalled.addListener(async(event) => {
   }
 });
 
-chrome.bookmarks.onCreated.addListener(initContextMenu);
+chrome.bookmarks.onCreated.addListener(handleCreatedBookmark);
 chrome.bookmarks.onChanged.addListener(initContextMenu);
 chrome.bookmarks.onRemoved.addListener(initContextMenu);
 chrome.bookmarks.onMoved.addListener(initContextMenu);
 
-chrome.contextMenus.onClicked.addListener(handlerCreateBookmark);
+chrome.bookmarks.onImportBegan.addListener(() => {
+  storage.local.set({ importingBookmarks: true });
+});
+chrome.bookmarks.onImportEnded.addListener(() => {
+  storage.local.remove('importingBookmarks');
+});
+
+chrome.contextMenus.onClicked.addListener(handleCreateBookmark);
 chrome.action.onClicked.addListener(browserActionHandler);
 chrome.notifications.onClicked.addListener(browserActionHandler);
 chrome.notifications.onButtonClicked.addListener((id) => {
