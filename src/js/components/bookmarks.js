@@ -10,7 +10,8 @@ import {
   remove,
   removeTree,
   create,
-  update
+  update,
+  get
 } from '../api/bookmark';
 import {
   $debounce,
@@ -189,9 +190,15 @@ const Bookmarks = (() => {
       chosenClass: 'bookmark--chosen',
       preventOnFilter: false,
       onStart(evt) {
+        container.classList.add('has-dragging');
+
+        if (localStorage.disabledSort) {
+          return false;
+        }
         showDropzone(evt.item);
       },
       onEnd(evt) {
+        container.classList.remove('has-dragging');
         if (!evt.pullMode) {
           hideDropzone();
         }
@@ -203,6 +210,10 @@ const Bookmarks = (() => {
        * @param {HTMLElement} event.related - HTMLElement on which have guided
        */
       onMove({ to, related }) {
+        if (localStorage.disabledSort) {
+          return false;
+        }
+
         container.querySelector('.has-highlight')?.classList.remove('has-highlight');
         if (to.matches(DROPZONE_SELECTOR)) {
           to.classList.add('has-highlight');
@@ -366,7 +377,7 @@ const Bookmarks = (() => {
    * @param {Array<BookmarkTreeNode>} bookmarks
    * @returns {Array<String>} array id
    */
-  function getChildren(bookmarks) {
+  function getChildrenBookmarks(bookmarks) {
     return bookmarks.reduce((acc, bookmark) => {
       if (bookmark.children) {
         const children = $shuffle(bookmark.children);
@@ -445,7 +456,7 @@ const Bookmarks = (() => {
     // request for thumbnails in folders if the display option is enabled
     if (settings.$.folder_preview) {
       // get children bookmarks for folders
-      childrenBookmarks = getChildren(arr);
+      childrenBookmarks = getChildrenBookmarks(arr);
       // get only ids
       const childrenIds = childrenBookmarks.map(child => child.id);
       promiseThumbnailsRequests.push(ImageDB.getAllByIds(childrenIds));
@@ -598,11 +609,68 @@ const Bookmarks = (() => {
     }));
   }
 
+  async function captureMultipleBookmarks(selectedBookmarks, showNotice) {
+    const bookmarksLength = selectedBookmarks.filter(b => !b.isFolder).length;
+    // create notification toast
+    const progressToast = renderProgressToast(bookmarksLength);
+    document.body.append(progressToast);
+    const progressToastTween = progressToast.animate([
+      { transform: 'translate3D(-100%, 0, 0)' },
+      { transform: 'translate3D(0, 0, 0)' }
+    ], {
+      duration: 200,
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      fill: 'forwards'
+    });
+    const progressText = document.getElementById('progress-text');
+
+    isGeneratedThumbs = true;
+    $customTrigger('thumbnails:updating', container);
+
+    for (const [index, b] of selectedBookmarks.entries()) {
+      // updating toast progress
+      progressText.textContent = index + 1;
+      // get capture
+      const response = await captureScreen(b.url, b.id);
+      if (response.warning) continue;
+
+      const image = await ImageDB.get(b.id);
+      const blobUrl = URL.createObjectURL(image.blob);
+      const thumbnail = THUMBNAILS_MAP.get(b.id);
+
+      if (thumbnail) {
+        URL.revokeObjectURL(thumbnail.blobUrl);
+      }
+      THUMBNAILS_MAP.set(b.id, {
+        ...image,
+        blobUrl
+      });
+
+      try {
+        // if we can, then update the bookmark in the DOM
+        const bookmark = document.getElementById(`vb-${b.id}`);
+        bookmark.image = blobUrl;
+      } catch (err) {}
+    }
+
+    isGeneratedThumbs = false;
+
+    showNotice && $notifications(
+      chrome.i18n.getMessage('notice_thumbnails_update_complete')
+    );
+
+    $customTrigger('thumbnails:updated', container);
+    progressToastTween.reverse();
+    progressToastTween.onfinish = () => {
+      progressToast.remove();
+    };
+  }
+
   function autoUpdateThumb() {
     if (isGeneratedThumbs) return;
     const id = startFolder();
     getSubTree(id)
-      .then(async(items) => {
+      .then((items) => {
         // check recursively or not
         const children = settings.$.thumbnails_update_recursive
           // create a flat array of nested bookmarks
@@ -615,58 +683,77 @@ const Bookmarks = (() => {
           children.sort((a, b) => b.dateAdded - a.dateAdded);
         }
 
-        // create notification toast
-        const progressToast = renderProgressToast(children.length);
-        document.body.append(progressToast);
-        const progressToastTween = progressToast.animate([
-          { transform: 'translate3D(-100%, 0, 0)' },
-          { transform: 'translate3D(0, 0, 0)' }
-        ], {
-          duration: 200,
-          easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-          fill: 'forwards'
-        });
-        const progressText = document.getElementById('progress-text');
-
-        isGeneratedThumbs = true;
-        $customTrigger('thumbnails:updating', container);
-
-        for (const [index, b] of children.entries()) {
-          // updating toast progress
-          progressText.textContent = index + 1;
-          // get capture
-          const response = await captureScreen(b.url, b.id, b.parentId);
-          if (response.warning) continue;
-
-          const image = await ImageDB.get(b.id);
-          const blobUrl = URL.createObjectURL(image.blob);
-          const thumbnail = THUMBNAILS_MAP.get(b.id);
-
-          if (thumbnail) {
-            URL.revokeObjectURL(thumbnail.blobUrl);
-          }
-          THUMBNAILS_MAP.set(b.id, {
-            ...image,
-            blobUrl
-          });
-
-          try {
-            // if we can, then update the bookmark in the DOM
-            const bookmark = document.getElementById(`vb-${b.id}`);
-            bookmark.image = blobUrl;
-          } catch (err) {}
-        }
-
-        isGeneratedThumbs = false;
-        $notifications(
-          chrome.i18n.getMessage('notice_thumbnails_update_complete')
-        );
-        $customTrigger('thumbnails:updated', container);
-        progressToastTween.reverse();
-        progressToastTween.onfinish = () => {
-          progressToast.remove();
-        };
+        captureMultipleBookmarks(children);
       });
+  }
+
+  async function updateSelectedThumbnails(selectedBookmarks) {
+    const bookmarks = [];
+
+    for (let b of selectedBookmarks) {
+      if (!b.isFolder) {
+        bookmarks.push(b);
+      } else {
+        const three = await getSubTree(b.id);
+        if (settings.$.thumbnails_update_recursive) {
+          bookmarks.push(...flattenArrayBookmarks(three));
+        } else {
+          const bookmarksThree = three[0].children.filter(child => child.url);
+          bookmarks.push(...bookmarksThree);
+        }
+      }
+    }
+
+    captureMultipleBookmarks(bookmarks);
+  }
+
+  async function moveSelectedBookmarks(selectedBookmarks, destinationId) {
+    // checking if the destination is contained within the selected folder
+    const isDestinationChild = (bookmarks) => {
+      return bookmarks.some(bookmark => {
+        if (bookmark.children) {
+          return bookmark.id === destinationId ? true : isDestinationChild(bookmark.children);
+        }
+        return false;
+      });
+    };
+
+    // if the destination is contained within the selected folder
+    // we must not move the selected folder
+    // parent folder cannot be placed in child folder
+    // remove this folder from the array selected bookmarks
+    // but first we make a shallow copy of the array so as not to mutate the original
+    const cloneSelectedBookmarks = [...selectedBookmarks];
+
+    for (let i = 0; i < cloneSelectedBookmarks.length; i++) {
+      const bookmark = cloneSelectedBookmarks[i];
+      if (bookmark.isFolder) {
+        const subTree = await getSubTree(bookmark.id);
+        if (isDestinationChild(subTree)) {
+          cloneSelectedBookmarks.splice(i, 1);
+          break;
+        }
+      }
+    }
+
+    const promises = cloneSelectedBookmarks.map(bookmark => {
+      return move(bookmark.id, {
+        parentId: destinationId,
+        ...(settings.$.move_to_start && { index: 0 })
+      })
+        .then(() => {
+        // if it is a folder update folderList
+          if (!bookmark.url) {
+            $customTrigger('updateFolderList', document, {
+              detail: {
+                isFolder: true
+              }
+            });
+          }
+          bookmark.remove();
+        });
+    });
+    return Promise.all(promises);
   }
 
   /**
@@ -796,18 +883,34 @@ const Bookmarks = (() => {
       });
   }
 
+  async function removeFromBrowser(bookmark, isFolder) {
+    const id = isFolder
+      ? bookmark.id
+      : bookmark.dataset.id;
+
+    await (isFolder ? removeTree(id) : remove(id));
+
+    bookmark.remove();
+    removeThumbnail(id);
+
+    isFolder && $customTrigger('updateFolderList', document, {
+      detail: {
+        isFolder: true
+      }
+    });
+  }
+
   async function removeBookmark(bookmark) {
     if (!settings.$.without_confirmation) {
       const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_bookmark'));
       if (!confirmAction) return;
     }
 
-    const id = bookmark.getAttribute('data-id');
+    const id = bookmark.dataset.id;
     remove(id)
       .then(() => {
         bookmark.remove();
         removeThumbnail(id);
-        THUMBNAILS_MAP.delete(id);
         Toast.show(chrome.i18n.getMessage('notice_bookmark_removed'));
       });
   }
@@ -917,12 +1020,15 @@ const Bookmarks = (() => {
     init,
     createBookmark,
     updateBookmark,
+    removeFromBrowser,
     removeBookmark,
     removeFolder,
     createScreen,
     uploadScreen,
     removeThumbnail,
-    autoUpdateThumb
+    autoUpdateThumb,
+    updateSelectedThumbnails,
+    moveSelectedBookmarks
   };
 })();
 

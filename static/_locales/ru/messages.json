@@ -436,5 +436,11 @@
   },
   "search_autofocus": {
     "message": "Фокус на строке поиска"
+  },
+  "confirm_delete_selected_bookmarks": {
+    "message": "Вы уверены, что хотите удалить выбранные закладки ?"
+  },
+  "button_action_move": {
+    "message": "Переместить в папку"
   }
 }

@@ -90,6 +90,12 @@ class VbPopup extends HTMLElement {
     this.popupContent.style.display = 'block';
     this.isActive = true;
 
+    const { top, height } = this.popupTriger.getBoundingClientRect();
+    const posYClass = (top + height + this.popupContent.offsetHeight > window.innerHeight)
+      ? 'is-below'
+      : 'is-above';
+
+    this.popupContent.classList.add(posYClass);
 
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {

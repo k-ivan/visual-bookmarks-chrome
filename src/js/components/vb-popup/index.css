@@ -15,8 +15,9 @@
   cursor: pointer;
   overflow: hidden;
 
-  &:focus {
-    box-shadow: 0 0 0 3px var(--color-primary-alpha-40);
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
   }
 }
 .content {
@@ -24,7 +25,6 @@
   position: absolute;
   left: var(--vb-popup-left, 0);
   right: var(--vb-popup-right, auto);
-  top: var(--vb-popup-top, 100%);
   max-width: 300px;
   opacity: 0;
   color: var(--theme-text-color);
@@ -35,6 +35,13 @@
   transition-property: visibility, opacity, transform;
   transition-duration: 0.15s, 0.15s, 0.15s;
   transition-timing-function: ease-in-out;
+
+  &.is-below {
+    bottom: var(--vb-popup-bottom, 100%);
+  }
+  &.is-above {
+    top: var(--vb-popup-top, 100%);
+  }
 
   &.is-show {
     opacity: 1;

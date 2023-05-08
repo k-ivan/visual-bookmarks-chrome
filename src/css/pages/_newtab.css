@@ -140,3 +140,9 @@
     background-color: var(--theme-background-3-alpha-65);
   }
 }
+
+/* transition for selected bookmark if dragging is not active  */
+.grid:not(.has-dragging) .bookmark {
+  transition: transform 0.15s ease;
+  transition-property: transform, box-shadow;
+}

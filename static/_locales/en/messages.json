@@ -436,5 +436,11 @@
   },
   "search_autofocus": {
     "message": "Focus on the search bar"
+  },
+  "confirm_delete_selected_bookmarks": {
+    "message": "Are you sure you want to delete selected bookmarks ?"
+  },
+  "button_action_move": {
+    "message": "Move to folder"
   }
 }

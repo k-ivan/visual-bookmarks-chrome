@@ -2,6 +2,8 @@ import '../css/newtab.css';
 import './components/vb-select';
 import './components/vb-context-menu';
 import './components/vb-scrollup';
+import './components/vb-bookmarks-panel';
+
 import Gmodal from 'glory-modal';
 import Validator from 'form-validation-plugin';
 import { settings } from './settings';
@@ -9,7 +11,7 @@ import Bookmarks from './components/bookmarks';
 import Localization from './plugins/localization';
 import UI from './components/ui';
 import Ripple from './components/ripple';
-import confirmPopup from './plugins/confirmPopup.js';
+import confirmPopup from './plugins/confirmPopup';
 import {
   get,
   getChildren,
@@ -37,10 +39,14 @@ const urlWrap = document.getElementById('urlWrap');
 const customScreen = document.getElementById('customScreen');
 const ctxMenuEl = document.getElementById('context-menu');
 const upload = document.getElementById('upload');
+const panelActions = {
+  tween: null,
+  tweenActive: false
+};
+let multipleSelectedBookmarks = [];
 let isGenerateThumbs = false;
 let modalApi;
 let generateThumbsBtn = null;
-
 
 async function init() {
   // Set lang attr
@@ -164,6 +170,7 @@ async function init() {
   window.addEventListener('unload', handleUnload);
   window.addEventListener('storage', handleUpdateStorage);
   window.addEventListener('load', handleLoad);
+  window.addEventListener('hashchange', hideControlMultiplyBookmarks);
 
   // if support Page Visibility API
   // if the tab is open but not active, then when you change bookmarks from other places,
@@ -186,6 +193,114 @@ async function init() {
         }
       });
   }
+
+  // import(/* webpackChunkName: "webcomponents/vb-actions-panel" */'./components/vb-bookmarks-panel');
+  container.addEventListener('click', handleSelectBookmark);
+  document.addEventListener('vb-bookmarks-panel:action', handleMultipleBookmarks);
+  document.addEventListener('vb-bookmarks-panel:close', hideControlMultiplyBookmarks);
+  document.addEventListener('vb:search', hideControlMultiplyBookmarks);
+  document.addEventListener('vb:searchreset', hideControlMultiplyBookmarks);
+  document.addEventListener('keydown', ({ code }) => {
+    code === 'Escape' && hideControlMultiplyBookmarks();
+  });
+}
+
+function handleSelectBookmark(e) {
+  if (isGenerateThumbs) return;
+  const bookmark = e.target.closest('.bookmark');
+  if (!bookmark) return true;
+
+  if (!e.shiftKey) return true;
+
+  e.preventDefault();
+
+  if (!bookmark.dataset.selected) {
+    // if bookmark not selected
+    bookmark.dataset.selected = true;
+    // added selected bookmark to the array of selected bookmarks
+    multipleSelectedBookmarks.push(bookmark);
+  } else {
+    // else bookmark already selected
+    delete bookmark.dataset.selected;
+    // remove selected bookmark from the array of selected bookmarks
+    multipleSelectedBookmarks = multipleSelectedBookmarks.filter(selectedBookmark => selectedBookmark !== bookmark);
+  }
+
+  multipleSelectedBookmarks.length > 0
+    ? showControlMultiplyBookmarks()
+    : hideControlMultiplyBookmarks();
+}
+
+async function showControlMultiplyBookmarks() {
+  const panelNode = document.getElementById('bookmarks-panel');
+  if (panelNode) return;
+
+  const panel = $createElement('vb-bookmarks-panel', {
+    id: 'bookmarks-panel',
+    class: 'bookmarks-panel'
+  });
+  panel.selectedFolder = window.location.hash.slice(1) || settings.$.default_folder_id;
+  panel.folders = await getFolders();
+
+  document.body.append(panel);
+
+  // disable sorting to avoid side effects
+  // for example, the selected bookmark can be moved by sorting to another folder
+  localStorage.setItem('disabledSort', 1);
+
+  // animate panel actions
+  panelActions.tweenActive = true;
+  panelActions.tween = panel.animate([
+    { transform: 'translate3D(0, 100%, 0)' },
+    { transform: 'translate3D(0, 0, 0)' }
+  ], {
+    duration: 200,
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fill: 'forwards'
+  });
+}
+
+function hideControlMultiplyBookmarks() {
+  if (!document.getElementById('bookmarks-panel')) return;
+  // if (!panelTweenActive) return;
+  if (!panelActions.tweenActive) return;
+
+  multipleSelectedBookmarks.forEach(bookmark => delete bookmark.dataset.selected);
+  multipleSelectedBookmarks.length = 0;
+
+  localStorage.removeItem('disabledSort');
+
+  panelActions.tween.playbackRate = -1;
+  panelActions.tween.onfinish = () => {
+    panelActions.tweenActive = false;
+    document.getElementById('bookmarks-panel')?.remove();
+  };
+}
+
+function handleMultipleBookmarks(evt) {
+  const { action, destFolder } = evt.detail;
+
+  if (!action) return;
+
+  switch (action) {
+    case 'open_all':
+    case 'open_all_window':
+    case 'new_window_incognito': openSelectedBookmarks(multipleSelectedBookmarks, action); break;
+    case 'remove': removeSelectedBookmarks(multipleSelectedBookmarks); break;
+    case 'update_thumbnails': updateSelectedThumbnails(multipleSelectedBookmarks); break;
+    case 'move_bookmarks': movedSelectedBookmarks(multipleSelectedBookmarks, destFolder); break;
+    default: break;
+  }
+}
+
+async function movedSelectedBookmarks(multipleSelectedBookmarks, destFolder) {
+  await Bookmarks.moveSelectedBookmarks(multipleSelectedBookmarks, destFolder);
+  hideControlMultiplyBookmarks();
+}
+
+async function updateSelectedThumbnails(multipleSelectedBookmarks) {
+  await Bookmarks.updateSelectedThumbnails(multipleSelectedBookmarks);
+  hideControlMultiplyBookmarks();
 }
 
 async function handleLoad() {
@@ -284,6 +399,10 @@ function handleUploadScreen(evt) {
 }
 
 function handleMenuOpen(evt) {
+  // when opening the context menu,
+  // hide the quick action bar to avoid side effects
+  hideControlMultiplyBookmarks();
+
   let items;
   if (evt.detail.isFolder) {
     items = CONTEXT_MENU.filter(item => !item.isBookmark);
@@ -372,6 +491,37 @@ function runServices() {
   });
 }
 
+async function removeSelectedBookmarks(multipleSelectedBookmarks) {
+  if (!settings.$.without_confirmation) {
+    const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_selected_bookmarks'));
+    if (!confirmAction) return;
+  }
+  await Promise.all(
+    multipleSelectedBookmarks.map(bookmark => {
+      return Bookmarks.removeFromBrowser(bookmark, bookmark.isFolder);
+    })
+  );
+  hideControlMultiplyBookmarks();
+}
+
+function openSelectedBookmarks(multipleSelectedBookmarks, action) {
+  if (['open_all_window', 'new_window_incognito'].includes(action)) {
+    chrome.windows.create({
+      focused: true,
+      state: 'maximized',
+      incognito: (action === 'new_window_incognito')
+    }, win => {
+      multipleSelectedBookmarks.forEach(bookmark => {
+        openTab(bookmark.url, { windowId: win.id });
+      });
+    });
+  } else if (action === 'open_all') {
+    multipleSelectedBookmarks.forEach(bookmark => {
+      openTab(bookmark.url);
+    });
+  }
+}
+
 /**
  * Open all bookmarks from a folder
  * @param {string} id - folder id
@@ -380,20 +530,18 @@ function runServices() {
 function openAll(id, action) {
   getChildren(id)
     .then(childrens => {
-      const folderUrl = (id) => `newtab.html#${id}`;
-
       if (action === 'open_all_window') {
         chrome.windows.create({
           focused: true
         }, win => {
           childrens.forEach(children => {
-            const url = children.url ?? folderUrl(children.id);
+            const url = children.url ?? children.id;
             openTab(url, { windowId: win.id });
           });
         });
       } else {
         childrens.forEach(children => {
-          const url = children.url ?? folderUrl(children.id);
+          const url = children.url ?? children.id;
           openTab(url);
         });
       }
@@ -427,6 +575,10 @@ function openWindow(url, action) {
  * @param {number} [options.windowId]
  */
 function openTab(url, options = {}) {
+  if (url.startsWith('#')) {
+    url = `newtab.html${url}`;
+  }
+
   const defaults = {
     url: url,
     active: false

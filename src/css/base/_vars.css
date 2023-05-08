@@ -19,6 +19,7 @@
   --theme-background-input: var(--theme-background);
   --theme-text-color: #212121;
   --theme-invert-alpha-10: rgba(0 0 0 / 10%);
+  --theme-invert-alpha-20: rgba(0 0 0 / 20%);
   --theme-invert-alpha-50: rgba(0 0 0 / 50%);
 
   /* body */
@@ -141,6 +142,7 @@
   --theme-background-3-alpha-95: rgb(64 64 64 / 95%);
   --theme-background-input: var(--theme-background-3);
   --theme-invert-alpha-10: rgb(255 255 255 / 10%);
+  --theme-invert-alpha-20: rgba(255 255 255 / 20%);
   --theme-invert-alpha-50: rgb(255 255 255 / 50%);
 
   /* body */

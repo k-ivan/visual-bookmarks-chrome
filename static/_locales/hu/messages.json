@@ -436,5 +436,11 @@
   },
   "search_autofocus": {
     "message": "Fókuszáljon a keresősávra"
+  },
+  "confirm_delete_selected_bookmarks": {
+    "message": "Biztosan törli a kiválasztott könyvjelzőket ?"
+  },
+  "button_action_move": {
+    "message": "Áthelyezés mappába"
   }
 }
