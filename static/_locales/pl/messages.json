@@ -243,7 +243,7 @@
     "message": "Pokaż pasek wyszukiwania i wyboru folderu"
   },
   "show_create_column": {
-    "message": "Pokaż przycisk dodawania zakładek"
+    "message": "Pokaż przycisk „dodaj” zakładkę"
   },
   "show_bookmark_title": {
     "message": "Pokaż tytuł zakładki"
@@ -384,10 +384,10 @@
     "message": "Opóźnienie przed utworzeniem miniatury"
   },
   "thumbnails_update_delay_note": {
-    "message": "Może to być przydatne, gdy zawartość strony ładuje się przez długi czas. Im dłuższe opóźnienie, tym dłuższe oczekiwanie"
+    "message": "Może to być przydatne, gdy zawartość strony ładuje się przez długi czas. Im dłuższe opóźnienie, tym dłuższe oczekiwanie."
   },
   "close_tab_after_adding_bookmark": {
-    "message": "Automatyczne zamykanie karty po dodaniu do zakładek"
+    "message": "Automatycznie zamknij kartę po dodaniu do zakładek"
   },
   "close_tab_after_adding_bookmark_note": {
     "message": "Tylko w przypadku dodania za pomocą menu kontekstowego"
@@ -396,7 +396,7 @@
     "message": "Nie znaleziono zakładek"
   },
   "logo_external": {
-    "message": "Loga zewnętrzne firmy Clearbit"
+    "message": "Loga zewnętrzne od Clearbit"
   },
   "delete_thumbnail": {
     "message": "Usuń miniaturę"
@@ -426,7 +426,7 @@
     "message": "Foldery na dole"
   },
   "bookmarks_sorting_warning": {
-    "message": "Sortowanie metodą „przeciągnij i upuść” zostanie wyłączone, jeśli wybrana zostanie jedna z opcji sortowania"
+    "message": "Sortowanie metodą „przeciągnij i upuść” zostanie wyłączone, jeśli wybrana zostanie jedna z dostępnych opcji sortowania"
   },
   "extension_updated_notification": {
     "message": "Rozszerzenie zostało zaktualizowane"
@@ -435,10 +435,10 @@
     "message": "Co nowego"
   },
   "search_autofocus": {
-    "message": "Skoncentruj się na pasku wyszukiwania"
+    "message": "Skup się na pasku wyszukiwania"
   },
   "confirm_delete_selected_bookmarks": {
-    "message": "Czy na pewno chcesz usunąć wybrane zakładki ?"
+    "message": "Czy na pewno chcesz usunąć wybrane zakładki?"
   },
   "button_action_move": {
     "message": "Przenieś do folderu"
