@@ -334,8 +334,11 @@ function handleBeforeUnload(evt) {
 
 function handleUnload() {
   // remove flag from storage to unlock button generate
-  if (isGenerateThumbs)
+  if (isGenerateThumbs) {
     localStorage.removeItem('update_thumbnails');
+  }
+
+  localStorage.removeItem('disabledSort');
 }
 
 function handleUpdateStorage(e) {
