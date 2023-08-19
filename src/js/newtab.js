@@ -133,7 +133,10 @@ async function init() {
   modal.addEventListener('gmodal:close', handleCloseModal);
 
   // scrollup button component
-  document.getElementById('aside_controls').insertAdjacentElement('afterend', $createElement('vb-scrollup'));
+  document.getElementById('aside_controls').insertAdjacentElement(
+    'afterend',
+    $createElement('vb-scrollup', { class: 'sticky' })
+  );
 
   // If thumbnail generation button
   if (settings.$.thumbnails_update_button) {
