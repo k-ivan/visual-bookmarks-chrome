@@ -1,4 +1,5 @@
 .options {
+  overflow-y: scroll;
   background-color: var(--options-background);
   color: var(--theme-text-color);
 

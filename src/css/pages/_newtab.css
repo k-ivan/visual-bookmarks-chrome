@@ -1,3 +1,10 @@
+body {
+  overflow-y: hidden;
+}
+.app {
+  overflow-y: scroll;
+  height: 100vh;
+}
 .aside-controls {
   position: fixed;
   top: 12px;

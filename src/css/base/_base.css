@@ -34,8 +34,6 @@ body {
   line-height: var(--line-height);
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  overflow-y: scroll;
-  overflow-y: overlay;
   overflow-x: hidden;
   background-color: var(--body-background);
   color: var(--theme-text-color);
