@@ -135,7 +135,7 @@ async function init() {
   // scrollup button component
   document.getElementById('aside_controls').insertAdjacentElement(
     'afterend',
-    $createElement('vb-scrollup', { class: 'sticky' })
+    $createElement('vb-scrollup', { class: 'sticky', 'scroll-selector': '.app' })
   );
 
   // If thumbnail generation button

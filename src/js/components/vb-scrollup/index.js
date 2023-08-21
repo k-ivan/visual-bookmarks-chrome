@@ -13,6 +13,14 @@ class VbScrollup extends HTMLElement {
     this.#dettachEvents();
   }
 
+  get scrollSelector() {
+    return this.getAttribute('scroll-selector');
+  }
+
+  get scrollTop() {
+    return this.scrollContainer === window ? window.scrollY : this.scrollContainer.scrollTop;
+  }
+
   #render() {
     this.classList.add('vb-scrollup');
     this.scrollButton = $createElement('button', {
@@ -26,6 +34,8 @@ class VbScrollup extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `<style>${styles}</style>`;
     this.shadowRoot.append(this.scrollButton);
+
+    this.scrollContainer = document.querySelector(this.scrollSelector) ?? window;
   }
 
   #attachEvents() {
@@ -33,23 +43,23 @@ class VbScrollup extends HTMLElement {
     this.scrollButton.addEventListener('click', this.handleClick);
 
     this.handleScroll = this.handleScroll.bind(this);
-    window.addEventListener('scroll', this.handleScroll);
+    this.scrollContainer.addEventListener('scroll', this.handleScroll);
   }
 
   #dettachEvents() {
     this.scrollButton.removeEventListener('click', this.handleClick);
-    window.removeEventListener('scroll', this.handleScroll);
+    this.scrollContainer.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll() {
-    const isShown = window.scrollY > 1000;
+    const isShown = this.scrollTop > 1000;
     this.classList.toggle('is-shown', isShown);
     this.scrollButton.disabled = !isShown;
   }
 
   handleClick(e) {
     e.preventDefault();
-    window.scrollTo({
+    this.scrollContainer.scrollTo({
       left: 0,
       top: 0,
       behavior: 'smooth'

@@ -2,7 +2,7 @@
   position: fixed;
   right: 12px;
   bottom: 20px;
-  transform: translateX(100%);
+  transform: translate3d(100%, 0, 0);
   opacity: 0;
   will-change: transform;
   transition: 0.15s ease-in-out;
