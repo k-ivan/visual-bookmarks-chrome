@@ -103,6 +103,21 @@ class VbHeader extends HTMLElement {
             ? this.formNode.setAttribute('target', '_blank')
             : this.formNode.removeAttribute('target');
         }
+
+        // when switching engines
+        // if search is active, we will display the actual results when the bookmark search returns
+        // if we leave the search for bookmarks on the engine, then we need to reset the search results by bookmarks
+        if (this.inputNode.value.trim()) {
+          this.dispatchEvent(
+            new CustomEvent('vb:search', {
+              detail: {
+                search: this.isBookmarksEngine ? this.inputNode.value : ''
+              },
+              bubbles: true,
+              cancelable: true
+            })
+          );
+        }
       });
   }
 
