@@ -231,7 +231,7 @@
     "message": "Obraz z adresu URL"
   },
   "background_local": {
-    "message": "Obraz z komputera"
+    "message": "Obraz lub wideo z komputera"
   },
   "choose_file": {
     "message": "Obraz lub wideo"

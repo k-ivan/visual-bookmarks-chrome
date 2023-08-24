@@ -231,7 +231,7 @@
     "message": "Kép az URL-címről"
   },
   "background_local": {
-    "message": "Kép a számítógépről"
+    "message": "Kép vagy videó számítógépről"
   },
   "choose_file": {
     "message": "Kép vagy videó"
