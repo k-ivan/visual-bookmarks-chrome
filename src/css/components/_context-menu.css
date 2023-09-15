@@ -14,9 +14,7 @@
 
 .context-menu__list {
   margin: 0;
-  padding-left: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 3px;
   list-style: none;
 }
 
@@ -35,6 +33,7 @@
   color: var(--context-menu-color);
   text-decoration: none;
   white-space: nowrap;
+  border-radius: 4px;
   &:not([href]) {
     cursor: pointer;
   }
