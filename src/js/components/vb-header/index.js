@@ -446,6 +446,10 @@ class VbHeader extends HTMLElement {
   }
 
   closeSuggest() {
+    if (!this.suggestNode || this.suggestNode.hidden) {
+      return;
+    }
+
     this.suggestNode.hidden = true;
     this.suggestList = [];
     this.suggestIndex = -1;
