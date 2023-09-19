@@ -15,6 +15,7 @@ class VbHeader extends HTMLElement {
   headerNode = null;
   formNode = null;
   inputNode = null;
+  suggestNode = null;
   resetNode = null;
   selectNode = null;
   vbPopup = null;
@@ -24,6 +25,10 @@ class VbHeader extends HTMLElement {
   engineNodes = [];
   engineIndex = 0;
   prevEngineIndex = 0;
+
+  suggestIndex = -1;
+  suggestList = [];
+  abortController = null;
 
   connectedCallback() {
     this.#render();
@@ -98,6 +103,18 @@ class VbHeader extends HTMLElement {
 
         this.buttonSubmitNode.hidden = this.isBookmarksEngine;
 
+        if (!this.isBookmarksEngine) {
+          this.suggestNode = $createElement('div', {
+            id: 'suggest',
+            class: 'suggest',
+            hidden: 'hidden'
+          });
+          this.formNode.append(this.suggestNode);
+        } else {
+          this.suggestNode?.remove();
+          this.suggestNode = null;
+        }
+
         if (settings.$.open_link_newtab) {
           !this.isBookmarksEngine
             ? this.formNode.setAttribute('target', '_blank')
@@ -164,6 +181,18 @@ class VbHeader extends HTMLElement {
     // listen for folders update event
     this.handleUpdateFolders = this.handleUpdateFolders.bind(this);
     document.addEventListener('updateFolderList', this.handleUpdateFolders);
+
+    this.handleKeydown = this.handleKeydown.bind(this);
+    this.inputNode.addEventListener('keydown', this.handleKeydown);
+
+    this.handleClickSuggest = this.handleClickSuggest.bind(this);
+    this.formNode.addEventListener('click', this.handleClickSuggest);
+
+    this.handleEscape = this.handleEscape.bind(this);
+    document.addEventListener('keydown', this.handleEscape);
+
+    this.handleDocClick = this.handleDocClick.bind(this);
+    document.addEventListener('click', this.handleDocClick);
   }
 
   #dettachEvents() {
@@ -175,8 +204,12 @@ class VbHeader extends HTMLElement {
     this.vbPopup.removeEventListener('keydown', this.handleKeydownEngine);
     this.vbPopup.removeEventListener('vb:popup:open', this.handlePopupState);
     this.vbPopup.removeEventListener('vb:popup:close', this.handlePopupState);
+    this.inputNode.removeEventListener('keydown', this.handleKeydown);
+    this.formNode.removeEventListener('click', this.handleClickSuggest);
     document.removeEventListener('changeFolder', this.handleHash);
     document.removeEventListener('updateFolderList', this.handleUpdateFolders);
+    document.removeEventListener('keydown', this.handleEscape);
+    document.removeEventListener('click', this.handleDocClick);
   }
 
   async handleUpdateFolders(e) {
@@ -280,29 +313,142 @@ class VbHeader extends HTMLElement {
 
   handleReset() {
     this.inputNode.value = '';
-    this.isBookmarksEngine && this.inputNode.dispatchEvent(
-      new CustomEvent('vb:searchreset', {
-        bubbles: true,
-        cancelable: true
-      })
-    );
+    if (this.isBookmarksEngine) {
+      this.inputNode.dispatchEvent(
+        new CustomEvent('vb:searchreset', {
+          bubbles: true,
+          cancelable: true
+        })
+      );
+    } else {
+      this.closeSuggest();
+    }
+
     this.resetNode.classList.remove('is-show');
     this.inputNode.focus();
   }
 
   handleInput(e) {
     const search = e.target.value;
-    this.isBookmarksEngine && this.dispatchEvent(
-      new CustomEvent('vb:search', {
-        detail: {
-          search
-        },
-        bubbles: true,
-        cancelable: true
-      })
-    );
+    if (this.isBookmarksEngine) {
+      this.dispatchEvent(
+        new CustomEvent('vb:search', {
+          detail: {
+            search
+          },
+          bubbles: true,
+          cancelable: true
+        })
+      );
+    } else {
+      this.suggestSearch(e.target.value.trim());
+    }
 
     this.resetNode.classList.toggle('is-show', search.trim().length);
+  }
+
+  handleEscape(e) {
+    if (this.suggestList.length && e.key === 'Escape') {
+      this.closeSuggest();
+    }
+  }
+
+  handleDocClick(e) {
+    if (!e.target.closest('#searchForm')) {
+      this.closeSuggest();
+    }
+  }
+
+  handleKeydown(e) {
+    if (!this.suggestList.length) return true;
+
+    switch (e.key) {
+      case 'ArrowUp':
+      case 'ArrowDown':
+        this.gotoSuggest(e);
+        break;
+      case 'Enter': this.handleEnterSuggest(e); break;
+    }
+  }
+
+  async suggestSearch(query) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    if (query.length > 0) {
+      try {
+        this.suggestList = await this.suggestRequest(query);
+      } catch (error) {}
+    } else {
+      this.suggestList = [];
+      this.suggestIndex = -1;
+    }
+
+    this.suggestNode.innerHTML = this.suggestList.map((suggest, index) => {
+      return `<div data-suggest="${index}">${suggest}</div>`;
+    }).join('');
+    this.suggestNode.hidden = !this.suggestList.length;
+  }
+
+  suggestRequest(query) {
+    this.abortController = new AbortController();
+    const signal = this.abortController.signal;
+
+    return fetch(`https://google.com/complete/search?output=toolbar&q=${query}`, { signal })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(str => {
+        const xmlDOM = new DOMParser().parseFromString(str, 'text/xml');
+        const suggestions = Array
+          .from(xmlDOM.querySelectorAll('[data]'))
+          .map(suggestion => suggestion.getAttribute('data'));
+
+        return suggestions;
+      });
+  }
+
+  gotoSuggest(e) {
+    e.preventDefault();
+    const suggestedList = Array.from(this.suggestNode.querySelectorAll('[data-suggest]'));
+    const prevIndex = this.suggestIndex;
+
+    if (e.key === 'ArrowUp') {
+      this.suggestIndex = this.suggestIndex <= 0 ? this.suggestList.length - 1 : this.suggestIndex - 1;
+    } else {
+      this.suggestIndex = (this.suggestIndex + 1) % this.suggestList.length;
+    }
+
+    suggestedList[prevIndex]?.classList.remove('is-active');
+    suggestedList[this.suggestIndex]?.classList.add('is-active');
+  }
+
+  handleEnterSuggest(e) {
+    e.preventDefault();
+    this.inputNode.value = this.suggestList[this.suggestIndex];
+    this.inputNode.focus();
+    this.closeSuggest();
+  }
+
+  handleClickSuggest(e) {
+    const target = e.target.closest('[data-suggest]');
+    if (!target) return true;
+
+    e.preventDefault();
+    const selectedIndex = parseInt(target.dataset.suggest);
+    this.inputNode.value = this.suggestList[selectedIndex];
+    this.inputNode.focus();
+    this.formNode.submit();
+    this.closeSuggest();
+  }
+
+  closeSuggest() {
+    this.suggestNode.hidden = true;
+    this.suggestList = [];
+    this.suggestIndex = -1;
   }
 }
 

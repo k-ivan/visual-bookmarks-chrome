@@ -147,6 +147,29 @@
   }
 }
 
+.suggest {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  padding: 5px;
+  background-color: var(--theme-background-2);
+  border-radius: var(--base-radius);
+  border: 1px solid var(--color-primary-alpha-40);
+
+  [data-suggest] {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: var(--base-radius);
+    cursor: pointer;
+    &:hover,
+    &.is-active {
+      background-color: var(--theme-background-3);
+    }
+  }
+}
+
 .back {
   color: var(--search-reset-btn-color);
   background-color: var(--input-bg);
