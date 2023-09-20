@@ -2,9 +2,9 @@ import ContextMenu from './contextmenu';
 import { $createElement } from '../../utils';
 
 class VbContextMenu extends HTMLElement {
-  containerNode = null
-  menuNode = null
-  items = []
+  containerNode = null;
+  menuNode = null;
+  items = [];
 
   constructor() {
     super();
@@ -14,7 +14,8 @@ class VbContextMenu extends HTMLElement {
     this.render();
 
     this.menuInstance = new ContextMenu(this.containerNode, {
-      delegateSelector: this.triggerSelector
+      delegateSelector: this.triggerSelector,
+      scrollContainer: '.app'
     });
     this.handleMenuOpen = this.handleMenuOpen.bind(this);
     this.handleMenuSelect = this.handleMenuSelect.bind(this);
