@@ -372,6 +372,7 @@ class VbHeader extends HTMLElement {
   }
 
   async suggestSearch(query) {
+    this.suggestIndex = -1;
     if (this.abortController) {
       this.abortController.abort();
     }
@@ -427,9 +428,12 @@ class VbHeader extends HTMLElement {
   }
 
   handleEnterSuggest(e) {
-    e.preventDefault();
-    this.inputNode.value = this.suggestList[this.suggestIndex];
-    this.inputNode.focus();
+    if (this.suggestIndex > -1) {
+      e.preventDefault();
+      this.inputNode.value = this.suggestList[this.suggestIndex];
+      this.inputNode.focus();
+      this.formNode.submit();
+    }
     this.closeSuggest();
   }
 
