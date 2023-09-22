@@ -25,6 +25,7 @@ class VbHeader extends HTMLElement {
   engineNodes = [];
   engineIndex = 0;
   prevEngineIndex = 0;
+  inputValue = '';
 
   suggestIndex = -1;
   suggestList = [];
@@ -341,6 +342,7 @@ class VbHeader extends HTMLElement {
         })
       );
     } else {
+      this.inputValue = e.target.value;
       this.suggestSearch(e.target.value.trim());
     }
 
@@ -417,11 +419,19 @@ class VbHeader extends HTMLElement {
     const suggestedList = Array.from(this.suggestNode.querySelectorAll('[data-suggest]'));
     const prevIndex = this.suggestIndex;
 
-    if (e.key === 'ArrowUp') {
-      this.suggestIndex = this.suggestIndex <= 0 ? this.suggestList.length - 1 : this.suggestIndex - 1;
-    } else {
-      this.suggestIndex = (this.suggestIndex + 1) % this.suggestList.length;
+    this.suggestIndex = e.key === 'ArrowUp'
+      ? this.suggestIndex - 1
+      : this.suggestIndex + 1;
+
+    if (this.suggestIndex > this.suggestList.length - 1) {
+      this.suggestIndex = -1;
+    } else if (this.suggestIndex < -1) {
+      this.suggestIndex = this.suggestList.length - 1;
     }
+
+    this.inputNode.value = this.suggestIndex < 0
+      ? this.inputValue
+      : this.suggestList[this.suggestIndex];
 
     suggestedList[prevIndex]?.classList.remove('is-active');
     suggestedList[this.suggestIndex]?.classList.add('is-active');
