@@ -444,9 +444,9 @@
     "message": "Przenieś do folderu"
   },
   "enable_virtual_pagination": {
-    "message": "Wirtualna paginacja"
+    "message": "Wirtualne stronicowanie"
   },
   "enable_virtual_pagination_note": {
-    "message": "Dzieli wysokość dokumentu na sekcje w celu nawigacji po nich  (eksperyment)"
+    "message": "Dzieli wysoki dokument na sekcje w celu ułatwienia nawigacji po nimi (eksperymentalne)"
   }
 }
