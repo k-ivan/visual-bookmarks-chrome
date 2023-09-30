@@ -442,5 +442,11 @@
   },
   "button_action_move": {
     "message": "Áthelyezés mappába"
+  },
+  "enable_virtual_pagination": {
+    "message": "Virtuális oldalszámozás"
+  },
+  "enable_virtual_pagination_note": {
+    "message": "A dokumentum magasságát szakaszokra osztja a navigációhoz (kísérlet)"
   }
 }

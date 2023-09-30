@@ -10,8 +10,7 @@ import {
   remove,
   removeTree,
   create,
-  update,
-  get
+  update
 } from '../api/bookmark';
 import {
   $debounce,
@@ -80,29 +79,27 @@ const Bookmarks = (() => {
         const query = detail.search.trim();
         if (!query.length && hasSearch) {
           hasSearch = false;
-          return createSpeedDial(startFolder());
-        }
-        if (query.length > 1) {
+          createSpeedDial(startFolder());
+        } else {
           hasSearch = true;
           search(query);
         }
+        document.body.classList.toggle('has-search', hasSearch);
       }, 500);
       const searchResetHandler = () => {
         hasSearch = false;
         createSpeedDial(startFolder());
+        document.body.classList.remove('has-search');
       };
 
       vbHeader.addEventListener('vb:search', searchHandler);
       vbHeader.addEventListener('vb:searchreset', searchResetHandler);
     }
 
-    // Create speeddial
-    createSpeedDial(startFolder());
-
     // Change the current dial if the page hash changes
-    window.addEventListener('hashchange', function() {
+    window.addEventListener('hashchange', async function() {
       const folderId = startFolder();
-      createSpeedDial(folderId);
+      await createSpeedDial(folderId);
       $customTrigger('changeFolder', container, {
         detail: { folderId },
         bubbles: true
@@ -128,6 +125,9 @@ const Bookmarks = (() => {
         }
       }
     });
+
+    // Create speeddial
+    return createSpeedDial(startFolder());
   }
 
   function observerDropzone() {
@@ -548,7 +548,6 @@ const Bookmarks = (() => {
         }
 
         // folder by id exists
-        render(item[0].children, settings.$.show_create_column);
         container.setAttribute('data-folder', id);
 
         if (Number(item[0].parentId)) {
@@ -556,6 +555,8 @@ const Bookmarks = (() => {
         } else {
           container.removeAttribute('data-parent-folder');
         }
+
+        return render(item[0].children, settings.$.show_create_column);
       })
       .catch(() => {
         Toast.show(chrome.i18n.getMessage('notice_cant_find_id'));

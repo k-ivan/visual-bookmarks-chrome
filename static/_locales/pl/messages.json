@@ -442,5 +442,11 @@
   },
   "button_action_move": {
     "message": "Przenieś do folderu"
+  },
+  "enable_virtual_pagination": {
+    "message": "Wirtualna paginacja"
+  },
+  "enable_virtual_pagination_note": {
+    "message": "Dzieli wysokość dokumentu na sekcje w celu nawigacji po nich  (eksperyment)"
   }
 }

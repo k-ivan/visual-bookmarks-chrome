@@ -315,3 +315,9 @@ export function getVideoPoster(file, height = 150) {
     reader.readAsDataURL(file);
   });
 }
+
+export function asyncLoadComponents(factoryImport) {
+  return factoryImport()
+    .then((module) => module)
+    .catch(console.warn);
+}

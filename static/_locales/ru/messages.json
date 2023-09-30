@@ -442,5 +442,11 @@
   },
   "button_action_move": {
     "message": "Переместить в папку"
+  },
+  "enable_virtual_pagination": {
+    "message": "Виртуальная пагинация"
+  },
+  "enable_virtual_pagination_note": {
+    "message": "Делит документ по высоте на секции для навигации по ним  (эксперимент)"
   }
 }

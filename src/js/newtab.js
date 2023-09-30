@@ -3,6 +3,7 @@ import './components/vb-select';
 import './components/vb-context-menu';
 import './components/vb-scrollup';
 import './components/vb-bookmarks-panel';
+// import './components/vb-virtual-pagination';
 
 import Gmodal from 'glory-modal';
 import Validator from 'form-validation-plugin';
@@ -21,7 +22,8 @@ import {
   $getDomain,
   $createElement,
   $copyStr,
-  $unescapeHtml
+  $unescapeHtml,
+  asyncLoadComponents
 } from './utils';
 import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU } from './constants';
@@ -79,7 +81,18 @@ async function init() {
   UI.calculateStyles();
   UI.setBG();
 
-  Bookmarks.init();
+  Bookmarks.init().then(() => {
+    if (settings.$.enable_virtual_pagination) {
+      // eslint-disable-next-line max-len
+      asyncLoadComponents(() => import(/* webpackChunkName: "webcomponents/vb-virtual-pagination" */'./components/vb-virtual-pagination'))
+        .then(() => {
+          document.body.insertAdjacentElement(
+            'beforeEnd',
+            $createElement('vb-virtual-pagination', { 'scrollable-selector': '.app' })
+          );
+        });
+    }
+  });
 
   modalApi = new Gmodal(modal, {
     stickySelectors: ['.sticky'],

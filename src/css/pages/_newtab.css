@@ -23,7 +23,7 @@ body {
 }
 
 .content {
-  padding: 20px 0;
+  padding: 20px 0 40px;
 }
 
 .thumb-upload {
@@ -152,4 +152,17 @@ body {
 .grid:not(.has-dragging) .bookmark {
   transition: transform 0.15s ease;
   transition-property: transform, box-shadow;
+}
+
+.has-search vb-virtual-pagination {
+  display: none;
+}
+
+vb-virtual-pagination {
+  position: absolute;
+  z-index: 1000;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  text-align: center;
 }

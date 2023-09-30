@@ -227,6 +227,12 @@ export default [
         ]
       },
       {
+        id: 'enable_virtual_pagination',
+        title: chrome.i18n.getMessage('enable_virtual_pagination'),
+        note: chrome.i18n.getMessage('enable_virtual_pagination_note'),
+        type: 'switch'
+      },
+      {
         id: 'enable_sync',
         title: chrome.i18n.getMessage('enable_sync'),
         type: 'switch'
