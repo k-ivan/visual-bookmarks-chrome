@@ -7,9 +7,12 @@ class VbVirtualPagination extends HTMLElement {
   buttons = [];
   currentPage = 0;
 
-  connectedCallback() {
+  constructor() {
+    super();
     this.attachShadow({ mode: 'open' });
+  }
 
+  connectedCallback() {
     this.scrollableContainer = document.querySelector(this.scrollableSelector) ?? document.body;
     this.node = $createElement('div', {
       class: 'vb-virtual-pagination'
@@ -27,7 +30,7 @@ class VbVirtualPagination extends HTMLElement {
   }
 
   get windowHeight() {
-    return Math.max(500, window.innerHeight);
+    return window.innerHeight;
   }
 
   get pages() {
@@ -78,7 +81,7 @@ class VbVirtualPagination extends HTMLElement {
         Array(pages).keys()
       ).map((slide, index) => {
         const isActive = this.currentPage === index ? ' class="is-active"' : '';
-        return `<button${isActive} data-page="${slide}"></button>`;
+        return `<button${isActive} data-page="${slide}">${index + 1}</button>`;
       });
     }
 

@@ -23,7 +23,7 @@ body {
 }
 
 .content {
-  padding: 20px 0 40px;
+  padding: 20px 0;
 }
 
 .thumb-upload {
@@ -158,11 +158,16 @@ body {
   display: none;
 }
 
+@media (max-height: 550px) {
+  vb-virtual-pagination {
+    display: none;
+  }
+}
+
 vb-virtual-pagination {
   position: absolute;
   z-index: 1000;
-  bottom: 3px;
-  left: 0;
-  right: 0;
-  text-align: center;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
 }
