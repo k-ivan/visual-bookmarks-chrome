@@ -127,10 +127,8 @@ export function $imageLoaded(img) {
 export function $base64ToBlob(base64, type, callback) {
   // convert base64 to raw binary data held in a string
   // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-  let dataURI = base64;
   let contentType = type || '';
-
-  let byteString = atob(dataURI.split(',')[1]);
+  let byteString = atob(base64.split(',')[1]);
 
   // separate out the mime component
   // let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];

@@ -9,6 +9,7 @@ import {
 } from './utils';
 import {
   create,
+  flattenArrayBookmarks,
   search
 } from './api/bookmark';
 import {
@@ -39,6 +40,7 @@ async function initContextMenu() {
   browserContextMenu.init(settings.show_contextmenu_item);
 }
 
+// TODO a refactor is needed to make the function return a promise
 async function captureScreen(link, callback) {
   const { screen } = await storage.local.get('screen');
 
@@ -178,21 +180,67 @@ async function handleCreatedTab(tab) {
   }
 }
 
-async function handleCreatedBookmark(id, bookmark) {
+async function handleCreateThumbnail(id, bookmark, callback) {
   const { importingBookmarks } = await storage.local.get('importingBookmarks');
   if (importingBookmarks) return;
 
+  captureScreen(bookmark.url, async function(data) {
+    if (data.error) {
+      return callback && callback();
+    }
+    const fileBlob = $base64ToBlob(data.capture, 'image/webp');
+    const blob = await $resizeThumbnail(fileBlob);
+    await ImageDB.update({ id: bookmark.id, blob, custom: false });
+    callback && callback();
+  });
+}
+
+async function handleBookmarks(eventType, id, bookmark) {
+  const isBookmarkUrl = bookmark.url || bookmark.node?.url;
+  // we will start rebuilding the list of folders only if an event happened to the folder
+  // note: in the case of moving, it will also work with a bookmark
+  if (!isBookmarkUrl || eventType === 'moved') {
+    initContextMenu();
+  }
+
+  // to avoid duplicating actions when editing bookmarks,
+  // we will ignore further execution if our application is in the active tab
+  const tabs = await chrome.tabs.query({ active: true });
+  const tabUrl = tabs[0].url.replace(/#\d*/, '');
+  if (NEWTAB_URLS.includes(tabUrl)) return;
+
   const { settings } = await storage.local.get('settings');
-
-  initContextMenu();
-
-  if (settings.auto_generate_thumbnail) {
-    captureScreen(bookmark.url, async function(data) {
-      const fileBlob = $base64ToBlob(data.capture, 'image/webp');
-      const blob = await $resizeThumbnail(fileBlob);
-      await ImageDB.update({ id: bookmark.id, blob, custom: false });
-      chrome.runtime.sendMessage({ autoGenerateThumbnail: true });
+  const sendMessageCallback = () => {
+    chrome.runtime.sendMessage({ bookmarksUpdated: true }, () => {
+      if (chrome.runtime.lastError) {
+        return;
+      }
     });
+  };
+
+  // create a thumbnail if required
+  // send a command to update the list of bookmarks
+  if (
+    ['created', 'changed'].includes(eventType) &&
+    settings.auto_generate_thumbnail &&
+    bookmark.url
+  ) {
+    handleCreateThumbnail(id, bookmark, sendMessageCallback);
+  } else {
+    sendMessageCallback();
+  }
+
+  // delete all thumbnails associated with the folder being deleted
+  if (eventType === 'removed') {
+    const deletedThumbsPromises = [ImageDB.delete(id)];
+
+    if (!bookmark.node.url) {
+      deletedThumbsPromises.push(
+        ...flattenArrayBookmarks(bookmark.node.children, true).map(({ id }) => ImageDB.delete(id))
+      );
+    }
+
+    Promise.all(deletedThumbsPromises);
   }
 }
 
@@ -221,10 +269,10 @@ chrome.runtime.onInstalled.addListener(async(event) => {
   }
 });
 
-chrome.bookmarks.onCreated.addListener(handleCreatedBookmark);
-chrome.bookmarks.onChanged.addListener(initContextMenu);
-chrome.bookmarks.onRemoved.addListener(initContextMenu);
-chrome.bookmarks.onMoved.addListener(initContextMenu);
+chrome.bookmarks.onCreated.addListener((id, bookmark) => handleBookmarks('created', id, bookmark));
+chrome.bookmarks.onChanged.addListener((id, bookmark) => handleBookmarks('changed', id, bookmark));
+chrome.bookmarks.onRemoved.addListener((id, bookmark) => handleBookmarks('removed', id, bookmark));
+chrome.bookmarks.onMoved.addListener((id, bookmark) => handleBookmarks('moved', id, bookmark));
 
 chrome.bookmarks.onImportBegan.addListener(() => {
   storage.local.set({ importingBookmarks: true });

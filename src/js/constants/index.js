@@ -143,5 +143,6 @@ export const SEARCH_ENGINES = [
 
 export const NEWTAB_URLS = [
   'edge://newtab/',
-  'chrome://newtab/'
+  'chrome://newtab/',
+  chrome.runtime.getURL('newtab.html')
 ];

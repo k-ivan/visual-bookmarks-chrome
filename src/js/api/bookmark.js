@@ -173,3 +173,21 @@ export function search(query) {
     return Promise.reject(error);
   }
 }
+
+/**
+ * Create a flat array of bookmarks
+ * @param {Array<BookmarkTreeNode>} bookmarks
+ * @param {boolean} hasFolders add bookmarks and folders
+ * @returns {Array<BookmarkTreeNode>} flatten bookmarks
+ */
+export function flattenArrayBookmarks(arr, hasFolders = false) {
+  if (hasFolders) {
+    return [].concat(...arr.map(item => {
+      return Array.isArray(item.children) ? [item, ...flattenArrayBookmarks(item.children, true)] : item;
+    }));
+  }
+
+  return [].concat(...arr.map(item => {
+    return Array.isArray(item.children) ? flattenArrayBookmarks(item.children) : item;
+  }));
+}
