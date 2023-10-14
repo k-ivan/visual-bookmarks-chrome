@@ -188,27 +188,12 @@ async function init() {
   window.addEventListener('load', handleLoad);
   window.addEventListener('hashchange', hideControlMultiplyBookmarks);
 
-  // if support Page Visibility API
-  // if the tab is open but not active, then when you change bookmarks from other places,
-  // we will do a reload of the bookmarks page to display the latest changes
-  if ('hidden' in document) {
-    if (!settings.$.auto_generate_thumbnail) {
-      chrome.bookmarks.onCreated.addListener(handlePageVisibility);
+  // if tab with bookmarks is open, but hidden, we need to reload, after updating thumbnails
+  chrome.runtime.onMessage.addListener(function(request) {
+    if (request.bookmarksUpdated && document.hidden) {
+      window.location.reload();
     }
-    chrome.bookmarks.onChanged.addListener(handlePageVisibility);
-    chrome.bookmarks.onRemoved.addListener(handlePageVisibility);
-    chrome.bookmarks.onMoved.addListener(handlePageVisibility);
-  }
-
-  // if there is auto-generation of thumbnails, and a tab with bookmarks is open, we need to reload, after saving the thumbnail
-  if (settings.$.auto_generate_thumbnail) {
-    chrome.runtime.onMessage.addListener(
-      function(request) {
-        if (request.autoGenerateThumbnail) {
-          window.location.reload();
-        }
-      });
-  }
+  });
 
   // import(/* webpackChunkName: "webcomponents/vb-actions-panel" */'./components/vb-bookmarks-panel');
   container.addEventListener('click', handleSelectBookmark);
@@ -368,17 +353,6 @@ function handleGenerateThumbs() {
   // method to start generating all bookmark thumbnails
   if (this.hasAttribute('disabled') || localStorage.getItem('update_thumbnails') !== null) return;
   Bookmarks.autoUpdateThumb();
-}
-
-function handlePageVisibility(id) {
-  if (document.hidden) {
-    const hash = location.hash.slice(1);
-
-    if (hash && hash === id) {
-      location.hash = '1';
-    }
-    window.location.reload();
-  }
 }
 
 function handleDelegateClick(evt) {
