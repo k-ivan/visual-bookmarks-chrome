@@ -10,7 +10,8 @@ import {
   remove,
   removeTree,
   create,
-  update
+  update,
+  flattenArrayBookmarks
 } from '../api/bookmark';
 import {
   $debounce,
@@ -599,17 +600,6 @@ const Bookmarks = (() => {
     return progressToast;
   }
 
-  /**
-   * Create a flat array of bookmarks
-   * @param {Array<BookmarkTreeNode>} bookmarks
-   * @returns {Array<BookmarkTreeNode>} flatten bookmarks
-   */
-  function flattenArrayBookmarks(arr) {
-    return [].concat(...arr.map(item => {
-      return Array.isArray(item.children) ? flattenArrayBookmarks(item.children) : item;
-    }));
-  }
-
   async function captureMultipleBookmarks(selectedBookmarks, showNotice) {
     const bookmarksLength = selectedBookmarks.filter(b => !b.isFolder).length;
     // create notification toast
@@ -889,10 +879,11 @@ const Bookmarks = (() => {
       ? bookmark.id
       : bookmark.dataset.id;
 
+    removeThumbnail(id, isFolder);
+
     await (isFolder ? removeTree(id) : remove(id));
 
     bookmark.remove();
-    removeThumbnail(id);
 
     isFolder && $customTrigger('updateFolderList', document, {
       detail: {
@@ -923,10 +914,10 @@ const Bookmarks = (() => {
     }
 
     const { id } = bookmark;
+    removeThumbnail(id, true);
     removeTree(id)
       .then(() => {
         bookmark.remove();
-        removeThumbnail(id);
         $customTrigger('updateFolderList', document, {
           detail: {
             isFolder: true
@@ -936,11 +927,22 @@ const Bookmarks = (() => {
       });
   }
 
-  function removeThumbnail(id) {
+  async function removeThumbnail(id, isFolder = false) {
+    const ids = [id];
+
+    if (isFolder) {
+      const subTree = await getSubTree(id);
+      const nestedBookmarksIds = flattenArrayBookmarks(subTree[0].children, true).map(({ id }) => id);
+      ids.push(...nestedBookmarksIds);
+    }
+
     const thumbnail = THUMBNAILS_MAP.get(id);
     thumbnail && URL.revokeObjectURL(thumbnail.blobUrl);
     THUMBNAILS_MAP.delete(id);
-    return ImageDB.delete(id);
+
+    return Promise.all(
+      ids.map(id => ImageDB.delete(id))
+    );
   }
 
   function createBookmark(title, url) {
