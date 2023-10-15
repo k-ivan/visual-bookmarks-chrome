@@ -15,7 +15,8 @@ import {
 import {
   THUMBNAIL_POPUP_HEIGHT,
   THUMBNAIL_POPUP_WIDTH,
-  NEWTAB_URLS
+  NEWTAB_URLS,
+  NEWTAB_EMPTY_URLS
 } from './constants';
 
 function browserActionHandler() {
@@ -172,9 +173,9 @@ function handleCreateBookmark(data) {
 
 async function handleCreatedTab(tab) {
   const { settings } = await storage.local.get('settings');
-  if (settings.search_autofocus && NEWTAB_URLS.includes(tab.pendingUrl)) {
+  if (settings.search_autofocus && NEWTAB_EMPTY_URLS.includes(tab.pendingUrl)) {
     chrome.tabs.create({
-      url: '/newtab.html'
+      url: chrome.runtime.getURL('newtab.html')
     });
     chrome.tabs.remove(tab.id);
   }

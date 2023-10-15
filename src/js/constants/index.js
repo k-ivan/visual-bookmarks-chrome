@@ -146,3 +146,8 @@ export const NEWTAB_URLS = [
   'chrome://newtab/',
   chrome.runtime.getURL('newtab.html')
 ];
+
+export const NEWTAB_EMPTY_URLS = [
+  'edge://newtab/',
+  'chrome://newtab/'
+];
