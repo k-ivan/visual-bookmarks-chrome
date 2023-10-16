@@ -109,9 +109,8 @@ module.exports = (env, arg) => {
           // do not extract to separate file
           extractComments: false,
           terserOptions: {
-            // output: { comments: false, },
             output: { comments: /@?license/i, },
-            compress: { passes: 3 }
+            compress: { passes: 1 }
           }
         })
       ]
