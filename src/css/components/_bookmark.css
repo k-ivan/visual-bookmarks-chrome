@@ -30,7 +30,7 @@
   box-shadow: 0 1px 4px 0 rgba(0 0 0 / 20%);
   background-color: var(--bookmark-bg);
   border-radius: var(--bookmark-radius);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.15s linear;
   &:hover,
   &:focus {
     opacity: 0.85;
