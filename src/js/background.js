@@ -20,15 +20,9 @@ import {
 } from './constants';
 
 function browserActionHandler() {
-  // TODO: need current hash folder
-  const urls = [
-    chrome.runtime.getURL('newtab.html'),
-    'chrome://newtab/'
-  ];
-
   chrome.tabs.query({ currentWindow: true }, function(tabs) {
     for (let tab of tabs) {
-      if (urls.some(url => tab.url.startsWith(url))) {
+      if (NEWTAB_URLS.some(url => tab.url.startsWith(url))) {
         return chrome.tabs.update(tab.id, { active: true });
       }
     }
