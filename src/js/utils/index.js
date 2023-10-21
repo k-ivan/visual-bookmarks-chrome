@@ -2,6 +2,9 @@
 export function $createElement(tag, attributes = {}, ...children) {
   const element = document.createElement(tag);
   for (const attribute in attributes) {
+    if (attributes[attribute] == null) {
+      continue;
+    }
     if (Object.prototype.hasOwnProperty.call(attributes, attribute)) {
       element.setAttribute(attribute, attributes[attribute]);
     }

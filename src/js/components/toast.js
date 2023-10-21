@@ -1,3 +1,5 @@
+import { $createElement } from '../utils';
+
 const Toast = (() => {
   let defaults = {
     position: 'bottom-left',
@@ -12,9 +14,9 @@ const Toast = (() => {
   let timer = null;
   let settings = null;
 
-  function createElement(tag, options) {
-    return Object.assign(document.createElement(tag), options);
-  }
+  // function createElement(tag, options) {
+  //   return Object.assign(document.createElement(tag), options);
+  // }
 
   function show(data) {
     if (document.getElementById('toast')) {
@@ -28,16 +30,19 @@ const Toast = (() => {
       Object.assign(settings, data);
     }
 
-    toast = createElement('div', {
+    toast = $createElement('div', {
       id: 'toast',
-      className: `toast toast--${settings.position}`,
-      innerHTML: `<div class="toast__message">${settings.message}</div>`
+      class: `toast toast--${settings.position}`
+    }, {
+      html: `<div class="toast__message">${settings.message}</div>`
     });
 
     if (settings.hideByClick) {
-      closeBtn = createElement('button', {
-        className: 'toast__btn',
-        innerHTML: `<svg version="1.1" width="24" height="24" viewBox="0 0 24 24" fill="#000"><path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path></svg>`
+      closeBtn = $createElement('button', {
+        class: 'toast__btn',
+        'aria-label': 'Close'
+      }, {
+        html: `<svg version="1.1" width="24" height="24" viewBox="0 0 24 24" fill="#000"><path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path></svg>`
       });
       closeBtn.addEventListener('click', closeHandler, { once: true });
       toast.insertAdjacentElement('beforeend', closeBtn);

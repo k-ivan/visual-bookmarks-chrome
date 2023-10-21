@@ -14,11 +14,18 @@ export default function(root = null) {
       item.textContent = chrome.i18n.getMessage(params[0], arrString);
     } else {
       // only string without params
-      const translation = chrome.i18n.getMessage(msg);
+
+      // remove the service pointer to the attribute from the translation string
+      // for example, original string  options[.arialabel] can be written as a string + .arialabel(optional)
+      const translation = chrome.i18n.getMessage(msg.replace(/\..*/, ''));
       if (!translation) return;
 
       if (~msg.indexOf('placeholder')) {
         item.placeholder = translation;
+        return;
+      }
+      if (~msg.indexOf('.aria-label')) {
+        item.setAttribute('aria-label', translation);
         return;
       }
       item.textContent = translation;

@@ -15,10 +15,26 @@ class VbPopup extends HTMLElement {
     this.#dettachEvents();
   }
 
+  static get observedAttributes() {
+    return ['title'];
+  }
+
+  get title() {
+    return this.getAttribute('title');
+  }
+
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (attr === 'title') {
+      this.popupTriger?.setAttribute('aria-label', newValue);
+    }
+  }
+
   #render() {
     this.classList.add('popup');
     this.popupTriger = $createElement('button', {
-      class: 'button'
+      type: 'button',
+      class: 'button',
+      'aria-label': this.title
     }, {
       html: '<slot name="button"></slot>'
     });

@@ -9,7 +9,7 @@
 
 <body>
   <aside class="aside-controls" id="aside_controls">
-    <a class="circ-btn settings-link" href="options.html" id="settings_icon">
+    <a class="circ-btn settings-link" href="options.html" id="settings_icon" data-locale-message="options.aria-label">
       <svg width="20" height="20">
         <use xlink:href="/img/symbol.svg#settings"/>
       </svg>
@@ -42,7 +42,7 @@
         <form class="gmodal__form" id="formBookmark" action="#0">
           <div class="gmodal__header">
             <div class="gmodal__title" id="modalHead"></div>
-            <button type="button" class="gmodal__close md-ripple" data-gmodal="dismiss" data-ripple-center>
+            <button type="button" class="gmodal__close md-ripple" data-gmodal="dismiss" data-ripple-center data-locale-message="modal_dismiss.aria-label" aria-label="Modal dismiss">
               <svg width="20" height="20" fill="#000">
                 <use xlink:href="/img/symbol.svg#close"/>
               </svg>
@@ -64,13 +64,13 @@
                 <input type="text" class="form-control" id="url" placeholder="https://www.google.com" spellcheck="false" data-valid="regex(isValidUrl)">
               </div>
               <div class="group gmodal__select" id="selFolder">
-                <label class="label" for="folderList" data-locale-message="label_folder"></label>
-                <vb-select-folders id="modalSelectFolders"></vb-select-folders>
+                <label class="label" for="select-folder" data-locale-message="label_folder"></label>
+                <vb-select-folders id="modalSelectFolders" select-id="select-folder"></vb-select-folders>
               </div>
             </div>
             <div class="gmodal__custom-image" id="customScreen">
               <img alt="">
-              <button type="button" class="md-ripple gmodal__custom-reset" id="resetCustomImage" data-ripple-center>
+              <button type="button" class="md-ripple gmodal__custom-reset" id="resetCustomImage" data-ripple-center data-locale-message="remove_thumbnail.aria-label" aria-label="Remove thumbnail">
                 <svg width="20" height="20" fill="currenColor">
                   <use xlink:href="/img/symbol.svg#close"/>
                 </svg>

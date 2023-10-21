@@ -21,10 +21,19 @@ class VbScrollup extends HTMLElement {
     return this.scrollContainer === window ? window.scrollY : this.scrollContainer.scrollTop;
   }
 
+  get title() {
+    return this.getAttribute('title');
+  }
+
+  set title(value) {
+    this.setAttribute('title', value);
+  }
+
   #render() {
     this.classList.add('vb-scrollup');
     this.scrollButton = $createElement('button', {
-      class: 'vb-scrollup__button'
+      class: 'vb-scrollup__button',
+      'aria-label': 'Go to the top'
     }, {
       html: /* html */
         `<svg width="20" height="20">

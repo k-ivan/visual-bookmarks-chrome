@@ -134,7 +134,7 @@ class VbBookmark extends HTMLAnchorElement {
     this.innerHTML =
     /* html */
     `<div class="bookmark__wrap">
-      <button class="bookmark__action"></button>
+      <button type="button" class="bookmark__action" aria-label="${chrome.i18n.getMessage('bookmark_context')}"></button>
       ${
         (this.hasFolderPreview)
           ? this.#renderFolderPreview()
@@ -179,7 +179,7 @@ class VbBookmark extends HTMLAnchorElement {
     this.innerHTML =
     /* html*/
     `<div class="bookmark__wrap">
-        <button class="bookmark__action"></button>
+        <button type="button" class="bookmark__action" aria-label="${chrome.i18n.getMessage('bookmark_context')}"></button>
         ${
           // bookmark img
           (this.image)

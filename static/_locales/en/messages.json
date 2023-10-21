@@ -448,5 +448,61 @@
   },
   "enable_virtual_pagination_note": {
     "message": "Divides the height of the document into sections for navigation through them (experiment)"
+  },
+  "parent_folder": {
+    "message": "Parent folder"
+  },
+  "new_bookmark": {
+    "message": "New bookmark"
+  },
+  "modal_dismiss": {
+    "message": "Modal dismiss"
+  },
+  "remove_thumbnail": {
+    "message": "Remove thumbnail"
+  },
+  "thumbnails_update": {
+    "message": "Thumbnails update"
+  },
+  "bookmark_context": {
+    "message": "Bookmark context"
+  },
+  "clear_search": {
+    "message": "Clear search"
+  },
+  "search": {
+    "message": "Search"
+  },
+  "hide_services_form": {
+    "message": "Hide services form"
+  },
+  "toggle_actions_popup": {
+    "message": "Toggle actions popup"
+  },
+  "toggle_services_popup": {
+    "message": "Toggle services popup"
+  },
+  "toggle_search_popup": {
+    "message": "Toggle search popup"
+  },
+  "open_selected": {
+    "message": "Open selected"
+  },
+  "delete_selected": {
+    "message": "Delete selected"
+  },
+  "select_folder": {
+    "message": "Select a folder"
+  },
+  "remove_service": {
+    "message": "Remove $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "history_back": {
+    "message": "History back"
   }
 }

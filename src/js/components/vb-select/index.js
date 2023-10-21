@@ -1,8 +1,15 @@
+import { $createElement } from '../../utils';
+
 class VbSelectFolders extends HTMLElement {
   connectedCallback() {
-    this.insertAdjacentHTML('afterbegin', `<select name="folder" class="form-control"></select>`);
-    this.selectNode = this.querySelector('select');
+    this.selectNode = $createElement('select', {
+      id: this.selectId,
+      name: 'folder',
+      class: 'form-control',
+      'aria-label': chrome.i18n.getMessage('select_folder')
+    });
 
+    this.insertAdjacentElement('afterbegin', this.selectNode);
     this.#attachEvents();
   }
 
@@ -26,6 +33,10 @@ class VbSelectFolders extends HTMLElement {
     this.folderId = this.getAttribute('folder-id');
     this.parentFolderId = this.getAttribute('parent-folder-id') ?? null;
     this.bookmarkId = this.getAttribute('bookmark-id') ?? null;
+  }
+
+  get selectId() {
+    return this.getAttribute('select-id');
   }
 
   set folders(arr) {

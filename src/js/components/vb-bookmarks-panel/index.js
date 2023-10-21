@@ -8,17 +8,20 @@ class VbBookmarksPanel extends HTMLElement {
     {
       icon: 'launch',
       tag: 'button',
-      action: 'open_all'
+      action: 'open_all',
+      text: chrome.i18n.getMessage('open_selected')
     },
     {
       icon: 'delete_outline',
       tag: 'button',
-      action: 'remove'
+      action: 'remove',
+      text: chrome.i18n.getMessage('delete_selected')
     },
     {
       icon: 'capture_outline',
       tag: 'button',
-      action: 'update_thumbnails'
+      action: 'update_thumbnails',
+      text: chrome.i18n.getMessage('thumbnails_update')
     }
   ];
   folderId = null;
@@ -50,7 +53,8 @@ class VbBookmarksPanel extends HTMLElement {
 
     this.closeBtn = $createElement('button', {
       class: 'bookmarks-panel__close md-ripple',
-      'data-ripple-center': ''
+      'data-ripple-center': '',
+      'aria-label': chrome.i18n.getMessage('btn_close')
     }, {
       html: /* html */ `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#close"/></svg>`
     });
@@ -63,7 +67,7 @@ class VbBookmarksPanel extends HTMLElement {
             return `<div class="bookmarks-panel__popup-action" data-action="${item.action}">${item.title}</div>`;
           });
         return (/* html */
-          `<vb-popup class="bookmarks-panel__popup">
+          `<vb-popup class="bookmarks-panel__popup" title="${chrome.i18n.getMessage('toggle_actions_popup')}">
             <span class="bookmarks-panel__action" slot="button">
               <svg width="20" height="20"><use xlink:href="/img/symbol.svg#${action.icon}"></use></svg>
             </span>
@@ -74,7 +78,7 @@ class VbBookmarksPanel extends HTMLElement {
         );
       }
       return (/* html */
-        `<button class="bookmarks-panel__action md-ripple" data-ripple-center data-action="${action.action}" title="${action.text}">
+        `<button class="bookmarks-panel__action md-ripple" data-ripple-center data-action="${action.action}" aria-label="${action.text}">
           <svg width="20" height="20"><use xlink:href="/img/symbol.svg#${action.icon}"></use></svg>
         </button>`
       );

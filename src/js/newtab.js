@@ -154,7 +154,8 @@ async function init() {
   // If thumbnail generation button
   if (settings.$.thumbnails_update_button) {
     generateThumbsBtn = $createElement('button', {
-      class: 'circ-btn update-thumbnails'
+      class: 'circ-btn update-thumbnails',
+      'aria-label': chrome.i18n.getMessage('thumbnails_update')
     }, {
       html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#capture_fill"/></svg>`
     });

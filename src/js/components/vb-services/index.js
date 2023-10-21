@@ -28,11 +28,10 @@ class VBServices extends HTMLElement {
       template.content.cloneNode(true)
     );
 
-    // this.trigger = this.shadowRoot.querySelector('.trigger');
-    // this.popup = this.shadowRoot.querySelector('.popup');
     this.grid = this.shadowRoot.querySelector('.list');
 
     this.vbPopup = this.shadowRoot.querySelector('vb-popup');
+    this.vbPopup.setAttribute('title', chrome.i18n.getMessage('toggle_services_popup'));
     this.settingsTriggerEl = this.shadowRoot.querySelector('.settings-trigger');
     this.settingsEl = this.shadowRoot.querySelector('.settings');
     this.settingsFormEl = this.shadowRoot.querySelector('.settings-form');
@@ -44,7 +43,7 @@ class VBServices extends HTMLElement {
     // render component
     this.#render();
 
-    Localization(this.popup);
+    Localization(this.vbPopup);
 
     // attach Events
     this.#attachEvents();
@@ -128,7 +127,7 @@ class VBServices extends HTMLElement {
           <img class="item-logo" alt="${nameText}" src="${logo}"/>
         </div>
         <div class="item-name">${nameText}</div>
-        <button class="item-remove" data-id="${id}">
+        <button type="button" class="item-remove" data-id="${id}" aria-label="${chrome.i18n.getMessage('remove_service', nameText)}">
           <svg height="14" width="14">
             <use xlink:href="/img/symbol.svg#minus"/>
           </svg>

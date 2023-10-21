@@ -512,7 +512,8 @@ const Bookmarks = (() => {
     hasBack && container.prepend(
       $createElement('button', {
         id: 'bookmark-back',
-        class: 'bookmark-btn bookmark-btn--back md-ripple'
+        class: 'bookmark-btn bookmark-btn--back md-ripple',
+        'aria-label': chrome.i18n.getMessage('parent_folder')
       }, $createElement('span', {
         class: DROPZONE_SELECTOR.replace('.', ''),
         'data-id': container.dataset?.parentFolder
@@ -523,7 +524,8 @@ const Bookmarks = (() => {
       $createElement('button', {
         id: 'add',
         class: 'bookmark-btn bookmark-btn--create md-ripple',
-        'data-create': 'New'
+        'data-create': 'New',
+        'aria-label': chrome.i18n.getMessage('new_bookmark')
       })
     );
     dialLoading.hidden = true;

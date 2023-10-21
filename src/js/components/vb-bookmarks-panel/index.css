@@ -53,6 +53,7 @@
   & svg {
     flex-shrink: 0;
     fill: currentcolor;
+    pointer-events: none;
   }
 }
 .bookmarks-panel__close {

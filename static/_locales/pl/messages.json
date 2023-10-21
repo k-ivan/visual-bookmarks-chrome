@@ -448,5 +448,61 @@
   },
   "enable_virtual_pagination_note": {
     "message": "Dzieli wysoki dokument na sekcje w celu ułatwienia nawigacji po nimi (eksperymentalne)"
+  },
+  "parent_folder": {
+    "message": "Folder nadrzędny"
+  },
+  "new_bookmark": {
+    "message": "Nowa zakładka"
+  },
+  "modal_dismiss": {
+    "message": "Odrzucenie modalne"
+  },
+  "remove_thumbnail": {
+    "message": "Usuń miniaturę"
+  },
+  "thumbnails_update": {
+    "message": "Aktualizacja miniatur"
+  },
+  "bookmark_context": {
+    "message": "Kontekst zakładek"
+  },
+  "clear_search": {
+    "message": "Wyczyść wyszukiwanie"
+  },
+  "search": {
+    "message": "Szukaj"
+  },
+  "hide_services_form": {
+    "message": "Ukryj formularz usług"
+  },
+  "toggle_actions_popup": {
+    "message": "Przełącz wyskakujące okienko akcji"
+  },
+  "toggle_services_popup": {
+    "message": "Przełącz wyskakujące okienko usług"
+  },
+  "toggle_search_popup": {
+    "message": "Przełącz wyskakujące okienko wyszukiwania"
+  },
+  "open_selected": {
+    "message": "Otwórz wybrane"
+  },
+  "delete_selected": {
+    "message": "Usuń wybrane"
+  },
+  "select_folder": {
+    "message": "Wybierz folder"
+  },
+  "remove_service": {
+    "message": "Usunąć $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "history_back": {
+    "message": "Historia z powrotem"
   }
 }

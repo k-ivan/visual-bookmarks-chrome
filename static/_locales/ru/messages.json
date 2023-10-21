@@ -448,5 +448,61 @@
   },
   "enable_virtual_pagination_note": {
     "message": "Делит документ по высоте на секции для навигации по ним  (эксперимент)"
+  },
+  "parent_folder": {
+    "message": "Родительская папка"
+  },
+  "new_bookmark": {
+    "message": "Новая закладка"
+  },
+  "modal_dismiss": {
+    "message": "Зыкрыть окно"
+  },
+  "remove_thumbnail": {
+    "message": "Удалить миниатюру"
+  },
+  "thumbnails_update": {
+    "message": "Обновление миниатюр"
+  },
+  "bookmark_context": {
+    "message": "Контекст закладки"
+  },
+  "clear_search": {
+    "message": "Очистить поиск"
+  },
+  "search": {
+    "message": "Поиск"
+  },
+  "hide_services_form": {
+    "message": "Скрыть форму сервисов"
+  },
+  "toggle_actions_popup": {
+    "message": "Переключить попап действий"
+  },
+  "toggle_services_popup": {
+    "message": "Переключить попап сервисов"
+  },
+  "toggle_search_popup": {
+    "message": "Переключить попап поиска"
+  },
+  "open_selected": {
+    "message": "Открыть выбранные"
+  },
+  "delete_selected": {
+    "message": "Удалить выбранные"
+  },
+  "select_folder": {
+    "message": "Выбор папки"
+  },
+  "remove_service": {
+    "message": "Удалить $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "history_back": {
+    "message": "Назад"
   }
 }

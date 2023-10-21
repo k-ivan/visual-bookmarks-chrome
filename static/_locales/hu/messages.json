@@ -448,5 +448,61 @@
   },
   "enable_virtual_pagination_note": {
     "message": "A dokumentum magasságát szakaszokra osztja a navigációhoz (kísérlet)"
+  },
+  "parent_folder": {
+    "message": "Szülőmappa"
+  },
+  "new_bookmark": {
+    "message": "Új könyvjelző"
+  },
+  "modal_dismiss": {
+    "message": "Modal dismiss"
+  },
+  "remove_thumbnail": {
+    "message": "Távolítsa el az indexképet"
+  },
+  "thumbnails_update": {
+    "message": "Thumbnails update"
+  },
+  "bookmark_context": {
+    "message": "Könyvjelző kontextus"
+  },
+  "clear_search": {
+    "message": "Keresés törlése"
+  },
+  "search": {
+    "message": "Keresés"
+  },
+  "hide_services_form": {
+    "message": "Szolgáltatások űrlap elrejtése"
+  },
+  "toggle_actions_popup": {
+    "message": "Műveletek váltása előugró ablak"
+  },
+  "toggle_services_popup": {
+    "message": "Szolgáltatások előugró ablakának váltása"
+  },
+  "toggle_search_popup": {
+    "message": "Keresés be- és kikapcsolása"
+  },
+  "open_selected": {
+    "message": "Kijelölt megnyitása"
+  },
+  "delete_selected": {
+    "message": "Kijelöltek eltávolítása"
+  },
+  "select_folder": {
+    "message": "Válasszon ki egy mappát"
+  },
+  "remove_service": {
+    "message": "Távolítsa el $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "history_back": {
+    "message": "Történelem vissza"
   }
 }

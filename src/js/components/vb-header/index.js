@@ -60,6 +60,7 @@ class VbHeader extends HTMLElement {
 
     // get vb-popup
     this.vbPopup = this.querySelector('vb-popup');
+    this.vbPopup.setAttribute('title', chrome.i18n.getMessage('toggle_search_popup'));
     this.vbPopupBtn = this.vbPopup.popupTriger;
     this.vbPopupSlotBtn = this.vbPopup.querySelector('[slot="button"]');
     this.vbPopupContent = this.vbPopup.querySelector('[slot="content"]');
@@ -231,7 +232,8 @@ class VbHeader extends HTMLElement {
         this.backNode = $createElement(
           'button',
           {
-            class: 'back'
+            class: 'back',
+            'aria-label': chrome.i18n.getMessage('history_back')
           },
           {
             html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#arrow_back"/></svg>`
