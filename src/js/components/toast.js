@@ -14,10 +14,6 @@ const Toast = (() => {
   let timer = null;
   let settings = null;
 
-  // function createElement(tag, options) {
-  //   return Object.assign(document.createElement(tag), options);
-  // }
-
   function show(data) {
     if (document.getElementById('toast')) {
       return hide(() => show(data));
