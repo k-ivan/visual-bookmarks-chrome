@@ -5,6 +5,7 @@ class VbPopup extends HTMLElement {
   popupTriger = null;
   popupContent = null;
   isActive = false;
+  isTransition = false;
 
   connectedCallback() {
     this.#render();
@@ -53,7 +54,7 @@ class VbPopup extends HTMLElement {
     this.handleToggle = this.toggle.bind(this);
     this.handleHideByDocument = this.handleHideByDocument.bind(this);
     this.closeByEsc = (e) => {
-      if (e.code === 'Escape' && this.isActive) {
+      if (e.code === 'Escape' && this.isActive && !this.isTransition) {
         this.hide();
       }
     };
@@ -69,6 +70,14 @@ class VbPopup extends HTMLElement {
     this.popupTriger.removeEventListener('click', this.handleToggle);
     document.removeEventListener('click', this.handleHideByDocument);
     document.removeEventListener('keydown', this.closeByEsc);
+  }
+
+  transitionEnd(callback) {
+    const handler = (e) => {
+      this.popupContent.removeEventListener(e.type, handler);
+      callback();
+    };
+    this.popupContent.addEventListener('transitionend', handler);
   }
 
   handleFocusout(e) {
@@ -101,10 +110,10 @@ class VbPopup extends HTMLElement {
   }
 
   show() {
-    if (this.isActive) return false;
+    if (this.isActive || this.isTransition) return false;
 
+    this.popupContent.classList.remove('is-below', 'is-above');
     this.popupContent.style.display = 'block';
-    this.isActive = true;
 
     const { top, height } = this.popupTriger.getBoundingClientRect();
     const posYClass = (top + height + this.popupContent.offsetHeight > window.innerHeight)
@@ -113,28 +122,28 @@ class VbPopup extends HTMLElement {
 
     this.popupContent.classList.add(posYClass);
 
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        this.popupContent.classList.add('is-show');
-      });
+    this.transitionEnd(() => {
+      this.isTransition = false;
+      this.isActive = true;
+
+      this.dispatchEvent(
+        new CustomEvent('vb:popup:open', {
+          bubbles: true,
+          cancelable: true
+        })
+      );
     });
-    this.dispatchEvent(
-      new CustomEvent('vb:popup:open', {
-        bubbles: true,
-        cancelable: true
-      })
-    );
+
+    this.isTransition = true;
+    this.popupContent.classList.add('is-show');
   }
 
   hide() {
-    if (!this.isActive) return false;
-    window.requestAnimationFrame(() => {
-      this.popupContent.classList.remove('is-show');
-    });
+    if (!this.isActive || this.isTransition) return false;
 
-    const handler = (e) => {
-      this.popupContent.removeEventListener(e.type, handler);
+    this.transitionEnd(() => {
       this.popupContent.style.display = 'none';
+      this.isTransition = false;
       this.isActive = false;
 
       this.dispatchEvent(
@@ -143,8 +152,10 @@ class VbPopup extends HTMLElement {
           cancelable: true
         })
       );
-    };
-    this.popupContent.addEventListener('transitionend', handler);
+    });
+
+    this.isTransition = true;
+    this.popupContent.classList.remove('is-show');
   }
 }
 
