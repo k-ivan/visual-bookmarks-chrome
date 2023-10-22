@@ -159,7 +159,7 @@ body {
   display: none;
 }
 
-@media (max-height: 550px) {
+@media (max-height: 670px) {
   vb-virtual-pagination {
     display: none;
   }

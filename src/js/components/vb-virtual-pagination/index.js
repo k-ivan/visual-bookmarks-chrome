@@ -76,13 +76,16 @@ class VbVirtualPagination extends HTMLElement {
     const pages = this.pages;
     if (pages <= 1) {
       this.buttons = [];
-    } else {
+    } else if (pages <= 20) {
       this.buttons = Array.from(
         Array(pages).keys()
       ).map((slide, index) => {
         const isActive = this.currentPage === index ? ' class="is-active"' : '';
         return `<button${isActive} data-page="${slide}">${index + 1}</button>`;
       });
+    } else {
+      this.hidden = true;
+      return;
     }
 
     this.node.innerHTML = this.buttons.join('');
