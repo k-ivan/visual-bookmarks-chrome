@@ -476,14 +476,14 @@
   "hide_services_form": {
     "message": "Szolgáltatások űrlap elrejtése"
   },
-  "toggle_actions_popup": {
-    "message": "Műveletek váltása előugró ablak"
+  "toggle_selected_bookmarks_popup": {
+    "message": "Kapcsolja be a felugró ablakot a hivatkozások megnyitásához"
   },
   "toggle_services_popup": {
-    "message": "Szolgáltatások előugró ablakának váltása"
+    "message": "Felugró ablak váltása szolgáltatásokkal"
   },
   "toggle_search_popup": {
-    "message": "Keresés be- és kikapcsolása"
+    "message": "Felugró ablak váltása kereséssel"
   },
   "open_selected": {
     "message": "Kijelölt megnyitása"

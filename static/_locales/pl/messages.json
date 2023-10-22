@@ -476,14 +476,14 @@
   "hide_services_form": {
     "message": "Ukryj formularz usług"
   },
-  "toggle_actions_popup": {
-    "message": "Przełącz wyskakujące okienko akcji"
+  "toggle_selected_bookmarks_popup": {
+    "message": "Przełącz wyskakujące okienko, aby otworzyć linki"
   },
   "toggle_services_popup": {
-    "message": "Przełącz wyskakujące okienko usług"
+    "message": "Przełącz wyskakujące okienko z usługami"
   },
   "toggle_search_popup": {
-    "message": "Przełącz wyskakujące okienko wyszukiwania"
+    "message": "Przełącz wyskakujące okienko z wyszukiwaniem"
   },
   "open_selected": {
     "message": "Otwórz wybrane"

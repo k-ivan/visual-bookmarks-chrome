@@ -476,14 +476,14 @@
   "hide_services_form": {
     "message": "Скрыть форму сервисов"
   },
-  "toggle_actions_popup": {
-    "message": "Переключить попап действий"
+  "toggle_selected_bookmarks_popup": {
+    "message": "Переключатель всплывающего окна для октрытия выбранных закладок"
   },
   "toggle_services_popup": {
-    "message": "Переключить попап сервисов"
+    "message": "Переключатель всплывающего окна c сервиcами"
   },
   "toggle_search_popup": {
-    "message": "Переключить попап поиска"
+    "message": "Переключатель всплывающего окна с поиском"
   },
   "open_selected": {
     "message": "Открыть выбранные"

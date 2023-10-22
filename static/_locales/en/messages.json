@@ -476,14 +476,14 @@
   "hide_services_form": {
     "message": "Hide services form"
   },
-  "toggle_actions_popup": {
-    "message": "Toggle actions popup"
+  "toggle_selected_bookmarks_popup": {
+    "message": "Toggle popup to open links"
   },
   "toggle_services_popup": {
-    "message": "Toggle services popup"
+    "message": "Toggle popup with services"
   },
   "toggle_search_popup": {
-    "message": "Toggle search popup"
+    "message": "Toggle popup with search"
   },
   "open_selected": {
     "message": "Open selected"
