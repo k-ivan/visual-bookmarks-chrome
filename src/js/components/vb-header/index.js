@@ -60,7 +60,7 @@ class VbHeader extends HTMLElement {
 
     // get vb-popup
     this.vbPopup = this.querySelector('vb-popup');
-    this.vbPopup.setAttribute('title', chrome.i18n.getMessage('toggle_search_popup'));
+    this.vbPopup.setAttribute('label', chrome.i18n.getMessage('toggle_search_popup'));
     this.vbPopupBtn = this.vbPopup.popupTriger;
     this.vbPopupSlotBtn = this.vbPopup.querySelector('[slot="button"]');
     this.vbPopupContent = this.vbPopup.querySelector('[slot="content"]');

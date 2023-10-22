@@ -67,7 +67,7 @@ class VbBookmarksPanel extends HTMLElement {
             return `<div class="bookmarks-panel__popup-action" data-action="${item.action}">${item.title}</div>`;
           });
         return (/* html */
-          `<vb-popup class="bookmarks-panel__popup" title="${chrome.i18n.getMessage('toggle_actions_popup')}">
+          `<vb-popup class="bookmarks-panel__popup" label="${chrome.i18n.getMessage('toggle_actions_popup')}">
             <span class="bookmarks-panel__action" slot="button">
               <svg width="20" height="20"><use xlink:href="/img/symbol.svg#${action.icon}"></use></svg>
             </span>

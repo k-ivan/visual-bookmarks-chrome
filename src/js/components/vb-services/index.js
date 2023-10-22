@@ -31,7 +31,7 @@ class VBServices extends HTMLElement {
     this.grid = this.shadowRoot.querySelector('.list');
 
     this.vbPopup = this.shadowRoot.querySelector('vb-popup');
-    this.vbPopup.setAttribute('title', chrome.i18n.getMessage('toggle_services_popup'));
+    this.vbPopup.setAttribute('label', chrome.i18n.getMessage('toggle_services_popup'));
     this.settingsTriggerEl = this.shadowRoot.querySelector('.settings-trigger');
     this.settingsEl = this.shadowRoot.querySelector('.settings');
     this.settingsFormEl = this.shadowRoot.querySelector('.settings-form');
