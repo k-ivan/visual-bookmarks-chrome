@@ -504,5 +504,8 @@
   },
   "history_back": {
     "message": "History back"
+  },
+  "incognito_access_note": {
+    "message": "You must allow the extension to run in private mode"
   }
 }

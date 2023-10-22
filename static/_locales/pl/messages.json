@@ -504,5 +504,8 @@
   },
   "history_back": {
     "message": "Historia z powrotem"
+  },
+  "incognito_access_note": {
+    "message": "Musisz zezwolić rozszerzeniu na działanie w trybie prywatnym"
   }
 }

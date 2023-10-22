@@ -3,7 +3,6 @@ import './components/vb-select';
 import './components/vb-context-menu';
 import './components/vb-scrollup';
 import './components/vb-bookmarks-panel';
-// import './components/vb-virtual-pagination';
 
 import Gmodal from 'glory-modal';
 import Validator from 'form-validation-plugin';
@@ -23,7 +22,8 @@ import {
   $createElement,
   $copyStr,
   $unescapeHtml,
-  asyncLoadComponents
+  asyncLoadComponents,
+  $notifications
 } from './utils';
 import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU } from './constants';
@@ -505,6 +505,9 @@ function openSelectedBookmarks(multipleSelectedBookmarks, action) {
       state: 'maximized',
       incognito: (action === 'new_window_incognito')
     }, win => {
+      if (!win) {
+        return $notifications(chrome.i18n.getMessage('incognito_access_note'));
+      }
       multipleSelectedBookmarks.forEach(bookmark => {
         openTab(bookmark.url, { windowId: win.id });
       });

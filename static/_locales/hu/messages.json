@@ -504,5 +504,8 @@
   },
   "history_back": {
     "message": "Történelem vissza"
+  },
+  "incognito_access_note": {
+    "message": "Engedélyeznie kell a bővítmény privát módban történő futtatását"
   }
 }
