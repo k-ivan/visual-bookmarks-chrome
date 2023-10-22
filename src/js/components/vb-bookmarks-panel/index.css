@@ -78,13 +78,16 @@
   }
 }
 .bookmarks-panel__popup-content {
-  width: 200px;
+  width: 210px;
+  padding: 5px;
   border-radius: var(--base-radius);
   box-shadow: 0 4px 20px 0 rgb(51 51 51 / 16%);
 }
 .bookmarks-panel__popup-action {
   padding: 5px 10px;
+  font-size: 90%;
   cursor: pointer;
+  border-radius: var(--base-radius);
   &:hover {
     background-color: var(--theme-invert-alpha-10);
   }
