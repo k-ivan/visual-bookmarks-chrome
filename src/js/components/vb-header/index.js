@@ -190,8 +190,8 @@ class VbHeader extends HTMLElement {
     this.handleClickSuggest = this.handleClickSuggest.bind(this);
     this.formNode.addEventListener('click', this.handleClickSuggest);
 
-    this.handleEscape = this.handleEscape.bind(this);
-    document.addEventListener('keydown', this.handleEscape);
+    this.handleDocumentKeydown = this.handleDocumentKeydown.bind(this);
+    document.addEventListener('keydown', this.handleDocumentKeydown);
 
     this.handleDocClick = this.handleDocClick.bind(this);
     document.addEventListener('click', this.handleDocClick);
@@ -351,9 +351,12 @@ class VbHeader extends HTMLElement {
     this.resetNode.classList.toggle('is-show', search.trim().length);
   }
 
-  handleEscape(e) {
-    if (this.suggestList.length && e.key === 'Escape') {
+  handleDocumentKeydown(e) {
+    if (e.code === 'Escape' && this.suggestList.length) {
       this.closeSuggest();
+    } else if (e.code === 'Slash' && document.activeElement !== this.inputNode) {
+      e.preventDefault();
+      this.inputNode.focus();
     }
   }
 
