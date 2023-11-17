@@ -46,6 +46,7 @@ const panelActions = {
   tweenActive: false
 };
 let multipleSelectedBookmarks = [];
+let lastSelectedBookmark = null;
 let isGenerateThumbs = false;
 let modalApi;
 let generateThumbsBtn = null;
@@ -216,21 +217,37 @@ function handleSelectBookmark(e) {
 
   e.preventDefault();
 
-  if (!bookmark.dataset.selected) {
-    // if bookmark not selected
-    bookmark.dataset.selected = true;
-    // added selected bookmark to the array of selected bookmarks
-    multipleSelectedBookmarks.push(bookmark);
+  let rangeBookmarks = [];
+  const isSelected = bookmark.hasAttribute('data-selected');
+
+  if (e.ctrlKey) {
+    const bookmarkNodes = Array.from(document.querySelectorAll('.bookmark'));
+    // find a range of bookmarks
+    const startIndex = bookmarkNodes.findIndex(bookmarkNode => bookmarkNode === bookmark);
+    const endIndex = bookmarkNodes.findIndex(bookmarkNode => bookmarkNode === (lastSelectedBookmark ?? bookmark));
+    rangeBookmarks = bookmarkNodes.slice(Math.min(startIndex, endIndex), Math.max(startIndex, endIndex) + 1);
   } else {
-    // else bookmark already selected
-    delete bookmark.dataset.selected;
-    // remove selected bookmark from the array of selected bookmarks
-    multipleSelectedBookmarks = multipleSelectedBookmarks.filter(selectedBookmark => selectedBookmark !== bookmark);
+    rangeBookmarks = [bookmark];
   }
 
-  multipleSelectedBookmarks.length > 0
-    ? showControlMultiplyBookmarks()
-    : hideControlMultiplyBookmarks();
+  rangeBookmarks.forEach(rangeBookmark => {
+    if (isSelected) {
+      rangeBookmark.removeAttribute('data-selected');
+      multipleSelectedBookmarks = multipleSelectedBookmarks.filter(bs => bs !== rangeBookmark);
+    } else {
+      rangeBookmark.setAttribute('data-selected', '');
+      // add to the array a range of bookmarks that do not exist yet
+      !multipleSelectedBookmarks.includes(rangeBookmark) && multipleSelectedBookmarks.push(rangeBookmark);
+    }
+  });
+
+  if (multipleSelectedBookmarks.length) {
+    lastSelectedBookmark = bookmark;
+    showControlMultiplyBookmarks();
+  } else {
+    lastSelectedBookmark = null;
+    hideControlMultiplyBookmarks();
+  }
 }
 
 async function showControlMultiplyBookmarks() {
@@ -264,7 +281,9 @@ async function showControlMultiplyBookmarks() {
 
 function hideControlMultiplyBookmarks() {
   if (!document.getElementById('bookmarks-panel')) return;
-  // if (!panelTweenActive) return;
+  // we need reset reset lastSelectedBookmark
+  lastSelectedBookmark = null;
+
   if (!panelActions.tweenActive) return;
 
   multipleSelectedBookmarks.forEach(bookmark => delete bookmark.dataset.selected);
