@@ -109,6 +109,10 @@
   color: var(--header-input-color-controls);
 }
 
+.has-image .search-wrap:has(input:not(:focus)) .search-button {
+  color: rgb(255 255 255 / 70%);
+}
+
 .search-icon {
   fill: currentcolor;
 }
@@ -212,8 +216,7 @@
   box-shadow: none;
 }
 
-.has-image .search-label,
-.has-image .search-reset-btn {
+.has-image .search-label {
   color: rgb(255 255 255 / 80%);
 }
 

@@ -282,6 +282,7 @@ class VbHeader extends HTMLElement {
   handleSubmit(e) {
     if (this.isBookmarksEngine || !this.inputNode.value.trim()) {
       e.preventDefault();
+      this.inputNode.focus();
       return;
     }
     return true;
