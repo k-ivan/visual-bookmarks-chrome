@@ -111,7 +111,7 @@ export const SEARCH_ENGINES = [
   },
   {
     title: 'Yandex',
-    url: 'https://yandex.com/search/',
+    url: 'https://ya.ru/search/',
     name: 'text',
     value: 'yandex'
   },
