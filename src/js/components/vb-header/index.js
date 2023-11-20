@@ -355,7 +355,10 @@ class VbHeader extends HTMLElement {
   handleDocumentKeydown(e) {
     if (e.code === 'Escape' && this.suggestList.length) {
       this.closeSuggest();
-    } else if (e.code === 'Slash' && document.activeElement !== this.inputNode) {
+    } else if (
+      e.code === 'Slash' &&
+      document.activeElement?.tagName !== 'INPUT'
+    ) {
       e.preventDefault();
       this.inputNode.focus();
     }
