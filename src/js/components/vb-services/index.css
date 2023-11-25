@@ -2,12 +2,14 @@
 @import "../../../css/components/_ripple.css";
 
 :host {
+  --vb-services-radius: 12px;
+  --vb-services-background: var(--theme-background);
+  --vb-services-skeleton-background: #ddd;
+  --vb-popup-radius: var(--vb-services-radius);
   --vb-popup-left: auto;
   --vb-popup-right: -5px;
   --vb-popup-top: calc(100% + 10px);
   --vb-popup-btn-radius: 50%;
-  --vb-services-background: var(--theme-background);
-  --vb-services-skeleton-background: #ddd;
 
   position: fixed;
   z-index: 999;
@@ -62,6 +64,7 @@
 .popup-content {
   width: 300px;
   box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+  border-radius: var(--vb-services-radius);
 }
 .popup-content::before {
   content: "";
@@ -110,7 +113,7 @@
       background-repeat: no-repeat;
       background-position: 50% 20%, 50% 90%;
       background-size: 48px 48px, 80px 7px;
-      border-radius: var(--base-radius);
+      border-radius: var(--vb-services-radius);
     }
   }
 }
@@ -128,7 +131,7 @@
   flex-direction: column;
   min-height: 84px;
   text-align: center;
-  border-radius: var(--base-radius);
+  border-radius: var(--vb-services-radius);
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
@@ -199,7 +202,7 @@
   font-size: inherit;
   border: 1px solid transparent;
   color: var(--theme-color);
-  border-radius: 0 0 var(--base-radius) var(--base-radius);
+  border-radius: 0 0 var(--vb-services-radius) var(--vb-services-radius);
   background-color: inherit;
   outline: none;
   cursor: pointer;
@@ -262,7 +265,7 @@
   padding: 10px;
   color: #fff;
   border: none;
-  border-radius: 0 0 var(--base-radius) var(--base-radius);
+  border-radius: 0 0 var(--vb-services-radius) var(--vb-services-radius);
   background-color: var(--color-primary);
   cursor: pointer;
   outline: none;
