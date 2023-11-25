@@ -123,7 +123,8 @@
   --notfound-icon-filter: var(--filter-invert-image);
 
   /* Context menu */
-  --context-menu-bg: var(--theme-background-3);
+  --context-menu-bg: var(--theme-background-2);
+  --context-menu-bg-hover: var(--theme-background-3);
   --context-menu-color: var(--theme-text-color);
   --context-menu-divider: rgb(0 0 0 / 10%);
 
