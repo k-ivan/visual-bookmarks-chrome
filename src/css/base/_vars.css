@@ -30,7 +30,7 @@
   --font-family: -apple-system, system-ui, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
   --font-size-base: 14px;
   --line-height: 1.5;
-  --base-radius: 4px;
+  --base-radius: 6px;
 
   /* Spiner */
   --spinner-size: 12px;
