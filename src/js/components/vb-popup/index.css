@@ -30,6 +30,7 @@
   color: var(--theme-text-color);
   background-color: var(--theme-background-2);
   border-radius: var(--vb-popup-radius, var(--base-radius));
+  box-shadow: var(--vb-popup-shadow, none);
   transform: translateY(10px);
   visibility: hidden;
   transition-property: visibility, opacity, transform;
