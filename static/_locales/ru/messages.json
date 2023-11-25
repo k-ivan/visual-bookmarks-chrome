@@ -154,6 +154,9 @@
   "notice_thumbnails_update_complete": {
     "message": "Обновление миниатюр завершено"
   },
+  "notice_link_copied": {
+    "message": "Ссылка скопирована"
+  },
   "alert_create_fail_bookmark": {
     "message": "- Для добавления новой папки требуется только заголовок.\n- Добавление новой закладки требует как заголовка, так и URL-адреса"
   },

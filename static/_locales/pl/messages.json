@@ -154,6 +154,9 @@
   "notice_thumbnails_update_complete": {
     "message": "Zakończono aktualizację miniatur"
   },
+  "notice_link_copied": {
+    "message": "Link skopiowany"
+  },
   "alert_create_fail_bookmark": {
     "message": "- Aby dodać nowy folder wpisz tylko tytułu \n- Aby dodać nową zakładkę wpisz zarówno tytułu, jak i adres URL"
   },

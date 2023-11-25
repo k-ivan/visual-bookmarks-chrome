@@ -154,6 +154,9 @@
   "notice_thumbnails_update_complete": {
     "message": "A miniatűrök frissítése befejeződött"
   },
+  "notice_link_copied": {
+    "message": "Link másolva"
+  },
   "alert_create_fail_bookmark": {
     "message": "- Új mappa hozzáadása csak egy címet igényel \n- Új könyvjelző hozzáadásához egy címre és egy URL-címre van szükség."
   },

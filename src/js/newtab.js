@@ -451,6 +451,7 @@ function handleMenuSelection(evt) {
       break;
     case 'copy_link':
       $copyStr(target.href);
+      Toast.show(chrome.i18n.getMessage('notice_link_copied'));
       break;
     case 'capture': {
       Bookmarks.createScreen(target);

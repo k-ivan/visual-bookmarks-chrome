@@ -154,6 +154,9 @@
   "notice_thumbnails_update_complete": {
     "message": "Thumbnail update complete"
   },
+  "notice_link_copied": {
+    "message": "Link copied"
+  },
   "alert_create_fail_bookmark": {
     "message": "- Adding a new Folder only requires a Title \n- Adding a new Bookmark requires both a Title and a URL"
   },
