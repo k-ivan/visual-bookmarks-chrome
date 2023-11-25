@@ -17,7 +17,7 @@
   padding: 10px;
   border-radius: var(--base-radius) var(--base-radius) 0 0;
   background-color: var(--theme-background-alpha-95);
-  box-shadow: 0 0 14px rgba(0 0 0 / 50%);
+  box-shadow: 0 0 14px rgba(0 0 0 / 20%);
   backdrop-filter: blur(10px);
   outline: none;
 
