@@ -23,6 +23,7 @@
 
 .header__engine {
   --vb-popup-top: calc(100% + 10px);
+  --vb-popup-shadow: 0 0 0 1px rgb(0 0 0 / 10%);
 
   position: absolute;
   left: 5px;
