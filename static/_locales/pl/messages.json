@@ -300,7 +300,7 @@
     "message": "Wersja"
   },
   "thumbnails_creation": {
-    "message": "Tworzenie miniaturek: $start$ na $total$",
+    "message": "Tworzenie miniatur: $start$ na $total$",
     "placeholders": {
       "start": {
         "content": "$1"
@@ -468,7 +468,7 @@
     "message": "Aktualizacja miniatur"
   },
   "bookmark_context": {
-    "message": "Kontekst zakładek"
+    "message": "Kontekst zakładki"
   },
   "clear_search": {
     "message": "Wyczyść wyszukiwanie"
