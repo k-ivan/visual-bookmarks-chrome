@@ -2,27 +2,7 @@ import { $createElement, $imageLoaded } from '../utils';
 import { settings } from '../settings';
 import ImageDB from '../api/imageDB';
 
-
-const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
-const colorTheme = () => document.documentElement.classList.toggle('dark', colorScheme.matches);
-
 export default {
-  toggleTheme() {
-    const theme = settings.$.color_theme;
-
-    if (theme === 'os') {
-      colorScheme.removeListener(colorTheme);
-      colorTheme();
-      colorScheme.addListener(colorTheme);
-      return true;
-    }
-
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  },
   userStyles() {
     const styles = settings.$.custom_style;
     if (!styles) return;

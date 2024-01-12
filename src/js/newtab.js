@@ -77,7 +77,6 @@ async function init() {
   /**
    * UI
    */
-  UI.toggleTheme();
   UI.userStyles();
   UI.calculateStyles();
   UI.setBG();

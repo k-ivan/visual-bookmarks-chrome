@@ -23,6 +23,7 @@ module.exports = (env, arg) => {
       newtab: './src/js/newtab.js',
       options: './src/js/options.js',
       background: './src/js/background.js',
+      theme: './src/js/theme.js',
     },
     output: {
       path: path.resolve(__dirname, 'extension'),

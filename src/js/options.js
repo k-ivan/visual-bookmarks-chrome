@@ -3,7 +3,6 @@ import './components/vb-select';
 import Gmodal from 'glory-modal';
 import TabsSlider from 'tabs-slider';
 import { settings } from './settings';
-import UI from './components/ui';
 import Localization from './plugins/localization';
 import Ripple from './components/ripple';
 import AutosizeTextarea from './components/autosizeTextarea';
@@ -44,7 +43,7 @@ async function init() {
 
   await settings.init();
 
-  UI.toggleTheme();
+  window.vbToggleTheme();
 
   Localization();
 
@@ -297,7 +296,7 @@ function handleSetOptions(e) {
 
   // dark theme
   if (target.id === 'color_theme') {
-    UI.toggleTheme();
+    window.vbToggleTheme();
   }
 }
 
@@ -397,7 +396,7 @@ async function handleResetLocalSettings() {
 
   await settings.resetLocal();
 
-  UI.toggleTheme();
+  window.vbToggleTheme();
   getOptions();
   Toast.show(chrome.i18n.getMessage('notice_reset_default_settings'));
 }
@@ -417,7 +416,7 @@ function handleChangeSync() {
         if (confirmAction) {
           await settings.restoreFromSync();
           getOptions();
-          UI.toggleTheme();
+          window.vbToggleTheme();
         } else {
           this.checked = false;
           settings.updateKey('enable_sync', false);
