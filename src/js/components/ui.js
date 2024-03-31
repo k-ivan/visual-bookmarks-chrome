@@ -36,11 +36,12 @@ export default {
     if (resource && resource !== '') {
       if (hasVideo) {
         const video = $createElement('video', {
-          muted: true,
-          loop: true,
-          autoplay: true,
           src: resource
         });
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+
         bgEl.append(video);
 
         video.addEventListener('canplay', () => {
