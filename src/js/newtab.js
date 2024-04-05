@@ -219,7 +219,7 @@ function handleSelectBookmark(e) {
   let rangeBookmarks = [];
   const isSelected = bookmark.hasAttribute('data-selected');
 
-  if (e.ctrlKey) {
+  if (e.ctrlKey || e.metaKey) {
     const bookmarkNodes = Array.from(document.querySelectorAll('.bookmark'));
     // find a range of bookmarks
     const startIndex = bookmarkNodes.findIndex(bookmarkNode => bookmarkNode === bookmark);
