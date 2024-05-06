@@ -484,13 +484,14 @@ const Bookmarks = (() => {
     if (settings.$.sort_by_date) {
       arr.sort((a, b) => b.dateAdded - a.dateAdded);
     }
-    // sorting by type
+
+    // sorting by type folders
     if (settings.$.bookmarks_sorting_type === 'folders_top') {
       // folders at the top
-      arr.sort((a, b) => Object.hasOwn(a, 'url') ? 1 : Object.hasOwn(b, 'url') ? -1 : 0);
+      arr.sort((a, b) => Object.hasOwn(b, 'children') - Object.hasOwn(a, 'children'));
     } else if (settings.$.bookmarks_sorting_type === 'folders_bottom') {
       // folders at the bottom
-      arr.sort((a, b) => !Object.hasOwn(a, 'url') ? 0 : Object.hasOwn(b, 'url') ? 1 : -1);
+      arr.sort((a, b) => Object.hasOwn(a, 'children') - Object.hasOwn(b, 'children'));
     }
 
     const fragment = document.createDocumentFragment();
