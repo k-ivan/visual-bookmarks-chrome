@@ -11,7 +11,8 @@
       "sourceType": "module"
   },
   "globals": {
-    "chrome": true
+    "chrome": true,
+    "browser": true
   },
   "rules": {
     "strict": 0,

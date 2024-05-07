@@ -127,13 +127,19 @@ module.exports = (env, arg) => {
           {
             from: 'static',
             transform(content, path) {
-              if (path.includes('manifest.json') && arg.mode === 'development') {
+              if (process.env.BROWSER === 'firefox' && path.includes('manifest.json')) {
                 const manifest = JSON.parse(content.toString());
-                manifest.content_security_policy = {
-                  extension_pages: `script-src 'self'; object-src 'self'`,
-                }
+
+                delete manifest.background.service_worker
+                delete manifest.browser_action;
+                delete manifest.options_page;
+
+                manifest.background.scripts = ['background.js'];
+                manifest.permissions = manifest.permissions.filter(p => p !== 'background');
+
                 return JSON.stringify(manifest, null, 2);
               }
+
               return content
             }
           }
@@ -173,6 +179,14 @@ module.exports = (env, arg) => {
           },
           chunks: [name]
         })
+      }),
+      new webpack.EnvironmentPlugin({
+        BROWSER: 'chrome'
+      }),
+      process.env.BROWSER !== 'firefox' && new webpack.BannerPlugin({
+        banner: 'if (typeof browser === "undefined") { browser = chrome; }',
+        raw: true,
+        entryOnly: false
       })
     ]
   }

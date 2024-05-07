@@ -9,6 +9,8 @@
     "lint": "npm run lint:es && npm run lint:css && npm run lint:html",
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
+    "dev:firefox": "BROWSER=firefox webpack --mode=development --watch",
+    "build:firefox": "BROWSER=firefox webpack --mode=production",
     "zip": "bestzip extension.zip extension/*",
     "release": "npm run build && npm run zip",
     "locales": "node autocompleteLocales.js",
