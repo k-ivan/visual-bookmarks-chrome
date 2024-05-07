@@ -1,3 +1,5 @@
+import { FIREFOX_BROWSER } from './index';
+
 export default [
   {
     key: chrome.i18n.getMessage('view_setting'),
@@ -58,11 +60,14 @@ export default [
             title: chrome.i18n.getMessage('show_toolbar'),
             type: 'switch'
           },
-          {
-            id: 'search_autofocus',
-            title: chrome.i18n.getMessage('search_autofocus'),
-            type: 'switch'
-          }
+          ...(
+            !FIREFOX_BROWSER && [{
+              id: 'search_autofocus',
+              title: browser.i18n.getMessage('search_autofocus'),
+              type: 'switch'
+            }] || []
+          )
+
         ]
       },
       {
