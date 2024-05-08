@@ -22,7 +22,7 @@ import {
   $notifications,
   $resizeThumbnail
 } from '../utils';
-import { SVG_LOADER } from '../constants';
+import { ROOT_FOLDERS, SVG_LOADER } from '../constants';
 import  confirmPopup from '../plugins/confirmPopup.js';
 import './vb-bookmark';
 
@@ -553,8 +553,7 @@ const Bookmarks = (() => {
 
         // folder by id exists
         container.setAttribute('data-folder', id);
-
-        if (Number(item[0].parentId)) {
+        if (item[0].parentId && !ROOT_FOLDERS.includes(item[0].parentId)) {
           container.setAttribute('data-parent-folder', item[0].parentId);
         } else {
           container.removeAttribute('data-parent-folder');

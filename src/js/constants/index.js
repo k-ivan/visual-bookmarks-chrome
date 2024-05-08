@@ -151,3 +151,17 @@ export const NEWTAB_EMPTY_URLS = [
   'edge://newtab/',
   'chrome://newtab/'
 ];
+
+export const FIREFOX_BROWSER = (process.env.BROWSER === 'firefox');
+export const DEFAULT_FOLDER = {
+  CHROME: '1',
+  FIREFOX: 'toolbar_____'
+};
+
+/**
+ * Browser root folders
+ * @type {string[]}
+ * 0 - chrome
+ * root________ - firefox
+ */
+export const ROOT_FOLDERS = ['0', 'root________'];
