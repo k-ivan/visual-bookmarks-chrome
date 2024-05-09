@@ -60,7 +60,7 @@ class VbHeader extends HTMLElement {
 
     // get vb-popup
     this.vbPopup = this.querySelector('vb-popup');
-    this.vbPopup.setAttribute('label', chrome.i18n.getMessage('toggle_search_popup'));
+    this.vbPopup.setAttribute('label', browser.i18n.getMessage('toggle_search_popup'));
     this.vbPopupBtn = this.vbPopup.popupTriger;
     this.vbPopupSlotBtn = this.vbPopup.querySelector('[slot="button"]');
     this.vbPopupContent = this.vbPopup.querySelector('[slot="content"]');
@@ -93,13 +93,13 @@ class VbHeader extends HTMLElement {
       `<svg width="16" height="16"><use xlink:href="/img/symbol.svg#${engineObject.value}"/></svg>`;
 
     const placeholderEngine = engineObject.value === 'bookmarks'
-      ? chrome.i18n.getMessage('placeholder_input_search_bookmarks')
+      ? browser.i18n.getMessage('placeholder_input_search_bookmarks')
       : engineObject.title;
 
     settings
       .updateKey('search_engine', engine)
       .then(() => {
-        this.inputNode.placeholder = chrome.i18n.getMessage('placeholder_input_search', [placeholderEngine]);
+        this.inputNode.placeholder = browser.i18n.getMessage('placeholder_input_search', [placeholderEngine]);
         this.inputNode.name = engineObject.name ?? 'bookmarks';
         this.formNode.action = engineObject.url ?? '';
 
@@ -233,7 +233,7 @@ class VbHeader extends HTMLElement {
           'button',
           {
             class: 'back',
-            'aria-label': chrome.i18n.getMessage('history_back')
+            'aria-label': browser.i18n.getMessage('history_back')
           },
           {
             html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#arrow_back"/></svg>`

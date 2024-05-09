@@ -1,24 +1,24 @@
 export const storage = {
   local: {
     get(key) {
-      return chrome.storage.local.get(key);
+      return browser.storage.local.get(key);
     },
     set(payload) {
-      return chrome.storage.local.set(payload);
+      return browser.storage.local.set(payload);
     },
     remove(key) {
-      return chrome.storage.local.remove(key);
+      return browser.storage.local.remove(key);
     }
   },
   sync: {
     get(key) {
-      return chrome.storage.sync.get(key);
+      return browser.storage.sync.get(key);
     },
     set(payload) {
-      return chrome.storage.sync.set(payload);
+      return browser.storage.sync.set(payload);
     },
     remove(key) {
-      return chrome.storage.sync.remove(key);
+      return browser.storage.sync.remove(key);
     }
   }
 };

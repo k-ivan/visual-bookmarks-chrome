@@ -70,7 +70,7 @@ const Bookmarks = (() => {
     if (settings.$.show_toolbar) {
       await import(/* webpackChunkName: "webcomponents/vb-header" */'./vb-header');
       const vbHeader = document.createElement('vb-header');
-      vbHeader.setAttribute('placeholder', chrome.i18n.getMessage('placeholder_input_search'));
+      vbHeader.setAttribute('placeholder', browser.i18n.getMessage('placeholder_input_search'));
       vbHeader.setAttribute('initial-folder-id', settings.$.default_folder_id);
       vbHeader.setAttribute('folder-id', startFolder());
       document.querySelector('header').append(vbHeader);
@@ -514,7 +514,7 @@ const Bookmarks = (() => {
       $createElement('button', {
         id: 'bookmark-back',
         class: 'bookmark-btn bookmark-btn--back md-ripple',
-        'aria-label': chrome.i18n.getMessage('parent_folder')
+        'aria-label': browser.i18n.getMessage('parent_folder')
       }, $createElement('span', {
         class: DROPZONE_SELECTOR.replace('.', ''),
         'data-id': container.dataset?.parentFolder
@@ -526,7 +526,7 @@ const Bookmarks = (() => {
         id: 'add',
         class: 'bookmark-btn bookmark-btn--create md-ripple',
         'data-create': 'New',
-        'aria-label': chrome.i18n.getMessage('new_bookmark')
+        'aria-label': browser.i18n.getMessage('new_bookmark')
       })
     );
     dialLoading.hidden = true;
@@ -562,15 +562,15 @@ const Bookmarks = (() => {
         return render(item[0].children, settings.$.show_create_column);
       })
       .catch(() => {
-        Toast.show(chrome.i18n.getMessage('notice_cant_find_id'));
+        Toast.show(browser.i18n.getMessage('notice_cant_find_id'));
         container.innerHTML = /* html */
             `<div class="not-found">
               <div class="not-found__wrap">
                 <div class="not-found__icon"></div>
                 <div class="not-found__text">
-                  ${chrome.i18n.getMessage('not_found_text')}
+                  ${browser.i18n.getMessage('not_found_text')}
                 </div>
-                <a class="btn md-ripple" href="#1">${chrome.i18n.getMessage('not_found_link_text')}</a>
+                <a class="btn md-ripple" href="#1">${browser.i18n.getMessage('not_found_link_text')}</a>
               </div>
             </div>`;
       });
@@ -582,7 +582,7 @@ const Bookmarks = (() => {
    * @returns {HTMLElement} progress element
    */
   function renderProgressToast(sum) {
-    const i18n = chrome.i18n.getMessage(
+    const i18n = browser.i18n.getMessage(
       'thumbnails_creation',
       [
         '<strong id="progress-text">0</strong>',
@@ -649,7 +649,7 @@ const Bookmarks = (() => {
     isGeneratedThumbs = false;
 
     showNotice && $notifications(
-      chrome.i18n.getMessage('notice_thumbnails_update_complete')
+      browser.i18n.getMessage('notice_thumbnails_update_complete')
     );
 
     $customTrigger('thumbnails:updated', container);
@@ -762,7 +762,7 @@ const Bookmarks = (() => {
     if (!file) return;
 
     if (!/image\/(jpe?g|png|webp)$/.test(file.type)) {
-      return Toast.show(chrome.i18n.getMessage('alert_file_type_fail'));
+      return Toast.show(browser.i18n.getMessage('alert_file_type_fail'));
     }
     target.value = '';
 
@@ -796,12 +796,12 @@ const Bookmarks = (() => {
     }
 
     bookmark.hasOverlay = false;
-    Toast.show(chrome.i18n.getMessage('notice_thumb_image_updated'));
+    Toast.show(browser.i18n.getMessage('notice_thumb_image_updated'));
   }
 
   function captureScreen(captureUrl, id) {
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage({
+      browser.runtime.sendMessage({
         capture: {
           id,
           captureUrl
@@ -871,7 +871,7 @@ const Bookmarks = (() => {
           }
           render(match);
         } else {
-          container.innerHTML = `<div class="empty-search">🙁 ${chrome.i18n.getMessage('empty_search')}</div>`;
+          container.innerHTML = `<div class="empty-search">🙁 ${browser.i18n.getMessage('empty_search')}</div>`;
         }
       });
   }
@@ -896,7 +896,7 @@ const Bookmarks = (() => {
 
   async function removeBookmark(bookmark) {
     if (!settings.$.without_confirmation) {
-      const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_bookmark'));
+      const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_bookmark'));
       if (!confirmAction) return;
     }
 
@@ -905,13 +905,13 @@ const Bookmarks = (() => {
       .then(() => {
         bookmark.remove();
         removeThumbnail(id);
-        Toast.show(chrome.i18n.getMessage('notice_bookmark_removed'));
+        Toast.show(browser.i18n.getMessage('notice_bookmark_removed'));
       });
   }
 
   async function removeFolder(bookmark) {
     if (!settings.$.without_confirmation) {
-      const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_folder'));
+      const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_folder'));
       if (!confirmAction) return;
     }
 
@@ -925,7 +925,7 @@ const Bookmarks = (() => {
             isFolder: true
           }
         });
-        Toast.show(chrome.i18n.getMessage('notice_folder_removed'));
+        Toast.show(browser.i18n.getMessage('notice_folder_removed'));
       });
   }
 
@@ -1016,7 +1016,7 @@ const Bookmarks = (() => {
             createScreen(bookmark, result.id, result.url);
           }
         }
-        Toast.show(chrome.i18n.getMessage('notice_bookmark_updated'));
+        Toast.show(browser.i18n.getMessage('notice_bookmark_updated'));
         return true;
       });
   }

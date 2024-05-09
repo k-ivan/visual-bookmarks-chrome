@@ -34,25 +34,25 @@ export const MAX_FILE_SIZE_BYTES = 50 * (10 ** 6);
 export const CONTEXT_MENU = [
   {
     action: 'new_tab',
-    title: chrome.i18n.getMessage('contextmenu_tab')
+    title: browser.i18n.getMessage('contextmenu_tab')
   },
   {
     action: 'new_window',
-    title: chrome.i18n.getMessage('contextmenu_window')
+    title: browser.i18n.getMessage('contextmenu_window')
   },
   {
     action: 'new_window_incognito',
-    title: chrome.i18n.getMessage('contextmenu_incognito'),
+    title: browser.i18n.getMessage('contextmenu_incognito'),
     isBookmark: true
   },
   {
     action: 'open_all',
-    title: chrome.i18n.getMessage('contextmenu_open_all'),
+    title: browser.i18n.getMessage('contextmenu_open_all'),
     isFolder: true
   },
   {
     action: 'open_all_window',
-    title: chrome.i18n.getMessage('contextmenu_open_all_window'),
+    title: browser.i18n.getMessage('contextmenu_open_all_window'),
     isFolder: true
   },
   {
@@ -60,34 +60,34 @@ export const CONTEXT_MENU = [
   },
   {
     action: 'copy_link',
-    title: chrome.i18n.getMessage('contextmenu_copy_link'),
+    title: browser.i18n.getMessage('contextmenu_copy_link'),
     icon: `<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#copy_outline"/></svg>`,
     isBookmark: true
   },
   {
     action: 'edit',
-    title: chrome.i18n.getMessage('contextmenu_edit'),
+    title: browser.i18n.getMessage('contextmenu_edit'),
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#edit_outline"/></svg>'
   },
   {
     action: 'capture',
-    title: chrome.i18n.getMessage('contextmenu_capture'),
+    title: browser.i18n.getMessage('contextmenu_capture'),
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#capture_outline"/></svg>',
     isBookmark: true
   },
   {
     action: 'upload',
-    title: chrome.i18n.getMessage('contextmenu_upload'),
+    title: browser.i18n.getMessage('contextmenu_upload'),
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#upload_outline"/></svg>'
   },
   {
     action: 'delete_thumbnail',
-    title: chrome.i18n.getMessage('delete_thumbnail'),
+    title: browser.i18n.getMessage('delete_thumbnail'),
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#hide_image"/></svg>'
   },
   {
     action: 'remove',
-    title: chrome.i18n.getMessage('contextmenu_remove'),
+    title: browser.i18n.getMessage('contextmenu_remove'),
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#delete_outline"/></svg>'
   }
 ];
@@ -144,7 +144,7 @@ export const SEARCH_ENGINES = [
 export const NEWTAB_URLS = [
   'edge://newtab/',
   'chrome://newtab/',
-  chrome.runtime.getURL('newtab.html')
+  browser.runtime.getURL('newtab.html')
 ];
 
 export const NEWTAB_EMPTY_URLS = [

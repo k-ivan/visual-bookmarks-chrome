@@ -118,7 +118,7 @@ function createBackup(setting) {
 
 function createBackgroundSetting() {
   return (/* html */
-  `<div id="background_noimage" class="tbl__option js-background-settings js-change text-muted" hidden>${chrome.i18n.getMessage('background_noimage_text')}</div>
+  `<div id="background_noimage" class="tbl__option js-background-settings js-change text-muted" hidden>${browser.i18n.getMessage('background_noimage_text')}</div>
   <div id="background_local" class="tbl__option js-background-settings">
     <div class="c-upload">
       <form action="#0" method="post">
@@ -218,7 +218,7 @@ export function displaySettings(settings) {
         ${sections.join('')}
       </div>
       <div class="tabs__footer">
-        <a href="newtab.html" id="save_btn" class="btn md-ripple">${chrome.i18n.getMessage('btn_back')}</a>
+        <a href="newtab.html" id="save_btn" class="btn md-ripple">${browser.i18n.getMessage('btn_back')}</a>
       </div>
     </div>
   `);

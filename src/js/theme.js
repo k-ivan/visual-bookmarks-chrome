@@ -3,7 +3,7 @@ const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
 const colorTheme = () => document.documentElement.classList.toggle('dark', colorScheme.matches);
 
 async function toggleTheme() {
-  const { settings } = await chrome.storage.local.get('settings');
+  const { settings } = await browser.storage.local.get('settings');
 
   if (settings.color_theme === 'os') {
     colorScheme.removeListener(colorTheme);

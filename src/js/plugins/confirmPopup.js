@@ -5,7 +5,7 @@ const template = /* html */
 `<div class="gmodal__container gmodal__container--popup has-center">
   <div class="gmodal__dialog">
     <div class="gmodal__header">
-      <div class="gmodal__title">${chrome.i18n.getMessage('ext_name')}</div>
+      <div class="gmodal__title">${browser.i18n.getMessage('ext_name')}</div>
       <button type="button" class="gmodal__close md-ripple" data-popup="reject" data-ripple-center>
         <svg version="1.1" width="24" height="24" viewBox="0 0 24 24" fill="#000">
           <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
@@ -14,7 +14,7 @@ const template = /* html */
     </div>
     <div class="gmodal__body" id="popupBody"></div>
     <div class="gmodal__footer text-right">
-      <button type="button" class="btn btn--clear md-ripple" data-popup="reject">${chrome.i18n.getMessage('btn_close')}</button>
+      <button type="button" class="btn btn--clear md-ripple" data-popup="reject">${browser.i18n.getMessage('btn_close')}</button>
       <button type="button" class="btn md-ripple" data-popup="resolve">Ok</button>
     </div>
   </div>

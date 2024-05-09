@@ -101,11 +101,11 @@ export function $notifications(message, id, buttons = []) {
 
   // For requireInteraction
   // if (window.timerNotice) {
-  //   chrome.notifications.clear(message);
+  //   browser.notifications.clear(message);
   //   clearTimeout(window.timerNotice);
   // }
 
-  chrome.notifications.create(id, {
+  browser.notifications.create(id, {
     type: 'basic',
     iconUrl: 'icons/icon128.png',
     title: 'Visual bookmarks',
@@ -115,7 +115,7 @@ export function $notifications(message, id, buttons = []) {
   }, function() {
     // For requireInteraction
     // window.timerNotice = setTimeout(() => {
-    //   chrome.notifications.clear(id);
+    //   browser.notifications.clear(id);
     //   window.timerNotice = null;
     // }, delay)
   });
@@ -273,14 +273,14 @@ export async function $filePicker(pickerOpts = {
 
   if (!/image\/(jpe?g|png|webp)$/.test(file.type)) {
     throw {
-      alert: chrome.i18n.getMessage('alert_file_type_fail')
+      alert: browser.i18n.getMessage('alert_file_type_fail')
     };
   }
   return file;
 }
 
 export function faviconURL(url, size = 16) {
-  // const favUrl = new URL(chrome.runtime.getURL('/_favicon/'));
+  // const favUrl = new URL(browser.runtime.getURL('/_favicon/'));
   // favUrl.searchParams.set('pageUrl', url);
   // favUrl.searchParams.set('size', size);
   // return favUrl.toString();

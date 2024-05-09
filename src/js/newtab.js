@@ -56,7 +56,7 @@ async function init() {
   // Replacement underscore on the dash because underscore is not a valid language subtag
   document.documentElement.setAttribute(
     'lang',
-    chrome.i18n.getMessage('@@ui_locale').replace('_', '-')
+    browser.i18n.getMessage('@@ui_locale').replace('_', '-')
   );
 
   /**
@@ -114,7 +114,7 @@ async function init() {
   const formBookmarkEl = document.getElementById('formBookmark');
 
   Validator.i18n = {
-    required: chrome.i18n.getMessage('error_input_required')
+    required: browser.i18n.getMessage('error_input_required')
   };
 
   Validator.run(formBookmarkEl, {
@@ -128,7 +128,7 @@ async function init() {
       regex: {
         isValidUrl: {
           pattern: REGEXP_URL_PATTERN,
-          error: chrome.i18n.getMessage('error_input_url')
+          error: browser.i18n.getMessage('error_input_url')
         }
       }
     },
@@ -155,7 +155,7 @@ async function init() {
   if (settings.$.thumbnails_update_button) {
     generateThumbsBtn = $createElement('button', {
       class: 'circ-btn update-thumbnails',
-      'aria-label': chrome.i18n.getMessage('thumbnails_update')
+      'aria-label': browser.i18n.getMessage('thumbnails_update')
     }, {
       html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#capture_fill"/></svg>`
     });
@@ -190,7 +190,7 @@ async function init() {
   window.addEventListener('hashchange', hideControlMultiplyBookmarks);
 
   // if tab with bookmarks is open, but hidden, we need to reload, after updating thumbnails
-  chrome.runtime.onMessage.addListener(function(request) {
+  browser.runtime.onMessage.addListener(function(request) {
     if (request.bookmarksUpdated && document.hidden) {
       window.location.reload();
     }
@@ -327,8 +327,8 @@ async function handleLoad() {
   // show a notification with a link to the description of the update
   const { extension_updated } = await storage.local.get('extension_updated');
   if (extension_updated) {
-    const text = chrome.i18n.getMessage('extension_updated_notification');
-    const linkText = chrome.i18n.getMessage('whats_new');
+    const text = browser.i18n.getMessage('extension_updated_notification');
+    const linkText = browser.i18n.getMessage('whats_new');
     Toast.show({
       message: `${text}.&nbsp;&nbsp;<a href="/options.html#changelog">${linkText}</a>`,
       delay: 0,
@@ -391,7 +391,7 @@ function handleDelegateClick(evt) {
 
     if (url.startsWith('file:///')) {
       evt.preventDefault();
-      chrome.tabs.update({
+      browser.tabs.update({
         url
       });
     }
@@ -450,7 +450,7 @@ function handleMenuSelection(evt) {
       break;
     case 'copy_link':
       $copyStr(target.href);
-      Toast.show(chrome.i18n.getMessage('notice_link_copied'));
+      Toast.show(browser.i18n.getMessage('notice_link_copied'));
       break;
     case 'capture': {
       Bookmarks.createScreen(target);
@@ -506,7 +506,7 @@ function runServices() {
 
 async function removeSelectedBookmarks(multipleSelectedBookmarks) {
   if (!settings.$.without_confirmation) {
-    const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_selected_bookmarks'));
+    const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_selected_bookmarks'));
     if (!confirmAction) return;
   }
   await Promise.all(
@@ -519,13 +519,13 @@ async function removeSelectedBookmarks(multipleSelectedBookmarks) {
 
 function openSelectedBookmarks(multipleSelectedBookmarks, action) {
   if (['open_all_window', 'new_window_incognito'].includes(action)) {
-    chrome.windows.create({
+    browser.windows.create({
       focused: true,
       state: 'maximized',
       incognito: (action === 'new_window_incognito')
     }, win => {
       if (!win) {
-        return $notifications(chrome.i18n.getMessage('incognito_access_note'));
+        return $notifications(browser.i18n.getMessage('incognito_access_note'));
       }
       multipleSelectedBookmarks.forEach(bookmark => {
         openTab(bookmark.url, { windowId: win.id });
@@ -547,7 +547,7 @@ function openAll(id, action) {
   getChildren(id)
     .then(childrens => {
       if (action === 'open_all_window') {
-        chrome.windows.create({
+        browser.windows.create({
           focused: true
         }, win => {
           childrens.forEach(children => {
@@ -571,7 +571,7 @@ function openAll(id, action) {
  */
 function openWindow(url, action) {
   try {
-    chrome.windows.create({
+    browser.windows.create({
       url: url,
       state: 'maximized',
       incognito: (action === 'new_window_incognito')
@@ -600,7 +600,7 @@ function openTab(url, options = {}) {
     active: false
   };
   try {
-    chrome.tabs.create({
+    browser.tabs.create({
       ...defaults,
       ...options
     });
@@ -635,7 +635,7 @@ function handleFormError(err) {
 
 async function handleResetThumb(evt) {
   if (!settings.$.without_confirmation) {
-    const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_image'));
+    const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_image'));
     if (!confirmAction) return;
   }
 
@@ -678,7 +678,7 @@ async function prepareModal(target) {
       customScreen.querySelector('#resetCustomImage').setAttribute('data-bookmark', id);
     }
 
-    modalHead.textContent = chrome.i18n.getMessage('edit_bookmark');
+    modalHead.textContent = browser.i18n.getMessage('edit_bookmark');
     titleField.value = title;
 
     if (url) {
@@ -690,7 +690,7 @@ async function prepareModal(target) {
     form.setAttribute('data-action', id);
   } else {
     modal.classList.add('has-add');
-    modalHead.textContent = chrome.i18n.getMessage('add_bookmark');
+    modalHead.textContent = browser.i18n.getMessage('add_bookmark');
     urlWrap.style.display = '';
     titleField.value = '';
     urlField.value = '';

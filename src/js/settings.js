@@ -1,6 +1,6 @@
 import { $uid } from './utils';
 /**
- * TODO: temporary promise wrapper for asynchronous work with chrome.storage in manifest v2
+ * TODO: temporary promise wrapper for asynchronous work with browser.storage in manifest v2
  * storage[local|sync][set|get]
  * remove after switching to a new manifest (v3)
  */
@@ -159,7 +159,7 @@ const settingsStore = () => {
      */
     resetSync() {
       return new Promise(resolve => {
-        chrome.storage.sync.clear(resolve);
+        browser.storage.sync.clear(resolve);
       });
     }
   };

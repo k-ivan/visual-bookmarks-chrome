@@ -36,7 +36,7 @@ async function init() {
   // Replacement underscore on the dash because underscore is not a valid language subtag
   document.documentElement.setAttribute(
     'lang',
-    chrome.i18n.getMessage('@@ui_locale').replace('_', '-')
+    browser.i18n.getMessage('@@ui_locale').replace('_', '-')
   );
 
   window.settings.innerHTML = displaySettings(settingsList);
@@ -90,9 +90,9 @@ async function init() {
     storage.local.remove('extension_updated');
   });
 
-  const manifest = chrome.runtime.getManifest();
+  const manifest = browser.runtime.getManifest();
   document.getElementById('ext_name').textContent = manifest.name;
-  document.getElementById('ext_version').textContent = `${chrome.i18n.getMessage('version')} ${manifest.version}`;
+  document.getElementById('ext_version').textContent = `${browser.i18n.getMessage('version')} ${manifest.version}`;
   document.getElementById('modal_changelog_version').textContent = manifest.version;
 
   tabs.addEventListener('tabChange', function(evt) {
@@ -141,14 +141,14 @@ function handleImportSettings(e) {
         const importSettings = JSON.parse(e.target.result);
         await settings.updateAll(importSettings);
         $notifications(
-          chrome.i18n.getMessage('import_settings_success')
+          browser.i18n.getMessage('import_settings_success')
         );
         setTimeout(() => {
           location.reload();
         }, 0);
       } catch (error) {
         input.value = '';
-        Toast.show(chrome.i18n.getMessage('import_settings_failed'));
+        Toast.show(browser.i18n.getMessage('import_settings_failed'));
         console.warn(error);
       }
     });
@@ -172,7 +172,7 @@ function handleExportSettings() {
 
   const file = new Blob([JSON.stringify(data)], { type: 'text/plain' });
   // TODO: permission is required to download
-  // chrome.downloads.download({
+  // browser.downloads.download({
   //   url: URL.createObjectURL(file),
   //   filename: 'visual-bookmarks-settings.backup'
   // });
@@ -310,13 +310,13 @@ async function handleUploadFile() {
   const isSizeExceeded = MAX_FILE_SIZE_BYTES < file.size;
   const isAllowedType = FILES_ALLOWED_EXTENSIONS.some(type => file.type.endsWith(type));
   if (!isAllowedType) {
-    return Toast.show(chrome.i18n.getMessage(
+    return Toast.show(browser.i18n.getMessage(
       'alert_file_type_fail_type',
       [FILES_ALLOWED_EXTENSIONS.join(' | ')]
     ));
   }
   if (isSizeExceeded) {
-    return Toast.show(chrome.i18n.getMessage(
+    return Toast.show(browser.i18n.getMessage(
       'alert_file_type_fail_size',
       [MAX_FILE_SIZE_BYTES / 10 ** 6]
     ));
@@ -349,7 +349,7 @@ async function handleUploadFile() {
             style="background-image: url(${backgroundImage});">
           <div>`;
 
-  Toast.show(chrome.i18n.getMessage('notice_bg_image_updated'));
+  Toast.show(browser.i18n.getMessage('notice_bg_image_updated'));
   tabsSliderInstance.recalcStyles();
 }
 
@@ -357,7 +357,7 @@ async function handleRemoveFile(evt) {
   const target = evt.target.closest('#delete_upload');
   if (!target) return;
 
-  const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_image'));
+  const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_image'));
   if (!confirmAction) return;
 
   evt.preventDefault();
@@ -373,7 +373,7 @@ async function handleRemoveFile(evt) {
   preview.innerHTML = '';
   previewParent.hidden = true;
   tabsSliderInstance.recalcStyles();
-  Toast.show(chrome.i18n.getMessage('notice_image_removed'));
+  Toast.show(browser.i18n.getMessage('notice_image_removed'));
 }
 
 function handleSelectBackground() {
@@ -383,35 +383,35 @@ function handleSelectBackground() {
 async function handleDeleteImages(evt) {
   evt.preventDefault();
 
-  const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_delete_images'));
+  const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_images'));
   if (!confirmAction) return;
 
   await ImageDB.clear();
-  Toast.show(chrome.i18n.getMessage('notice_images_removed'));
+  Toast.show(browser.i18n.getMessage('notice_images_removed'));
 }
 
 async function handleResetLocalSettings() {
-  const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_restore_default_settings'));
+  const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_restore_default_settings'));
   if (!confirmAction) return;
 
   await settings.resetLocal();
 
   window.vbToggleTheme();
   getOptions();
-  Toast.show(chrome.i18n.getMessage('notice_reset_default_settings'));
+  Toast.show(browser.i18n.getMessage('notice_reset_default_settings'));
 }
 async function handleResetSyncSettings() {
-  const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_clear_sync_settings'));
+  const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_clear_sync_settings'));
   if (!confirmAction) return;
 
   await settings.resetSync();
-  Toast.show(chrome.i18n.getMessage('notice_sync_settings_cleared'));
+  Toast.show(browser.i18n.getMessage('notice_sync_settings_cleared'));
 }
 function handleChangeSync() {
   if (this.checked) {
-    chrome.storage.sync.getBytesInUse(null, async(bytes) => {
+    browser.storage.sync.getBytesInUse(null, async(bytes) => {
       if (bytes > 0) {
-        const confirmAction = await confirmPopup(chrome.i18n.getMessage('confirm_sync_remote_settings'));
+        const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_sync_remote_settings'));
 
         if (confirmAction) {
           await settings.restoreFromSync();

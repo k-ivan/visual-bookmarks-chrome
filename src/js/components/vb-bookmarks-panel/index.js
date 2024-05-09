@@ -9,19 +9,19 @@ class VbBookmarksPanel extends HTMLElement {
       icon: 'launch',
       tag: 'button',
       action: 'open_all',
-      text: chrome.i18n.getMessage('open_selected')
+      text: browser.i18n.getMessage('open_selected')
     },
     {
       icon: 'delete_outline',
       tag: 'button',
       action: 'remove',
-      text: chrome.i18n.getMessage('delete_selected')
+      text: browser.i18n.getMessage('delete_selected')
     },
     {
       icon: 'capture_outline',
       tag: 'button',
       action: 'update_thumbnails',
-      text: chrome.i18n.getMessage('thumbnails_update')
+      text: browser.i18n.getMessage('thumbnails_update')
     }
   ];
   folderId = null;
@@ -54,7 +54,7 @@ class VbBookmarksPanel extends HTMLElement {
     this.closeBtn = $createElement('button', {
       class: 'bookmarks-panel__close md-ripple',
       'data-ripple-center': '',
-      'aria-label': chrome.i18n.getMessage('btn_close')
+      'aria-label': browser.i18n.getMessage('btn_close')
     }, {
       html: /* html */ `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#close"/></svg>`
     });
@@ -67,7 +67,7 @@ class VbBookmarksPanel extends HTMLElement {
             return `<div class="bookmarks-panel__popup-action" data-action="${item.action}">${item.title}</div>`;
           });
         return (/* html */
-          `<vb-popup class="bookmarks-panel__popup" label="${chrome.i18n.getMessage('toggle_selected_bookmarks_popup')}">
+          `<vb-popup class="bookmarks-panel__popup" label="${browser.i18n.getMessage('toggle_selected_bookmarks_popup')}">
             <span class="bookmarks-panel__action" slot="button">
               <svg width="20" height="20"><use xlink:href="/img/symbol.svg#${action.icon}"></use></svg>
             </span>
@@ -93,7 +93,7 @@ class VbBookmarksPanel extends HTMLElement {
       class: 'btn md-ripple',
       hidden: true,
       disabled: true
-    }, chrome.i18n.getMessage('button_action_move'));
+    }, browser.i18n.getMessage('button_action_move'));
     this.selectContainer.append(this.select, this.selectButton);
 
     this.innerHTML = `<style>${styles}</style>`;

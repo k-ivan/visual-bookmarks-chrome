@@ -9,15 +9,15 @@ export default function(root = null) {
     const params = msg.split(':');
     if (params.length > 1) {
       const arrString = params[1].split(',').map(str => {
-        return chrome.i18n.getMessage(str) || str;
+        return browser.i18n.getMessage(str) || str;
       });
-      item.textContent = chrome.i18n.getMessage(params[0], arrString);
+      item.textContent = browser.i18n.getMessage(params[0], arrString);
     } else {
       // only string without params
 
       // remove the service pointer to the attribute from the translation string
       // for example, original string  options[.arialabel] can be written as a string + .arialabel(optional)
-      const translation = chrome.i18n.getMessage(msg.replace(/\..*/, ''));
+      const translation = browser.i18n.getMessage(msg.replace(/\..*/, ''));
       if (!translation) return;
 
       if (~msg.indexOf('placeholder')) {

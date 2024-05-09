@@ -6,7 +6,7 @@ class VbSelectFolders extends HTMLElement {
       id: this.selectId,
       name: 'folder',
       class: 'form-control',
-      'aria-label': chrome.i18n.getMessage('select_folder')
+      'aria-label': browser.i18n.getMessage('select_folder')
     });
 
     this.insertAdjacentElement('afterbegin', this.selectNode);

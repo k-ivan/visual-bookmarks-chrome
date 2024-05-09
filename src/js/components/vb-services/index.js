@@ -31,7 +31,7 @@ class VBServices extends HTMLElement {
     this.grid = this.shadowRoot.querySelector('.list');
 
     this.vbPopup = this.shadowRoot.querySelector('vb-popup');
-    this.vbPopup.setAttribute('label', chrome.i18n.getMessage('toggle_services_popup'));
+    this.vbPopup.setAttribute('label', browser.i18n.getMessage('toggle_services_popup'));
     this.settingsTriggerEl = this.shadowRoot.querySelector('.settings-trigger');
     this.settingsEl = this.shadowRoot.querySelector('.settings');
     this.settingsFormEl = this.shadowRoot.querySelector('.settings-form');
@@ -67,8 +67,8 @@ class VBServices extends HTMLElement {
     });
 
     Validator.i18n = {
-      required: chrome.i18n.getMessage('error_input_required'),
-      url: chrome.i18n.getMessage('error_input_url')
+      required: browser.i18n.getMessage('error_input_required'),
+      url: browser.i18n.getMessage('error_input_url')
     };
 
     Validator.run(this.settingsFormEl, {
@@ -127,7 +127,7 @@ class VBServices extends HTMLElement {
           <img class="item-logo" alt="${nameText}" src="${logo}"/>
         </div>
         <div class="item-name">${nameText}</div>
-        <button type="button" class="item-remove" data-id="${id}" aria-label="${chrome.i18n.getMessage('remove_service', nameText)}">
+        <button type="button" class="item-remove" data-id="${id}" aria-label="${browser.i18n.getMessage('remove_service', nameText)}">
           <svg height="14" width="14">
             <use xlink:href="/img/symbol.svg#minus"/>
           </svg>

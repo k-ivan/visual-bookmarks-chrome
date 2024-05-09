@@ -1,4 +1,4 @@
-const API = chrome.bookmarks;
+const API = browser.bookmarks;
 
 /**
  * Get three folders

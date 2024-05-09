@@ -20,13 +20,13 @@ import {
 } from './constants';
 
 function browserActionHandler() {
-  chrome.tabs.query({ currentWindow: true }, function(tabs) {
+  browser.tabs.query({ currentWindow: true }, function(tabs) {
     for (let tab of tabs) {
       if (NEWTAB_URLS.some(url => tab.url.startsWith(url))) {
-        return chrome.tabs.update(tab.id, { active: true });
+        return browser.tabs.update(tab.id, { active: true });
       }
     }
-    return chrome.tabs.create({ url: chrome.runtime.getURL('newtab.html') });
+    return browser.tabs.create({ url: browser.runtime.getURL('newtab.html') });
   });
 }
 
@@ -39,7 +39,7 @@ async function initContextMenu() {
 async function captureScreen(link, callback) {
   const { screen } = await storage.local.get('screen');
 
-  chrome.windows.create({
+  browser.windows.create({
     url: link,
     state: 'normal',
     left: 1e5,
@@ -60,7 +60,7 @@ async function captureScreen(link, callback) {
     }
 
     if (!w.tabs || !w.tabs.length) {
-      chrome.windows.remove(w.id);
+      browser.windows.remove(w.id);
       console.error('not found page');
       return false;
     }
@@ -68,12 +68,12 @@ async function captureScreen(link, callback) {
     let tab = w.tabs[0];
     let stop = false;
 
-    chrome.tabs.update(tab.id, {
+    browser.tabs.update(tab.id, {
       muted: true
     });
 
     let closeWindow = setTimeout(function() {
-      chrome.windows.remove(w.id);
+      browser.windows.remove(w.id);
       callback({ error: 'long_load', url: tab.url });
       stop = true;
     }, timeout);
@@ -86,15 +86,15 @@ async function captureScreen(link, callback) {
         return false;
       }
 
-      chrome.tabs.get(tab.id, function(tabInfo) {
+      browser.tabs.get(tab.id, function(tabInfo) {
         if (tabInfo.status === 'complete') {
-          chrome.scripting.insertCSS({
+          browser.scripting.insertCSS({
             target: {
               tabId: tab.id
             },
             css: 'html, body { overflow-y: hidden !important; }'
           });
-          chrome.windows.update(w.id, {
+          browser.windows.update(w.id, {
             left: screen.availWidth - THUMBNAIL_POPUP_WIDTH,
             top: screen.availHeight - THUMBNAIL_POPUP_HEIGHT,
             width: THUMBNAIL_POPUP_WIDTH,
@@ -102,13 +102,13 @@ async function captureScreen(link, callback) {
             focused: true
           }, function(win) {
             setTimeout(() => {
-              chrome.tabs.captureVisibleTab(win.id, function(dataUrl) {
+              browser.tabs.captureVisibleTab(win.id, function(dataUrl) {
                 callback({
                   capture: dataUrl,
                   title: tabInfo.title
                 });
                 try {
-                  chrome.windows.remove(win.id, () => {
+                  browser.windows.remove(win.id, () => {
                     clearTimeout(closeWindow);
                   });
                 } catch (e) {}
@@ -126,14 +126,14 @@ async function captureScreen(link, callback) {
 }
 
 function handleCreateBookmark(data) {
-  chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs){
+  browser.tabs.query({ active: true, currentWindow: true }, async function(tabs){
     const matches = await search(data.pageUrl);
     if (!matches) return;
 
     const isExist = matches.some(match => match.url === data.pageUrl);
     if (isExist) {
       // Bookmarks exist
-      $notifications(chrome.i18n.getMessage('notice_bookmark_exist'));
+      $notifications(browser.i18n.getMessage('notice_bookmark_exist'));
     } else {
       const { settings } = await storage.local.get('settings');
       // ID of the item for subfolders starts with 'save-{parentId}'
@@ -158,9 +158,9 @@ function handleCreateBookmark(data) {
       if (!response) return;
 
       if (settings.close_tab_after_adding_bookmark) {
-        chrome.tabs.remove(tabs[0].id);
+        browser.tabs.remove(tabs[0].id);
       }
-      $notifications(chrome.i18n.getMessage('notice_bookmark_created'));
+      $notifications(browser.i18n.getMessage('notice_bookmark_created'));
     }
   });
 }
@@ -168,10 +168,10 @@ function handleCreateBookmark(data) {
 async function handleCreatedTab(tab) {
   const { settings } = await storage.local.get('settings');
   if (settings.search_autofocus && NEWTAB_EMPTY_URLS.includes(tab.pendingUrl)) {
-    chrome.tabs.create({
-      url: chrome.runtime.getURL('newtab.html')
+    browser.tabs.create({
+      url: browser.runtime.getURL('newtab.html')
     });
-    chrome.tabs.remove(tab.id);
+    browser.tabs.remove(tab.id);
   }
 }
 
@@ -206,8 +206,8 @@ async function handleBookmarks(eventType, id, bookmark) {
 
   const { settings } = await storage.local.get('settings');
   const sendMessageCallback = () => {
-    chrome.runtime.sendMessage({ bookmarksUpdated: true }, () => {
-      if (chrome.runtime.lastError) {
+    browser.runtime.sendMessage({ bookmarksUpdated: true }, () => {
+      if (browser.runtime.lastError) {
         return;
       }
     });
@@ -239,7 +239,7 @@ async function handleBookmarks(eventType, id, bookmark) {
   }
 }
 
-chrome.storage.onChanged.addListener((changes, area) => {
+browser.storage.onChanged.addListener((changes, area) => {
   // if storage changes from local
   // watching the settings parameter
   if (area === 'local' && changes?.settings?.oldValue) {
@@ -253,42 +253,42 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
 });
 
-chrome.runtime.onInstalled.addListener(async(event) => {
+browser.runtime.onInstalled.addListener(async(event) => {
   if (event.reason === 'install') {
     await settings.init();
   }
   initContextMenu();
   if (event.reason === 'update') {
     storage.local.set({ extension_updated: true });
-    // return chrome.tabs.create({ url: chrome.runtime.getURL('options.html#changelog') });
+    // return browser.tabs.create({ url: browser.runtime.getURL('options.html#changelog') });
   }
 });
 
-chrome.bookmarks.onCreated.addListener((id, bookmark) => handleBookmarks('created', id, bookmark));
-chrome.bookmarks.onChanged.addListener((id, bookmark) => handleBookmarks('changed', id, bookmark));
-chrome.bookmarks.onRemoved.addListener((id, bookmark) => handleBookmarks('removed', id, bookmark));
-chrome.bookmarks.onMoved.addListener((id, bookmark) => handleBookmarks('moved', id, bookmark));
+browser.bookmarks.onCreated.addListener((id, bookmark) => handleBookmarks('created', id, bookmark));
+browser.bookmarks.onChanged.addListener((id, bookmark) => handleBookmarks('changed', id, bookmark));
+browser.bookmarks.onRemoved.addListener((id, bookmark) => handleBookmarks('removed', id, bookmark));
+browser.bookmarks.onMoved.addListener((id, bookmark) => handleBookmarks('moved', id, bookmark));
 
-chrome.bookmarks.onImportBegan.addListener(() => {
-  storage.local.set({ importingBookmarks: true });
-});
-chrome.bookmarks.onImportEnded.addListener(() => {
-  storage.local.remove('importingBookmarks');
-});
+// browser.bookmarks.onImportBegan.addListener(() => {
+//   storage.local.set({ importingBookmarks: true });
+// });
+// browser.bookmarks.onImportEnded.addListener(() => {
+//   storage.local.remove('importingBookmarks');
+// });
 
-chrome.contextMenus.onClicked.addListener(handleCreateBookmark);
-chrome.action.onClicked.addListener(browserActionHandler);
-chrome.notifications.onClicked.addListener(browserActionHandler);
-chrome.notifications.onButtonClicked.addListener((id) => {
+browser.contextMenus.onClicked.addListener(handleCreateBookmark);
+browser.action.onClicked.addListener(browserActionHandler);
+browser.notifications.onClicked.addListener(browserActionHandler);
+browser.notifications.onButtonClicked.addListener((id) => {
   // TODO: updates info
   // more about updates
   // go to options page with hash to show modal info
   if (id === 'changelog') {
-    return chrome.tabs.create({ url: chrome.runtime.getURL('options.html#changelog') });
+    return browser.tabs.create({ url: browser.runtime.getURL('options.html#changelog') });
   }
 });
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.capture) {
     const { id, captureUrl } = request.capture;
 
@@ -331,4 +331,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   return true;
 });
 
-chrome.tabs.onCreated.addListener(handleCreatedTab);
+browser.tabs.onCreated.addListener(handleCreatedTab);

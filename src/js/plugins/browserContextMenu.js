@@ -7,7 +7,7 @@ const generateFolderItems = (foldersThree, rootId) => {
   // auxiliary array with parent ids
   // 0 - root level
   const parentIds = ['0'];
-  const translateItemTitle = chrome.i18n.getMessage('btn_save');
+  const translateItemTitle = browser.i18n.getMessage('btn_save');
 
   const flatRecursiveFolders = (folders, parentId) => {
     return folders.reduce((accum, current) => {
@@ -63,9 +63,9 @@ const browserContextMenu = {
 
     busy = true;
 
-    chrome.contextMenus.removeAll(() => {
-      if (chrome.runtime.lastError) {
-        console.warn(chrome.runtime.lastError);
+    browser.contextMenus.removeAll(() => {
+      if (browser.runtime.lastError) {
+        console.warn(browser.runtime.lastError);
       }
       this.create()
         .then(() => {
@@ -78,12 +78,12 @@ const browserContextMenu = {
     const linkItems = [
       {
         id,
-        title: chrome.i18n.getMessage('add_bookmark'),
+        title: browser.i18n.getMessage('add_bookmark'),
         contexts: ['page']
       },
       {
         id: 'current_folder',
-        title: chrome.i18n.getMessage('save_to_current_folder'),
+        title: browser.i18n.getMessage('save_to_current_folder'),
         contexts: ['page'],
         parentId: id
       },
@@ -99,9 +99,9 @@ const browserContextMenu = {
     linkItems.push(...folders);
 
     for (let item of linkItems) {
-      chrome.contextMenus.create(item, () => {
-        if (chrome.runtime.lastError) {
-          console.warn(chrome.runtime.lastError?.message);
+      browser.contextMenus.create(item, () => {
+        if (browser.runtime.lastError) {
+          console.warn(browser.runtime.lastError?.message);
         }
       });
     }
@@ -110,8 +110,8 @@ const browserContextMenu = {
     if (isShow) {
       this.create();
     } else {
-      chrome.contextMenus.removeAll(() => {
-        if (chrome.runtime.lastError) return;
+      browser.contextMenus.removeAll(() => {
+        if (browser.runtime.lastError) return;
       });
     }
   }
