@@ -149,7 +149,8 @@ export const NEWTAB_URLS = [
 
 export const NEWTAB_EMPTY_URLS = [
   'edge://newtab/',
-  'chrome://newtab/'
+  'chrome://newtab/',
+  'about:blank'
 ];
 
 export const FIREFOX_BROWSER = (process.env.BROWSER === 'firefox');
