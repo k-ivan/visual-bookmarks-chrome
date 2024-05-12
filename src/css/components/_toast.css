@@ -5,7 +5,7 @@
   gap: 10px;
   max-width: 350px;
   width: 100%;
-  z-index: 99999;
+  z-index: 9997;
   pointer-events: none;
 
   &.toast-container--top,

@@ -110,6 +110,10 @@ async function init() {
       form.elements.title.select();
     }
   });
+  const modalPermissionsApi = new Gmodal('#modal-host-permissions', {
+    stickySelectors: ['.sticky'],
+    closeBackdrop: false
+  });
 
   const formBookmarkEl = document.getElementById('formBookmark');
 
@@ -197,6 +201,10 @@ async function init() {
   });
 
   // import(/* webpackChunkName: "webcomponents/vb-actions-panel" */'./components/vb-bookmarks-panel');
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-permissions-info]')) return;
+    modalPermissionsApi.open();
+  });
   container.addEventListener('click', handleSelectBookmark);
   document.addEventListener('vb-bookmarks-panel:action', handleMultipleBookmarks);
   document.addEventListener('vb-bookmarks-panel:close', hideControlMultiplyBookmarks);
@@ -319,6 +327,10 @@ async function movedSelectedBookmarks(multipleSelectedBookmarks, destFolder) {
 }
 
 async function updateSelectedThumbnails(multipleSelectedBookmarks) {
+  if (!(await Bookmarks.checkHostPermissions())) {
+    return;
+  }
+
   await Bookmarks.updateSelectedThumbnails(multipleSelectedBookmarks);
   hideControlMultiplyBookmarks();
 }
@@ -368,9 +380,14 @@ function handleUpdateStorage(e) {
   }
 }
 
-function handleGenerateThumbs() {
+async function handleGenerateThumbs() {
+  if (!(await Bookmarks.checkHostPermissions())) {
+    return;
+  }
+
   // method to start generating all bookmark thumbnails
   if (this.hasAttribute('disabled') || localStorage.getItem('update_thumbnails') !== null) return;
+
   Bookmarks.autoUpdateThumb();
 }
 

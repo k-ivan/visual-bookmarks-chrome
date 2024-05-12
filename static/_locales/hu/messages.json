@@ -510,5 +510,17 @@
   },
   "incognito_access_note": {
     "message": "Engedélyeznie kell a bővítmény privát módban történő futtatását"
+  },
+  "notice_host_permissions": {
+    "message": "A weboldalak bélyegképeinek létrehozásához engedély szükséges a felhasználótól, hogy a bővítmény hozzáférhessen a weboldalakhoz."
+  },
+  "learn_more": {
+    "message": "Tanulj többet"
+  },
+  "why_use_host_permissions": {
+    "message": "Miért használjuk ezt a jogosultságot?"
+  },
+  "host_permissions_info": {
+    "message": "<p>Ez a engedély szükséges a webhelyek képernyőképeinek generálásához. A bővítmény nem gyűjt, követ, vagy módosítja az adataidat a webhelyeken. Az egyetlen módosítás, ami történik a weboldal külön ablakban történő megnyitása után, az a görgetősáv elrejtése a webhelyen a képernyőkép generálása előtt (hogy a képernyőkép lehetőleg ne tartalmazzon görgetősávot). A bővítmény kódja elérhető a <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Ha aggódsz emiatt a jogosultság miatt, választhatod, hogy nem adsz hozzá engedélyt, az alkalmazás még mindig működni fog nélküle, de az internetes oldalakról készített képernyőképek mentése könyvjelzőkhöz nem lesz elérhető.</p><p>Ezt az engedélyt kérni fogják, amikor megpróbálod a webhely képernyőképét elkészíteni (ha letiltva van). Ezt a jogot a böngészőbeállításokban is kezelheted egy ablak megnyitásával, amely részletes információkat tartalmaz a bővítményről.</p><p>Általában olyan böngészőkben, mint a Chrome és az Edge, ez az engedély alapértelmezés szerint engedélyezve van, míg a Firefox letiltva van. Ezért az alapértelmezett viselkedés változhat a böngészőtől függően.</p>"
   }
 }

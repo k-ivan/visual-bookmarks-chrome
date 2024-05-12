@@ -18,6 +18,7 @@ import {
   NEWTAB_URLS,
   NEWTAB_EMPTY_URLS
 } from './constants';
+import { containsPermissions } from './api/permissions';
 
 function browserActionHandler() {
   browser.tabs.query({ currentWindow: true }, function(tabs) {
@@ -220,7 +221,8 @@ async function handleBookmarks(eventType, id, bookmark) {
     settings.auto_generate_thumbnail &&
     bookmark.url
   ) {
-    handleCreateThumbnail(id, bookmark, sendMessageCallback);
+    const allUrlsPermission = await containsPermissions({ origins: ['<all_urls>'] });
+    allUrlsPermission && handleCreateThumbnail(id, bookmark, sendMessageCallback);
   } else {
     sendMessageCallback();
   }

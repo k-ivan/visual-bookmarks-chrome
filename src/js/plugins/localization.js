@@ -1,8 +1,8 @@
 export default function(root = null) {
-  const els = (root ? root : document).querySelectorAll('[data-locale-message]');
+  const els = (root ? root : document).querySelectorAll('[data-locale-message], [data-locale-html]');
 
   Array.prototype.slice.call(els).forEach(item => {
-    const msg = item.getAttribute('data-locale-message');
+    const msg = item.getAttribute('data-locale-message') || item.getAttribute('data-locale-html');
     if (!msg) return;
 
     // if exist params i18nString:param1,param2,paramI18nString
@@ -11,7 +11,12 @@ export default function(root = null) {
       const arrString = params[1].split(',').map(str => {
         return browser.i18n.getMessage(str) || str;
       });
-      item.textContent = browser.i18n.getMessage(params[0], arrString);
+
+      if (item.hasAttribute('data-locale-html')) {
+        item.innerHTML = browser.i18n.getMessage(params[0], arrString);
+      } else {
+        item.textContent = browser.i18n.getMessage(params[0], arrString);
+      }
     } else {
       // only string without params
 
@@ -28,7 +33,12 @@ export default function(root = null) {
         item.setAttribute('aria-label', translation);
         return;
       }
-      item.textContent = translation;
+
+      if (item.hasAttribute('data-locale-html')) {
+        item.innerHTML = translation;
+      } else {
+        item.textContent = translation;
+      }
     }
   });
 }

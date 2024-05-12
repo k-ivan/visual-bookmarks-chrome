@@ -510,5 +510,17 @@
   },
   "incognito_access_note": {
     "message": "Musisz zezwolić rozszerzeniu na działanie w trybie prywatnym"
+  },
+  "notice_host_permissions": {
+    "message": "Aby tworzyć miniatury stron internetowych, wymagana jest zgoda użytkownika na udzielenie rozszerzeniu dostępu do stron internetowych."
+  },
+  "learn_more": {
+    "message": "Dowiedz się więcej"
+  },
+  "why_use_host_permissions": {
+    "message": "Dlaczego używać tej zgody?"
+  },
+  "host_permissions_info": {
+    "message": "<p>Ta zgoda jest konieczna do generowania zrzutów ekranu witryn internetowych. Rozszerzenie nie zbiera, nie śledzi ani nie modyfikuje Twoich danych na stronach internetowych. Jedyną modyfikacją, która następuje po otwarciu osobnego okna z witryną, jest ukrycie paska przewijania na stronie przed wygenerowaniem zrzutu ekranu (aby zrzut ekranu był jak najbardziej pozbawiony paska przewijania). Kod rozszerzenia jest dostępny na <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Jeśli martwisz się tym pozwoleniem, możesz zdecydować się go nie udzielać, rozszerzenie nadal będzie działać bez niego, ale generowanie zrzutów ekranowych stron internetowych dla zakładek nie będzie dostępne.</p><p>Ta zgoda będzie żądana podczas próby zrobienia zrzutu ekranu witryny internetowej (jeśli jest wyłączona). Możesz także zarządzać tym prawem w ustawieniach przeglądarki, otwierając okno z szczegółowymi informacjami na temat rozszerzenia.</p><p>Zazwyczaj w przeglądarkach takich jak Chrome i Edge ta zgoda jest domyślnie włączona, podczas gdy w Firefox jest wyłączona. Dlatego domyślne zachowanie może się różnić w zależności od przeglądarki.</p>"
   }
 }

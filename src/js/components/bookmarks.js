@@ -24,6 +24,7 @@ import {
 } from '../utils';
 import { ROOT_FOLDERS, SVG_LOADER } from '../constants';
 import  confirmPopup from '../plugins/confirmPopup.js';
+import { requestPermissions } from '../api/permissions';
 import './vb-bookmark';
 
 /**
@@ -602,6 +603,24 @@ const Bookmarks = (() => {
     return progressToast;
   }
 
+  /**
+   * Checks if the user has permission to access all URLs.
+   * @return {Promise<boolean>} A promise that resolves to a boolean indicating whether the user has permission to access all URLs.
+   */
+  async function checkHostPermissions() {
+    const allUrlsPermission = await requestPermissions({ origins: ['<all_urls>'] });
+    if (!allUrlsPermission) {
+      const message = browser.i18n.getMessage('notice_host_permissions')
+        + `<br><br><button class="btn btn--primary md-ripple" data-permissions-info>${browser.i18n.getMessage('learn_more')}</button>`;
+
+      Toast.show({
+        message,
+        delay: 7000
+      });
+    }
+    return allUrlsPermission;
+  }
+
   async function captureMultipleBookmarks(selectedBookmarks, showNotice) {
     const bookmarksLength = selectedBookmarks.filter(b => !b.isFolder).length;
     // create notification toast
@@ -846,7 +865,11 @@ const Bookmarks = (() => {
     }
   }
 
-  function createScreen(bookmark) {
+  async function createScreen(bookmark) {
+    if (!(await checkHostPermissions())) {
+      return;
+    }
+
     if (!bookmark) return;
 
     bookmark.hasOverlay = true;
@@ -1033,7 +1056,8 @@ const Bookmarks = (() => {
     removeThumbnail,
     autoUpdateThumb,
     updateSelectedThumbnails,
-    moveSelectedBookmarks
+    moveSelectedBookmarks,
+    checkHostPermissions
   };
 })();
 
