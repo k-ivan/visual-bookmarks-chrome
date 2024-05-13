@@ -16,7 +16,8 @@ import {
   THUMBNAIL_POPUP_HEIGHT,
   THUMBNAIL_POPUP_WIDTH,
   NEWTAB_URLS,
-  NEWTAB_EMPTY_URLS
+  NEWTAB_EMPTY_URLS,
+  FIREFOX_BROWSER
 } from './constants';
 import { containsPermissions } from './api/permissions';
 
@@ -201,7 +202,7 @@ async function handleBookmarks(eventType, id, bookmark) {
 
   // to avoid duplicating actions when editing bookmarks,
   // we will ignore further execution if our application is in the active tab
-  const tabs = await chrome.tabs.query({ active: true });
+  const tabs = await browser.tabs.query({ active: true });
   const tabUrl = tabs[0].url.replace(/#\d*/, '');
   if (NEWTAB_URLS.includes(tabUrl)) return;
 
@@ -271,12 +272,15 @@ browser.bookmarks.onChanged.addListener((id, bookmark) => handleBookmarks('chang
 browser.bookmarks.onRemoved.addListener((id, bookmark) => handleBookmarks('removed', id, bookmark));
 browser.bookmarks.onMoved.addListener((id, bookmark) => handleBookmarks('moved', id, bookmark));
 
-// browser.bookmarks.onImportBegan.addListener(() => {
-//   storage.local.set({ importingBookmarks: true });
-// });
-// browser.bookmarks.onImportEnded.addListener(() => {
-//   storage.local.remove('importingBookmarks');
-// });
+if (!FIREFOX_BROWSER) {
+  // firefox does not support onImportBegan and onImportEnded events
+  browser.bookmarks.onImportBegan.addListener(() => {
+    storage.local.set({ importingBookmarks: true });
+  });
+  browser.bookmarks.onImportEnded.addListener(() => {
+    storage.local.remove('importingBookmarks');
+  });
+}
 
 browser.contextMenus.onClicked.addListener(handleCreateBookmark);
 browser.action.onClicked.addListener(browserActionHandler);

@@ -361,7 +361,7 @@ function handlePopstate() {
 function handleBeforeUnload(evt) {
   // if generate thumbs exist
   if (localStorage.getItem('update_thumbnails') !== null && isGenerateThumbs)
-    return evt.returnValue = '';
+    return evt.returnValue = 'Are you shure?';
 }
 
 function handleUnload() {
