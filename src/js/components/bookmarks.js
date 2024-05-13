@@ -973,7 +973,7 @@ const Bookmarks = (() => {
   function createBookmark(title, url) {
     const parentId = container.getAttribute('data-folder');
 
-    return create({ title, url, parentId })
+    return create({ title, ...(url && { url }), parentId })
       .then(result => {
         let bookmark;
         if (result.url) {
@@ -1001,7 +1001,7 @@ const Bookmarks = (() => {
   function updateBookmark(id, title, url, moveId) {
     const bookmark = document.getElementById(`vb-${id}`);
 
-    return update(id, { title, url })
+    return update(id, { title, ...(url && { url }) })
       .then(result => {
         // if the bookmark is moved to another folder
         if (moveId !== id && moveId !== result.parentId) {
