@@ -59,15 +59,13 @@ async function init() {
     browser.i18n.getMessage('@@ui_locale').replace('_', '-')
   );
 
-  /**
-   * Localization
-   */
-  Localization();
-
-  /**
-   * Ripple
-   */
-  Ripple.init('.md-ripple');
+  window.addEventListener('resize', () => UI.calculateStyles());
+  window.addEventListener('popstate', handlePopstate);
+  window.addEventListener('beforeunload', handleBeforeUnload);
+  window.addEventListener('unload', handleUnload);
+  window.addEventListener('storage', handleUpdateStorage);
+  window.addEventListener('load', handleLoad);
+  window.addEventListener('hashchange', hideControlMultiplyBookmarks);
 
   /**
    * Settings
@@ -80,6 +78,16 @@ async function init() {
   UI.userStyles();
   UI.calculateStyles();
   UI.setBG();
+
+  /**
+   * Localization
+   */
+  Localization();
+
+  /**
+   * Ripple
+   */
+  Ripple.init('.md-ripple');
 
   Bookmarks.init().then(() => {
     if (settings.$.enable_virtual_pagination) {
@@ -184,14 +192,6 @@ async function init() {
     });
     generateThumbsBtn.addEventListener('click', handleGenerateThumbs);
   }
-
-  window.addEventListener('resize', () => UI.calculateStyles());
-  window.addEventListener('popstate', handlePopstate);
-  window.addEventListener('beforeunload', handleBeforeUnload);
-  window.addEventListener('unload', handleUnload);
-  window.addEventListener('storage', handleUpdateStorage);
-  window.addEventListener('load', handleLoad);
-  window.addEventListener('hashchange', hideControlMultiplyBookmarks);
 
   // if tab with bookmarks is open, but hidden, we need to reload, after updating thumbnails
   browser.runtime.onMessage.addListener(function(request) {
