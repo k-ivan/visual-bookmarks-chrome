@@ -26,7 +26,7 @@ module.exports = (env, arg) => {
       theme: './src/js/theme.js',
     },
     output: {
-      path: path.resolve(__dirname, 'extension'),
+      path: path.join(__dirname, process.env.BROWSER === 'firefox' ? '/extension_firefox' : '/extension_chrome'),
       filename(pathData) {
         return pathData.chunk.name === 'background' ? '[name].js' : 'js/[name].js';
       },
