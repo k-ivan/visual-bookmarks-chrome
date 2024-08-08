@@ -1,3 +1,4 @@
+import { FIREFOX_BROWSER } from '../constants';
 
 export function $createElement(tag, attributes = {}, ...children) {
   const element = document.createElement(tag);
@@ -110,7 +111,7 @@ export function $notifications(message, id, buttons = []) {
     iconUrl: 'icons/icon128.png',
     title: 'Visual bookmarks',
     message,
-    buttons
+    ...(!FIREFOX_BROWSER && { buttons })
     // requireInteraction: true
   }, function() {
     // For requireInteraction
