@@ -865,10 +865,21 @@ const Bookmarks = (() => {
     }
   }
 
-  async function createScreen(bookmark) {
-    if (!(await checkHostPermissions())) {
-      return;
-    }
+  async function createScreen(bookmark, access = false) {
+    // Firefox is terrible 💩💩💩
+    // because of firefox i have to duplicate this check at a top level functions(from newtab.js)
+    // I am forced to use trycatch because of firefox
+    let hostPermissions = access;
+    try {
+      hostPermissions = await checkHostPermissions();
+    } catch (error) {}
+
+    if (!hostPermissions) return;
+
+    // permissions.request may only be called from a user input handler firefox can't catch a function in the trace via promises)
+    // if (!(await checkHostPermissions())) {
+    //   return;
+    // }
 
     if (!bookmark) return;
 
@@ -983,45 +994,31 @@ const Bookmarks = (() => {
         }
         container.querySelector('.bookmark-btn--create').insertAdjacentElement('beforeBegin', bookmark);
 
-        if (result.url) {
-          if (settings.$.auto_generate_thumbnail) {
-            createScreen(bookmark, result.id, result.url);
-          }
-        } else {
+        if (!result.url) {
           $customTrigger('updateFolderList', document, {
             detail: {
               isFolder: true
             }
           });
         }
-        return true;
+
+        return bookmark;
       });
   }
 
-  function updateBookmark(id, title, url, moveId) {
+  async function updateBookmark(id, title, url, moveId) {
     const bookmark = document.getElementById(`vb-${id}`);
 
-    return update(id, { title, ...(url && { url }) })
-      .then(result => {
-        // if the bookmark is moved to another folder
-        if (moveId !== id && moveId !== result.parentId) {
-          const destination = {
-            parentId: moveId,
-            ...(settings.$.move_to_start && { index: 0 })
-          };
-          move(id, destination)
-            .then(() => {
-              // if it is a folder update folderList
-              if (!result.url) {
-                $customTrigger('updateFolderList', document, {
-                  detail: {
-                    isFolder: true
-                  }
-                });
-              }
-              bookmark.remove();
-            });
-        } else {
+    const result = await update(id, { title, ...(url && { url }) });
+
+    // if the bookmark is moved to another folder
+    if (moveId !== id && moveId !== result.parentId) {
+      const destination = {
+        parentId: moveId,
+        ...(settings.$.move_to_start && { index: 0 })
+      };
+      move(id, destination)
+        .then(() => {
           // if it is a folder update folderList
           if (!result.url) {
             $customTrigger('updateFolderList', document, {
@@ -1030,18 +1027,23 @@ const Bookmarks = (() => {
               }
             });
           }
-          // else update bookmark view
-          bookmark.title = result.title;
-          bookmark.url = result.url ? result.url : `#${result.id}`;
-
-          // update thumbnail if thumbnail generation option is enabled and if it is not a folder
-          if (result.url && settings.$.auto_generate_thumbnail) {
-            createScreen(bookmark, result.id, result.url);
+          bookmark.remove();
+        });
+    } else {
+      // if it is a folder update folderList
+      if (!result.url) {
+        $customTrigger('updateFolderList', document, {
+          detail: {
+            isFolder: true
           }
-        }
-        Toast.show(browser.i18n.getMessage('notice_bookmark_updated'));
-        return true;
-      });
+        });
+      }
+      // else update bookmark view
+      bookmark.title = result.title;
+      bookmark.url = result.url ? result.url : `#${result.id}`;
+    }
+    Toast.show(browser.i18n.getMessage('notice_bookmark_updated'));
+    return bookmark;
   }
 
   return {

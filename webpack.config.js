@@ -133,9 +133,15 @@ module.exports = (env, arg) => {
                 delete manifest.background.service_worker
                 delete manifest.browser_action;
                 delete manifest.options_page;
+                delete manifest.minimum_chrome_version
 
                 manifest.background.scripts = ['background.js'];
                 manifest.permissions = manifest.permissions.filter(p => p !== 'background');
+                manifest.browser_specific_settings = {
+                  gecko: {
+                    strict_min_version: '128.0'
+                  }
+                }
 
                 return JSON.stringify(manifest, null, 2);
               }

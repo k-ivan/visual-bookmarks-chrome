@@ -4,7 +4,7 @@
   "name": "__MSG_ext_name__",
   "description": "__MSG_ext_desc__",
   "version": "5.12.5",
-  "minimum_chrome_version": "95",
+  "minimum_chrome_version": "103",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -28,6 +28,9 @@
     "contextMenus"
   ],
   "host_permissions": [
+    "https://google.com/*"
+  ],
+  "optional_host_permissions": [
     "<all_urls>"
   ],
   "background": {

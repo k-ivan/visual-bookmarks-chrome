@@ -631,14 +631,33 @@ async function handleSubmitForm(evt) {
   const title = form.title.value;
   const url = form.url.value;
 
-  let success = false;
+  let bookmark = false;
+
+  // Firefox is terrible 💩💩💩
+  // run the permission check at the very top level
+  // permissions.request may only be called from a user input handler (firefox can't catch a function in the trace via promises)
+  let permission = false;
+  if (url && settings.$.auto_generate_thumbnail) {
+    permission = await Bookmarks.checkHostPermissions();
+  }
+
   if (id !== 'New') {
     const newLocation = modalSelectFolders.value;
-    success = await Bookmarks.updateBookmark(id, title, url, newLocation);
+    bookmark = await Bookmarks.updateBookmark(id, title, url, newLocation);
   } else {
-    success = await Bookmarks.createBookmark(title, url);
+    bookmark = await Bookmarks.createBookmark(title, url);
   }
-  success && modalApi.close();
+
+  // Firefox
+  // run the permission check at the very top level
+  // permissions.request may only be called from a user input handler (firefox can't catch a function in the trace via promises)
+  // that's why I moved the screenshot creation to this place
+  if (url && permission && bookmark && settings.$.auto_generate_thumbnail) {
+    // update thumbnail if thumbnail generation option is enabled and if it is not a folder
+    Bookmarks.createScreen(bookmark, permission);
+  }
+
+  bookmark && modalApi.close();
 }
 
 /**
