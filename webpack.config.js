@@ -139,6 +139,7 @@ module.exports = (env, arg) => {
                 manifest.permissions = manifest.permissions.filter(p => p !== 'background');
                 manifest.browser_specific_settings = {
                   gecko: {
+                    id: '{876119d0-ddb9-47bb-9620-bc8d2489e857}',
                     strict_min_version: '128.0'
                   }
                 }
