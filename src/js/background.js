@@ -223,7 +223,7 @@ async function handleBookmarks(eventType, id, bookmark) {
     bookmark.url
   ) {
     const allUrlsPermission = await containsPermissions({ origins: ['<all_urls>'] });
-    allUrlsPermission && handleCreateThumbnail(id, bookmark, sendMessageCallback);
+    allUrlsPermission ? handleCreateThumbnail(id, bookmark, sendMessageCallback) : sendMessageCallback();
   } else {
     sendMessageCallback();
   }
