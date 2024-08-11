@@ -37,6 +37,7 @@
   --spinner-color: var(--color-primary);
 
   /* Bookmark */
+  --bookmark-aspect-ratio: 4 / 3;
   --bookmark-logo-size: 32px;
   --bookmark-radius: var(--base-radius);
   --bookmark-bg: var(--theme-background-3-alpha-65);
@@ -96,8 +97,7 @@
 
   /* Grid */
   --container-width: 100%;
-  --grid-column-width: 80px;
-  --grid-row-height: 60px;
+  --grid-column-min-width: 80px;
   --grid-gap: 10px;
   --grid-columns: auto-fit;
 

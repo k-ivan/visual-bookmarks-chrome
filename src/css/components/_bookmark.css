@@ -2,8 +2,7 @@
 .bookmark {
   display: block;
   position: relative;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: var(--bookmark-aspect-ratio);
   text-decoration: none;
   border-radius: var(--bookmark-radius);
   outline: 1px solid rgb(0 0 0 / 10%);

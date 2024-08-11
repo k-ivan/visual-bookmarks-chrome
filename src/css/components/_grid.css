@@ -6,8 +6,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-columns), var(--grid-column-width));
-  grid-auto-rows: var(--grid-row-height);
+  grid-template-columns: repeat(var(--grid-columns), minmax(var(--grid-column-min-width), 1fr));
   grid-gap: var(--grid-gap);
   justify-content: center;
 
