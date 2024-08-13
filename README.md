@@ -12,4 +12,7 @@ Simple visual bookmarks extension for browser. The extension includes editing, s
   <a href="https://microsoftedge.microsoft.com/addons/detail/idfbjjfgccflicphjlpbomcklaehplha" title="Microsoft Edge">
     <img src="https://user-images.githubusercontent.com/6150895/143012373-153cd498-1abc-4524-a76e-e630a7d14deb.png" height="58" alt="Microsoft Edge Store">
   </a>
+  <a href="https://addons.mozilla.org/ru/firefox/addon/visual-bookmarks-firefox/" title="Mozilla Firefox">
+    <img src="https://github.com/user-attachments/assets/a0754d0f-474d-43fa-af24-9c99ab36130e" height="58" alt="Mozilla Firefox Add-ons">
+  </a>
 </p>
