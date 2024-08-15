@@ -21,7 +21,7 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 100%;
+  aspect-ratio: var(--bookmark-aspect-ratio);
   padding: 0;
   border: 0;
   cursor: pointer;
