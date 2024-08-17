@@ -182,7 +182,7 @@ vb-virtual-pagination {
   margin-top: auto;
   text-align: center;
 
-  a {
+  & a {
     display: inline-block;
     height: 30px;
     line-height: 30px;
