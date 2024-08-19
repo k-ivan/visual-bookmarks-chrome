@@ -1,0 +1,526 @@
+{
+  "ext_name": {
+    "message": "Favoris visuels"
+  },
+  "ext_desc": {
+    "message": "Page de favoris visuels simple permettant de rechercher, d'ajouter, d'éditer et de glisser-déposer vos favoris."
+  },
+  "default_title": {
+    "message": "Favoris visuels"
+  },
+  "color_theme": {
+    "message": "Thème"
+  },
+  "dark_theme": {
+    "message": "Sombre"
+  },
+  "light_theme": {
+    "message": "Clair"
+  },
+  "os_theme": {
+    "message": "Thème du Système"
+  },
+  "placeholder_input_customstyle": {
+    "message": "Entrer votre CSS personnalisé (pour utilisateurs avancés)"
+  },
+  "placeholder_input_search": {
+    "message": "Recherche dans $engine$",
+    "placeholders": {
+      "engine": {
+        "content": "$1"
+      }
+    }
+  },
+  "placeholder_input_search_bookmarks": {
+    "message": "favoris"
+  },
+  "placeholder_input_title": {
+    "message": "Entrer le titre du favori"
+  },
+  "label_title": {
+    "message": "Titre"
+  },
+  "label_url": {
+    "message": "URL"
+  },
+  "label_folder": {
+    "message": "Dossier"
+  },
+  "url_field_tip": {
+    "message": "Entrer l'URL ou laisser vide pour créer un dossier"
+  },
+  "btn_close": {
+    "message": "Annuler"
+  },
+  "btn_save": {
+    "message": "Enregistrer"
+  },
+  "btn_back": {
+    "message": "Terminé"
+  },
+  "btn_apply": {
+    "message": "Appliquer"
+  },
+  "contextmenu_tab": {
+    "message": "Ouvrir dans un nouvel onglet"
+  },
+  "contextmenu_window": {
+    "message": "Ouvrir dans une nouvelle fenêtre"
+  },
+  "contextmenu_open_all": {
+    "message": "Tout ouvrir"
+  },
+  "contextmenu_open_all_window": {
+    "message": "Tout ouvrir dans une nouvelle fenêtre"
+  },
+  "contextmenu_incognito": {
+    "message": "Ouvrir dans une fenêtre privée"
+  },
+  "contextmenu_copy_link": {
+    "message": "Copier l'adresse du lien"
+  },
+  "contextmenu_edit": {
+    "message": "Éditer"
+  },
+  "contextmenu_capture": {
+    "message": "Actualiser la vignette"
+  },
+  "contextmenu_upload": {
+    "message": "Charger depuis l'ordinateur"
+  },
+  "contextmenu_remove": {
+    "message": "Supprimer"
+  },
+  "confirm_delete_image": {
+    "message": "Supprimer l'image ?"
+  },
+  "confirm_delete_images": {
+    "message": "Êtes-vous sûr.e ? Toutes les images locales seront supprimées"
+  },
+  "confirm_delete_bookmark": {
+    "message": "Voulez-vous vraiment supprimer le favori ?"
+  },
+  "confirm_delete_folder": {
+    "message": "Voulez-vous vraiment supprimer le dossier et tout son contenu ?"
+  },
+  "confirm_restore_default_settings": {
+    "message": "Voulez-vous vraiment restaurer les paramètres par défaut ?"
+  },
+  "confirm_clear_sync_settings": {
+    "message": "Voulez-vous vraiment supprimer toutes les données précédemment synchronisées pour repartir à zéro ?"
+  },
+  "confirm_sync_remote_settings": {
+    "message": "Vous avez des données précédemment synchronisées !\nVoulez-vous écraser vos paramètres locaux actuels avec vos paramètres distants précédemment enregistrés ?"
+  },
+  "notice_image_removed": {
+    "message": "Image supprimée"
+  },
+  "notice_thumb_image_updated": {
+    "message": "Vignette du favori mise à jour"
+  },
+  "notice_bookmark_exist": {
+    "message": "Le favori existe déjà"
+  },
+  "notice_bookmark_created": {
+    "message": "Favori créé"
+  },
+  "notice_bookmark_updated": {
+    "message": "Favori mis à jour"
+  },
+  "notice_bookmark_removed": {
+    "message": "Favori supprimé"
+  },
+  "notice_folder_removed": {
+    "message": "Dossier supprimé"
+  },
+  "notice_images_removed": {
+    "message": "Toutes les images ont été supprimées"
+  },
+  "notice_cant_find_id": {
+    "message": "ID de dossier introuvable. Vos favoris ne sont peut-être pas synchronisés"
+  },
+  "notice_save_settings_success": {
+    "message": "Paramètres enregistrés avec succès"
+  },
+  "notice_reset_default_settings": {
+    "message": "Paramètres locaux par défaut réinitialisés"
+  },
+  "notice_sync_settings_cleared": {
+    "message": "Synchronisation des données effacée"
+  },
+  "notice_bg_image_updated": {
+    "message": "Image d'arrière-plan modifiée"
+  },
+  "notice_thumbnails_update_complete": {
+    "message": "Mise à jour de la vignette terminée"
+  },
+  "notice_link_copied": {
+    "message": "Lien copié"
+  },
+  "alert_create_fail_bookmark": {
+    "message": "- Un titre est nécessaire pour l'ajout d'un nouveau dossier\n- Un titre et une URL sont nécessaires pour l'ajout d'un nouveau favori"
+  },
+  "alert_update_fail_bookmark": {
+    "message": "Un titre et une URL valide sont nécessaires pour la modification d'un favori existant dans Chrome.\n\n Par exemple, des URLs valides commencent par :\n - http:// \n - https:// \n - ftp://"
+  },
+  "alert_file_type_fail_type": {
+    "message": "Mauvais type de fichier\nType de fichier valide($type$)",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "alert_file_type_fail_size": {
+    "message": "Taille maximale d'envoi de fichier :  $filesize$ MB",
+    "placeholders": {
+      "filesize": {
+        "content": "$1"
+      }
+    }
+  },
+  "not_found_text": {
+    "message": "ID de dossier introuvable. Vos favoris ne sont peut-être pas synchronisés, ou vous avez supprimé | déplacé ce dossier."
+  },
+  "not_found_link_text": {
+    "message": "Barre de favoris"
+  },
+  "add_bookmark": {
+    "message": "Ajouter aux favoris"
+  },
+  "save_to_current_folder": {
+    "message": "Enregistrer dans le dossier actuel"
+  },
+  "edit_bookmark": {
+    "message": "Modifier le favori"
+  },
+  "options": {
+    "message": "Options"
+  },
+  "view_setting": {
+    "message": "Apparence"
+  },
+  "general_setting": {
+    "message": "Général"
+  },
+  "advanced_setting": {
+    "message": "Avancé"
+  },
+  "dial_width": {
+    "message": "Largeur du tableau"
+  },
+  "number_of_columns": {
+    "message": "Nombre de colonnes"
+  },
+  "vertical_center": {
+    "message": "Centrage vertical"
+  },
+  "default_folder_id": {
+    "message": "Dossier à afficher par défaut"
+  },
+  "background": {
+    "message": "Arrière-plan"
+  },
+  "color": {
+    "message": "Couleur"
+  },
+  "background_noimage": {
+    "message": "Sans image d'arrière-plan"
+  },
+  "background_noimage_text": {
+    "message": "Thème sans image d'arrière-plan"
+  },
+  "background_external": {
+    "message": "Image à partir d'une URL"
+  },
+  "background_local": {
+    "message": "Image ou vidéo sur l'ordinateur"
+  },
+  "choose_file": {
+    "message": "Image ou vidéo"
+  },
+  "show_settings_icon": {
+    "message": "Afficher l'icône des paramètres"
+  },
+  "show_toolbar": {
+    "message": "Afficher la barre de recherche et la sélection du dossier"
+  },
+  "show_create_column": {
+    "message": "Afficher une colonne pour l'jout d'un favori"
+  },
+  "show_bookmark_title": {
+    "message": "Afficher le titre du favori"
+  },
+  "show_favicon": {
+    "message": "Afficher la favicône à côté du titre"
+  },
+  "open_link_newtab": {
+    "message": "Ouvrir les favoris et la recherche dans un nouvel onglet"
+  },
+  "show_contextmenu_item": {
+    "message": "Afficher dans le menu contextuel"
+  },
+  "drag_and_drop": {
+    "message": "Activer le glisser-déposer"
+  },
+  "auto_generate_thumbnail": {
+    "message": "Générer une vignette à la création du favori"
+  },
+  "enable_sync": {
+    "message": "Activer la synchronisation"
+  },
+  "advanced_settings": {
+    "message": "Paramètres avancés"
+  },
+  "thumbnail_service": {
+    "message": "Service de vignette"
+  },
+  "thumbnail_help": {
+    "message": "Le jeton [URL] sera remplacé par l'URL des favoris visuels"
+  },
+  "careful_change": {
+    "message": "Soyez prudent si vous désirez changer cette option"
+  },
+  "clear_background_locals": {
+    "message": "Vider le dossier des images locales"
+  },
+  "reset_local_default": {
+    "message": "Réinitialiser les paramètres locaux aux valeurs par défaut"
+  },
+  "reset_sync_text": {
+    "message": "Supprimer les données synchronisées du serveur"
+  },
+  "option_not_sync": {
+    "message": "L'option n'est pas synchronisée"
+  },
+  "custom_style": {
+    "message": "CSS personnalisé"
+  },
+  "version": {
+    "message": "Version"
+  },
+  "thumbnails_creation": {
+    "message": "Création des vignettes : $start$ sur $total$",
+    "placeholders": {
+      "start": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "thumbnails_update_warn": {
+    "message": "La mise à jour des vignettes peut affecter la performance (dépend du nombre de favoris dans un dossier et des capacités de l'ordinateur)"
+  },
+  "thumbnails_update_button": {
+    "message": "Bouton de mise à jour des vignettes"
+  },
+  "thumbnails_update_recursive": {
+    "message": "Inclusion des sous-dossiers"
+  },
+  "thumbnails_update_recursive_note": {
+    "message": "Si l'option \"$option$\" est activée",
+    "placeholders": {
+      "option": {
+        "content": "$1"
+      }
+    }
+  },
+  "folder_preview": {
+    "message": "Vignettes des sites sur le dossier plutôt qu'une icône"
+  },
+  "folder_preview_description": {
+    "message": "En activant ce paramètre, les vignettes de 4 sites web du dossier seront aléatoirement affichées à la place de l'icône ou de l'image personnalisée."
+  },
+  "backup_settings": {
+    "message": "Paramètres d'importation / exportation"
+  },
+  "backup_settings_description": {
+    "message": "Sauvegarde des paramètre de l'extension uniquemement, favoris et images non inclus"
+  },
+  "import": {
+    "message": "Importer"
+  },
+  "export": {
+    "message": "Exporter"
+  },
+  "import_settings_success": {
+    "message": "Paramètres importés"
+  },
+  "import_settings_failed": {
+    "message": "Échec de l'analyse du fichier de paramètres"
+  },
+  "without_confirmation": {
+    "message": "Ne pas me demander de confirmer lors de la suppression"
+  },
+  "services_enable": {
+    "message": "Ajouter un panneau de services"
+  },
+  "service_settings_btn": {
+    "message": "Paramétrer"
+  },
+  "services_add_title": {
+    "message": "Ajouter"
+  },
+  "services_limit": {
+    "message": "Nombre maximal de services : $total$",
+    "placeholders": {
+      "total": {
+        "content": "$1"
+      }
+    }
+  },
+  "service_name": {
+    "message": "Nom"
+  },
+  "service_link": {
+    "message": "Lien"
+  },
+  "error_input_required": {
+    "message": "Champ obligatoire"
+  },
+  "error_input_url": {
+    "message": "L'URL n'est pas valide"
+  },
+  "thumbnails_update_delay": {
+    "message": "Délai avant création de la vignette"
+  },
+  "thumbnails_update_delay_note": {
+    "message": "Il peut être utile lorsque le chargemement du contenu de la page est long. L'attente sera d'autant plus longue que le délai est grand"
+  },
+  "close_tab_after_adding_bookmark": {
+    "message": "Fermeture automatique de l'onglet si vous l'avez ajouté aux favoris"
+  },
+  "close_tab_after_adding_bookmark_note": {
+    "message": "Seulement en cas d'ajout par le menu contextuel"
+  },
+  "empty_search": {
+    "message": "Aucun favori trouvé"
+  },
+  "logo_external": {
+    "message": "Logos externes par Logo.dev"
+  },
+  "delete_thumbnail": {
+    "message": "Supprimer la vignette"
+  },
+  "show_back_column": {
+    "message": "Afficher une colonne retour dans les favoris"
+  },
+  "search_engine": {
+    "message": "Moteur de recherche par défaut"
+  },
+  "move_to_start": {
+    "message": "Déplacer un favori en tête de liste dans un dossier"
+  },
+  "bookmarks_sorting_type": {
+    "message": "Trier par type"
+  },
+  "sort_by_date": {
+    "message": "Trier par date"
+  },
+  "not_sorting": {
+    "message": "Non trié"
+  },
+  "folders_on_top": {
+    "message": "Dossiers en premier"
+  },
+  "folders_at_the_bottom": {
+    "message": "Dossiers en dernier"
+  },
+  "bookmarks_sorting_warning": {
+    "message": "Le tri par glisser-déposer sera désactivé si l'une des options de tri est sélectionnée"
+  },
+  "extension_updated_notification": {
+    "message": "L'extension a été mise à jour"
+  },
+  "whats_new": {
+    "message": "Nouveautés"
+  },
+  "search_autofocus": {
+    "message": "Focus sur la barre de recherche"
+  },
+  "confirm_delete_selected_bookmarks": {
+    "message": "Êtes-vous sûr.e de vouloir supprimer les favoris sélectionnés ?"
+  },
+  "button_action_move": {
+    "message": "Déplacer vers le dossier"
+  },
+  "enable_virtual_pagination": {
+    "message": "Pagination virtuelle"
+  },
+  "enable_virtual_pagination_note": {
+    "message": "Divise la hauteur du document en sections dans lesquelles naviguer (expérimental)"
+  },
+  "parent_folder": {
+    "message": "Dossier parent"
+  },
+  "new_bookmark": {
+    "message": "Nouveau favori"
+  },
+  "modal_dismiss": {
+    "message": "Rejet modal"
+  },
+  "remove_thumbnail": {
+    "message": "Effacer la vignette"
+  },
+  "thumbnails_update": {
+    "message": "Mise à jour des vignettes"
+  },
+  "bookmark_context": {
+    "message": "Contexte du favori"
+  },
+  "clear_search": {
+    "message": "Effacer la recherche"
+  },
+  "search": {
+    "message": "Rechercher"
+  },
+  "hide_services_form": {
+    "message": "Masquer le formulaire de services"
+  },
+  "toggle_selected_bookmarks_popup": {
+    "message": "Déclencher une fenêtre pop-up pour ouvrir les liens"
+  },
+  "toggle_services_popup": {
+    "message": "Déclencher une fenêtre pop-up avec les services"
+  },
+  "toggle_search_popup": {
+    "message": "Déclencher une fenêtre pop-up avec la recherche"
+  },
+  "open_selected": {
+    "message": "Ouvrir la sélection"
+  },
+  "delete_selected": {
+    "message": "Supprimer la sélection"
+  },
+  "select_folder": {
+    "message": "Sélectionner un dossier"
+  },
+  "remove_service": {
+    "message": "Enlever $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "history_back": {
+    "message": "Retour historique"
+  },
+  "incognito_access_note": {
+    "message": "Vous devez autoriser cette extension à s'éxécuter en mode privé"
+  },
+  "notice_host_permissions": {
+    "message": "Pour créer des vignettes de sites web, l'autorisation de l'utilisateur est nécessaire pour que l'extension puisse accéder aux sites"
+  },
+  "learn_more": {
+    "message": "En savoir plus"
+  },
+  "why_use_host_permissions": {
+    "message": "Pourquoi utiliser cette autorisation ?"
+  },
+  "host_permissions_info": {
+    "message": "<p>Cette autorisation est nécessaire pour générer les aperçus des sites web. Vos données sur les sites ne sont ni collectées, ni pistées, ni modifiées par cette extension. La seule modification ayant lieu après l'ouverture d'une fenêtre séparée avec le site web est le masquage de la barre de défilement avant la capture d'écran (pour obtenir un aperçu dépourvu de barre de défilement dans la mesure du possible). Le code de l'extension est disponible sur <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Si vous avez des réserves quant à cette autorisation, vous pouvez refuser, l'extension fonctionnera quand même mais la génération d'aperçus des sites web pour les favoris ne sera pas disponible.</p><p>Cette autorisation sera demandée lors d'une tentative de prise d'écran d'un site web (si désactivée). Vous pouvez également gérer ce droit dans les paramètres du navigateur en ouvrant une fenêtre avec les informations détaillées de l'extension.</p><p>Habituellement, pour les navigateurs tels que Chrome et Edge, cette autorisation est activée par défaut, alors que pour Firefox, elle est désactivée. De ce fait, le comportement par défaut peut varier selon le navigateur.</p>"
+  }
+}
