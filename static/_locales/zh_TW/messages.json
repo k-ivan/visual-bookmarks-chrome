@@ -399,13 +399,13 @@
     "message": "沒有找到書籤"
   },
   "logo_external": {
-    "message": "Clearbit 提供的標誌"
+    "message": "外部標誌由 Logo.dev 提供"
   },
   "delete_thumbnail": {
     "message": "刪除縮圖"
   },
   "show_back_column": {
-    "message": "在加入後，在書籤列最後面"
+    "message": "在書籤列中顯示回到上層的圖標"
   },
   "search_engine": {
     "message": "預設的搜尋引擎"
