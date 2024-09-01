@@ -110,9 +110,9 @@ function createBackup(setting) {
   return /* html */`<div class="btn-group btn-group--full">
       <div class="c-upload btn">
         <input type="file" name="import" id="${setting.import.id}" class="c-upload__input" accept="${setting.import.accept}">
-        <label for="${setting.import.id}" class="c-upload__btn md-ripple"><span class="c-upload__name">${setting.import.id}</span></label>
+        <label for="${setting.import.id}" class="c-upload__btn md-ripple"><span class="c-upload__name">${browser.i18n.getMessage(setting.import.id)}</span></label>
       </div>
-      <button class="btn md-ripple" id="${setting.export.id}">${setting.export.id}</button>
+      <button class="btn md-ripple" id="${setting.export.id}">${browser.i18n.getMessage(setting.export.id)}</button>
     </div>`;
 }
 

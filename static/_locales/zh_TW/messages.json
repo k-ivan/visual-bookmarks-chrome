@@ -1,12 +1,12 @@
 {
   "ext_name": {
-    "message": "Visual bookmarks(視覺書籤)"
+    "message": "視覺書籤"
   },
   "ext_desc": {
     "message": "簡單的快速存取書籤頁面，包括搜尋、新增、編輯、刪除和拖曳書籤。"
   },
   "default_title": {
-    "message": "Visual bookmarks(視覺書籤)"
+    "message": "視覺書籤"
   },
   "color_theme": {
     "message": "色彩佈景"
