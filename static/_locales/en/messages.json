@@ -355,7 +355,10 @@
     "message": "Do not ask for confirmation when deleting"
   },
   "services_enable": {
-    "message": "Include a panel with services"
+    "message": "Quick Access Panel to Services"
+  },
+  "services_enable_description": {
+    "message": "Menu of quick links for frequently used Web applications and Services"
   },
   "service_settings_btn": {
     "message": "Tune"

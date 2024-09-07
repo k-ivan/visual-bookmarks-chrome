@@ -355,7 +355,10 @@
     "message": "Nie pytaj o potwierdzenie przy usuwaniu"
   },
   "services_enable": {
-    "message": "Dołącz panel z usługami"
+    "message": "Panel szybkiego dostępu do usług"
+  },
+  "services_enable_description": {
+    "message": "Menu szybkich linków do często używanych aplikacji internetowych i usług"
   },
   "service_settings_btn": {
     "message": "Dostosuj"

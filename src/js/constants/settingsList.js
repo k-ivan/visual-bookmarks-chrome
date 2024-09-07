@@ -126,6 +126,7 @@ export default [
       {
         id: 'services_enable',
         title: browser.i18n.getMessage('services_enable'),
+        note: browser.i18n.getMessage('services_enable_description'),
         type: 'switch'
       },
       {

@@ -355,7 +355,10 @@
     "message": "Törléskor ne kérjen megerősítést"
   },
   "services_enable": {
-    "message": "Tartalmaz egy panelt a szolgáltatásokkal"
+    "message": "Gyors hozzáférési panel a szolgáltatásokhoz"
+  },
+  "services_enable_description": {
+    "message": "Gyors linkek menüje gyakran használt webalkalmazásokhoz és szolgáltatásokhoz"
   },
   "service_settings_btn": {
     "message": "Konfigurálni"

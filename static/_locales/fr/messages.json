@@ -355,7 +355,10 @@
     "message": "Ne pas me demander de confirmer lors de la suppression"
   },
   "services_enable": {
-    "message": "Ajouter un panneau de services"
+    "message": "Panneau d'accès rapide aux services"
+  },
+  "services_enable_description": {
+    "message": "Menu de liens rapides pour les applications web et services fréquemment utilisés"
   },
   "service_settings_btn": {
     "message": "Paramétrer"

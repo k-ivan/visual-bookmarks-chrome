@@ -355,7 +355,10 @@
     "message": "刪除時不確認"
   },
   "services_enable": {
-    "message": "包含一個有帶服務的面板"
+    "message": "服務快速存取面板"
+  },
+  "services_enable_description": {
+    "message": "常用網絡應用程式和服務的快速鏈接菜單"
   },
   "service_settings_btn": {
     "message": "調整"
