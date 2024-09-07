@@ -152,7 +152,10 @@ class VbBookmark extends HTMLAnchorElement {
         (this.hasTitle)
           ? /* html */
             `<div class="bookmark__caption">
-              <img src="/img/folder.svg" class="bookmark__favicon" width="16" height="16" alt="">
+              ${ (this.hasFavicon)
+                ? /* html */ `<img src="/img/folder.svg" class="bookmark__favicon" width="16" height="16" alt="">`
+                : ''
+              }
               <span class="bookmark__title">${this.title}</span>
             </div>`
           : ``
