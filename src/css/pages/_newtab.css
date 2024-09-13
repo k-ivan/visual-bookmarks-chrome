@@ -2,10 +2,8 @@ body {
   overflow-y: hidden;
 }
 .app {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  height: 100vh;
   overflow-y: scroll;
+  height: 100vh;
 }
 .aside-controls {
   position: fixed;
@@ -173,22 +171,4 @@ vb-virtual-pagination {
   top: 50%;
   right: 12px;
   transform: translateY(-50%);
-}
-
-.has-image .logodev-link a {
-  background-color: var(--theme-background-2);
-}
-.logodev-link {
-  margin-top: auto;
-  text-align: center;
-
-  & a {
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    padding-inline: 10px;
-    border-radius: var(--base-radius);
-    color: var(--theme-text-color);
-    text-underline-offset: 3px;
-  }
 }

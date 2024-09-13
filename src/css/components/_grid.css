@@ -1,5 +1,4 @@
 .container {
-  width: 100%;
   max-width: var(--container-width);
   margin: 0 auto;
   padding-inline: var(--container-padding-inline, 0);
@@ -18,10 +17,10 @@
 
 .grid--vcenter {
   /* content padding + header height (+ top padding) */
-  min-height: calc(100vh - 115px - var(--footer-height, 0px));
+  min-height: calc(100vh - 115px);
   align-content: center;
-}
 
-body:has(.logodev-link) {
-  --footer-height: 30px;
+  @nest .hidden-toolbar & {
+    min-height: calc(100vh - 60px);
+  }
 }

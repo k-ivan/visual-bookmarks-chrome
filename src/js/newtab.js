@@ -100,17 +100,6 @@ async function init() {
           );
         });
     }
-
-    if (settings.$.logo_external) {
-      const logoDevLink = $createElement('div', {
-        class: 'logodev-link'
-      }, $createElement('a', {
-        href: 'https://logo.dev',
-        alt: 'Logo API'
-      }, 'Logos provided by Logo.dev'));
-
-      document.getElementById('main').append(logoDevLink);
-    }
   });
 
   modalApi = new Gmodal(modal, {
