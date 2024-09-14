@@ -52,6 +52,11 @@ class ContextMenu {
     this.attachEvents();
   }
 
+  getDOMChildren() {
+    this.items = Array.from(this.menu.querySelectorAll('.context-menu__link'));
+    this.itemsLength = this.items.length;
+  }
+
   attachEvents() {
     this.handlerTrigger = this.handlerTrigger.bind(this);
     this.handlerClick = this.handlerClick.bind(this);
@@ -231,9 +236,8 @@ class ContextMenu {
     this.position(e);
 
     // links
-    this.items = Array.from(this.menu.querySelectorAll('.context-menu__link'));
-    this.itemsLength = this.items.length;
     this.currentIndex = -1;
+    this.getDOMChildren();
   }
 
   close() {

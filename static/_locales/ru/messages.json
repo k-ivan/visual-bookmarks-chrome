@@ -88,6 +88,9 @@
   "contextmenu_upload": {
     "message": "Загрузить с компьютера"
   },
+  "contextmenu_upload_paste": {
+    "message": "Загрузить из буфера обмена"
+  },
   "contextmenu_remove": {
     "message": "Удалить"
   },

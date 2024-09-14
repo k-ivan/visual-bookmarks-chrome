@@ -324,3 +324,14 @@ export function asyncLoadComponents(factoryImport) {
     .then((module) => module)
     .catch(console.warn);
 }
+
+export async function checkClipboardImage() {
+  try {
+    const [clipboardItem] = await navigator.clipboard.read();
+    const imageType = clipboardItem.types.find(type => /image\/(jpe?g|png|webp|avif)$/.test(type));
+
+    return Boolean(imageType);
+  } catch (error) {
+    return false;
+  }
+}

@@ -42,7 +42,7 @@
     background-color: var(--context-menu-bg-hover);
   }
   &.is-disabled {
-    display: none;
+    opacity: 0.35;
     pointer-events: none;
   }
 }

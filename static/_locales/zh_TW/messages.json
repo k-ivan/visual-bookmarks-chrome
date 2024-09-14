@@ -88,6 +88,9 @@
   "contextmenu_upload": {
     "message": "從電腦上傳"
   },
+  "contextmenu_upload_paste": {
+    "message": "從剪貼簿上傳"
+  },
   "contextmenu_remove": {
     "message": "移除"
   },

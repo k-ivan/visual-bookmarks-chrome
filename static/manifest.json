@@ -25,7 +25,8 @@
     "unlimitedStorage",
     "tabs",
     "notifications",
-    "contextMenus"
+    "contextMenus",
+    "clipboardRead"
   ],
   "host_permissions": [
     "https://google.com/*"

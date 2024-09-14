@@ -35,7 +35,7 @@ class VbContextMenu extends HTMLElement {
   set listItems(items) {
     if (!this.diffItems(items)) return;
 
-    this.items = items;
+    this.items = structuredClone(items);
     this.setItems();
   }
 
@@ -60,17 +60,20 @@ class VbContextMenu extends HTMLElement {
 
   setItems() {
     const list = this.items.map(item => {
+      const isDisabled = item.disabled ? 'is-disabled' : '';
+
       if (item.divider) {
         return '<li class="context-menu__item context-menu__item--divider"></li>';
       }
       return `<li class="context-menu__item">
-          <a class="context-menu__link" data-action="${ item.action }">
+          <a class="context-menu__link ${ isDisabled }" data-action="${ item.action }">
             <span class="context-menu__icon">${ item.icon ? item.icon : '' }</span>
             <span class="">${ item.title }</span>
           </a>
         </li>`;
     }).join('');
     this.menuNode.innerHTML = list;
+    this.menuInstance.getDOMChildren();
   }
 
   close() {
@@ -105,14 +108,17 @@ class VbContextMenu extends HTMLElement {
   }
 
   diffItems(newArr) {
-    if (this.items.length !== newArr.length) {
-      return true;
-    }
-    const resultArr = this.items.filter(currentItem => {
-      return !newArr.some(newItem => newItem.action === currentItem.action);
-    });
+    return JSON.stringify(this.listItems) !== JSON.stringify(newArr);
 
-    return resultArr.length > 0;
+    // if (this.items.length !== newArr.length) {
+    //   return true;
+    // }
+
+    // const resultArr = this.items.filter(currentItem => {
+    //   return !newArr.some(newItem => newItem.action === currentItem.action);
+    // });
+
+    // return resultArr.length > 0;
   }
 }
 

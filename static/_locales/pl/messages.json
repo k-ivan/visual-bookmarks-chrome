@@ -88,6 +88,9 @@
   "contextmenu_upload": {
     "message": "Prześlij z komputera"
   },
+  "contextmenu_upload_paste": {
+    "message": "Prześlij z schowka"
+  },
   "contextmenu_remove": {
     "message": "Usuń"
   },

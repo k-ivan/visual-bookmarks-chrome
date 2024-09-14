@@ -88,6 +88,9 @@
   "contextmenu_upload": {
     "message": "Upload from computer"
   },
+  "contextmenu_upload_paste": {
+    "message": "Upload from clipboard"
+  },
   "contextmenu_remove": {
     "message": "Remove"
   },

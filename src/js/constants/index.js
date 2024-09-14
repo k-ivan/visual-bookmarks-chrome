@@ -76,9 +76,20 @@ export const CONTEXT_MENU = [
     isBookmark: true
   },
   {
+    divider: true
+  },
+  {
     action: 'upload',
     title: browser.i18n.getMessage('contextmenu_upload'),
     icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#upload_outline"/></svg>'
+  },
+  {
+    action: 'paste_image',
+    title: browser.i18n.getMessage('contextmenu_upload_paste'),
+    icon: '<svg height="24" width="24" fill="currentColor"><use xlink:href="/img/symbol.svg#image_paste"/></svg>'
+  },
+  {
+    divider: true
   },
   {
     action: 'delete_thumbnail',

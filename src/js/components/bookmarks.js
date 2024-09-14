@@ -775,22 +775,10 @@ const Bookmarks = (() => {
    * @param {string} data.id
    * @param {(string|undefined)} data.site - domain
    */
-  async function uploadScreen(data) {
-    const { target, id, site } = data;
-    const file = target.files[0];
-    if (!file) return;
-
-    if (!/image\/(jpe?g|png|webp)$/.test(file.type)) {
-      return Toast.show(browser.i18n.getMessage('alert_file_type_fail'));
-    }
-    target.value = '';
-
-    const bookmark = document.getElementById(`vb-${id}`);
+  async function uploadScreen(bookmark, fileBlob, siteName) {
     bookmark.hasOverlay = true;
 
-    const fileBlob = new Blob([new Uint8Array(await file.arrayBuffer())], {
-      type: file.type
-    });
+    const { id } = bookmark;
     const blob = await $resizeThumbnail(fileBlob);
     const blobUrl = URL.createObjectURL(blob);
     const thumbnail = THUMBNAILS_MAP.get(id);
@@ -809,7 +797,7 @@ const Bookmarks = (() => {
       ...(thumbnail?.children && { children: thumbnail.children })
     });
 
-    if (!settings.$.folder_preview || site) {
+    if (!settings.$.folder_preview || siteName) {
       bookmark.isCustomImage = true;
       bookmark.image = blobUrl;
     }

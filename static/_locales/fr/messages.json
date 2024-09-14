@@ -88,6 +88,9 @@
   "contextmenu_upload": {
     "message": "Charger depuis l'ordinateur"
   },
+  "contextmenu_upload_paste": {
+    "message": "Importer depuis le presse-papiers"
+  },
   "contextmenu_remove": {
     "message": "Supprimer"
   },

@@ -23,7 +23,8 @@ import {
   $copyStr,
   $unescapeHtml,
   asyncLoadComponents,
-  $notifications
+  $notifications,
+  checkClipboardImage
 } from './utils';
 import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU } from './constants';
@@ -415,19 +416,7 @@ function handleDelegateClick(evt) {
   }
 }
 
-function handleUploadScreen(evt) {
-  evt.preventDefault();
-
-  const el = evt.target;
-  const data = el.dataset;
-  Bookmarks.uploadScreen({
-    target: el,
-    id: data.id,
-    site: data.site
-  });
-}
-
-function handleMenuOpen(evt) {
+async function handleMenuOpen(evt) {
   // when opening the context menu,
   // hide the quick action bar to avoid side effects
   hideControlMultiplyBookmarks();
@@ -442,6 +431,14 @@ function handleMenuOpen(evt) {
     // hide the menu item if there is no thumbnail
     items = items.filter(item => item.action !== 'delete_thumbnail');
   }
+
+  // if there is an image in the clipboard
+  // enable the menu item to paste image
+  const item = items.find(item => item.action === 'paste_image');
+  if (item) {
+    item.disabled = !(await checkClipboardImage());
+  }
+
   ctxMenuEl.listItems = items;
 }
 
@@ -482,6 +479,10 @@ function handleMenuSelection(evt) {
       upload.click();
       break;
     }
+    case 'paste_image': {
+      pasteImage(target);
+      break;
+    }
     case 'delete_thumbnail': {
       Bookmarks.removeThumbnail(target.id)
         .then(() => {
@@ -495,6 +496,42 @@ function handleMenuSelection(evt) {
         : Bookmarks.removeBookmark(target);
       break;
     }
+  }
+}
+
+async function handleUploadScreen(evt) {
+  evt.preventDefault();
+
+  const input = evt.target;
+  const file = input.files[0];
+  const { id, site: imageName } = input.dataset;
+  const bookmark = document.getElementById(`vb-${id}`);
+
+  if (!bookmark) return;
+
+  input.value = '';
+  const blob = new Blob([new Uint8Array(await file.arrayBuffer())], {
+    type: file.type
+  });
+
+  Bookmarks.uploadScreen(bookmark, blob, imageName);
+}
+
+async function pasteImage(target) {
+  try {
+    const [clipboardItem] = await navigator.clipboard.read();
+    const imageType = clipboardItem.types.find(type => type.startsWith('image/'));
+
+    if (!imageType) {
+      return;
+    }
+
+    const blob = await clipboardItem.getType(imageType);
+    const name = $getDomain(target.href);
+
+    Bookmarks.uploadScreen(target, blob, name);
+  } catch (err) {
+    console.error(err.name, err.message);
   }
 }
 

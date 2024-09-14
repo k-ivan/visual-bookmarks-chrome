@@ -88,6 +88,9 @@
   "contextmenu_upload": {
     "message": "Feltöltés a számítógépről"
   },
+  "contextmenu_upload_paste": {
+    "message": "Feltöltés vágólapról"
+  },
   "contextmenu_remove": {
     "message": "Eltávolítás"
   },
