@@ -42,6 +42,7 @@ const urlWrap = document.getElementById('urlWrap');
 const customScreen = document.getElementById('customScreen');
 const ctxMenuEl = document.getElementById('context-menu');
 const upload = document.getElementById('upload');
+const asideControlsNode = document.getElementById('aside_controls');
 const panelActions = {
   tween: null,
   tweenActive: false
@@ -157,6 +158,18 @@ async function init() {
   ctxMenuEl.addEventListener('vb:contextmenu:open', handleMenuOpen);
   document.getElementById('resetCustomImage').addEventListener('click', handleResetThumb);
   modal.addEventListener('gmodal:close', handleCloseModal);
+
+  if (settings.$.show_settings_icon) {
+    asideControlsNode.append($createElement('a', {
+      id: 'settings_icon',
+      class: 'circ-btn settings-link',
+      ariaLabel: browser.i18n.getMessage('options'),
+      href: 'options.html'
+    }, {
+      html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#settings"/></svg>`
+    }
+    ));
+  }
 
   // scrollup button component
   document.getElementById('aside_controls').insertAdjacentElement(

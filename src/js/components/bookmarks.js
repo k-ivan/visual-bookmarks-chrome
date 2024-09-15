@@ -52,12 +52,6 @@ const Bookmarks = (() => {
       container.classList.add('grid--vcenter');
     }
 
-    // Hide the settings icon if setting_icon disable
-    if (!settings.$.show_settings_icon) {
-      const icon = document.getElementById('settings_icon');
-      icon.parentNode.removeChild(icon);
-    }
-
     // Dragging option
     if (
       settings.$.drag_and_drop &&
