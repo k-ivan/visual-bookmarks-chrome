@@ -429,7 +429,7 @@ function handleDelegateClick(evt) {
   }
 }
 
-async function handleMenuOpen(evt) {
+function handleMenuOpen(evt) {
   // when opening the context menu,
   // hide the quick action bar to avoid side effects
   hideControlMultiplyBookmarks();
@@ -447,10 +447,11 @@ async function handleMenuOpen(evt) {
 
   // if there is an image in the clipboard
   // enable the menu item to paste image
-  const item = items.find(item => item.action === 'paste_image');
-  if (item) {
-    item.disabled = !(await checkClipboardImage());
-  }
+  // TODO firefox not supported as optional permission
+  // const item = items.find(item => item.action === 'paste_image');
+  // if (item) {
+  //   item.disabled = !(await checkClipboardImage());
+  // }
 
   ctxMenuEl.listItems = items;
 }
