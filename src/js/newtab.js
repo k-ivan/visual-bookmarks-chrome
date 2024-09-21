@@ -27,7 +27,7 @@ import {
   checkClipboardImage
 } from './utils';
 import ImageDB from './api/imageDB';
-import { REGEXP_URL_PATTERN, CONTEXT_MENU } from './constants';
+import { REGEXP_URL_PATTERN, CONTEXT_MENU, LOCAL_PROTOCOLS } from './constants';
 import Toast from './components/toast';
 import { storage } from './api/storage';
 
@@ -154,6 +154,7 @@ async function init() {
 
   upload.addEventListener('change', handleUploadScreen);
   container.addEventListener('click', handleDelegateClick);
+  container.addEventListener('mousedown', handleOpenMousemiddle);
   ctxMenuEl.addEventListener('vb:contextmenu:select', handleMenuSelection);
   ctxMenuEl.addEventListener('vb:contextmenu:open', handleMenuOpen);
   document.getElementById('resetCustomImage').addEventListener('click', handleResetThumb);
@@ -420,14 +421,37 @@ function handleDelegateClick(evt) {
   } else if (evt.target.closest('.bookmark')) {
     const url = evt.target.closest('.bookmark').href;
 
-    if (url.startsWith('file:///')) {
+    if (checkLocalProtocol(url)) {
       evt.preventDefault();
-      browser.tabs.update({
-        url
-      });
+      openLocalProtocol(url);
     }
   }
 }
+
+function handleOpenMousemiddle(evt) {
+  if (evt.target.closest('.bookmark') && evt.button === 1) {
+    const url = evt.target.closest('.bookmark').href;
+
+    if (checkLocalProtocol(url)) {
+      evt.preventDefault();
+      openLocalProtocol(url);
+    }
+  }
+}
+
+function checkLocalProtocol(url) {
+  return LOCAL_PROTOCOLS.some(proto => url.startsWith(proto));
+}
+
+function openLocalProtocol(url) {
+  // This trick won't work in Firefox; it doesn't allow opening local files.
+  const open = settings.$.open_link_newtab ? browser.tabs.create : browser.tabs.update;
+
+  open({
+    url
+  });
+}
+
 
 function handleMenuOpen(evt) {
   // when opening the context menu,

@@ -171,3 +171,9 @@ export const DEFAULT_FOLDER = {
  * root________ - firefox
  */
 export const ROOT_FOLDERS = ['0', 'root________'];
+
+export const LOCAL_PROTOCOLS = [
+  'file:///',
+  'edge://',
+  'chrome://'
+];
