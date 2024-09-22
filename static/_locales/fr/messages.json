@@ -363,6 +363,12 @@
   "services_enable_description": {
     "message": "Menu de liens rapides pour les applications web et services fréquemment utilisés"
   },
+  "toggle_clipboard_access": {
+    "message": "Permission de lire à partir du presse-papiers"
+  },
+  "toggle_clipboard_access_description": {
+    "message": "Permet à l'extension de lire les données du presse-papiers (pour charger la miniature du signet à partir du presse-papiers). Dans le menu contextuel des favoris, l'option \"Coller depuis le presse-papiers\" deviendra disponible. Si cette autorisation vous inquiète, il vous suffit de ne pas l'activer."
+  },
   "service_settings_btn": {
     "message": "Paramétrer"
   },

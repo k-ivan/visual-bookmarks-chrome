@@ -363,6 +363,12 @@
   "services_enable_description": {
     "message": "常用網絡應用程式和服務的快速鏈接菜單"
   },
+  "toggle_clipboard_access": {
+    "message": "從剪貼簿讀取的權限"
+  },
+  "toggle_clipboard_access_description": {
+    "message": "允許擴充功能從剪貼簿中讀取資料（從剪貼簿加載書籤縮圖）。在書籤的右鍵選單中，會出現「從剪貼簿貼上」的選項。如果您對此權限感到擔心，只需不啟用它即可。"
+  },
   "service_settings_btn": {
     "message": "調整"
   },

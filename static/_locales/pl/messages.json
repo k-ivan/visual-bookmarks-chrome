@@ -363,6 +363,12 @@
   "services_enable_description": {
     "message": "Menu szybkich linków do często używanych aplikacji internetowych i usług"
   },
+  "toggle_clipboard_access": {
+    "message": "Zezwolenie na odczyt z schowka"
+  },
+  "toggle_clipboard_access_description": {
+    "message": "Pozwala rozszerzeniu na odczyt danych ze schowka (aby załadować miniaturę zakładki ze schowka). W menu kontekstowym zakładek opcja „Wklej ze schowka” stanie się dostępna. Jeśli obawiasz się tego uprawnienia, po prostu go nie aktywuj."
+  },
   "service_settings_btn": {
     "message": "Dostosuj"
   },

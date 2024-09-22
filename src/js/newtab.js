@@ -30,6 +30,7 @@ import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU, LOCAL_PROTOCOLS } from './constants';
 import Toast from './components/toast';
 import { storage } from './api/storage';
+import { containsPermissions, requestPermissions } from './api/permissions';
 
 const container = document.getElementById('bookmarks');
 const modal = document.getElementById('modal');
@@ -453,7 +454,7 @@ function openLocalProtocol(url) {
 }
 
 
-function handleMenuOpen(evt) {
+async function handleMenuOpen(evt) {
   // when opening the context menu,
   // hide the quick action bar to avoid side effects
   hideControlMultiplyBookmarks();
@@ -471,16 +472,18 @@ function handleMenuOpen(evt) {
 
   // if there is an image in the clipboard
   // enable the menu item to paste image
-  // TODO firefox not supported as optional permission
-  // const item = items.find(item => item.action === 'paste_image');
-  // if (item) {
-  //   item.disabled = !(await checkClipboardImage());
-  // }
+  const item = items.find(item => item.action === 'paste_image');
+  if (item) {
+    // check if the permission is granted
+    // else disable the menu item
+    const clipboardReadPermission = await containsPermissions({ permissions: ['clipboardRead'] });
+    item.disabled = clipboardReadPermission ? !(await checkClipboardImage()) : true;
+  }
 
   ctxMenuEl.listItems = items;
 }
 
-function handleMenuSelection(evt) {
+async function handleMenuSelection(evt) {
   const target = evt.detail.trigger;
   const action = evt.detail.selection;
 
@@ -518,6 +521,9 @@ function handleMenuSelection(evt) {
       break;
     }
     case 'paste_image': {
+      if (!(await containsPermissions({ permissions: ['clipboardRead'] }))) {
+        return;
+      }
       pasteImage(target);
       break;
     }

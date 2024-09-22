@@ -363,6 +363,12 @@
   "services_enable_description": {
     "message": "Gyors linkek menüje gyakran használt webalkalmazásokhoz és szolgáltatásokhoz"
   },
+  "toggle_clipboard_access": {
+    "message": "Engedély a vágólap olvasásához"
+  },
+  "toggle_clipboard_access_description": {
+    "message": "Lehetővé teszi a bővítmény számára, hogy adatokat olvasson a vágólapról (a könyvjelző miniatűrjének betöltéséhez a vágólapról). A könyvjelzők helyi menüjében elérhetővé válik a „Beillesztés a vágólapról” opció. Ha aggódik emiatt az engedély miatt, egyszerűen ne engedélyezze azt."
+  },
   "service_settings_btn": {
     "message": "Konfigurálni"
   },

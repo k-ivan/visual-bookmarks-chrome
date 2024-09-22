@@ -30,6 +30,9 @@
   "host_permissions": [
     "https://google.com/*"
   ],
+  "optional_permissions": [
+    "clipboardRead"
+  ],
   "optional_host_permissions": [
     "<all_urls>"
   ],

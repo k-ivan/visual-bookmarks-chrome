@@ -290,6 +290,12 @@ export default [
         export: {
           id: 'export'
         }
+      },
+      {
+        id: 'toggle_clipboard_access',
+        title: browser.i18n.getMessage('toggle_clipboard_access'),
+        note: browser.i18n.getMessage('toggle_clipboard_access_description'),
+        type: 'switch'
       }
     ]
   }

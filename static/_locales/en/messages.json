@@ -363,6 +363,12 @@
   "services_enable_description": {
     "message": "Menu of quick links for frequently used Web applications and Services"
   },
+  "toggle_clipboard_access": {
+    "message": "Permission to read from the clipboard"
+  },
+  "toggle_clipboard_access_description": {
+    "message": "Allows the extension to read data from the clipboard(to upload the bookmark thumbnail from the clipboard.). In the bookmark context menu, the option 'Paste from clipboard' will become available. If you're concerned about this permission, simply don't enable it."
+  },
   "service_settings_btn": {
     "message": "Tune"
   },

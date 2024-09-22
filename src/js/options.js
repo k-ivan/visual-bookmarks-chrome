@@ -25,6 +25,7 @@ import {
 import { storage } from './api/storage';
 import settingsList from './constants/settingsList';
 import { displaySettings } from './components/displaySettings';
+import { containsPermissions, removePermissions, requestPermissions } from './api/permissions';
 
 let modalInstance = null;
 let tabsSliderInstance = null;
@@ -112,6 +113,7 @@ async function init() {
   document.getElementById('restore_sync').addEventListener('click', handleResetSyncSettings);
   document.getElementById('enable_sync').addEventListener('change', handleChangeSync);
   document.getElementById('clear_images').addEventListener('click', handleDeleteImages);
+  document.getElementById('toggle_clipboard_access').addEventListener('change', handleToggleClipboardAccess);
 
   document.getElementById('export').addEventListener('click', handleExportSettings);
   document.getElementById('import').addEventListener('change', handleImportSettings);
@@ -186,6 +188,7 @@ function handleExportSettings() {
 function getOptions() {
   generateFolderList();
   generateSearchEngineList();
+  getPermissions();
 
   const optionBackgroundSelect = document.getElementById('background_image');
   optionBackgroundSelect.value = settings.$.background_image;
@@ -426,6 +429,26 @@ function handleChangeSync() {
       }
     });
   }
+}
+async function handleToggleClipboardAccess(e) {
+  e.preventDefault();
+  const clipboardInput = document.getElementById('toggle_clipboard_access');
+
+  if (clipboardInput.dataset.active !== 'true') {
+    const requestPermission = await requestPermissions({ permissions: ['clipboardRead'] });
+    clipboardInput.dataset.active = requestPermission;
+  } else {
+    const removePermission = await removePermissions({ permissions: ['clipboardRead'] });
+    clipboardInput.dataset.active = !removePermission;
+  }
+  clipboardInput.checked = clipboardInput.dataset.active === 'true';
+}
+
+async function getPermissions() {
+  const clipboardInput = document.getElementById('toggle_clipboard_access');
+  const clipboardReadPermission = await containsPermissions({ permissions: ['clipboardRead'] });
+  clipboardInput.checked = clipboardReadPermission;
+  clipboardInput.dataset.active = clipboardReadPermission;
 }
 
 async function generateFolderList() {
