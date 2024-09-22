@@ -470,17 +470,17 @@ async function handleMenuOpen(evt) {
     items = items.filter(item => item.action !== 'delete_thumbnail');
   }
 
-  // if there is an image in the clipboard
-  // enable the menu item to paste image
-  const item = items.find(item => item.action === 'paste_image');
-  if (item) {
+  // render menu items
+  ctxMenuEl.listItems = items;
+
+  // Moved the asynchronous permission check code below the render, as the menu positioning might not work correctly.
+  const pasteItem = ctxMenuEl.querySelector('[data-action="paste_image"]');
+  if (pasteItem) {
     // check if the permission is granted
     // else disable the menu item
     const clipboardReadPermission = await containsPermissions({ permissions: ['clipboardRead'] });
-    item.disabled = clipboardReadPermission ? !(await checkClipboardImage()) : true;
+    pasteItem.classList.toggle('is-disabled', clipboardReadPermission ? !(await checkClipboardImage()) : true);
   }
-
-  ctxMenuEl.listItems = items;
 }
 
 async function handleMenuSelection(evt) {
