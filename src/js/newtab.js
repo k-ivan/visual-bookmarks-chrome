@@ -30,7 +30,7 @@ import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU, LOCAL_PROTOCOLS } from './constants';
 import Toast from './components/toast';
 import { storage } from './api/storage';
-import { containsPermissions, requestPermissions } from './api/permissions';
+import { containsPermissions } from './api/permissions';
 
 const container = document.getElementById('bookmarks');
 const modal = document.getElementById('modal');
