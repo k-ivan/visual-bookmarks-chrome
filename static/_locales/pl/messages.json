@@ -89,7 +89,7 @@
     "message": "Prześlij z komputera"
   },
   "contextmenu_upload_paste": {
-    "message": "Prześlij z schowka"
+    "message": "Prześlij ze schowka"
   },
   "contextmenu_remove": {
     "message": "Usuń"
@@ -119,7 +119,7 @@
     "message": "Obraz został usunięty"
   },
   "notice_thumb_image_updated": {
-    "message": "Miniaturka zakładki została zaktualizowana"
+    "message": "Miniatura zakładki została zaktualizowana"
   },
   "notice_bookmark_exist": {
     "message": "Zakładka już istnieje"
@@ -361,13 +361,13 @@
     "message": "Panel szybkiego dostępu do usług"
   },
   "services_enable_description": {
-    "message": "Menu szybkich linków do często używanych aplikacji internetowych i usług"
+    "message": "Menu szybkich linków do często używanych aplikacji i usług internetowych"
   },
   "toggle_clipboard_access": {
-    "message": "Zezwolenie na odczyt z schowka"
+    "message": "Zezwól na odczyt z schowka"
   },
   "toggle_clipboard_access_description": {
-    "message": "Pozwala rozszerzeniu na odczyt danych ze schowka (aby załadować miniaturę zakładki ze schowka). W menu kontekstowym zakładek opcja „Wklej ze schowka” stanie się dostępna. Jeśli obawiasz się tego uprawnienia, po prostu go nie aktywuj."
+    "message": "Pozwól rozszerzeniu odczytywać dane ze schowka (aby załadować miniaturę zakładki ze schowka). W menu kontekstowym zakładki pojawi się opcja „Wklej ze schowka”. Jeśli obawiasz się tego uprawnienia, po prostu go nie włączaj."
   },
   "service_settings_btn": {
     "message": "Dostosuj"
@@ -399,7 +399,7 @@
     "message": "Opóźnienie przed utworzeniem miniatury"
   },
   "thumbnails_update_delay_note": {
-    "message": "Może to być przydatne, gdy zawartość strony ładuje się przez długi czas. Im dłuższe opóźnienie, tym dłuższe oczekiwanie."
+    "message": "Może być przydatne, gdy zawartość strony ładuje się zbyt długo. Im dłuższe opóźnienie, tym dłuższe oczekiwanie."
   },
   "close_tab_after_adding_bookmark": {
     "message": "Automatycznie zamknij kartę po dodaniu do zakładek"
@@ -518,7 +518,7 @@
     }
   },
   "history_back": {
-    "message": "Historia z powrotem"
+    "message": "Historia wstecz"
   },
   "incognito_access_note": {
     "message": "Musisz zezwolić rozszerzeniu na działanie w trybie prywatnym"
@@ -530,9 +530,9 @@
     "message": "Dowiedz się więcej"
   },
   "why_use_host_permissions": {
-    "message": "Dlaczego używać tej zgody?"
+    "message": "Dlaczego korzystamy z tego uprawnienia?"
   },
   "host_permissions_info": {
-    "message": "<p>Ta zgoda jest konieczna do generowania zrzutów ekranu witryn internetowych. Rozszerzenie nie zbiera, nie śledzi ani nie modyfikuje Twoich danych na stronach internetowych. Jedyną modyfikacją, która następuje po otwarciu osobnego okna z witryną, jest ukrycie paska przewijania na stronie przed wygenerowaniem zrzutu ekranu (aby zrzut ekranu był jak najbardziej pozbawiony paska przewijania). Kod rozszerzenia jest dostępny na <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Jeśli martwisz się tym pozwoleniem, możesz zdecydować się go nie udzielać, rozszerzenie nadal będzie działać bez niego, ale generowanie zrzutów ekranowych stron internetowych dla zakładek nie będzie dostępne.</p><p>Ta zgoda będzie żądana podczas próby zrobienia zrzutu ekranu witryny internetowej (jeśli jest wyłączona). Możesz także zarządzać tym prawem w ustawieniach przeglądarki, otwierając okno z szczegółowymi informacjami na temat rozszerzenia.</p><p>Zazwyczaj w przeglądarkach takich jak Chrome i Edge ta zgoda jest domyślnie włączona, podczas gdy w Firefox jest wyłączona. Dlatego domyślne zachowanie może się różnić w zależności od przeglądarki.</p>"
+    "message": "<p>Ta zgoda jest konieczna do generowania zrzutów ekranu stron internetowych. Rozszerzenie nie zbiera, nie śledzi ani nie modyfikuje Twoich danych na stronach internetowych. Jedyną modyfikacją, która następuje po otwarciu nowego okna ze stroną internetową, jest ukrycie paska przewijania przed wygenerowaniem zrzutu ekranu (aby zrzut ekranu był jak najbardziej pozbawiony paska przewijania). Kod rozszerzenia jest dostępny na <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Jeśli obawiasz się tego uprawnienia, możesz zdecydować się nie udzielać go. Rozszerzenie nadal będzie działać bez niego, ale generowanie zrzutów ekranu strony internetowej dla zakładek nie będzie dostępne.</p><p>Ta zgoda będzie żądana podczas próby zrobienia zrzutu ekranu strony internetowej (jeśli jest wyłączona). Możesz także zarządzać tym prawem w ustawieniach przeglądarki, otwierając okno z szczegółowymi informacjami na temat rozszerzenia.</p><p>Zazwyczaj w przeglądarkach takich jak Chrome i Edge ta zgoda jest domyślnie włączona, podczas gdy w Firefox jest wyłączona. Dlatego domyślne zachowanie może się różnić w zależności od przeglądarki.</p>"
   }
 }
