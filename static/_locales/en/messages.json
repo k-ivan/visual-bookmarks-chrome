@@ -411,7 +411,10 @@
     "message": "Bookmarks not found"
   },
   "logo_external": {
-    "message": "External logos by Clearbit"
+    "message": "External logos"
+  },
+  "logo_external_note": {
+    "message": "Link to a third-party logo resource. Please be careful, the substring <code>{{website}}</code> must remain unchanged and be inserted into the appropriate place in the link."
   },
   "delete_thumbnail": {
     "message": "Delete thumbnail"
@@ -534,5 +537,13 @@
   },
   "host_permissions_info": {
     "message": "<p>This permission is necessary for generating website screenshots. The extension does not collect, track, or modify your data on websites. The only modification that occurs after opening a separate window with the website is hiding the scroll bar on the site before generating the screenshot (to make the screenshot as scroll-bar-free as possible). The extension code is available on <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. If you are concerned about this permission, you can choose not to grant it, the extension will still function without it, but generating website screenshots for bookmarks will not be available.</p><p>This permission will be requested when attempting to take a website screenshot (if it is disabled). You can also manage this right in the browser settings by opening a window with detailed information about the extension.</p><p>Usually, in browsers like Chrome and Edge, this permission is enabled by default, while in Firefox, it is disabled. Therefore, default behavior may vary depending on the browser.</p>"
+  },
+  "example_string": {
+    "message": "Example: $string$",
+    "placeholders": {
+      "string": {
+        "content": "$1"
+      }
+    }
   }
 }

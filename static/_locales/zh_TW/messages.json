@@ -411,7 +411,10 @@
     "message": "沒有找到書籤"
   },
   "logo_external": {
-    "message": "外部標誌由 Logo.dev 提供"
+    "message": "外部標誌"
+  },
+  "logo_external_note": {
+    "message": "外部標誌資源的連結。請注意，字串 <code>{{website}}</code> 必須保持不變，並插入到連結中的正確位置。"
   },
   "delete_thumbnail": {
     "message": "刪除縮圖"
@@ -534,5 +537,13 @@
   },
   "host_permissions_info": {
     "message": "<p>此權限對於產生網站螢幕截圖是必需的。但擴充功能不會收集、追蹤或修改您在網站上的資料。打開網站的單獨視窗後發生的唯一變動是在產生螢幕截圖之前隱藏網站上的捲軸 (盡量讓螢幕截圖不會有捲軸). 擴充代碼可在 <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. 如果對此此權限有疑慮，可以選擇不同意授權，網站的截圖功能將不可用，但擴充功能仍然可以正常執行。</p><p>嘗試截取網站螢幕截圖時將請求此權限 (如果已停用)。你也可以透過開啟包含有關擴充功能的詳細資訊的視窗來在瀏覽器設定中管理此權限。</p><p>通常，在 Chrome 和 Edge 等瀏覽器中，此權限預設是啟用的，而在 Firefox 中則是停用。因此，預設行為可能會因瀏覽器而有所差異。</p>"
+  },
+  "example_string": {
+    "message": "示例: $string$",
+    "placeholders": {
+      "string": {
+        "content": "$1"
+      }
+    }
   }
 }

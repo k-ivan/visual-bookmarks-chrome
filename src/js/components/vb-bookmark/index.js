@@ -1,6 +1,6 @@
 // import styles from '../../../css/components/_bookmark.css';
 import { $createElement, $getDomain, faviconURL } from '../../utils';
-import { SVG_LOADER, LOGO_CLEARBIT } from '../../constants';
+import { SVG_LOADER } from '../../constants';
 
 class VbBookmark extends HTMLAnchorElement {
   #isRendered = false;
@@ -215,7 +215,7 @@ class VbBookmark extends HTMLAnchorElement {
 
   #logoUrl(url) {
     return this.#externalLogo
-      ? `${LOGO_CLEARBIT}/${$getDomain(url)}`
+      ? this.#externalLogo.replace('{{website}}', $getDomain(url))
       : faviconURL(url, 32);
   }
 

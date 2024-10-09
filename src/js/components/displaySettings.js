@@ -20,6 +20,11 @@ function createSwitch(setting) {
       for: setting.id
     })
   );
+
+  if (setting.id === 'logo_external') {
+    return switchElement.outerHTML + createExternalLogoSetting(setting);
+  }
+
   return switchElement.outerHTML;
 }
 
@@ -104,6 +109,19 @@ function createVbSelect(setting) {
     id: setting.id,
     class: 'js-change'
   }).outerHTML;
+}
+
+function createExternalLogoSetting() {
+  return /* html */`<input
+    type="text"
+    name="logo_external_url"
+    id="logo_external_url"
+    class="form-control js-change mt-2 mb-1"
+    placeholder="https://logo.clearbit.com/{{website}}"
+    spellcheck="false"
+    value=""
+    data-locale-message="external">
+    <small>${browser.i18n.getMessage('example_string', '<code>https://logo.clearbit.com/{{website}}</code>')}</small>`;
 }
 
 function createBackup(setting) {

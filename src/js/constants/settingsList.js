@@ -51,6 +51,7 @@ export default [
       {
         id: 'logo_external',
         title: browser.i18n.getMessage('logo_external'),
+        note: browser.i18n.getMessage('logo_external_note'),
         type: 'switch'
       },
       {
@@ -67,7 +68,6 @@ export default [
               type: 'switch'
             }] || []
           )
-
         ]
       },
       {

@@ -1,5 +1,4 @@
 export const FAVICON_GOOGLE = 'https://www.google.com/s2/favicons?sz=32&amp;domain_url=';
-export const LOGO_CLEARBIT = `https://logo.clearbit.com/`;
 
 export const SVG_LOADER =
 `<svg class="loading" id="loading" viewBox="0 0 100 100">` +

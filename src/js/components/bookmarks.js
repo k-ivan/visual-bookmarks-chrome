@@ -308,7 +308,7 @@ const Bookmarks = (() => {
       parentId: bookmark.parentId,
       image,
       isCustomImage: custom,
-      externalLogo: settings.$.logo_external,
+      externalLogo: settings.$.logo_external ? settings.$.logo_external_url : null,
       openNewTab: settings.$.open_link_newtab,
       hasTitle: settings.$.show_bookmark_title,
       hasFavicon: settings.$.show_favicon
