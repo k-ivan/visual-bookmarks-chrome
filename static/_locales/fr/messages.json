@@ -142,9 +142,6 @@
   "notice_cant_find_id": {
     "message": "ID de dossier introuvable. Vos favoris ne sont peut-être pas synchronisés"
   },
-  "notice_save_settings_success": {
-    "message": "Paramètres enregistrés avec succès"
-  },
   "notice_reset_default_settings": {
     "message": "Paramètres locaux par défaut réinitialisés"
   },
@@ -159,12 +156,6 @@
   },
   "notice_link_copied": {
     "message": "Lien copié"
-  },
-  "alert_create_fail_bookmark": {
-    "message": "- Un titre est nécessaire pour l'ajout d'un nouveau dossier\n- Un titre et une URL sont nécessaires pour l'ajout d'un nouveau favori"
-  },
-  "alert_update_fail_bookmark": {
-    "message": "Un titre et une URL valide sont nécessaires pour la modification d'un favori existant dans Chrome.\n\n Par exemple, des URLs valides commencent par :\n - http:// \n - https:// \n - ftp://"
   },
   "alert_file_type_fail_type": {
     "message": "Mauvais type de fichier\nType de fichier valide($type$)",
@@ -274,15 +265,6 @@
   },
   "advanced_settings": {
     "message": "Paramètres avancés"
-  },
-  "thumbnail_service": {
-    "message": "Service de vignette"
-  },
-  "thumbnail_help": {
-    "message": "Le jeton [URL] sera remplacé par l'URL des favoris visuels"
-  },
-  "careful_change": {
-    "message": "Soyez prudent si vous désirez changer cette option"
   },
   "clear_background_locals": {
     "message": "Vider le dossier des images locales"

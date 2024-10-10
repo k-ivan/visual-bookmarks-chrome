@@ -142,9 +142,6 @@
   "notice_cant_find_id": {
     "message": "無法按 ID 找到資料夾。或許你還沒有同步過書籤"
   },
-  "notice_save_settings_success": {
-    "message": "設定儲存成功"
-  },
   "notice_reset_default_settings": {
     "message": "本機的設定已清除，復原為程式預設"
   },
@@ -159,12 +156,6 @@
   },
   "notice_link_copied": {
     "message": "連結已複製"
-  },
-  "alert_create_fail_bookmark": {
-    "message": "- 新增的資料夾僅需要標題 \n- 新增的書籤需要標題和網址"
-  },
-  "alert_update_fail_bookmark": {
-    "message": "編輯現有書籤需要 Chrome 中的標題和有效網址 \n\n 例如，有效的網址開頭是：\n - http:// \n - https:// \n - ftp://"
   },
   "alert_file_type_fail_type": {
     "message": "檔案類型錯誤\n 有效檔案類型：($type$)",
@@ -274,15 +265,6 @@
   },
   "advanced_settings": {
     "message": "進階設定"
-  },
-  "thumbnail_service": {
-    "message": "縮圖服務"
-  },
-  "thumbnail_help": {
-    "message": "[URL] 將替代為快速存取 URL"
-  },
-  "careful_change": {
-    "message": "如果您想更改此選項，請小心使用"
   },
   "clear_background_locals": {
     "message": "清除本機機料夾內的圖示"

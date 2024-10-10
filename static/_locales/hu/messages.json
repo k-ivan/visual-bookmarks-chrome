@@ -142,9 +142,6 @@
   "notice_cant_find_id": {
     "message": "Nem találom a mappát az azonosító alapján. Talán nem szinkronizáltad a könyvjelzőket?"
   },
-  "notice_save_settings_success": {
-    "message": "A beállítások sikeresen mentve"
-  },
   "notice_reset_default_settings": {
     "message": "Az alapértelmezett helyi beállítások visszaállítása"
   },
@@ -159,12 +156,6 @@
   },
   "notice_link_copied": {
     "message": "Link másolva"
-  },
-  "alert_create_fail_bookmark": {
-    "message": "- Új mappa hozzáadása csak egy címet igényel \n- Új könyvjelző hozzáadásához egy címre és egy URL-címre van szükség."
-  },
-  "alert_update_fail_bookmark": {
-    "message": "Egy meglévő könyvjelző szerkesztéséhez a Chrome-ban egy címre és egy érvényes URL-re is szükség van\n\n Például az érvényes URL-címek a következővel kezdődnek: \n - http:// \n - https:// \n - ftp://"
   },
   "alert_file_type_fail_type": {
     "message": "Rossz fájltípus\nÉrvényes fájltípus ($type$)",
@@ -274,15 +265,6 @@
   },
   "advanced_settings": {
     "message": "Speciális beállítások"
-  },
-  "thumbnail_service": {
-    "message": "Miniatűr szolgáltatás"
-  },
-  "thumbnail_help": {
-    "message": "[URL] kód helyébe a gyorstárcsázási URL lép."
-  },
-  "careful_change": {
-    "message": "Legyen óvatos, ha meg akarja változtatni ezt az opciót"
   },
   "clear_background_locals": {
     "message": "A helyi képeket tartalmazó mappa törlése"

@@ -142,9 +142,6 @@
   "notice_cant_find_id": {
     "message": "Nie odnaleziono identyfikatora folderu. Możesz nie posiadać zsynchronizowanych zakładek."
   },
-  "notice_save_settings_success": {
-    "message": "Ustawienia zostały zapisane"
-  },
   "notice_reset_default_settings": {
     "message": "Ustawienia lokalne zostały zresetowane"
   },
@@ -159,12 +156,6 @@
   },
   "notice_link_copied": {
     "message": "Link skopiowany"
-  },
-  "alert_create_fail_bookmark": {
-    "message": "- Aby dodać nowy folder wpisz tylko tytułu \n- Aby dodać nową zakładkę wpisz zarówno tytułu, jak i adres URL"
-  },
-  "alert_update_fail_bookmark": {
-    "message": "Edycja istniejącej zakładki wymaga podania zarówno tytułu, jak i prawidłowego adresu URL.\n\n Prawidłowy adres URL zaczyna się od: \n - http:// \n - https:// \n - ftp://"
   },
   "alert_file_type_fail_type": {
     "message": "Zły typ pliku\nPrawidłowy typ pliku ($type$)",
@@ -274,15 +265,6 @@
   },
   "advanced_settings": {
     "message": "Ustawienia zaawansowane"
-  },
-  "thumbnail_service": {
-    "message": "Usługa miniatur"
-  },
-  "thumbnail_help": {
-    "message": "Token [URL] zostanie zastąpiony przez adres URL"
-  },
-  "careful_change": {
-    "message": "Zachowaj ostrożność, jeśli chcesz zmienić tę opcję"
   },
   "clear_background_locals": {
     "message": "Wyczyść folder z lokalnymi obrazami"

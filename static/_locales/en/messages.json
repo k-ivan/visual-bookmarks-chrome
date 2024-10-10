@@ -142,9 +142,6 @@
   "notice_cant_find_id": {
     "message": "Cant find folder by id. Maybe you have not synced bookmarks"
   },
-  "notice_save_settings_success": {
-    "message": "Settings successfully saved"
-  },
   "notice_reset_default_settings": {
     "message": "Default local settings are reset"
   },
@@ -159,12 +156,6 @@
   },
   "notice_link_copied": {
     "message": "Link copied"
-  },
-  "alert_create_fail_bookmark": {
-    "message": "- Adding a new Folder only requires a Title \n- Adding a new Bookmark requires both a Title and a URL"
-  },
-  "alert_update_fail_bookmark": {
-    "message": "Editing an existing Bookmark requires both a Title and a valid URL in Chrome\n\n For example, valid URL's start with: \n - http:// \n - https:// \n - ftp://"
   },
   "alert_file_type_fail_type": {
     "message": "Bad file type\nValid file type ($type$)",
@@ -274,15 +265,6 @@
   },
   "advanced_settings": {
     "message": "Advanced settings"
-  },
-  "thumbnail_service": {
-    "message": "Thumbnail service"
-  },
-  "thumbnail_help": {
-    "message": "[URL] token will be replaced by the speed dial URL"
-  },
-  "careful_change": {
-    "message": "Be careful if you want to change this option"
   },
   "clear_background_locals": {
     "message": "Clear folder with local images"
