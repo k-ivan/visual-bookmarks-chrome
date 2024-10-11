@@ -422,7 +422,7 @@ function handleDelegateClick(evt) {
   } else if (evt.target.closest('.bookmark')) {
     const url = evt.target.closest('.bookmark').href;
 
-    if (checkLocalProtocol(url)) {
+    if (checkLocalProtocol(url) && !evt.shiftKey) {
       evt.preventDefault();
       openLocalProtocol(url);
     }
