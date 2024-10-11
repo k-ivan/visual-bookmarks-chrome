@@ -116,11 +116,12 @@ function createExternalLogoSetting() {
     type="text"
     name="logo_external_url"
     id="logo_external_url"
-    class="form-control js-change mt-2 mb-1"
+    class="form-control js-change"
     placeholder="https://logo.clearbit.com/{{website}}"
     spellcheck="false"
     value=""
-    data-locale-message="external">
+    data-locale-message="external"
+    style="margin-top: 5px">
     <small>${browser.i18n.getMessage('example_string', '<code>https://logo.clearbit.com/{{website}}</code>')}</small>`;
 }
 
