@@ -281,11 +281,19 @@ export async function $filePicker(pickerOpts = {
 }
 
 export function faviconURL(url, size = 16) {
+  const googleFavUrl = `https://www.google.com/s2/favicons?sz=${size}&domain_url=${url}`;
+  const request = new XMLHttpRequest();
+  request.open('HEAD', googleFavUrl, false);
+  request.send();
+
+  if (request.status !== 404) {
+    return googleFavUrl;
+  }
+
   const favUrl = new URL(browser.runtime.getURL('/_favicon/'));
   favUrl.searchParams.set('pageUrl', url);
   favUrl.searchParams.set('size', size);
   return favUrl.toString();
-  // return `https://www.google.com/s2/favicons?sz=${size}&domain_url=${url}`;
 }
 
 export function getVideoPoster(file, height = 150) {

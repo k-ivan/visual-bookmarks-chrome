@@ -36,7 +36,9 @@
     }
   ],
   "host_permissions": [
-    "https://google.com/*"
+    "https://google.com/*",
+    "https://www.google.com/*",
+    "https://*.gstatic.com/*"
   ],
   "optional_permissions": [
     "clipboardRead"
