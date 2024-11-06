@@ -280,20 +280,32 @@ export async function $filePicker(pickerOpts = {
   return file;
 }
 
+const faviconCache = new Map();
+
 export function faviconURL(url, size = 16) {
+  const cacheKey = `${url}|${size}`;
+  if (faviconCache.has(cacheKey)) {
+    return faviconCache.get(cacheKey);
+  }
+
   const googleFavUrl = `https://www.google.com/s2/favicons?sz=${size}&domain_url=${url}`;
+
   const request = new XMLHttpRequest();
   request.open('HEAD', googleFavUrl, false);
   request.send();
 
+  let result;
   if (request.status !== 404) {
-    return googleFavUrl;
+    result = googleFavUrl;
+  } else {
+    const favUrl = new URL(browser.runtime.getURL('/_favicon/'));
+    favUrl.searchParams.set('pageUrl', url);
+    favUrl.searchParams.set('size', size);
+    result = favUrl.toString();
   }
 
-  const favUrl = new URL(browser.runtime.getURL('/_favicon/'));
-  favUrl.searchParams.set('pageUrl', url);
-  favUrl.searchParams.set('size', size);
-  return favUrl.toString();
+  faviconCache.set(cacheKey, result);
+  return result;
 }
 
 export function getVideoPoster(file, height = 150) {
