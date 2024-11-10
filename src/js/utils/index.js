@@ -282,6 +282,19 @@ export async function $filePicker(pickerOpts = {
 
 const faviconCache = new Map();
 
+chrome.storage.local.get('faviconCache', (result) => {
+  if (result.faviconCache) {
+    const cachedData = JSON.parse(result.faviconCache);
+    cachedData.forEach(([key, value]) => faviconCache.set(key, value));
+  }
+});
+
+function saveFaviconCache() {
+  chrome.storage.local.set({
+    faviconCache: JSON.stringify([...faviconCache])
+  });
+}
+
 export function faviconURL(url, size = 16) {
   const cacheKey = `${url}|${size}`;
   if (faviconCache.has(cacheKey)) {
@@ -305,6 +318,7 @@ export function faviconURL(url, size = 16) {
   }
 
   faviconCache.set(cacheKey, result);
+  saveFaviconCache();
   return result;
 }
 
