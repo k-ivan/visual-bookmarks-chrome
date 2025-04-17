@@ -43,7 +43,7 @@ const DEFAULTS = Object.freeze({
   folder_preview: false,
   close_tab_after_adding_bookmark: false,
   logo_external: false,
-  logo_external_url: 'https://logo.clearbit.com/{{website}}',
+  logo_external_url: '',
   search_engine: 'bookmarks',
   move_to_start: false,
   sort_by_date: false,
