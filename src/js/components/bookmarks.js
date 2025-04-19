@@ -1,4 +1,6 @@
-import Sortable from 'sortablejs';
+// import Sortable from 'sortablejs';
+import { DragSortify } from '../plugins/dragSortify';
+import { multiswap } from '../plugins/dragSortify/multiswap';
 import Toast from './toast';
 import ImageDB from '../api/imageDB';
 import { settings } from '../settings';
@@ -172,114 +174,120 @@ const Bookmarks = (() => {
   }
 
   function initDrag(el) {
-    el.sortInstance = Sortable.create(el, {
-      group: {
-        name: 'shared',
-        pull: 'clone'
-      },
-      animation: 200,
-      fallbackOnBody: true,
-      filter: '.bookmark__action',
-      draggable: '.bookmark',
-      removeCloneOnHide: false,
-      ghostClass: 'bookmark--ghost',
-      chosenClass: 'bookmark--chosen',
-      preventOnFilter: false,
-      onStart(evt) {
-        container.classList.add('has-dragging');
-
-        if (localStorage.disabledSort) {
-          return false;
-        }
-        showDropzone(evt.item);
-      },
-      onEnd(evt) {
-        container.classList.remove('has-dragging');
-        if (!evt.pullMode) {
-          hideDropzone();
-        }
-      },
-      /**
-       * Sortable onMove event
-       * @param {Object} event - sortablejs event
-       * @param {HTMLElement} event.to - HTMLElement target list
-       * @param {HTMLElement} event.related - HTMLElement on which have guided
-       */
-      onMove({ to, related }) {
-        if (localStorage.disabledSort) {
-          return false;
-        }
-
-        container.querySelector('.has-highlight')?.classList.remove('has-highlight');
-        if (to.matches(DROPZONE_SELECTOR)) {
-          to.classList.add('has-highlight');
-        }
-        // do not sort create column
-        if (related.classList.contains('bookmark-btn')) {
-          return false;
-        }
-      },
-      /**
-       * Sortable onAdd event
-       * @param {Object} event -sortablejs event
-       * @param {HTMLElement} event.item - dragging element
-       * @param {HTMLElement} event.clone -clone for dragging element
-       * @param {HTMLElement} event.target - dropzone element
-       *
-       */
-      onAdd({ item, clone, target }) {
-        const id = item.dataset.id;
-        const destination = {
-          parentId: target.dataset.id,
-          ...(settings.$.move_to_start && { index: 0 })
-        };
-
-        // preparation for animation
-        item.style.transformOrigin = 'center bottom';
-        // animation of moving a bookmark to a folder(Web Animations API)
-        let itemAnimation = item.animate([
-          {
-            opacity: 1,
-            transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, -20px, 0)',
-            animationTimingFunction: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)',
-            offset: 0.4
-          },
-          {
-            opacity: 0,
-            transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, 100px, 0)',
-            animationTimingFunction: 'cubic-bezier(0.175, 0.885, 0.32, 1)'
-          }
-        ], 550);
-        // waiting animationend
-        itemAnimation.onfinish = () => {
-          // remove clone bookmark
-          clone.remove();
-          // remove bookmark node from DOM
-          item.remove();
-          // hide highlight dropzone
-          hideDropzone();
-          // move the bookmark to the target folder
-          move(id, destination)
-            .then(() => {
-              const isFolder = item.hasAttribute('is-folder');
-              // if the folder run the updateFolderList trigger
-              isFolder && $customTrigger('updateFolderList', document, {
-                detail: {
-                  isFolder: true
-                }
-              });
-            });
-        };
-      },
-      onUpdate() {
-        Array.from(container.querySelectorAll('.bookmark')).forEach(async(item, index) => {
-          await move(item.getAttribute('data-id'), {
-            'parentId': container.dataset.folder,
-            'index': index
-          }).catch(console.warn);
-        });
-      }
+    el.sortInstance = new DragSortify(el, {
+      draggableSelector: '.bookmark',
+      // viewTransition: true,
+      ignoreSelectors: ['.bookmark__action'],
+      plugin: multiswap
     });
+    // el.sortInstance = Sortable.create(el, {
+    //   group: {
+    //     name: 'shared',
+    //     pull: 'clone'
+    //   },
+    //   animation: 200,
+    //   fallbackOnBody: true,
+    //   filter: '.bookmark__action',
+    //   draggable: '.bookmark',
+    //   removeCloneOnHide: false,
+    //   ghostClass: 'bookmark--ghost',
+    //   chosenClass: 'bookmark--chosen',
+    //   preventOnFilter: false,
+    //   onStart(evt) {
+    //     container.classList.add('has-dragging');
+
+    //     if (localStorage.disabledSort) {
+    //       return false;
+    //     }
+    //     showDropzone(evt.item);
+    //   },
+    //   onEnd(evt) {
+    //     container.classList.remove('has-dragging');
+    //     if (!evt.pullMode) {
+    //       hideDropzone();
+    //     }
+    //   },
+    //   /**
+    //    * Sortable onMove event
+    //    * @param {Object} event - sortablejs event
+    //    * @param {HTMLElement} event.to - HTMLElement target list
+    //    * @param {HTMLElement} event.related - HTMLElement on which have guided
+    //    */
+    //   onMove({ to, related }) {
+    //     if (localStorage.disabledSort) {
+    //       return false;
+    //     }
+
+    //     container.querySelector('.has-highlight')?.classList.remove('has-highlight');
+    //     if (to.matches(DROPZONE_SELECTOR)) {
+    //       to.classList.add('has-highlight');
+    //     }
+    //     // do not sort create column
+    //     if (related.classList.contains('bookmark-btn')) {
+    //       return false;
+    //     }
+    //   },
+    //   /**
+    //    * Sortable onAdd event
+    //    * @param {Object} event -sortablejs event
+    //    * @param {HTMLElement} event.item - dragging element
+    //    * @param {HTMLElement} event.clone -clone for dragging element
+    //    * @param {HTMLElement} event.target - dropzone element
+    //    *
+    //    */
+    //   onAdd({ item, clone, target }) {
+    //     const id = item.dataset.id;
+    //     const destination = {
+    //       parentId: target.dataset.id,
+    //       ...(settings.$.move_to_start && { index: 0 })
+    //     };
+
+    //     // preparation for animation
+    //     item.style.transformOrigin = 'center bottom';
+    //     // animation of moving a bookmark to a folder(Web Animations API)
+    //     let itemAnimation = item.animate([
+    //       {
+    //         opacity: 1,
+    //         transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, -20px, 0)',
+    //         animationTimingFunction: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)',
+    //         offset: 0.4
+    //       },
+    //       {
+    //         opacity: 0,
+    //         transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, 100px, 0)',
+    //         animationTimingFunction: 'cubic-bezier(0.175, 0.885, 0.32, 1)'
+    //       }
+    //     ], 550);
+    //     // waiting animationend
+    //     itemAnimation.onfinish = () => {
+    //       // remove clone bookmark
+    //       clone.remove();
+    //       // remove bookmark node from DOM
+    //       item.remove();
+    //       // hide highlight dropzone
+    //       hideDropzone();
+    //       // move the bookmark to the target folder
+    //       move(id, destination)
+    //         .then(() => {
+    //           const isFolder = item.hasAttribute('is-folder');
+    //           // if the folder run the updateFolderList trigger
+    //           isFolder && $customTrigger('updateFolderList', document, {
+    //             detail: {
+    //               isFolder: true
+    //             }
+    //           });
+    //         });
+    //     };
+    //   },
+    //   onUpdate() {
+    //     Array.from(container.querySelectorAll('.bookmark')).forEach(async(item, index) => {
+    //       await move(item.getAttribute('data-id'), {
+    //         'parentId': container.dataset.folder,
+    //         'index': index
+    //       }).catch(console.warn);
+    //     });
+    //   }
+    // });
   }
 
   function startFolder() {

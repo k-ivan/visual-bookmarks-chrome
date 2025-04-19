@@ -137,6 +137,19 @@
   text-decoration: none;
   color: var(--popup-text-color);
   outline: none;
+  transition: opacity 0.2s;
+
+  &.dragging {
+    opacity: 0;
+    /* opacity: 0;
+    cursor: grabbing; */
+    /* img {
+      pointer-events: none;
+    } */
+  }
+}
+.list:has(.dragging) .item:not(.dragging) {
+  background-color: transparent;
 }
 .item:focus,
 .item:hover {

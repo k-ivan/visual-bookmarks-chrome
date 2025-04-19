@@ -6,7 +6,8 @@
   text-decoration: none;
   border-radius: var(--bookmark-radius);
   outline: 1px solid rgb(0 0 0 / 10%);
-  overflow: hidden;
+  /* overflow: hidden; */
+
   &:focus-visible {
     box-shadow: 0 0 0 3px var(--bookmark-outline-color);
   }
@@ -14,6 +15,60 @@
   &[data-selected] {
     transform: scale(0.85);
     box-shadow: 0 0 0 5px var(--color-primary);
+  }
+
+  &.dragging {
+    opacity: 0.01;
+  }
+
+  &.dropline-before::before,
+  &.dropline-after::before,
+  &.dropline-before::after,
+  &.dropline-after::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--grid-gap);
+    mix-blend-mode: overlay;
+  }
+
+  &.dropline-before::before,
+  &.dropline-after::before {
+    background:
+      linear-gradient(
+        to bottom,
+        red 0,
+        red 3px,
+        transparent 3px,
+        transparent calc(100% - 3px),
+        red calc(100% - 3px),
+        red 100%
+      );
+  }
+  &.dropline-before::after,
+  &.dropline-after::after {
+    border: calc((var(--grid-gap) - 3px) / 2) solid transparent;
+    background-color: red;
+    background-clip: padding-box;
+    /* border-top-width: 0;
+    border-bottom-width: 0; */
+  }
+  &.dropline-before {
+    &::before {
+      left: calc((var(--grid-gap) / -2) - calc(10px / 2));
+    }
+    &::after {
+      left: calc(var(--grid-gap) * -1);
+    }
+  }
+  &.dropline-after {
+    &::before {
+      right: calc((var(--grid-gap) / -2) - calc(10px / 2));
+    }
+    &::after {
+      right: calc(var(--grid-gap) * -1);
+    }
   }
 }
 
@@ -78,6 +133,8 @@
   display: flex;
   flex-direction: column;
   background-color: var(--bookmark-bg);
+  border-radius: var(--bookmark-radius);
+  overflow: hidden;
 }
 
 .bookmark__img {

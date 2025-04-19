@@ -179,6 +179,7 @@ class VbBookmark extends HTMLAnchorElement {
         : (this.#externalLogo && ' bookmark__img--external')
     ) || '';
 
+    this.draggable = true;
     this.innerHTML =
     /* html*/
     `<div class="bookmark__wrap">
