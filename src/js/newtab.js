@@ -273,9 +273,20 @@ function handleSelectBookmark(e) {
   }
 }
 
+function dispatchSelectedBookmarks() {
+  document.dispatchEvent(
+    new CustomEvent('vb:bookmarks:select', {
+      detail: multipleSelectedBookmarks
+    })
+  );
+}
+
 async function showControlMultiplyBookmarks() {
+  dispatchSelectedBookmarks();
+
   const panelNode = document.getElementById('bookmarks-panel');
   if (panelNode) return;
+
 
   const panel = $createElement('vb-bookmarks-panel', {
     id: 'bookmarks-panel',
@@ -285,10 +296,6 @@ async function showControlMultiplyBookmarks() {
   panel.folders = await getFolders();
 
   document.body.append(panel);
-
-  // disable sorting to avoid side effects
-  // for example, the selected bookmark can be moved by sorting to another folder
-  localStorage.setItem('disabledSort', 1);
 
   // animate panel actions
   panelActions.tweenActive = true;
@@ -311,6 +318,14 @@ function hideControlMultiplyBookmarks() {
 
   multipleSelectedBookmarks.forEach(bookmark => delete bookmark.dataset.selected);
   multipleSelectedBookmarks.length = 0;
+
+  dispatchSelectedBookmarks();
+
+  document.dispatchEvent(
+    new CustomEvent('vb:bookmarks:select', {
+      detail: multipleSelectedBookmarks
+    })
+  );
 
   localStorage.removeItem('disabledSort');
 

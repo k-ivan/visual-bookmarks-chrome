@@ -1,4 +1,5 @@
-import Sortable from 'sortablejs';
+import { DragSortify } from '../plugins/dragSortify';
+import { multiswap } from '../plugins/dragSortify/multiswap';
 import Toast from './toast';
 import ImageDB from '../api/imageDB';
 import { settings } from '../settings';
@@ -57,7 +58,6 @@ const Bookmarks = (() => {
       settings.$.drag_and_drop &&
       !settings.$.sort_by_newest
     ) {
-      observerDropzone();
       initDrag(container);
     }
 
@@ -126,34 +126,6 @@ const Bookmarks = (() => {
     return createSpeedDial(startFolder());
   }
 
-  function observerDropzone() {
-    const observer = new MutationObserver((mutations) => {
-      for (let mutation of mutations) {
-        for (let node of mutation.addedNodes) {
-          if (!(node instanceof HTMLElement)) continue;
-
-          const dropzone = node.querySelector(DROPZONE_SELECTOR);
-          if (!dropzone) continue;
-          initDrag(dropzone);
-        }
-
-        for (let node of mutation.removedNodes) {
-          if (!(node instanceof HTMLElement)) continue;
-
-          const dropzone = node.querySelector(DROPZONE_SELECTOR);
-          if (!dropzone) continue;
-
-          dropzone.sortInstance?.destroy();
-          delete dropzone.sortInstance;
-        }
-      }
-    });
-
-    observer.observe(container, {
-      childList: true
-    });
-  }
-
   // helper to turn on the dropzone lighting
   function showDropzone(target) {
     [...container.querySelectorAll(DROPZONE_SELECTOR)]
@@ -172,93 +144,71 @@ const Bookmarks = (() => {
   }
 
   function initDrag(el) {
-    el.sortInstance = Sortable.create(el, {
-      group: {
-        name: 'shared',
-        pull: 'clone'
-      },
-      animation: 200,
-      fallbackOnBody: true,
-      filter: '.bookmark__action',
-      draggable: '.bookmark',
-      removeCloneOnHide: false,
-      ghostClass: 'bookmark--ghost',
-      chosenClass: 'bookmark--chosen',
-      preventOnFilter: false,
-      onStart(evt) {
+    el.sortInstance = new DragSortify(el, {
+      draggableSelector: '.bookmark',
+      viewTransition: true,
+      ignoreSelectors: ['.bookmark__action'],
+      plugin: multiswap,
+      onDragStart(e) {
+        if (localStorage.disabledSort) {
+          return false;
+        }
         container.classList.add('has-dragging');
+        showDropzone(e.item);
 
-        if (localStorage.disabledSort) {
-          return false;
+        if (!e.selectedItems.includes(e.item)) {
+          // if the item is not selected, hide action panel
+          document.dispatchEvent(new CustomEvent('vb-bookmarks-panel:close'));
         }
-        showDropzone(evt.item);
       },
-      onEnd(evt) {
+      onDragEnd() {
         container.classList.remove('has-dragging');
-        if (!evt.pullMode) {
-          hideDropzone();
-        }
+        hideDropzone();
       },
-      /**
-       * Sortable onMove event
-       * @param {Object} event - sortablejs event
-       * @param {HTMLElement} event.to - HTMLElement target list
-       * @param {HTMLElement} event.related - HTMLElement on which have guided
-       */
-      onMove({ to, related }) {
-        if (localStorage.disabledSort) {
-          return false;
-        }
-
-        container.querySelector('.has-highlight')?.classList.remove('has-highlight');
-        if (to.matches(DROPZONE_SELECTOR)) {
-          to.classList.add('has-highlight');
-        }
-        // do not sort create column
-        if (related.classList.contains('bookmark-btn')) {
-          return false;
-        }
+      onUpdate() {
+        Array.from(container.querySelectorAll('.bookmark')).forEach(async(item, index) => {
+          await move(item.getAttribute('data-id'), {
+            'parentId': container.dataset.folder,
+            'index': index
+          }).catch(console.warn);
+        });
       },
-      /**
-       * Sortable onAdd event
-       * @param {Object} event -sortablejs event
-       * @param {HTMLElement} event.item - dragging element
-       * @param {HTMLElement} event.clone -clone for dragging element
-       * @param {HTMLElement} event.target - dropzone element
-       *
-       */
-      onAdd({ item, clone, target }) {
+      onAdd({ item, target }) {
         const id = item.dataset.id;
         const destination = {
           parentId: target.dataset.id,
           ...(settings.$.move_to_start && { index: 0 })
         };
-
-        // preparation for animation
-        item.style.transformOrigin = 'center bottom';
-        // animation of moving a bookmark to a folder(Web Animations API)
-        let itemAnimation = item.animate([
+        const dropZoneRect = target.getBoundingClientRect();
+        const cardRect = item.getBoundingClientRect();
+        const translateX = dropZoneRect.left + dropZoneRect.width / 2 - cardRect.left - cardRect.width / 2;
+        const translateY = dropZoneRect.top + dropZoneRect.height / 2 - cardRect.top - cardRect.height / 2;
+        const animation = item.animate(
+          [
+            {
+              offset: 0,
+              transform: 'none',
+              opacity: 1
+            },
+            {
+              offset: 0.85,
+              transform: `translate(${translateX}px, ${translateY}px) scale(0.75)`,
+              opacity: 0.5
+            },
+            {
+              offset: 1,
+              transform: `translate(${translateX}px, ${translateY}px) scale(0.3)`,
+              opacity: 0
+            }
+          ],
           {
-            opacity: 1,
-            transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, -20px, 0)',
-            animationTimingFunction: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)',
-            offset: 0.4
-          },
-          {
-            opacity: 0,
-            transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, 100px, 0)',
-            animationTimingFunction: 'cubic-bezier(0.175, 0.885, 0.32, 1)'
+            duration: 500,
+            easing: 'cubic-bezier(0, 0.55, 0.45, 1)',
+            fill: 'forwards'
           }
-        ], 550);
-        // waiting animationend
-        itemAnimation.onfinish = () => {
-          // remove clone bookmark
-          clone.remove();
-          // remove bookmark node from DOM
+        );
+        animation.onfinish = () => {
           item.remove();
-          // hide highlight dropzone
-          hideDropzone();
-          // move the bookmark to the target folder
           move(id, destination)
             .then(() => {
               const isFolder = item.hasAttribute('is-folder');
@@ -268,17 +218,13 @@ const Bookmarks = (() => {
                   isFolder: true
                 }
               });
+              document.dispatchEvent(new CustomEvent('vb-bookmarks-panel:close'));
             });
         };
-      },
-      onUpdate() {
-        Array.from(container.querySelectorAll('.bookmark')).forEach(async(item, index) => {
-          await move(item.getAttribute('data-id'), {
-            'parentId': container.dataset.folder,
-            'index': index
-          }).catch(console.warn);
-        });
       }
+    });
+    document.addEventListener('vb:bookmarks:select', (e) => {
+      el.sortInstance.setSelectedItems(e.detail);
     });
   }
 
@@ -535,8 +481,8 @@ const Bookmarks = (() => {
   function createSpeedDial(id) {
     if (settings.$.drag_and_drop) {
       // if dnd instance exist and disabled(after search) turn it on
-      if (container.sortInstance?.options?.disabled) {
-        container.sortInstance?.option('disabled', false);
+      if (container.sortInstance?.isDisabled) {
+        container.sortInstance?.toggleDisable(false);
       }
     }
 
@@ -883,7 +829,7 @@ const Bookmarks = (() => {
         if (match.length > 0) {
           if (settings.$.drag_and_drop) {
             // if dnd we turn off sorting and destroy nested instances
-            container.sortInstance?.option('disabled', true);
+            container.sortInstance?.toggleDisable(true);
           }
           render(match);
         } else {

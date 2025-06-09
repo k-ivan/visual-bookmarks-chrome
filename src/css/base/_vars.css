@@ -50,8 +50,9 @@
   --bookmark-dropzone-outline-width: 2px;
   --bookmark-dropzone-outline: var(--bookmark-dropzone-outline-width) dashed var(--theme-invert-alpha-50);
   --bookmark-dropzone-background: var(--theme-background-2);
-  --bookmark-dropzone-background-active: var(--theme-background-3);
+  --bookmark-dropzone-background-active: var(--color-primary-alpha-40);
   --bookmark-dropzone-icon-invert: none;
+  --dropline-width: 6px;
 
   /* Options */
   --options-slider-width: 700px;
@@ -130,6 +131,10 @@
 
   /* search engines */
   --engine-svg-color: #555;
+
+  /* services popup */
+  --vb-services-background: var(--theme-background);
+  --vb-services-skeleton-background: #ddd;
 }
 
 .dark {
@@ -193,4 +198,8 @@
 
   /* search engines */
   --engine-svg-color: #fafafa;
+
+  /* services popup */
+  --vb-services-background: var(--theme-background-2);
+  --vb-services-skeleton-background: var(--theme-background-3);
 }

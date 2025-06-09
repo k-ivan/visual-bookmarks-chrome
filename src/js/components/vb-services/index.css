@@ -3,8 +3,6 @@
 
 :host {
   --vb-services-radius: 12px;
-  --vb-services-background: var(--theme-background);
-  --vb-services-skeleton-background: #ddd;
   --vb-popup-radius: var(--vb-services-radius);
   --vb-popup-left: auto;
   --vb-popup-right: -5px;
@@ -19,10 +17,6 @@
   & * {
     box-sizing: border-box;
   }
-}
-:host-context(.dark) {
-  --vb-services-background: var(--theme-background-2);
-  --vb-services-skeleton-background: var(--theme-background-3);
 }
 
 .services-popup {
@@ -137,6 +131,14 @@
   text-decoration: none;
   color: var(--popup-text-color);
   outline: none;
+  transition: opacity 0.2s;
+
+  &.dragging {
+    opacity: 0;
+  }
+}
+.list:has(.dragging) .item:not(.dragging) {
+  background-color: transparent;
 }
 .item:focus,
 .item:hover {

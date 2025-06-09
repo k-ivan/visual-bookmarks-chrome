@@ -1,7 +1,7 @@
-import Sortable from 'sortablejs';
 import Validator from 'form-validation-plugin';
-import styles from './index.css';
+import { DragSortify } from '../../plugins/dragSortify';
 import html from './template.html';
+import styles from './index.css';
 import '../vb-popup';
 import {
   FAVICON_GOOGLE,
@@ -49,9 +49,9 @@ class VBServices extends HTMLElement {
     this.#attachEvents();
 
     // external plugin
-    this.sortableInstance = new Sortable(this.grid, {
-      animation: 150,
-      ghostClass: 'ghost',
+    this.sortableInstance = new DragSortify(this.grid, {
+      draggableSelector: '.item',
+      // viewTransition: true,
       onUpdate: (e) => {
         this.services = this.#reorderArray(e, this.services);
         this.dispatchEvent(
@@ -59,8 +59,7 @@ class VBServices extends HTMLElement {
             detail: {
               services: this.services
             },
-            bubbles: true,
-            cancelable: true
+            bubbles: true
           })
         );
       }
@@ -90,8 +89,9 @@ class VBServices extends HTMLElement {
 
   disconnectedCallback() {
     this.#dettachEvents();
-    this.sortableInstance.destroy();
-    delete this.sortableInstance;
+    // FIXME
+    // this.sortableInstance.destroy();
+    // delete this.sortableInstance;
     Validator.destroy();
   }
 
@@ -122,9 +122,9 @@ class VBServices extends HTMLElement {
     const nameText = document.createTextNode(name).textContent;
 
     return /* html */`
-      <a class="item" href="${link}" id="${id}">
+      <a class="item" href="${link}" id="${id}" draggable="true">
         <div class="item-img-wrap">
-          <img class="item-logo" alt="${nameText}" src="${logo}"/>
+          <img class="item-logo" alt="${nameText}" src="${logo}" draggable="false"/>
         </div>
         <div class="item-name">${nameText}</div>
         <button type="button" class="item-remove" data-id="${id}" aria-label="${browser.i18n.getMessage('remove_service', nameText)}">
@@ -181,7 +181,8 @@ class VBServices extends HTMLElement {
     this.settingsTriggerEl.hidden = this.hasSettings;
     this.settingsEl.hidden = !this.hasSettings;
     this.settingsFormEl.name.focus();
-    this.sortableInstance.option('disabled', true);
+    // FIXME
+    // this.sortableInstance.option('disabled', true);
     this.#toggleServicesLimit();
   }
 
@@ -191,7 +192,8 @@ class VBServices extends HTMLElement {
     this.settingsTriggerEl.hidden = this.hasSettings;
     this.settingsEl.hidden = !this.hasSettings;
     this.settingsFormEl.reset();
-    this.sortableInstance.option('disabled', false);
+    // FIXME
+    // this.sortableInstance.option('disabled', false);
   }
 
   #toggleServicesLimit() {
