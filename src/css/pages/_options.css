@@ -81,12 +81,24 @@
 }
 
 .tbl {
+  position: relative;
   display: table;
   width: 100%;
   border-radius: var(--base-radius);
+
   &:focus-within,
   &:hover {
     background-color: var(--option-tbl-hover-bg);
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      border-radius: var(--base-radius);
+      background: linear-gradient(45deg, #4285f4, #b96bd6);
+      mask: conic-gradient(#000 0 0) content-box exclude, conic-gradient(#000 0 0);
+      pointer-events: none;
+    }
   }
 }
 
