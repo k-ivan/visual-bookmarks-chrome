@@ -90,6 +90,13 @@ async function init() {
   modalInstance.element.addEventListener('gmodal:open', function() {
     storage.local.remove('extension_updated');
   });
+  modalInstance.element.addEventListener('gmodal:close', function() {
+    const video = modalInstance.element.querySelector('video');
+    if (video) {
+      video.pause();
+      video.currentTime = 1;
+    }
+  });
 
   const manifest = browser.runtime.getManifest();
   document.getElementById('ext_name').textContent = manifest.name;

@@ -65,6 +65,10 @@ a {
   }
 }
 
+video {
+  max-width: 100%;
+}
+
 .error-hint {
   font-size: 90%;
   color: var(--color-warning);

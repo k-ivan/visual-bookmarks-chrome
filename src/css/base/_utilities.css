@@ -19,3 +19,10 @@
 [hidden] {
   display: none !important;
 }
+
+.aspect-ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+video.aspect-ratio-16-9 {
+  width: 100%;
+}
