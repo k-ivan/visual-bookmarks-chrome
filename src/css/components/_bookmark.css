@@ -112,7 +112,7 @@
 .bookmark-btn--back {
   transition: scale 0.15s ease;
   &:has(.has-highlight) {
-    scale: 1.1;
+    scale: 0.95;
   }
   &::after {
     content: "";
@@ -323,7 +323,7 @@
   }
 }
 .bookmark:has(.has-highlight) {
-  scale: 1.1;
+  scale: 0.95;
 }
 
 .bookmark-btn .dropzone-bookmark {
@@ -342,7 +342,7 @@
   overflow: hidden;
   box-shadow: none !important;
 
-  &.qqq .bookmark__caption {
+  &.is-firefox .bookmark__caption {
     display: none;
   }
 

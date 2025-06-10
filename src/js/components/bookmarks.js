@@ -144,26 +144,68 @@ const Bookmarks = (() => {
   }
 
   function initDrag(el) {
+    let ghost = null;
     el.sortInstance = new DragSortify(el, {
       draggableSelector: '.bookmark',
       viewTransition: true,
       ignoreSelectors: ['.bookmark__action'],
       plugin: multiswap,
-      onDragStart(e) {
+      onDragStart({ event, draggedElement, draggingItems }) {
         if (localStorage.disabledSort) {
           return false;
         }
-        container.classList.add('has-dragging');
-        showDropzone(e.item);
 
-        if (!e.selectedItems.includes(e.item)) {
+        container.classList.add('has-dragging');
+        showDropzone(draggedElement);
+
+        if (!draggingItems.includes(draggedElement)) {
           // if the item is not selected, hide action panel
           document.dispatchEvent(new CustomEvent('vb-bookmarks-panel:close'));
         }
+
+        const classes = ['drag-ghost'];
+        ghost = draggedElement.cloneNode(true);
+        ghost.externalLogo = settings.$.logo_external ? settings.$.logo_external_url : null,
+        document.body.appendChild(ghost);
+
+        if (process.env.BROWSER === 'firefox') {
+          classes.push('is-firefox');
+        }
+        if (draggingItems.length > 1) {
+          classes.push('multiply-ghost');
+          ghost.innerHTML += `<div class="multiply-drop-count">${draggingItems.length}</div>`;
+        }
+        ghost.classList.add(...classes);
+
+        const wh = draggedElement.offsetHeight / draggedElement.offsetWidth;
+        let width = 150;
+        let height = 150 * wh;
+
+        // In browsers, there is a limit on the size of the ghost, restrict it 180
+        if (draggedElement.offsetWidth < 180) {
+        // reduce the ghost(25px) for UX
+          width = draggedElement.offsetWidth - 25;
+          height = width * wh;
+        }
+
+        ghost.style.width = `${width}px`;
+        ghost.style.height = `${height}px`;
+
+        const rect = draggedElement.getBoundingClientRect();
+
+        event.dataTransfer.setDragImage(
+          ghost,
+          (event.clientX - rect.left) - (rect.width / 2) + (width / 2),
+          (event.clientY - rect.top) - (rect.height / 2) + ((height) / 2)
+        );
       },
       onDragEnd() {
         container.classList.remove('has-dragging');
         hideDropzone();
+        if (ghost) {
+          ghost.remove();
+          ghost = null;
+        }
       },
       onUpdate() {
         Array.from(container.querySelectorAll('.bookmark')).forEach(async(item, index) => {

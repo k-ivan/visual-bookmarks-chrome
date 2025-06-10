@@ -19,7 +19,6 @@ export function multiswap(dnd) {
   let activeDropZone = null;
   let lastTarget = null;
   let items = [];
-  let ghost = null;
 
   function hideDropLine(el) {
     el?.classList?.remove(DROPLINE.class.before, DROPLINE.class.after);
@@ -53,8 +52,8 @@ export function multiswap(dnd) {
 
       const dragStartCallback = dnd.options?.onDragStart?.({
         event: e,
-        item: draggedElement,
-        selectedItems: dnd.draggingItems.length ? dnd.draggingItems : [draggedElement]
+        draggedElement,
+        draggingItems: dnd.draggingItems.length ? dnd.draggingItems : [draggedElement]
       });
 
       if (dragStartCallback === false) {
@@ -73,40 +72,6 @@ export function multiswap(dnd) {
       draggingCards.forEach((el) => dnd.toggleDragging(el, true));
 
       e.dataTransfer.effectAllowed = 'move';
-
-      const classes = ['drag-ghost'];
-      ghost = draggedElement.cloneNode(true);
-      document.body.appendChild(ghost);
-
-      if (process.env.BROWSER === 'firefox') {
-        classes.push('qqq');
-      }
-      if (draggingCards.length > 1) {
-        classes.push('multiply-ghost');
-        ghost.innerHTML += `<div class="multiply-drop-count">${draggingCards.length}</div>`;
-      }
-      ghost.classList.add(...classes);
-
-      const wh = draggedElement.offsetHeight / draggedElement.offsetWidth;
-      let width = 150;
-      let height = 150 * wh;
-
-      // In browsers, there is a limit on the size of the ghost, restrict it 180
-      if (draggedElement.offsetWidth < 180) {
-        // reduce the ghost(25px) for UX
-        width = draggedElement.offsetWidth - 25;
-        height = width * wh;
-      }
-
-      ghost.style.width = `${width}px`;
-      ghost.style.height = `${height}px`;
-
-      const rect = draggedElement.getBoundingClientRect();
-      e.dataTransfer.setDragImage(
-        ghost,
-        (e.clientX - rect.left) - (rect.width / 2) + (width / 2),
-        (e.clientY - rect.top) - (rect.height / 2) + ((height) / 2)
-      );
     },
     dragover(e) {
       if (dnd.isIgnoreSelector(e.target)) {
@@ -252,7 +217,6 @@ export function multiswap(dnd) {
         dnd.toggleDragging(el, false);
         el.classList.remove(HOVER_CLASSNAME);
       });
-      dnd.options?.onDragEnd?.(e);
 
       draggingCards = [];
       deactivateDropZone();
@@ -263,10 +227,7 @@ export function multiswap(dnd) {
       }
       lastTarget = null;
 
-      if (ghost) {
-        ghost.remove();
-        ghost = null;
-      }
+      dnd.options?.onDragEnd?.(e);
     },
     dragleave(e) {
       if (
