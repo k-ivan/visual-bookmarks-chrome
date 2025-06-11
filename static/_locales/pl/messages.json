@@ -47,7 +47,7 @@
     "message": "Folder"
   },
   "url_field_tip": {
-    "message": "Wpisz adres URL lub pozostaw to pole puste, jeśli chcesz utworzyć folder."
+    "message": "Wpisz adres URL lub pozostaw to pole puste, jeśli chcesz utworzyć folder"
   },
   "btn_close": {
     "message": "Anuluj"
@@ -313,10 +313,10 @@
     }
   },
   "folder_preview": {
-    "message": "Miniatury witryn w folderze zamiast ikony"
+    "message": "Miniatury stron w folderze zamiast ikony"
   },
   "folder_preview_description": {
-    "message": "Gdy to ustawienie jest włączone, zamiast ikony lub niestandardowego obrazu zostaną wyświetlone miniatury 4 losowych witryn z folderu."
+    "message": "Gdy to ustawienie jest włączone, zamiast ikony lub niestandardowego obrazu zostaną wyświetlone miniatury 4 losowych stron z folderu."
   },
   "backup_settings": {
     "message": "Ustawienia importu / eksportu"
@@ -346,7 +346,7 @@
     "message": "Menu szybkich linków do często używanych aplikacji i usług internetowych"
   },
   "toggle_clipboard_access": {
-    "message": "Zezwól na odczyt z schowka"
+    "message": "Zezwól na odczyt ze schowka"
   },
   "toggle_clipboard_access_description": {
     "message": "Pozwól rozszerzeniu odczytywać dane ze schowka (aby załadować miniaturę zakładki ze schowka). W menu kontekstowym zakładki pojawi się opcja „Wklej ze schowka”. Jeśli obawiasz się tego uprawnienia, po prostu go nie włączaj."
@@ -387,7 +387,7 @@
     "message": "Automatycznie zamknij kartę po dodaniu do zakładek"
   },
   "close_tab_after_adding_bookmark_note": {
-    "message": "Tylko w przypadku dodania za pomocą menu kontekstowego"
+    "message": "Tylko po dodaniu za pomocą menu kontekstowego"
   },
   "empty_search": {
     "message": "Nie znaleziono zakładek"
@@ -396,7 +396,7 @@
     "message": "Loga zewnętrzne"
   },
   "logo_external_note": {
-    "message": "Link do zewnętrznego źródła logotypów. Uważaj, podciąg <code>{{website}}</code> musi pozostać niezmieniony i zostać wstawiony we właściwe miejsce linku"
+    "message": "Link do zewnętrznego źródła logotypów. Uważaj, podciąg <code>{{website}}</code> musi zostać niezmieniony i wstawiony we właściwe miejsce w linku"
   },
   "delete_thumbnail": {
     "message": "Usuń miniaturę"
@@ -447,7 +447,7 @@
     "message": "Wirtualne stronicowanie"
   },
   "enable_virtual_pagination_note": {
-    "message": "Dzieli wysoki dokument na sekcje w celu ułatwienia nawigacji po nimi (eksperymentalne)"
+    "message": "Dzieli wysoki dokument na sekcje w celu ułatwienia nawigacji (eksperymentalne)"
   },
   "parent_folder": {
     "message": "Folder nadrzędny"
@@ -518,7 +518,7 @@
     "message": "Dlaczego korzystamy z tego uprawnienia?"
   },
   "host_permissions_info": {
-    "message": "<p>Ta zgoda jest konieczna do generowania zrzutów ekranu stron internetowych. Rozszerzenie nie zbiera, nie śledzi ani nie modyfikuje Twoich danych na stronach internetowych. Jedyną modyfikacją, która następuje po otwarciu nowego okna ze stroną internetową, jest ukrycie paska przewijania przed wygenerowaniem zrzutu ekranu (aby zrzut ekranu był jak najbardziej pozbawiony paska przewijania). Kod rozszerzenia jest dostępny na <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Jeśli obawiasz się tego uprawnienia, możesz zdecydować się nie udzielać go. Rozszerzenie nadal będzie działać bez niego, ale generowanie zrzutów ekranu strony internetowej dla zakładek nie będzie dostępne.</p><p>Ta zgoda będzie żądana podczas próby zrobienia zrzutu ekranu strony internetowej (jeśli jest wyłączona). Możesz także zarządzać tym prawem w ustawieniach przeglądarki, otwierając okno z szczegółowymi informacjami na temat rozszerzenia.</p><p>Zazwyczaj w przeglądarkach takich jak Chrome i Edge ta zgoda jest domyślnie włączona, podczas gdy w Firefox jest wyłączona. Dlatego domyślne zachowanie może się różnić w zależności od przeglądarki.</p>"
+    "message": "<p>Ta zgoda jest konieczna do generowania zrzutów ekranu stron internetowych. Rozszerzenie nie zbiera, nie śledzi ani nie modyfikuje twoich danych na stronach internetowych. Jedyną modyfikacją, która następuje po otwarciu nowego okna ze stroną internetową, jest ukrycie paska przewijania przed wygenerowaniem zrzutu ekranu (aby zrzut ekranu był pozbawiony paska przewijania). Kod rozszerzenia jest dostępny na <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. Jeśli obawiasz się tego uprawnienia, możesz zdecydować się nie udzielać go. Rozszerzenie nadal będzie działać bez niego, ale generowanie zrzutów ekranu strony internetowej dla zakładek nie będzie dostępne.</p><p>Ta zgoda będzie żądana podczas próby zrobienia zrzutu ekranu strony internetowej (jeśli jest wyłączona). Możesz także zarządzać tym prawem w ustawieniach przeglądarki, otwierając okno z szczegółowymi informacjami na temat rozszerzenia.</p><p>Zazwyczaj w przeglądarkach takich jak Chrome i Edge ta zgoda jest domyślnie włączona, podczas gdy w Firefox jest wyłączona. Dlatego domyślne zachowanie może się różnić w zależności od przeglądarki.</p>"
   },
   "example_string": {
     "message": "Przykład: $string$",
