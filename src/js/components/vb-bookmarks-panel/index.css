@@ -27,6 +27,7 @@
   }
 }
 .bookmarks-panel__body {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -93,7 +94,13 @@
   }
 }
 .bookmarks-panel__selector {
+  flex: 1;
   position: relative;
   display: flex;
   gap: 10px;
+
+  & vb-select-folders {
+    flex: 1;
+    min-width: 120px;
+  }
 }
