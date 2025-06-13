@@ -147,7 +147,6 @@ const Bookmarks = (() => {
     let ghost = null;
     el.sortInstance = new DragSortify(el, {
       draggableSelector: '.bookmark',
-      viewTransition: true,
       ignoreSelectors: ['.bookmark__action'],
       plugin: multiswap,
       onDragStart({ event, draggedElement, draggingItems }) {
