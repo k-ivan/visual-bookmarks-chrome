@@ -327,8 +327,6 @@ function hideControlMultiplyBookmarks() {
     })
   );
 
-  localStorage.removeItem('disabledSort');
-
   panelActions.tween.playbackRate = -1;
   panelActions.tween.onfinish = () => {
     panelActions.tweenActive = false;
@@ -400,8 +398,6 @@ function handlePagehide() {
   if (isGenerateThumbs) {
     localStorage.removeItem('update_thumbnails');
   }
-
-  localStorage.removeItem('disabledSort');
 }
 
 function handleUpdateStorage(e) {

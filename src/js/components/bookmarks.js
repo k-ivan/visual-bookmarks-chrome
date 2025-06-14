@@ -150,10 +150,6 @@ const Bookmarks = (() => {
       ignoreSelectors: ['.bookmark__action'],
       plugin: multiswap,
       onDragStart({ event, draggedElement, draggingItems }) {
-        if (localStorage.disabledSort) {
-          return false;
-        }
-
         container.classList.add('has-dragging');
         showDropzone(draggedElement);
 
