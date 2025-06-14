@@ -65,7 +65,7 @@ async function init() {
   window.addEventListener('resize', () => UI.calculateStyles());
   window.addEventListener('popstate', handlePopstate);
   window.addEventListener('beforeunload', handleBeforeUnload);
-  window.addEventListener('unload', handleUnload);
+  window.addEventListener('pagehide', handlePagehide);
   window.addEventListener('storage', handleUpdateStorage);
   window.addEventListener('load', handleLoad);
   window.addEventListener('hashchange', hideControlMultiplyBookmarks);
@@ -395,7 +395,7 @@ function handleBeforeUnload(evt) {
     return evt.returnValue = 'Are you shure?';
 }
 
-function handleUnload() {
+function handlePagehide() {
   // remove flag from storage to unlock button generate
   if (isGenerateThumbs) {
     localStorage.removeItem('update_thumbnails');
