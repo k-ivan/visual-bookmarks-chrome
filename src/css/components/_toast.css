@@ -12,6 +12,7 @@
   &.toast-container--bottom {
     left: 0;
     right: 0;
+    margin: auto;
   }
   &.toast-container--top {
     top: 20px;
