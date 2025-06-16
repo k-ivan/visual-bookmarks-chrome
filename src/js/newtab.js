@@ -628,18 +628,20 @@ async function removeSelectedBookmarks(multipleSelectedBookmarks) {
 
 function openSelectedBookmarks(multipleSelectedBookmarks, action) {
   if (['open_all_window', 'new_window_incognito'].includes(action)) {
+    const isIncognitoMode = action === 'new_window_incognito';
     browser.windows.create({
       focused: true,
       state: 'maximized',
-      incognito: (action === 'new_window_incognito')
-    }, win => {
-      if (!win) {
-        return $notifications(browser.i18n.getMessage('incognito_access_note'));
-      }
-      multipleSelectedBookmarks.forEach(bookmark => {
-        openTab(bookmark.url, { windowId: win.id });
+      incognito: isIncognitoMode
+    })
+      .then(win => {
+        multipleSelectedBookmarks.forEach(bookmark => {
+          openTab(bookmark.url, { windowId: win.id });
+        });
+      })
+      .catch(() => {
+        isIncognitoMode && $notifications(browser.i18n.getMessage('incognito_access_note'));
       });
-    });
   } else if (action === 'open_all') {
     multipleSelectedBookmarks.forEach(bookmark => {
       openTab(bookmark.url);
@@ -658,12 +660,13 @@ function openAll(id, action) {
       if (action === 'open_all_window') {
         browser.windows.create({
           focused: true
-        }, win => {
-          childrens.forEach(children => {
-            const url = children.url ?? children.id;
-            openTab(url, { windowId: win.id });
+        })
+          .then(win => {
+            childrens.forEach(children => {
+              const url = children.url ?? children.id;
+              openTab(url, { windowId: win.id });
+            });
           });
-        });
       } else {
         childrens.forEach(children => {
           const url = children.url ?? children.id;
@@ -679,13 +682,16 @@ function openAll(id, action) {
  * @param {string} action - action to run
  */
 function openWindow(url, action) {
-  try {
-    browser.windows.create({
-      url: url,
-      state: 'maximized',
-      incognito: (action === 'new_window_incognito')
+  const isIncognitoMode = action === 'new_window_incognito';
+
+  browser.windows.create({
+    url: url,
+    state: 'maximized',
+    incognito: isIncognitoMode
+  })
+    .catch(() => {
+      isIncognitoMode && $notifications(browser.i18n.getMessage('incognito_access_note'));
     });
-  } catch (e) {}
 }
 
 /**
