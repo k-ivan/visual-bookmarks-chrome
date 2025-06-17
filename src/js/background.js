@@ -262,7 +262,13 @@ browser.runtime.onInstalled.addListener(async(event) => {
   }
   initContextMenu();
   if (event.reason === 'update') {
-    storage.local.set({ extension_updated: true });
+    const manifest = browser.runtime.getManifest();
+    const [majorPrevious, minorPrevious] = event.previousVersion.split('.').map(Number);
+    const [major, minor] = manifest.version.split('.').map(Number);
+
+    if (major > majorPrevious || minor > minorPrevious) {
+      storage.local.set({ extension_updated: true });
+    }
     // return browser.tabs.create({ url: browser.runtime.getURL('options.html#changelog') });
   }
 });
