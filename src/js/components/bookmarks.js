@@ -160,7 +160,7 @@ const Bookmarks = (() => {
 
         const classes = ['drag-ghost'];
         ghost = draggedElement.cloneNode(true);
-        ghost.externalLogo = settings.$.logo_external ? settings.$.logo_external_url : null,
+        ghost.externalLogo = settings.$.logo_external ? settings.$.logo_external_url : null;
         document.body.appendChild(ghost);
 
         if (process.env.BROWSER === 'firefox') {
