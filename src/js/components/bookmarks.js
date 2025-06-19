@@ -161,6 +161,9 @@ const Bookmarks = (() => {
         const classes = ['drag-ghost'];
         ghost = draggedElement.cloneNode(true);
         ghost.externalLogo = settings.$.logo_external ? settings.$.logo_external_url : null;
+        if (ghost.isFolder && settings.$.folder_preview) {
+          ghost.folderChidlren = renderFolderChildren(ghost);
+        }
         document.body.appendChild(ghost);
 
         if (process.env.BROWSER === 'firefox') {
