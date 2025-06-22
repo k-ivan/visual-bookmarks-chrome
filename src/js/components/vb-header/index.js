@@ -130,7 +130,8 @@ class VbHeader extends HTMLElement {
           this.dispatchEvent(
             new CustomEvent('vb:search', {
               detail: {
-                search: this.isBookmarksEngine ? this.inputNode.value : ''
+                search: this.inputNode.value,
+                isBookmarksEngine: this.isBookmarksEngine
               },
               bubbles: true,
               cancelable: true
@@ -338,7 +339,8 @@ class VbHeader extends HTMLElement {
       this.dispatchEvent(
         new CustomEvent('vb:search', {
           detail: {
-            search
+            search,
+            isBookmarksEngine: this.isBookmarksEngine
           },
           bubbles: true,
           cancelable: true

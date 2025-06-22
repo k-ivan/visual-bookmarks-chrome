@@ -72,8 +72,17 @@ const Bookmarks = (() => {
 
       let hasSearch = false;
       const searchHandler = $debounce(({ detail }) => {
+        if (!detail.isBookmarksEngine) {
+          if (hasSearch) {
+            hasSearch = false;
+            createSpeedDial(startFolder());
+            document.body.classList.remove('has-search');
+          }
+          return;
+        }
+
         const query = detail.search.trim();
-        if (!query.length && hasSearch) {
+        if (!query.length) {
           hasSearch = false;
           createSpeedDial(startFolder());
         } else {
