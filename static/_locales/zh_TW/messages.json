@@ -34,6 +34,9 @@
   "placeholder_input_search_bookmarks": {
     "message": "書籤"
   },
+  "search_browser_default": {
+    "message": "瀏覽器設定"
+  },
   "placeholder_input_title": {
     "message": "輸入書籤標題"
   },

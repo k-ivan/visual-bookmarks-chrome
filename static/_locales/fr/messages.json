@@ -34,6 +34,9 @@
   "placeholder_input_search_bookmarks": {
     "message": "favoris"
   },
+  "search_browser_default": {
+    "message": "Paramètre navigateur"
+  },
   "placeholder_input_title": {
     "message": "Entrer le titre du favori"
   },

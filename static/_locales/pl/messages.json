@@ -34,6 +34,9 @@
   "placeholder_input_search_bookmarks": {
     "message": "zakładkach"
   },
+  "search_browser_default": {
+    "message": "Ustawienie przeglądarki"
+  },
   "placeholder_input_title": {
     "message": "Wpisz tytuł zakładki"
   },

@@ -108,6 +108,10 @@ export const SEARCH_ENGINES = [
     value: 'bookmarks'
   },
   {
+    title: browser.i18n.getMessage('search_browser_default'),
+    value: 'browser'
+  },
+  {
     title: 'Google',
     url: 'https://www.google.com/search',
     name: 'q',

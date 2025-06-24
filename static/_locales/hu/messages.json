@@ -34,6 +34,9 @@
   "placeholder_input_search_bookmarks": {
     "message": "könyvjelzőkben"
   },
+  "search_browser_default": {
+    "message": "Böngésző beállítás"
+  },
   "placeholder_input_title": {
     "message": "Adja meg a könyvjelző címét"
   },

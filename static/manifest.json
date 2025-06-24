@@ -3,7 +3,7 @@
   "default_locale": "en",
   "name": "__MSG_ext_name__",
   "description": "__MSG_ext_desc__",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "minimum_chrome_version": "105",
   "icons": {
     "16": "icons/icon16.png",
@@ -31,7 +31,8 @@
     "https://google.com/*"
   ],
   "optional_permissions": [
-    "clipboardRead"
+    "clipboardRead",
+    "search"
   ],
   "optional_host_permissions": [
     "<all_urls>"

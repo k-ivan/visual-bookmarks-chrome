@@ -34,6 +34,9 @@
   "placeholder_input_search_bookmarks": {
     "message": "bookmarks"
   },
+  "search_browser_default": {
+    "message": "Browser default"
+  },
   "placeholder_input_title": {
     "message": "Enter bookmark title"
   },

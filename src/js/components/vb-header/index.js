@@ -5,6 +5,7 @@ import { $createElement } from '../../utils';
 import { getFolders } from '../../api/bookmark';
 import { SEARCH_ENGINES } from '../../constants';
 import { settings } from '../../settings';
+import { requestPermissions } from '../../api/permissions';
 
 class VbHeader extends HTMLElement {
   initialFolderId = null;
@@ -78,6 +79,10 @@ class VbHeader extends HTMLElement {
     return settings.$.search_engine === 'bookmarks';
   }
 
+  get isBrowserEngine() {
+    return settings.$.search_engine === 'browser';
+  }
+
   set engine(engine) {
     this.engineNodes[this.prevEngineIndex].classList.remove('is-active');
     const engineObject = SEARCH_ENGINES.find((searchEngine, index) => {
@@ -89,8 +94,8 @@ class VbHeader extends HTMLElement {
     });
     this.engineNodes[this.engineIndex].classList.add('is-active');
 
-    this.vbPopupSlotBtn.innerHTML = /* html */
-      `<svg width="16" height="16"><use xlink:href="/img/symbol.svg#${engineObject.value}"/></svg>`;
+    const symbol = engineObject.value === 'browser' ? 'web_search' : engineObject.value;
+    this.vbPopupSlotBtn.innerHTML = /* html */`<svg width="16" height="16"><use xlink:href="/img/symbol.svg#${symbol}"/></svg>`;
 
     const placeholderEngine = engineObject.value === 'bookmarks'
       ? browser.i18n.getMessage('placeholder_input_search_bookmarks')
@@ -99,7 +104,10 @@ class VbHeader extends HTMLElement {
     settings
       .updateKey('search_engine', engine)
       .then(() => {
-        this.inputNode.placeholder = browser.i18n.getMessage('placeholder_input_search', [placeholderEngine]);
+        this.inputNode.placeholder = engine !== 'browser'
+          ? browser.i18n.getMessage('placeholder_input_search', [placeholderEngine])
+          : browser.i18n.getMessage('search');
+
         this.inputNode.name = engineObject.name ?? 'bookmarks';
         this.formNode.action = engineObject.url ?? '';
 
@@ -280,10 +288,22 @@ class VbHeader extends HTMLElement {
     }
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     if (this.isBookmarksEngine || !this.inputNode.value.trim()) {
       e.preventDefault();
       this.inputNode.focus();
+      return;
+    }
+    if (this.isBrowserEngine) {
+      e.preventDefault();
+      const searchPermission = await requestPermissions({ permissions: ['search'] });
+
+      if (searchPermission) {
+        browser.search.query({
+          text: this.inputNode.value.trim(),
+          disposition: settings.$.open_link_newtab ? 'NEW_TAB' : 'CURRENT_TAB'
+        });
+      }
       return;
     }
     return true;

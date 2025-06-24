@@ -34,6 +34,9 @@
   "placeholder_input_search_bookmarks": {
     "message": "закладках"
   },
+  "search_browser_default": {
+    "message": "Настройки браузера"
+  },
   "placeholder_input_title": {
     "message": "Введите название закладки"
   },

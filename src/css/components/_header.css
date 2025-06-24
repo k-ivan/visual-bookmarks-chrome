@@ -52,7 +52,7 @@
 
 .header__engine-content {
   padding: 10px;
-  min-width: 150px;
+  width: max-content;
 
   &::before {
     content: "";
