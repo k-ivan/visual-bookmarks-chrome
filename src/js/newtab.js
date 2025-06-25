@@ -14,7 +14,8 @@ import Ripple from './components/ripple';
 import confirmPopup from './plugins/confirmPopup';
 import {
   get,
-  getChildren,
+  getSubTree,
+  flattenArrayBookmarks,
   getFolders
 } from './api/bookmark';
 import {
@@ -655,23 +656,21 @@ function openSelectedBookmarks(multipleSelectedBookmarks, action) {
  * @param {string} action - action to run
  */
 function openAll(id, action) {
-  getChildren(id)
+  getSubTree(id)
     .then(childrens => {
+      if (!childrens.length) return;
+
+      const bookmarks = flattenArrayBookmarks(childrens);
+
       if (action === 'open_all_window') {
         browser.windows.create({
           focused: true
         })
           .then(win => {
-            childrens.forEach(children => {
-              const url = children.url ?? children.id;
-              openTab(url, { windowId: win.id });
-            });
+            bookmarks.forEach(bookmark => openTab(bookmark.url, { windowId: win.id }));
           });
       } else {
-        childrens.forEach(children => {
-          const url = children.url ?? children.id;
-          openTab(url);
-        });
+        bookmarks.forEach(bookmark => openTab(bookmark.url));
       }
     });
 }
