@@ -258,6 +258,7 @@ const Bookmarks = (() => {
         );
         animation.onfinish = () => {
           item.remove();
+          // FIXME возможна утечка памяти, так как закладка будет удалена из DOM, а кастоная миниатюра будет продолжать находится в обьекте THUMBNAILS_MAP
           move(id, destination)
             .then(() => {
               const isFolder = item.hasAttribute('is-folder');
@@ -299,7 +300,8 @@ const Bookmarks = (() => {
     Object.assign(vbBookmark, {
       id: bookmark.id,
       url: bookmark.url,
-      title: $escapeHtml(bookmark.title),
+      // title: $escapeHtml(bookmark.title),
+      title: bookmark.title,
       parentId: bookmark.parentId,
       image,
       isCustomImage: custom,
@@ -315,17 +317,17 @@ const Bookmarks = (() => {
     let image;
     const folderPreview = settings.$.folder_preview;
 
-    if (!folderPreview) {
-      const thumbnail = THUMBNAILS_MAP.get(bookmark.id);
-      image = thumbnail?.blobUrl;
-    }
+    // if (!folderPreview) {
+    const thumbnail = THUMBNAILS_MAP.get(bookmark.id);
+    image = thumbnail?.blobUrl;
+    // }
 
     const vbBookmark = document.createElement('a', { is: 'vb-bookmark' });
     Object.assign(vbBookmark, {
       id: bookmark.id,
       url: `#${bookmark.id}`,
       parentId: bookmark.parentId,
-      title: $escapeHtml(bookmark.title),
+      title: bookmark.title,
       isFolder: true,
       hasFolderPreview: folderPreview,
       folderChidlren: folderPreview ? renderFolderChildren(bookmark) : [],
@@ -419,8 +421,11 @@ const Bookmarks = (() => {
     // iterate through the array of thumbnail keys
     // add thumbnails to thumbnail map
     Object.keys(thumbnails).forEach(key => {
+      const parentFolderThumb = THUMBNAILS_MAP.get(key) ?? {};
+
       THUMBNAILS_MAP.set(key, {
         id: key,
+        ...(parentFolderThumb && parentFolderThumb),
         children: thumbnails[key]
       });
     });
@@ -786,10 +791,10 @@ const Bookmarks = (() => {
       ...(thumbnail?.children && { children: thumbnail.children })
     });
 
-    if (!settings.$.folder_preview || siteName) {
-      bookmark.isCustomImage = true;
-      bookmark.image = blobUrl;
-    }
+    // if (!settings.$.folder_preview || siteName) {
+    bookmark.isCustomImage = true;
+    bookmark.image = blobUrl;
+    // }
 
     bookmark.hasOverlay = false;
     Toast.show(browser.i18n.getMessage('notice_thumb_image_updated'));
