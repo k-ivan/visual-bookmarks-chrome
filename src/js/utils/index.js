@@ -1,5 +1,13 @@
 import { FIREFOX_BROWSER } from '../constants';
 
+/**
+ * Creates a new DOM element with the specified tag, attributes, and children.
+ *
+ * @param {string} tag - The tag name of the element to create (e.g., 'div', 'span').
+ * @param {Object} [attributes={}] - An object representing the attributes to set on the element.
+ * @param {...(Node|string|Object)} children - The child nodes, strings, or an object with an `html` property to set as innerHTML.
+ * @returns {HTMLElement} The newly created DOM element.
+ */
 export function $createElement(tag, attributes = {}, ...children) {
   const element = document.createElement(tag);
   for (const attribute in attributes) {
