@@ -17,7 +17,6 @@ import {
 import {
   $debounce,
   $customTrigger,
-  $escapeHtml,
   $shuffle,
   $createElement,
   $notifications,
@@ -299,7 +298,7 @@ const Bookmarks = (() => {
     Object.assign(vbBookmark, {
       id: bookmark.id,
       url: bookmark.url,
-      title: $escapeHtml(bookmark.title),
+      title: bookmark.title,
       parentId: bookmark.parentId,
       image,
       isCustomImage: custom,
@@ -312,20 +311,16 @@ const Bookmarks = (() => {
   }
 
   function genFolder(bookmark) {
-    let image;
     const folderPreview = settings.$.folder_preview;
-
-    if (!folderPreview) {
-      const thumbnail = THUMBNAILS_MAP.get(bookmark.id);
-      image = thumbnail?.blobUrl;
-    }
+    const thumbnail = THUMBNAILS_MAP.get(bookmark.id);
+    const image = thumbnail?.blobUrl;
 
     const vbBookmark = document.createElement('a', { is: 'vb-bookmark' });
     Object.assign(vbBookmark, {
       id: bookmark.id,
       url: `#${bookmark.id}`,
       parentId: bookmark.parentId,
-      title: $escapeHtml(bookmark.title),
+      title: bookmark.title,
       isFolder: true,
       hasFolderPreview: folderPreview,
       folderChidlren: folderPreview ? renderFolderChildren(bookmark) : [],
@@ -419,8 +414,11 @@ const Bookmarks = (() => {
     // iterate through the array of thumbnail keys
     // add thumbnails to thumbnail map
     Object.keys(thumbnails).forEach(key => {
+      const parentFolderThumb = THUMBNAILS_MAP.get(key) ?? {};
+
       THUMBNAILS_MAP.set(key, {
         id: key,
+        ...(parentFolderThumb && parentFolderThumb),
         children: thumbnails[key]
       });
     });
@@ -764,7 +762,7 @@ const Bookmarks = (() => {
    * @param {string} data.id
    * @param {(string|undefined)} data.site - domain
    */
-  async function uploadScreen(bookmark, fileBlob, siteName) {
+  async function uploadScreen(bookmark, fileBlob) {
     bookmark.hasOverlay = true;
 
     const { id } = bookmark;
@@ -786,12 +784,10 @@ const Bookmarks = (() => {
       ...(thumbnail?.children && { children: thumbnail.children })
     });
 
-    if (!settings.$.folder_preview || siteName) {
-      bookmark.isCustomImage = true;
-      bookmark.image = blobUrl;
-    }
-
+    bookmark.isCustomImage = true;
+    bookmark.image = blobUrl;
     bookmark.hasOverlay = false;
+
     Toast.show(browser.i18n.getMessage('notice_thumb_image_updated'));
   }
 
