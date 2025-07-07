@@ -82,23 +82,14 @@ class VbBookmark extends HTMLAnchorElement {
       }
     }
     if (attr === 'image') {
-      const imageEl = this.querySelector('.bookmark__img');
+      const imageEl = this.querySelector('[data-thumb]');
+      const newThumbnail = this.#createBookmarkThumbnail();
+      queueMicrotask(() => {
+        imageEl.replaceWith(newThumbnail);
+      });
 
-      if (this.image) {
-        if (this.isFolder) {
-          imageEl.className = 'bookmark__img bookmark__img--contain';
-        } else {
-          imageEl.className = 'bookmark__img';
-          imageEl.classList.toggle('bookmark__img--contain', this.isCustomImage);
-        }
-        imageEl.style.backgroundImage = `url('${this.image}')`;
-      } else {
-        if (this.isFolder) {
-          imageEl.className = 'bookmark__img bookmark__img--folder';
-          imageEl.style.backgroundImage = '';
-        } else {
-          this.#updateLogo();
-        }
+      if (!this.isFolder) {
+        this.#updateLogo();
       }
     }
     if (
@@ -115,102 +106,111 @@ class VbBookmark extends HTMLAnchorElement {
 
   #renderFolderPreview() {
     if (this.#hasChildren) {
-      const childs = this.#_folderChildren.map(child => {
+      const fragment = document.createDocumentFragment();
+      const bookmark = $createElement('div', { class: 'bookmark__img bookmark__img--children' });
+
+      this.#_folderChildren.forEach(child => {
+        const el = bookmark.cloneNode(true);
         if (child.image) {
-          return /* html */`<div class="bookmark__img bookmark__img--contain bookmark__img--children" style="background-image: url(${child.image})"></div>`;
+          el.classList.add('bookmark__img--contain');
+          el.style.backgroundImage = `url('${child.image}')`;
         } else {
-          const imageUrl = this.#logoUrl(child.url);
-          return /* html */`<div class="bookmark__img bookmark__img--logo bookmark__img--children" style="background-image: url('${imageUrl}')"></div>`;
+          el.classList.add('bookmark__img--logo');
+          el.style.backgroundImage = `url('${this.#logoUrl(child.url)}')`;
         }
-      }).join('');
+        fragment.appendChild(el);
+      });
 
-      return /* html */`<div class="bookmark__summary-folder">${childs}</div>`;
+      return fragment;
     }
-    return /* html */`<div class="bookmark__img bookmark__img--folder"></div>`;
+    return null;
   }
 
-  #renderFolder() {
-    this.classList.add('bookmark', 'bookmark--folder');
-    this.innerHTML =
-    /* html */
-    `<div class="bookmark__wrap">
-      <button type="button" class="bookmark__action" aria-label="${browser.i18n.getMessage('bookmark_context')}"></button>
-      ${
-        (this.hasFolderPreview)
-          ? this.#renderFolderPreview()
-          : (this.image)
-            ? /* html */
-              `<div
-                class="bookmark__img bookmark__img--contain"
-                style="background-image: url(${this.image})">
-              </div>`
-            : /* html */
-            `<div class="bookmark__img bookmark__img--folder"></div>`
-      }
-      ${
-        // bookmark title
-        (this.hasTitle)
-          ? /* html */
-            `<div class="bookmark__caption">
-              ${ (this.hasFavicon)
-                ? /* html */ `<img src="/img/folder.svg" class="bookmark__favicon" width="16" height="16" alt="">`
-                : ''
-              }
-              <span class="bookmark__title">${this.title}</span>
-            </div>`
-          : ``
-      }
-      ${
-        // if dnd create a dropzone
-        (this.isDND) ? /* html */`<div class="dropzone-bookmark" data-id="${this.id}"></div>` : ``
-      }
-    </div>`;
+  #createContextButton() {
+    return $createElement('button', {
+      type: 'button',
+      class: 'bookmark__action',
+      'aria-label': browser.i18n.getMessage('bookmark_context')
+    });
   }
 
-  #renderBookmark() {
-    this.classList.add('bookmark');
-    if (this.openNewTab) {
-      this.setAttribute('target', '_blank');
-      this.setAttribute('rel', 'noopener noreferrer');
+  #createBookmarkCaption() {
+    const caption = $createElement('div', {
+      class: 'bookmark__caption'
+    });
+    if (this.hasFavicon) {
+      const favicon = $createElement('img', {
+        class: 'bookmark__favicon',
+        width: 16,
+        height: 16,
+        src: this.isFolder ? '/img/folder.svg' : this.faviconUrl,
+        alt: ''
+      });
+      caption.appendChild(favicon);
     }
-    const imgAdditionalClassString = (
-      this.image
-        ? (this.isCustomImage && ' bookmark__img--contain')
-        : (this.#externalLogo && ' bookmark__img--external')
-    ) || '';
 
-    this.innerHTML =
-    /* html*/
-    `<div class="bookmark__wrap">
-        <button type="button" class="bookmark__action" aria-label="${browser.i18n.getMessage('bookmark_context')}"></button>
-        ${
-          // bookmark img
-          (this.image)
-          ? /* html*/
-            `<div class="bookmark__img${imgAdditionalClassString}" style="background-image: url('${this.image}');"></div>`
-          : /* html*/
-            `<div class="bookmark__img bookmark__img--logo${imgAdditionalClassString}" style="background-image: url('${this.#logoUrl(this.url)}')"></div>`
-        }
-        ${
-          // bookmark title
-          (this.hasTitle)
-            ? /* html*/
-              `<div class="bookmark__caption">
-                ${ (this.hasFavicon)
-                  ? /* html*/`<img class="bookmark__favicon" width="16" height="16" src="${this.faviconUrl}" alt="">`
-                  : ``
-                }
-                <span class="bookmark__title">${this.title}</span>
-              </div>`
-            : ``
-        }
-      </div>`;
+    const title = $createElement('span', {
+      class: 'bookmark__title'
+    }, this.title);
+
+    caption.appendChild(title);
+
+    return caption;
+  }
+
+  #createBookmarkThumbnail() {
+    const thumbnail = $createElement('div', { 'data-thumb': '' });
+
+    if (this.image) {
+      thumbnail.classList.add('bookmark__img');
+      thumbnail.classList.toggle('bookmark__img--contain', this.isCustomImage || this.isFolder);
+      thumbnail.style.backgroundImage = `url('${this.image}')`;
+    } else if (!this.isFolder) {
+      thumbnail.classList.add('bookmark__img', 'bookmark__img--logo');
+      thumbnail.classList.toggle('bookmark__img--external', this.#externalLogo);
+      thumbnail.style.backgroundImage = `url('${this.#logoUrl(this.url)}')`;
+    } else if (this.isFolder) {
+      if (this.hasFolderPreview) {
+        thumbnail.classList.add('bookmark__summary-folder');
+        const children = this.#renderFolderPreview();
+        children
+          ?  thumbnail.appendChild(children)
+          : thumbnail.classList.add('bookmark__img', 'bookmark__img--folder');
+      } else {
+        thumbnail.classList.add('bookmark__img', 'bookmark__img--folder');
+      }
+    }
+
+    return thumbnail;
   }
 
   #render() {
-    (this.isFolder)
-      ? this.#renderFolder()
-      : this.#renderBookmark();
+    this.innerHTML = '';
+    this.classList.add('bookmark');
+    if (this.openNewTab) {
+      this.setAttribute('target', '_blank');
+    }
+
+    const template = $createElement('div',
+      {
+        class: 'bookmark__wrap'
+      },
+      this.#createContextButton(),
+      this.#createBookmarkThumbnail()
+    );
+
+    if (this.hasTitle) {
+      template.appendChild(this.#createBookmarkCaption());
+    }
+
+    if (this.isDND) {
+      template.appendChild($createElement('div', {
+        class: 'dropzone-bookmark',
+        'data-id': this.id
+      }));
+    }
+
+    this.appendChild(template);
   }
 
   #logoUrl(url) {
