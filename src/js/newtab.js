@@ -524,11 +524,7 @@ async function handleMenuSelection(evt) {
       break;
     }
     case 'upload': {
-      delete upload.dataset.site;
       upload.dataset.id = target.id;
-      if (!target.isFolder) {
-        upload.dataset.site = $getDomain(target.href);
-      }
       upload.click();
       break;
     }
@@ -560,7 +556,7 @@ async function handleUploadScreen(evt) {
 
   const input = evt.target;
   const file = input.files[0];
-  const { id, site: imageName } = input.dataset;
+  const { id } = input.dataset;
   const bookmark = document.getElementById(`vb-${id}`);
 
   if (!bookmark) return;
@@ -570,7 +566,7 @@ async function handleUploadScreen(evt) {
     type: file.type
   });
 
-  Bookmarks.uploadScreen(bookmark, blob, imageName);
+  Bookmarks.uploadScreen(bookmark, blob);
 }
 
 async function pasteImage(target) {
@@ -583,9 +579,7 @@ async function pasteImage(target) {
     }
 
     const blob = await clipboardItem.getType(imageType);
-    const name = $getDomain(target.href);
-
-    Bookmarks.uploadScreen(target, blob, name);
+    Bookmarks.uploadScreen(target, blob);
   } catch (err) {
     console.error(err.name, err.message);
   }
