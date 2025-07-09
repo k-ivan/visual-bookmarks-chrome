@@ -719,8 +719,8 @@ async function handleSubmitForm(evt) {
   evt.preventDefault();
   const form = evt.target;
   const id = form.getAttribute('data-action');
-  const title = form.title.value;
-  const url = form.url.value;
+  const title = form.title.value.trim();
+  const url = form.url.value.trim();
 
   let bookmark = false;
 
@@ -743,7 +743,12 @@ async function handleSubmitForm(evt) {
   // run the permission check at the very top level
   // permissions.request may only be called from a user input handler (firefox can't catch a function in the trace via promises)
   // that's why I moved the screenshot creation to this place
-  if (url && permission && bookmark && settings.$.auto_generate_thumbnail) {
+  if (
+    (url && form.dataset.oldUrl !== url)
+    && permission
+    && bookmark
+    && settings.$.auto_generate_thumbnail
+  ) {
     // update thumbnail if thumbnail generation option is enabled and if it is not a folder
     Bookmarks.createScreen(bookmark, permission);
   }
@@ -811,6 +816,7 @@ async function prepareModal(target) {
     if (url) {
       urlWrap.style.display = '';
       urlField.value = url;
+      form.dataset.oldUrl = url;
     } else {
       urlWrap.style.display = 'none';
     }
