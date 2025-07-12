@@ -187,7 +187,7 @@ class VbBookmark extends HTMLAnchorElement {
   #render() {
     this.innerHTML = '';
     this.classList.add('bookmark');
-    if (this.openNewTab) {
+    if (this.openNewTab && !this.isFolder) {
       this.setAttribute('target', '_blank');
     }
 
