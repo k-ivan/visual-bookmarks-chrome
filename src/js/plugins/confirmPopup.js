@@ -20,18 +20,17 @@ const template = /* html */
   </div>
 </div>`;
 
-const popupEl = $createElement('div',
-  {
-    class: 'gmodal gmodal--popup',
-    id: 'popup'
-  },
-  {
-    html: template
-  }
-);
-
 function confirmPopup(message) {
   let confirm = false;
+  const popupEl = $createElement('div',
+    {
+      class: 'gmodal gmodal--popup',
+      id: 'popup'
+    },
+    {
+      html: template
+    }
+  );
   document.body.appendChild(popupEl);
 
   const popupBody = document.getElementById('popupBody');
@@ -59,8 +58,9 @@ function confirmPopup(message) {
       controls.forEach(control => {
         control.removeEventListener('click', handleClick);
       });
+
       popupInstance.element.removeEventListener('gmodal:close', closePopup);
-      (confirm) ? resolve(true) : resolve(false);
+      resolve(confirm);
       confirm = false;
       popupInstance.destroy();
       popupEl.remove();
