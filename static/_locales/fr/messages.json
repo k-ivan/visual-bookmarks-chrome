@@ -139,6 +139,9 @@
   "notice_folder_removed": {
     "message": "Dossier supprimé"
   },
+  "notice_selected_bookmarks_removed": {
+    "message": "Les favoris sélectionnés ont été supprimés"
+  },
   "notice_images_removed": {
     "message": "Toutes les images ont été supprimées"
   },
@@ -530,5 +533,8 @@
         "content": "$1"
       }
     }
+  },
+  "undo": {
+    "message": "Annuler"
   }
 }

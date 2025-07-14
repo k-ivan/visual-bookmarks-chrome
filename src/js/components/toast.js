@@ -6,8 +6,11 @@ const Toast = (() => {
     modClass: '',
     hideByClick: true,
     delay: 5000,
+    progress: false,
     message: '',
-    onClose: null
+    action: undefined,
+    onClose: undefined,
+    onShow: undefined
   };
 
   const containers = {
@@ -45,7 +48,11 @@ const Toast = (() => {
   }
 
   function show(data) {
+    let actionBtn = null;
+    let closeBtn = null;
     let clickByManual = false;
+    let timer = null;
+
     const settings = { ...DEFAULTS };
 
     if (typeof data === 'string') {
@@ -60,45 +67,73 @@ const Toast = (() => {
       html: `<div class="toast__message">${settings.message}</div>`
     });
 
-    const hideToast = (evt) => {
+    function onActionClick(evt) {
+      settings.action?.callback?.(evt, hideToast);
+    }
+    function hideToast(evt) {
       if (clickByManual) return;
 
       if (evt) {
-        if (!evt.target.closest('.toast__btn')) return;
+        // if (!evt.target.closest('.toast__btn')) return;
         clickByManual = true;
       }
 
       toast.classList.add('is-deleting');
-      toast.removeEventListener('click', hideToast);
+
+      closeBtn?.removeEventListener('click', hideToast);
+      closeBtn = null;
+      actionBtn?.removeEventListener('click', onActionClick);
+      actionBtn = null;
+
+      clearTimeout(timer);
+
       setTimeout(() => {
         toast.remove();
         settings.onClose?.();
       }, 250);
-    };
+    }
+
+    if (settings.action) {
+      actionBtn = $createElement('button', {
+        class: 'toast__action',
+        'data-action': ''
+      }, {
+        html: settings.action.html
+      });
+      if (settings.action.class) {
+        actionBtn.classList.add(...settings.action.class);
+      }
+      toast.append(actionBtn);
+      actionBtn.addEventListener('click', onActionClick);
+    }
 
     if (settings.hideByClick) {
-      const closeBtn = $createElement('button', {
+      closeBtn = $createElement('button', {
         class: 'toast__btn',
         'aria-label': 'Close'
       }, {
         html: `<svg version="1.1" width="24" height="24" viewBox="0 0 24 24" fill="#000"><path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path></svg>`
       });
       toast.append(closeBtn);
-      toast.addEventListener('click', hideToast);
+      closeBtn.addEventListener('click', hideToast);
     }
 
     const container = containers[settings.position];
     settings.position.startsWith('top')
       ? container.el.prepend(toast)
       : container.el.append(toast);
-    // container.el.append(toast)
+
+    settings?.onShow?.();
 
     setTimeout(() => {
       toast.classList.add('toast-enter');
     }, 16);
 
     if (settings.delay) {
-      setTimeout(hideToast, settings.delay);
+      toast.style.setProperty('--toast-delay', `${settings.delay}ms`);
+      settings.progress && toast.classList.add('toast--progress');
+
+      timer = setTimeout(hideToast, settings.delay);
     }
   }
 

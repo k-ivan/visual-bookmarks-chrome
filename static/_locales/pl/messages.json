@@ -139,6 +139,9 @@
   "notice_folder_removed": {
     "message": "Folder został usunięty"
   },
+  "notice_selected_bookmarks_removed": {
+    "message": "Wybrane zakładki zostały usunięte"
+  },
   "notice_images_removed": {
     "message": "Wszystkie obrazy zostały usunięte"
   },
@@ -530,5 +533,8 @@
         "content": "$1"
       }
     }
+  },
+  "undo": {
+    "message": "Cofnij"
   }
 }

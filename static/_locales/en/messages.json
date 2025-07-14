@@ -139,6 +139,9 @@
   "notice_folder_removed": {
     "message": "Folder removed"
   },
+  "notice_selected_bookmarks_removed": {
+    "message": "Selected bookmarks have been deleted"
+  },
   "notice_images_removed": {
     "message": "All images was deleted"
   },
@@ -530,5 +533,8 @@
         "content": "$1"
       }
     }
+  },
+  "undo": {
+    "message": "Undo"
   }
 }

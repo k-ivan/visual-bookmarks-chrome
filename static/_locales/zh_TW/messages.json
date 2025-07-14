@@ -139,6 +139,9 @@
   "notice_folder_removed": {
     "message": "資料夾已刪除"
   },
+  "notice_selected_bookmarks_removed": {
+    "message": "已刪除所選書籤。"
+  },
   "notice_images_removed": {
     "message": "所有縮圖已刪除"
   },
@@ -530,5 +533,8 @@
         "content": "$1"
       }
     }
+  },
+  "undo": {
+    "message": "復原"
   }
 }

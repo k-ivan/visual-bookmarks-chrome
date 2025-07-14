@@ -139,6 +139,9 @@
   "notice_folder_removed": {
     "message": "Удалена папка и всё её содержимое"
   },
+  "notice_selected_bookmarks_removed": {
+    "message": "Выбранные закладки удалены"
+  },
   "notice_images_removed": {
     "message": "Все изображения удалены"
   },
@@ -530,5 +533,8 @@
         "content": "$1"
       }
     }
+  },
+  "undo": {
+    "message": "Отменить"
   }
 }

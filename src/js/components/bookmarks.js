@@ -23,9 +23,11 @@ import {
   $resizeThumbnail
 } from '../utils';
 import { ROOT_FOLDERS, SVG_LOADER } from '../constants';
+import { bookmarksToDelete } from '../state';
 import  confirmPopup from '../plugins/confirmPopup.js';
 import { requestPermissions } from '../api/permissions';
 import './vb-bookmark';
+import './vb-countdown';
 
 /**
  * Bookmarks module
@@ -901,39 +903,140 @@ const Bookmarks = (() => {
     });
   }
 
-  async function removeBookmark(bookmark) {
+  function showRemoveBookmarkToast({
+    message,
+    onShow,
+    onUndo,
+    onClose
+  }) {
+    Toast.show({
+      message,
+      delay: 7500,
+      progress: true,
+      hideByClick: false,
+      action: {
+        html: browser.i18n.getMessage('undo'),
+        class: ['btn', 'btn--clear', 'md-ripple'],
+        callback(e, hideToast) {
+          onUndo();
+          hideToast();
+        }
+      },
+      onShow,
+      onClose
+    });
+  }
+
+  async function removeMultipleBookmarks(selectedBookmarks) {
     if (!settings.$.without_confirmation) {
-      const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_bookmark'));
+      const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_selected_bookmarks'));
+      if (!confirmAction) return false;
+    }
+
+    const toggleViewBookmarks = (hidden = false) => {
+      selectedBookmarks.forEach(bookmark => {
+        bookmark.hidden = hidden;
+      });
+    };
+    const clearBoorkmarksToDelete = () => {
+      selectedBookmarks.forEach(bookmark => {
+        delete bookmarksToDelete[bookmark.id];
+      });
+    };
+
+    selectedBookmarks.forEach(bookmark => {
+      bookmarksToDelete[bookmark.id] = {
+        id: bookmark.id,
+        image: bookmark.image,
+        isFolder: bookmark.isFolder
+      };
+    });
+
+    let isHidden = true;
+    toggleViewBookmarks(isHidden);
+
+
+    return new Promise(resolve => {
+      showRemoveBookmarkToast({
+        message: browser.i18n.getMessage('notice_selected_bookmarks_removed'),
+        onShow() {
+        // When showing the toast, we need to notify that the toast has appeared so the initiator can clean up after itself.
+        // This isn't a very reliable method because there’s no guarantee everything will be properly removed.
+        // However, it’s important for us to hide the action panel;
+        // otherwise, while the toast with the timer is visible, the user can still interact with the action panel, which could lead to unwanted issues.
+          resolve(true);
+        },
+        onUndo() {
+          isHidden = false;
+          toggleViewBookmarks(false);
+          clearBoorkmarksToDelete();
+        },
+        async onClose() {
+          if (isHidden) {
+            clearBoorkmarksToDelete();
+
+            await Promise.all(selectedBookmarks.map(async(bookmark) => {
+              const { id, isFolder } = bookmark;
+              removeThumbnail(id, isFolder);
+              await (isFolder ? removeTree(id) : remove(id));
+              bookmark.remove();
+            }));
+
+            $customTrigger('updateFolderList', document, {
+              detail: {
+                isFolder: true
+              }
+            });
+          }
+        }
+      });
+    });
+  }
+
+  async function removeBookmark(bookmark, isFolder = false) {
+    if (!settings.$.without_confirmation) {
+      const confirmMessage = isFolder
+        ? browser.i18n.getMessage('confirm_delete_folder')
+        : browser.i18n.getMessage('confirm_delete_bookmark');
+
+      const confirmAction = await confirmPopup(confirmMessage);
       if (!confirmAction) return;
     }
 
     const id = bookmark.dataset.id;
-    remove(id)
-      .then(() => {
-        bookmark.remove();
-        removeThumbnail(id);
-        Toast.show(browser.i18n.getMessage('notice_bookmark_removed'));
-      });
-  }
+    const message = isFolder
+      ? browser.i18n.getMessage('notice_folder_removed')
+      : browser.i18n.getMessage('notice_bookmark_removed');
 
-  async function removeFolder(bookmark) {
-    if (!settings.$.without_confirmation) {
-      const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_folder'));
-      if (!confirmAction) return;
-    }
+    bookmark.hidden = true;
+    bookmarksToDelete[bookmark.id] = {
+      id: bookmark.id,
+      image: bookmark.image,
+      isFolder: bookmark.isFolder
+    };
 
-    const { id } = bookmark;
-    removeThumbnail(id, true);
-    removeTree(id)
-      .then(() => {
-        bookmark.remove();
-        $customTrigger('updateFolderList', document, {
-          detail: {
-            isFolder: true
-          }
-        });
-        Toast.show(browser.i18n.getMessage('notice_folder_removed'));
-      });
+    showRemoveBookmarkToast({
+      message,
+      onUndo() {
+        delete bookmarksToDelete[id];
+        bookmark.hidden = false;
+      },
+      onClose() {
+        if (bookmark.hidden) {
+          delete bookmarksToDelete[id];
+          removeThumbnail(bookmark.id, isFolder);
+          (isFolder ? removeTree : remove)(id)
+            .then(() => {
+              bookmark.remove();
+              isFolder && $customTrigger('updateFolderList', document, {
+                detail: {
+                  isFolder: true
+                }
+              });
+            });
+        }
+      }
+    });
   }
 
   async function removeThumbnail(id, isFolder = false) {
@@ -1025,7 +1128,7 @@ const Bookmarks = (() => {
     updateBookmark,
     removeFromBrowser,
     removeBookmark,
-    removeFolder,
+    removeMultipleBookmarks,
     createScreen,
     uploadScreen,
     removeThumbnail,

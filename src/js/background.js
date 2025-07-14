@@ -10,7 +10,9 @@ import {
 import {
   create,
   flattenArrayBookmarks,
-  search
+  search,
+  remove,
+  removeTree
 } from './api/bookmark';
 import {
   THUMBNAIL_POPUP_HEIGHT,
@@ -336,6 +338,20 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.showContextMenuItem) {
     const { checked } = request.showContextMenuItem;
     browserContextMenu.toggle(checked);
+  }
+
+  // if there is a request to delete bookmarks, they must be deleted.
+  // this is only possible in one case: if the undo timer has not yet expired, but the user has already closed or refreshed the page.
+  // such a request will be handled only in the page’s beforeUnload event.
+  if (request.bookmarksToDelete && Object.keys(request.bookmarksToDelete).length) {
+    const { bookmarksToDelete } = request;
+    Object.keys(bookmarksToDelete).forEach(bookmarkId => {
+      const bookmark = bookmarksToDelete[bookmarkId];
+
+      bookmark.isFolder
+        ? removeTree(bookmarkId).catch(err => console.warn(err))
+        : remove(bookmarkId).catch(err => console.warn(err));
+    });
   }
 
   // send a response asynchronously (return true)

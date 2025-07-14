@@ -19,7 +19,7 @@ import {
   getFolders
 } from './api/bookmark';
 import {
-  $getDomain,
+  // $getDomain,
   $createElement,
   $copyStr,
   $unescapeHtml,
@@ -29,6 +29,7 @@ import {
 } from './utils';
 import ImageDB from './api/imageDB';
 import { REGEXP_URL_PATTERN, CONTEXT_MENU, LOCAL_PROTOCOLS } from './constants';
+import { bookmarksToDelete } from './state';
 import Toast from './components/toast';
 import { storage } from './api/storage';
 import { containsPermissions } from './api/permissions';
@@ -322,11 +323,11 @@ function hideControlMultiplyBookmarks() {
 
   dispatchSelectedBookmarks();
 
-  document.dispatchEvent(
-    new CustomEvent('vb:bookmarks:select', {
-      detail: multipleSelectedBookmarks
-    })
-  );
+  // document.dispatchEvent(
+  //   new CustomEvent('vb:bookmarks:select', {
+  //     detail: multipleSelectedBookmarks
+  //   })
+  // );
 
   panelActions.tween.playbackRate = -1;
   panelActions.tween.onfinish = () => {
@@ -390,6 +391,12 @@ function handlePopstate() {
 
 function handleBeforeUnload(evt) {
   // if generate thumbs exist
+  // if (bookmarksToDelete.size > 0) {
+  browser.runtime.sendMessage({
+    bookmarksToDelete
+  });
+  // }
+
   if (localStorage.getItem('update_thumbnails') !== null && isGenerateThumbs)
     return evt.returnValue = 'Are you shure?';
 }
@@ -399,6 +406,10 @@ function handlePagehide() {
   if (isGenerateThumbs) {
     localStorage.removeItem('update_thumbnails');
   }
+
+  // browser.runtime.sendMessage({
+  //   bookmarksToDelete
+  // });
 }
 
 function handleUpdateStorage(e) {
@@ -543,9 +554,7 @@ async function handleMenuSelection(evt) {
       break;
     }
     case 'remove': {
-      (target.isFolder)
-        ? Bookmarks.removeFolder(target)
-        : Bookmarks.removeBookmark(target);
+      Bookmarks.removeBookmark(target, target.isFolder);
       break;
     }
   }
@@ -609,16 +618,19 @@ function runServices() {
 }
 
 async function removeSelectedBookmarks(multipleSelectedBookmarks) {
-  if (!settings.$.without_confirmation) {
-    const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_selected_bookmarks'));
-    if (!confirmAction) return;
-  }
-  await Promise.all(
-    multipleSelectedBookmarks.map(bookmark => {
-      return Bookmarks.removeFromBrowser(bookmark, bookmark.isFolder);
-    })
-  );
-  hideControlMultiplyBookmarks();
+  // if (!settings.$.without_confirmation) {
+  //   const confirmAction = await confirmPopup(browser.i18n.getMessage('confirm_delete_selected_bookmarks'));
+  //   if (!confirmAction) return;
+  // }
+  // await Promise.all(
+  //   multipleSelectedBookmarks.map(bookmark => {
+  //     return Bookmarks.removeFromBrowser(bookmark, bookmark.isFolder);
+  //   })
+  // );
+
+  const selectedBookmarks = [...multipleSelectedBookmarks];
+  const confirm = await Bookmarks.removeMultipleBookmarks(selectedBookmarks);
+  confirm && hideControlMultiplyBookmarks();
 }
 
 function openSelectedBookmarks(multipleSelectedBookmarks, action) {
