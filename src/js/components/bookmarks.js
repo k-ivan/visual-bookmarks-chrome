@@ -27,7 +27,6 @@ import { bookmarksToDelete } from '../state';
 import  confirmPopup from '../plugins/confirmPopup.js';
 import { requestPermissions } from '../api/permissions';
 import './vb-bookmark';
-import './vb-countdown';
 
 /**
  * Bookmarks module
