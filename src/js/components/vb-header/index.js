@@ -306,7 +306,8 @@ class VbHeader extends HTMLElement {
       }
       return;
     }
-    return true;
+
+    this.formNode.submit();
   }
 
   handleClickEngine(e) {
@@ -473,7 +474,7 @@ class VbHeader extends HTMLElement {
       e.preventDefault();
       this.inputNode.value = this.suggestList[this.suggestIndex];
       this.inputNode.focus();
-      this.formNode.submit();
+      this.handleSubmit(new Event('submit'));
     }
     this.closeSuggest();
   }
@@ -486,7 +487,7 @@ class VbHeader extends HTMLElement {
     const selectedIndex = parseInt(target.dataset.suggest);
     this.inputNode.value = this.suggestList[selectedIndex];
     this.inputNode.focus();
-    this.formNode.submit();
+    this.handleSubmit(new Event('submit'));
     this.closeSuggest();
   }
 
