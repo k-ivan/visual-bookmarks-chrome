@@ -910,7 +910,7 @@ const Bookmarks = (() => {
   }) {
     Toast.show({
       message,
-      delay: 7500,
+      delay: 8000,
       progress: true,
       hideByClick: false,
       action: {
