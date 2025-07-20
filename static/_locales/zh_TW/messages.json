@@ -134,10 +134,20 @@
     "message": "書籤已更新"
   },
   "notice_bookmark_removed": {
-    "message": "書籤已刪除"
+    "message": "書籤 \"<span data-title>$title$</span>\" 已刪除",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_folder_removed": {
-    "message": "資料夾已刪除"
+    "message": "資料夾 \"<span data-title>$title$</span>\" 已刪除",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_selected_bookmarks_removed": {
     "message": "已刪除所選書籤。"

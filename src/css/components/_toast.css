@@ -92,6 +92,14 @@
   line-height: 1.25rem;
   letter-spacing: 0.015em;
   white-space: pre-line;
+
+  [data-title] {
+    display: inline-block;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+  }
 }
 
 .toast__action {

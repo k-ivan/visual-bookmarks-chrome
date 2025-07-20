@@ -1004,8 +1004,8 @@ const Bookmarks = (() => {
 
     const id = bookmark.dataset.id;
     const message = isFolder
-      ? browser.i18n.getMessage('notice_folder_removed')
-      : browser.i18n.getMessage('notice_bookmark_removed');
+      ? browser.i18n.getMessage('notice_folder_removed', bookmark.title)
+      : browser.i18n.getMessage('notice_bookmark_removed', bookmark.title);
 
     bookmark.hidden = true;
     bookmarksToDelete[bookmark.id] = {

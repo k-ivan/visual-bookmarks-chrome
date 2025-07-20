@@ -134,10 +134,20 @@
     "message": "Könyvjelző módosítva"
   },
   "notice_bookmark_removed": {
-    "message": "Könyvjelző eltávolítva"
+    "message": "Könyvjelző \"<span data-title>$title$</span>\" törölve",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_folder_removed": {
-    "message": "Mappa eltávolítva"
+    "message": "Mappa \"<span data-title>$title$</span>\" törölve",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_selected_bookmarks_removed": {
     "message": "A kiválasztott könyvjelzők törölve lettek"

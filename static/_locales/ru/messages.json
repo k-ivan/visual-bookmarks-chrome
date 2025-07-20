@@ -134,10 +134,20 @@
     "message": "Закладка обновлена"
   },
   "notice_bookmark_removed": {
-    "message": "Закладка удалена"
+    "message": "Закладка \"<span data-title>$title$</span>\" удалена",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_folder_removed": {
-    "message": "Удалена папка и всё её содержимое"
+    "message": "Папка \"<span data-title>$title$</span>\" удалена",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_selected_bookmarks_removed": {
     "message": "Выбранные закладки удалены"

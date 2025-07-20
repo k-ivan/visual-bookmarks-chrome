@@ -134,10 +134,20 @@
     "message": "Zaktualizowano zakładkę"
   },
   "notice_bookmark_removed": {
-    "message": "Zakładka została usunięta"
+    "message": "Zakładka \"<span data-title>$title$</span>\" usunięta",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_folder_removed": {
-    "message": "Folder został usunięty"
+    "message": "Folder \"<span data-title>$title$</span>\" usunięty",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_selected_bookmarks_removed": {
     "message": "Wybrane zakładki zostały usunięte"

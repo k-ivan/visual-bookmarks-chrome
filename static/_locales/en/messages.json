@@ -134,10 +134,20 @@
     "message": "Bookmark updated"
   },
   "notice_bookmark_removed": {
-    "message": "Bookmark removed"
+    "message": "Bookmark \"<span data-title>$title$</span>\" deleted",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_folder_removed": {
-    "message": "Folder removed"
+    "message": "Folder \"<span data-title>$title$</span>\" deleted",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
   },
   "notice_selected_bookmarks_removed": {
     "message": "Selected bookmarks have been deleted"
