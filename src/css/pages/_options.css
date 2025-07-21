@@ -61,20 +61,31 @@
   max-width: var(--options-slider-width);
   margin: 0 auto 10px;
   background: var(--theme-background-3);
-  height: 50px;
-  line-height: 50px;
-  padding: 0 15px;
+  padding: 15px;
   box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
   border-radius: var(--base-radius);
 }
 
-.footer__pull-left {
-  float: left;
+.footer__wrap {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
 }
 
-.footer__pull-right {
-  float: right;
+dl {
+  max-width: --options-slider-width;
+  margin-inline: auto;
+  > div {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+
+    dd {
+      margin: 0;
+    }
+  }
 }
+
 
 .special-link {
   margin-bottom: 15px;
