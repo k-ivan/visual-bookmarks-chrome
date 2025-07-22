@@ -93,7 +93,7 @@
   letter-spacing: 0.015em;
   white-space: pre-line;
 
-  [data-title] {
+  & [data-title] {
     display: inline-block;
     max-width: 100px;
     white-space: nowrap;

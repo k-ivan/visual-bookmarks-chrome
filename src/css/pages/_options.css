@@ -73,14 +73,13 @@
 }
 
 dl {
-  max-width: --options-slider-width;
   margin-inline: auto;
-  > div {
+  & > div {
     display: flex;
     gap: 6px;
     align-items: baseline;
 
-    dd {
+    & dd {
       margin: 0;
     }
   }
