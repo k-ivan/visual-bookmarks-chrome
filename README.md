@@ -1,7 +1,8 @@
 # Visual bookmarks chrome
 
 [<img alt="store" src="https://img.shields.io/chrome-web-store/v/jdbgjlehkajddoapdgpdjmlpdalfnenf.svg?style=for-the-badge">](https://chrome.google.com/webstore/detail/visual-bookmarks/jdbgjlehkajddoapdgpdjmlpdalfnenf)
-[<img alt="chrome rating" src="https://img.shields.io/chrome-web-store/rating/jdbgjlehkajddoapdgpdjmlpdalfnenf?style=for-the-badge">](https://chrome.google.com/webstore/detail/visual-bookmarks/jdbgjlehkajddoapdgpdjmlpdalfnenf)
+[![СHrome Add-on Rating](https://img.shields.io/chrome-web-store/rating/jdbgjlehkajddoapdgpdjmlpdalfnenf?style=for-the-badge&label=Chrome%20rating)](https://chrome.google.com/webstore/detail/visual-bookmarks/jdbgjlehkajddoapdgpdjmlpdalfnenf)
+[![Mozilla Add-on Rating](https://img.shields.io/amo/rating/visual-bookmarks-firefox?style=for-the-badge&label=Firefox%20rating)](https://addons.mozilla.org/en-US/firefox/addon/visual-bookmarks-firefox/)
 
 Simple visual bookmarks extension for browser. The extension includes editing, searching, dragging bookmarks.
 
