@@ -214,9 +214,18 @@ class VbBookmark extends HTMLAnchorElement {
   }
 
   #logoUrl(url) {
+    if (!this.#canDisplayLogo(url)) {
+      return '/img/black-hole.svg';
+    }
+
     return this.#externalLogo
       ? this.#externalLogo.replace('{{website}}', $getDomain(url))
       : faviconURL(url, 32);
+  }
+
+  #canDisplayLogo(url) {
+    const urlLink = url ?? this.url;
+    return /^https?:\/\/.+|#.+/.test(urlLink);
   }
 
   get serviceLogo() {
@@ -227,6 +236,9 @@ class VbBookmark extends HTMLAnchorElement {
   }
 
   get faviconUrl() {
+    if (!this.#canDisplayLogo()) {
+      return '/img/black-hole.svg';
+    }
     return faviconURL(this.url);
   }
 
