@@ -74,7 +74,7 @@ export function multiswap(dnd) {
       e.dataTransfer.effectAllowed = 'move';
     },
     dragover(e) {
-      if (dnd.isIgnoreSelector(e.target)) {
+      if (dnd.isIgnoreSelector(e.target) || !draggedElement) {
         return;
       }
 
@@ -228,6 +228,7 @@ export function multiswap(dnd) {
       lastTarget = null;
 
       dnd.options?.onDragEnd?.(e);
+      draggedElement = null;
     },
     dragleave(e) {
       if (
