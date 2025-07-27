@@ -71,8 +71,9 @@ export default {
     const columns = parseInt(settings.$.dial_columns);
     const lsGridWidth = parseInt(settings.$.dial_width);
 
-    // doc.style.setProperty('--container-width', `${gridWidth}px`);
-    doc.style.setProperty('--container-width', `${lsGridWidth}%`);
+    const mediaQuery = window.matchMedia('(width > 480px)');
+    const containerWidth = mediaQuery.matches ? lsGridWidth : 100;
+    doc.style.setProperty('--container-width', `${containerWidth}%`);
 
     // if there is at least one button and the width of the container is greater than 95
     // set container inline padding
@@ -82,7 +83,7 @@ export default {
       settings.$.show_settings_icon ||
       settings.$.thumbnails_update_button ||
       settings.$.services_enable
-    ) && lsGridWidth >= 95
+    ) && lsGridWidth >= 85
     ) {
       const circBtnSize = parseInt(window.getComputedStyle(doc).getPropertyValue('--circ-btn-size'));
       // button size + small padding
