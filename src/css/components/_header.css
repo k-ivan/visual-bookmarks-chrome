@@ -128,6 +128,7 @@
 }
 
 .search-button {
+  position: relative;
   line-height: 0;
   border: 0;
   color: var(--search-reset-btn-color);
@@ -136,6 +137,34 @@
   cursor: pointer;
   &:focus-visible {
     box-shadow: 0 0 0 3px var(--color-primary-alpha-40);
+  }
+
+  &:hover,
+  &:focus {
+    &[data-tooltip]::after {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  &[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 3px);
+    padding: 6px 12px;
+    width: 170px;
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.3;
+    color: var(--theme-text-color);
+    border-radius: var(--base-radius);
+    background-color: var(--theme-background-3);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.15s ease;
+    transition-property: opacity, visibility;
   }
 }
 
@@ -227,7 +256,11 @@
 
 .header input {
   padding-left: 55px;
-  padding-right: 40px;
+  padding-right: 70px;
+
+  &.lg-offset {
+    padding-right: 106px;
+  }
 }
 
 .header .form-control {

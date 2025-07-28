@@ -486,6 +486,9 @@
   "clear_search": {
     "message": "Clear search"
   },
+  "search_suggestions_permission_tooltip": {
+    "message": "Access to Google.com is needed for search autocomplete suggestions"
+  },
   "search": {
     "message": "Search"
   },

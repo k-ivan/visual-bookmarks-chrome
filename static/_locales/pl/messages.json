@@ -486,6 +486,9 @@
   "clear_search": {
     "message": "Wyczyść wyszukiwanie"
   },
+  "search_suggestions_permission_tooltip": {
+    "message": "Aby działały podpowiedzi wyszukiwania, wymagany jest dostęp do Google.com"
+  },
   "search": {
     "message": "Szukaj"
   },

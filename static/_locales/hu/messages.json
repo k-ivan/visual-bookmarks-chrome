@@ -486,6 +486,9 @@
   "clear_search": {
     "message": "Keresés törlése"
   },
+  "search_suggestions_permission_tooltip": {
+    "message": "A keresési automatikus kiegészítésekhez hozzáférés szükséges a Google.com-hoz"
+  },
   "search": {
     "message": "Keresés"
   },

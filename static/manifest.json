@@ -27,14 +27,12 @@
     "notifications",
     "contextMenus"
   ],
-  "host_permissions": [
-    "https://google.com/*"
-  ],
   "optional_permissions": [
     "clipboardRead",
     "search"
   ],
   "optional_host_permissions": [
+    "https://google.com/*",
     "<all_urls>"
   ],
   "background": {

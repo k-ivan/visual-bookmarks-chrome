@@ -486,6 +486,9 @@
   "clear_search": {
     "message": "Очистить поиск"
   },
+  "search_suggestions_permission_tooltip": {
+    "message": "Для работы автоподсказок поиска необходим доступ к Google.com"
+  },
   "search": {
     "message": "Поиск"
   },

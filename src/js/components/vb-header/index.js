@@ -5,7 +5,7 @@ import { $createElement } from '../../utils';
 import { getFolders } from '../../api/bookmark';
 import { SEARCH_ENGINES } from '../../constants';
 import { settings } from '../../settings';
-import { requestPermissions } from '../../api/permissions';
+import { containsPermissions, requestPermissions } from '../../api/permissions';
 
 class VbHeader extends HTMLElement {
   initialFolderId = null;
@@ -51,6 +51,7 @@ class VbHeader extends HTMLElement {
     // form nodes
     this.formNode = this.querySelector('form');
     this.inputNode = this.querySelector('input');
+    this.permSuggestionsNode = this.querySelector('#searchSuggestions');
     this.resetNode = this.querySelector('#searchReset');
     this.buttonSubmitNode = this.querySelector('#searchSubmit');
     // get vb-select-folders component
@@ -73,6 +74,9 @@ class VbHeader extends HTMLElement {
     if (settings.$.search_autofocus) {
       this.inputNode.focus();
     }
+
+    this.permSuggestionsNode.dataset.tooltip = browser.i18n.getMessage('search_suggestions_permission_tooltip');
+    this.#suggestPermissionButtonVisibility();
   }
 
   get isBookmarksEngine() {
@@ -149,6 +153,23 @@ class VbHeader extends HTMLElement {
       });
   }
 
+  async #suggestPermissionButtonVisibility() {
+    const shouldCheckPermission = this.isBookmarksEngine;
+
+    if (shouldCheckPermission) {
+      this.permSuggestionsNode.hidden = true;
+      return;
+    }
+
+    const hasSuggestPermission = await containsPermissions({
+      origins: ['https://google.com/*']
+    });
+
+    this.permSuggestionsNode.hidden = hasSuggestPermission;
+
+    this.inputNode.classList.toggle('lg-offset', !this.permSuggestionsNode.hidden);
+  }
+
   #setSearchEngines() {
     this.vbPopupContent.innerHTML = SEARCH_ENGINES.map(engine => {
       const isActive = engine.value === settings.$.search_engine ? ' is-active' : '';
@@ -165,6 +186,7 @@ class VbHeader extends HTMLElement {
   #attachEvents() {
     this.handleInput = this.handleInput.bind(this);
     this.inputNode.addEventListener('input', this.handleInput);
+    this.permSuggestionsNode.addEventListener('click', this.handleSuggestPermission);
 
     this.handleReset = this.handleReset.bind(this);
     this.resetNode.addEventListener('click', this.handleReset);
@@ -208,6 +230,7 @@ class VbHeader extends HTMLElement {
 
   #dettachEvents() {
     this.inputNode.removeEventListener('input', this.handleInput);
+    this.permSuggestionsNode.removeEventListener('click', this.handleSuggestPermission);
     this.resetNode.removeEventListener('click', this.handleReset);
     this.selectNode.removeEventListener('vb:select:change', this.handleSelectHash);
     this.formNode.removeEventListener('submit', this.handleSubmit);
@@ -222,6 +245,16 @@ class VbHeader extends HTMLElement {
     document.removeEventListener('keydown', this.handleEscape);
     document.removeEventListener('click', this.handleDocClick);
   }
+
+  handleSuggestPermission = async() => {
+    if (!this.isBookmarksEngine) {
+      const permissions = await requestPermissions({ origins: ['https://google.com/*'] });
+
+      if (permissions) {
+        this.#suggestPermissionButtonVisibility();
+      }
+    }
+  };
 
   async handleUpdateFolders(e) {
     if (e.detail?.isFolder && this.selectNode) {
@@ -318,6 +351,7 @@ class VbHeader extends HTMLElement {
       return engineNode.classList.contains('is-active');
     });
     this.engine = target.dataset.engine;
+    this.#suggestPermissionButtonVisibility();
     this.vbPopup.hide();
     this.inputNode.focus();
   }
@@ -369,7 +403,7 @@ class VbHeader extends HTMLElement {
       );
     } else {
       this.inputValue = e.target.value;
-      this.suggestSearch(e.target.value.trim());
+      this.permSuggestionsNode.hidden && this.suggestSearch(e.target.value.trim());
     }
 
     this.resetNode.classList.toggle('is-show', search.trim().length);

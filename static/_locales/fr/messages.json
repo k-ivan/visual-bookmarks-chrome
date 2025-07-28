@@ -486,6 +486,9 @@
   "clear_search": {
     "message": "Effacer la recherche"
   },
+  "search_suggestions_permission_tooltip": {
+    "message": "L'accès à Google.com est nécessaire pour les suggestions de recherche automatiques"
+  },
   "search": {
     "message": "Rechercher"
   },

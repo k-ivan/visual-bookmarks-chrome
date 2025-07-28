@@ -486,6 +486,9 @@
   "clear_search": {
     "message": "清除搜尋"
   },
+  "search_suggestions_permission_tooltip": {
+    "message": "啟用搜尋自動完成建議需要存取 Google.com"
+  },
   "search": {
     "message": "搜尋"
   },
