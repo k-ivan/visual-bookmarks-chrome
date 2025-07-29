@@ -240,6 +240,15 @@
   "background_noimage_text": {
     "message": "Téma háttérkép nélkül"
   },
+  "background_bing": {
+    "message": "Bing napi képe"
+  },
+  "background_bing_text": {
+    "message": "A Bing napi képe egy napi háttérfotó, amely megjelenik a Bing kezdőlapján. A Microsoft minden nap lenyűgöző vagy érdekes képet mutat be a természetből, az építészetből vagy a kultúrából a világ különböző részeiről"
+  },
+  "bing_permission_toast": {
+    "message": "A Bing napi képe funkcióhoz engedély szükséges a bing.com webhelyhez. Ezt az engedélyt a <a href=\"/options.html\">beállítások oldalon</a> engedélyezheti a „Bing napi képe” opció kiválasztásával és az engedély megerősítésével."
+  },
   "background_external": {
     "message": "Kép az URL-címről"
   },

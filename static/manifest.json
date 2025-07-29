@@ -33,6 +33,7 @@
   ],
   "optional_host_permissions": [
     "https://google.com/*",
+    "https://www.bing.com/*",
     "<all_urls>"
   ],
   "background": {

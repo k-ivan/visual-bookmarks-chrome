@@ -114,7 +114,6 @@ async function init() {
 
   // Delegate change settings
   document.querySelector('.tabs').addEventListener('change', handleSetOptions);
-  document.getElementById('background_image').addEventListener('change', handleSelectBackground);
   document.getElementById('background_local').addEventListener('click', handleRemoveFile);
   document.getElementById('restore_local').addEventListener('click', handleResetLocalSettings);
   document.getElementById('restore_sync').addEventListener('click', handleResetSyncSettings);
@@ -196,10 +195,6 @@ function getOptions() {
   generateFolderList();
   generateSearchEngineList();
   getPermissions();
-
-  const optionBackgroundSelect = document.getElementById('background_image');
-  optionBackgroundSelect.value = settings.$.background_image;
-  toggleBackgroundControls(settings.$.background_image);
 
   const logoExternalInput = document.getElementById('logo_external_url');
   logoExternalInput.value = settings.$.logo_external_url;
@@ -293,7 +288,7 @@ function relationToggleOption(target) {
   }
 }
 
-function handleSetOptions(e) {
+async function handleSetOptions(e) {
   const target = e.target.closest('.js-change');
   if (!target) return;
 
@@ -302,6 +297,17 @@ function handleSetOptions(e) {
   if (/checkbox|radio/.test(target.type)) {
     settings.updateKey(id, target.checked);
   } else {
+    if (id === 'background_image') {
+      if (target.value === 'background_bing') {
+        const bingHostPermission = await requestPermissions({ origins: ['https://www.bing.com/*'] });
+        if (!bingHostPermission) {
+          target.value = 'background_local';
+        }
+      }
+
+      toggleBackgroundControls(target.value);
+    }
+
     settings.updateKey(id, target.value);
   }
 
@@ -389,10 +395,6 @@ async function handleRemoveFile(evt) {
   Toast.show(browser.i18n.getMessage('notice_image_removed'));
 }
 
-function handleSelectBackground() {
-  toggleBackgroundControls(this.value);
-}
-
 async function handleDeleteImages(evt) {
   evt.preventDefault();
 
@@ -459,6 +461,18 @@ async function getPermissions() {
   const clipboardReadPermission = await containsPermissions({ permissions: ['clipboardRead'] });
   clipboardInput.checked = clipboardReadPermission;
   clipboardInput.dataset.active = clipboardReadPermission;
+
+  const optionBackgroundSelect = document.getElementById('background_image');
+  let selectedBackgroundValue = settings.$.background_image;
+  if (selectedBackgroundValue === 'background_bing') {
+    const bingHostPermission = await containsPermissions({ origins: ['https://www.bing.com/*'] });
+    if (!bingHostPermission) {
+      selectedBackgroundValue = 'background_local';
+      settings.updateKey('background_image', selectedBackgroundValue);
+    }
+  }
+  optionBackgroundSelect.value = selectedBackgroundValue;
+  toggleBackgroundControls(selectedBackgroundValue);
 }
 
 async function generateFolderList() {

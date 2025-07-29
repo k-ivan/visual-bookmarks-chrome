@@ -138,6 +138,7 @@ function createBackup(setting) {
 function createBackgroundSetting() {
   return (/* html */
   `<div id="background_noimage" class="tbl__option js-background-settings js-change text-muted" hidden>${browser.i18n.getMessage('background_noimage_text')}</div>
+  <div id="background_bing" class="tbl__option js-background-settings js-change text-muted" hidden>${browser.i18n.getMessage('background_bing_text')}</div>
   <div id="background_local" class="tbl__option js-background-settings">
     <div class="c-upload">
       <form action="#0" method="post">

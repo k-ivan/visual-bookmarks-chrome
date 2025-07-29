@@ -240,6 +240,15 @@
   "background_noimage_text": {
     "message": "Motyw bez obrazu tła"
   },
+  "background_bing": {
+    "message": "Obraz dnia Bing"
+  },
+  "background_bing_text": {
+    "message": "Obraz dnia Bing to codzienne zdjęcie tła wyświetlane na stronie głównej Bing. Każdego dnia Microsoft prezentuje zachwycające lub interesujące zdjęcie natury, architektury lub kultury z całego świata"
+  },
+  "bing_permission_toast": {
+    "message": "Obraz dnia Bing wymaga uprawnień dostępu do bing.com. Możesz je włączyć na <a href=\"/options.html\">stronie ustawień</a>, wybierając opcję „Obraz dnia Bing” i potwierdzając uprawnienia."
+  },
   "background_external": {
     "message": "Obraz z adresu URL"
   },

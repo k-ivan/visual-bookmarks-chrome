@@ -240,6 +240,15 @@
   "background_noimage_text": {
     "message": "Thème sans image d'arrière-plan"
   },
+  "background_bing": {
+    "message": "Image du jour de Bing"
+  },
+  "background_bing_text": {
+    "message": "L’image du jour de Bing est une photo d’arrière-plan quotidienne affichée sur la page d’accueil de Bing. Chaque jour, Microsoft met en avant une image impressionnante ou intéressante de la nature, de l’architecture ou de la culture du monde entier"
+  },
+  "bing_permission_toast": {
+    "message": "L’image du jour de Bing nécessite une autorisation d'accès à bing.com. Vous pouvez activer cette autorisation sur la <a href=\"/options.html\">page des paramètres</a> en sélectionnant l’option « Image du jour de Bing » et en confirmant l’autorisation"
+  },
   "background_external": {
     "message": "Image à partir d'une URL"
   },

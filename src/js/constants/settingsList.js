@@ -102,7 +102,8 @@ export default [
         options: [
           { value: 'background_noimage', title: browser.i18n.getMessage('background_noimage') },
           { value: 'background_external', title: browser.i18n.getMessage('background_external') },
-          { value: 'background_local', title: browser.i18n.getMessage('background_local') }
+          { value: 'background_local', title: browser.i18n.getMessage('background_local') },
+          { value: 'background_bing', title: browser.i18n.getMessage('background_bing') }
         ]
       }
     ]

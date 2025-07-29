@@ -240,6 +240,15 @@
   "background_noimage_text": {
     "message": "Theme without background image"
   },
+  "background_bing": {
+    "message": "Bing Image Of The Day"
+  },
+  "background_bing_text": {
+    "message": "Bing Image of the Day is a daily background photo featured on Bing’s homepage. Each day, Microsoft showcases a stunning or interesting image of nature, architecture, or culture from around the world"
+  },
+  "bing_permission_toast": {
+    "message": "Bing Image of the Day requires host permission to bing.com. You can enable this permission on the <a href=\"/options.html\">settings page</a> by selecting the \"Bing Image of the Day\" option and confirming the permission"
+  },
   "background_external": {
     "message": "Image from URL"
   },

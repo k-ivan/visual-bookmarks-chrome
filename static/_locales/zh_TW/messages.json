@@ -240,6 +240,15 @@
   "background_noimage_text": {
     "message": "沒有背景圖片的主題"
   },
+  "background_bing": {
+    "message": "Bing 每日圖片"
+  },
+  "background_bing_text": {
+    "message": "Bing 每日圖片是顯示在 Bing 首頁上的每日背景照片。Microsoft 每天都會展示來自世界各地的自然、建築或文化的驚艷或有趣的圖片"
+  },
+  "bing_permission_toast": {
+    "message": "Bing 每日圖片需要對 bing.com 的存取權限。您可以在<a href=\"/options.html\">設定頁面</a>中啟用此權限，選取「Bing 每日圖片」選項並確認權限"
+  },
   "background_external": {
     "message": "使用網路圖片當作底圖"
   },
