@@ -225,7 +225,7 @@ class VbBookmark extends HTMLAnchorElement {
 
   #canDisplayLogo(url) {
     const urlLink = url ?? this.url;
-    return /^https?:\/\/.+|#.+/.test(urlLink);
+    return /^https?:\/\/.+|^#.+/.test(urlLink);
   }
 
   get serviceLogo() {
