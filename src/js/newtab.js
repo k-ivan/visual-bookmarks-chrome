@@ -740,7 +740,7 @@ async function handleSubmitForm(evt) {
   // run the permission check at the very top level
   // permissions.request may only be called from a user input handler (firefox can't catch a function in the trace via promises)
   let permission = false;
-  if (url && settings.$.auto_generate_thumbnail) {
+  if (url && form.dataset.oldUrl !== url && settings.$.auto_generate_thumbnail) {
     permission = await Bookmarks.checkHostPermissions();
   }
 
