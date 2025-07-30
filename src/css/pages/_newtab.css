@@ -178,7 +178,7 @@ vb-virtual-pagination {
   bottom: 12px;
   left: 3px;
   min-height: 40px;
-  z-index: 9998;
+  z-index: 9995;
   display: flex;
   align-items: center;
   padding: 1px;
