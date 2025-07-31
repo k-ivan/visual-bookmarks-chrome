@@ -231,7 +231,7 @@ pre {
 }
 
 .whats-new {
-  & img {
+  & .logo {
     display: block;
     margin: auto;
     max-width: 100%;
