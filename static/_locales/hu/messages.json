@@ -83,7 +83,7 @@
     "message": "Link címének másolása"
   },
   "contextmenu_edit": {
-    "message": "Szerkeszt"
+    "message": "Szerkesztés"
   },
   "contextmenu_capture": {
     "message": "Miniatűr frissítése"
@@ -162,7 +162,7 @@
     "message": "Az alapértelmezett helyi beállítások visszaállítása"
   },
   "notice_sync_settings_cleared": {
-    "message": "Adatok szinkronizálása törölve"
+    "message": "Szinkronizált beállítások és adatok törölve."
   },
   "notice_bg_image_updated": {
     "message": "A háttérkép megváltozott"
@@ -265,7 +265,7 @@
     "message": "Keresősáv és mappaválasztás megjelenítése"
   },
   "show_create_column": {
-    "message": "Könyvjelző hozzáadására szolgáló oszlop megjelenítése"
+    "message": "Könyvjelző hozzáadására szolgáló miniatűr megjelenítése"
   },
   "show_bookmark_title": {
     "message": "Könyvjelző címének megjelenítése"
@@ -330,7 +330,7 @@
     "message": "Beleértve az almappákat is"
   },
   "thumbnails_update_recursive_note": {
-    "message": "Ha az \"$option$\" opció engedélyezve van",
+    "message": "Ha a(z) \"$option$\" opció engedélyezve van",
     "placeholders": {
       "option": {
         "content": "$1"
@@ -377,10 +377,10 @@
     "message": "Lehetővé teszi a bővítmény számára, hogy adatokat olvasson a vágólapról (a könyvjelző miniatűrjének betöltéséhez a vágólapról). A könyvjelzők helyi menüjében elérhetővé válik a „Beillesztés a vágólapról” opció. Ha aggódik emiatt az engedély miatt, egyszerűen ne engedélyezze azt."
   },
   "service_settings_btn": {
-    "message": "Konfigurálni"
+    "message": "Beállítás"
   },
   "services_add_title": {
-    "message": "Hozzá"
+    "message": "Hozzáadás"
   },
   "services_limit": {
     "message": "Szolgáltatások maximális száma: $total$",
@@ -427,7 +427,7 @@
     "message": "Miniatűr törlése"
   },
   "show_back_column": {
-    "message": "Oszlop megjelenítése a könyvjelzőkben"
+    "message": "Vissza miniatűr megjelenítése a lapokon"
   },
   "search_engine": {
     "message": "Alapértelmezett kereső"
@@ -442,13 +442,13 @@
     "message": "Rendezés dátum szerint"
   },
   "not_sorting": {
-    "message": "Nincs válogatva"
+    "message": "Nincs rendezés"
   },
   "folders_on_top": {
-    "message": "Mappák a tetején"
+    "message": "Mappák felül"
   },
   "folders_at_the_bottom": {
-    "message": "Alul mappák"
+    "message": "Mappák alul"
   },
   "bookmarks_sorting_warning": {
     "message": "A fogd és vidd rendezés le lesz tiltva, ha valamelyik rendezési opciót kiválasztja"
@@ -457,7 +457,7 @@
     "message": "A bővítmény frissítve lett"
   },
   "whats_new": {
-    "message": "Mi újság"
+    "message": "Újdonságok"
   },
   "search_autofocus": {
     "message": "Fókuszáljon a keresősávra"
@@ -472,7 +472,7 @@
     "message": "Virtuális oldalszámozás"
   },
   "enable_virtual_pagination_note": {
-    "message": "A dokumentum magasságát szakaszokra osztja a navigációhoz (kísérlet)"
+    "message": "A dokumentum magasságát szakaszokra osztja a navigációhoz (kísérleti)"
   },
   "parent_folder": {
     "message": "Szülőmappa"
@@ -481,13 +481,13 @@
     "message": "Új könyvjelző"
   },
   "modal_dismiss": {
-    "message": "Modal dismiss"
+    "message": "Modális elutasítás"
   },
   "remove_thumbnail": {
     "message": "Távolítsa el az indexképet"
   },
   "thumbnails_update": {
-    "message": "Thumbnails update"
+    "message": "Miniatűrök frissítése"
   },
   "bookmark_context": {
     "message": "Könyvjelző kontextus"
@@ -531,7 +531,7 @@
     }
   },
   "history_back": {
-    "message": "Történelem vissza"
+    "message": "Vissza az előzményekhez"
   },
   "incognito_access_note": {
     "message": "Engedélyeznie kell a bővítmény privát módban történő futtatását"
@@ -540,7 +540,7 @@
     "message": "A weboldalak bélyegképeinek létrehozásához engedély szükséges a felhasználótól, hogy a bővítmény hozzáférhessen a weboldalakhoz."
   },
   "learn_more": {
-    "message": "Tanulj többet"
+    "message": "Tudjon meg többet"
   },
   "why_use_host_permissions": {
     "message": "Miért használjuk ezt a jogosultságot?"
