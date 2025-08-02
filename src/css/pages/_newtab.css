@@ -1,3 +1,11 @@
+::view-transition-old(root) {
+  animation: 0.3s ease-in-out both slideOut;
+}
+
+::view-transition-new(root) {
+  animation: 0.3s ease-in-out both zoomIn;
+}
+
 body {
   overflow-y: hidden;
 }

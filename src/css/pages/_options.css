@@ -1,3 +1,11 @@
+::view-transition-old(root) {
+  animation: 0.3s ease-in-out both zoomOut;
+}
+
+::view-transition-new(root) {
+  animation: 0.3s ease-in-out both slideIn;
+}
+
 .options {
   overflow-y: scroll;
   background-color: var(--options-background);
