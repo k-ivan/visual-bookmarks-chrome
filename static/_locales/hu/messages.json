@@ -418,7 +418,7 @@
     "message": "A könyvjelzők nem találhatók"
   },
   "logo_external": {
-    "message": "Külső logói"
+    "message": "Külső logók"
   },
   "logo_external_note": {
     "message": "Hivatkozás külső logóforrásra. Ügyeljen arra, hogy az <code>{{website}}</code> aláfűzés változatlan maradjon, és a megfelelő helyre kerüljön a hivatkozásban"
