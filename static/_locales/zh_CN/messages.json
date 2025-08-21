@@ -1,0 +1,562 @@
+{
+  "ext_name": {
+    "message": "缩略图书签"
+  },
+  "ext_desc": {
+    "message": "简单的快速访问书签页面, 包括搜索, 新建, 编辑, 删除和拖拽书签."
+  },
+  "default_title": {
+    "message": "缩略图书签"
+  },
+  "color_theme": {
+    "message": "颜色主题"
+  },
+  "dark_theme": {
+    "message": "深色模式"
+  },
+  "light_theme": {
+    "message": "浅色模式"
+  },
+  "os_theme": {
+    "message": "跟随系统设置"
+  },
+  "placeholder_input_customstyle": {
+    "message": "输入你自定义的 CSS (高级操作)"
+  },
+  "placeholder_input_search": {
+    "message": "在 $engine$ 中搜索",
+    "placeholders": {
+      "engine": {
+        "content": "$1"
+      }
+    }
+  },
+  "placeholder_input_search_bookmarks": {
+    "message": "书签"
+  },
+  "search_browser_default": {
+    "message": "浏览器设置"
+  },
+  "placeholder_input_title": {
+    "message": "输入书签标题"
+  },
+  "label_title": {
+    "message": "标题"
+  },
+  "label_url": {
+    "message": "地址"
+  },
+  "label_folder": {
+    "message": "文件夹"
+  },
+  "url_field_tip": {
+    "message": "输入地址, 如果要创建文件夹, 请留空"
+  },
+  "btn_close": {
+    "message": "取消"
+  },
+  "btn_save": {
+    "message": "保存"
+  },
+  "btn_back": {
+    "message": "完成"
+  },
+  "btn_apply": {
+    "message": "应用"
+  },
+  "contextmenu_tab": {
+    "message": "在新标签页中打开"
+  },
+  "contextmenu_window": {
+    "message": "在新窗口中打开"
+  },
+  "contextmenu_open_all": {
+    "message": "全部打开"
+  },
+  "contextmenu_open_all_window": {
+    "message": "全部在新窗口中打开"
+  },
+  "contextmenu_incognito": {
+    "message": "以无痕模式打开"
+  },
+  "contextmenu_copy_link": {
+    "message": "复制链接地址"
+  },
+  "contextmenu_edit": {
+    "message": "编辑"
+  },
+  "contextmenu_capture": {
+    "message": "更新缩略图"
+  },
+  "contextmenu_upload": {
+    "message": "从电脑上传"
+  },
+  "contextmenu_upload_paste": {
+    "message": "从剪贴板上传"
+  },
+  "contextmenu_remove": {
+    "message": "删除"
+  },
+  "confirm_delete_image": {
+    "message": "删除图片?"
+  },
+  "confirm_delete_images": {
+    "message": "你确定吗? 所有本地的图片将被删除"
+  },
+  "confirm_delete_bookmark": {
+    "message": "你确定要删除这个书签吗?"
+  },
+  "confirm_delete_folder": {
+    "message": "你确定要删除该文件夹及其所有内容吗?"
+  },
+  "confirm_restore_default_settings": {
+    "message": "你确定要恢复成默认设置吗?"
+  },
+  "confirm_clear_sync_settings": {
+    "message": "你确定要删除之前同步的所有数据, 重新开始吗?"
+  },
+  "confirm_sync_remote_settings": {
+    "message": "你之前已经同步过设置!\n 你想用之前在服务器上备份的设置来覆盖当前的本地设置吗?"
+  },
+  "notice_image_removed": {
+    "message": "图片已删除"
+  },
+  "notice_thumb_image_updated": {
+    "message": "书签缩略图已更新"
+  },
+  "notice_bookmark_exist": {
+    "message": "书签已存在"
+  },
+  "notice_bookmark_created": {
+    "message": "书签已创建"
+  },
+  "notice_bookmark_updated": {
+    "message": "书签已更新"
+  },
+  "notice_bookmark_removed": {
+    "message": "书签 \"<span data-title>$title$</span>\" 已删除",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
+  },
+  "notice_folder_removed": {
+    "message": "文件夹 \"<span data-title>$title$</span>\" 已删除",
+    "placeholders": {
+      "title": {
+        "content": "$1"
+      }
+    }
+  },
+  "notice_selected_bookmarks_removed": {
+    "message": "已删除所选书签."
+  },
+  "notice_images_removed": {
+    "message": "所有缩略图已删除"
+  },
+  "notice_cant_find_id": {
+    "message": "无法按 ID 找到文件夹, 也许你还没有同步过书签"
+  },
+  "notice_reset_default_settings": {
+    "message": "本地的设置已清除, 恢复为程序默认"
+  },
+  "notice_sync_settings_cleared": {
+    "message": "清除已同步的数据"
+  },
+  "notice_bg_image_updated": {
+    "message": "背景图已更新"
+  },
+  "notice_thumbnails_update_complete": {
+    "message": "按钮缩略图更新完成"
+  },
+  "notice_link_copied": {
+    "message": "链接已复制"
+  },
+  "alert_file_type_fail_type": {
+    "message": "文件类型错误\n 有效文件类型: ($type$)",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "alert_file_type_fail_size": {
+    "message": "最大上传文件大小: $filesize$ MB",
+    "placeholders": {
+      "filesize": {
+        "content": "$1"
+      }
+    }
+  },
+  "not_found_text": {
+    "message": "无法通过 ID 找到该文件夹. 您可能没有同步书签, 或者您 “删除” 或 “移动” 了这个文件夹."
+  },
+  "not_found_link_text": {
+    "message": "书签栏"
+  },
+  "add_bookmark": {
+    "message": "添加到书签"
+  },
+  "save_to_current_folder": {
+    "message": "保存到当前文件夹"
+  },
+  "edit_bookmark": {
+    "message": "编辑书签"
+  },
+  "options": {
+    "message": "选项"
+  },
+  "view_setting": {
+    "message": "查看设置"
+  },
+  "general_setting": {
+    "message": "常规设置"
+  },
+  "advanced_setting": {
+    "message": "高级设置"
+  },
+  "dial_width": {
+    "message": "宽度比例"
+  },
+  "number_of_columns": {
+    "message": "屏幕面宽(从左到右的数量)"
+  },
+  "vertical_center": {
+    "message": "垂直居中"
+  },
+  "default_folder_id": {
+    "message": "默认显示文件夹"
+  },
+  "background": {
+    "message": "底图"
+  },
+  "color": {
+    "message": "颜色"
+  },
+  "background_noimage": {
+    "message": "没有背景图片"
+  },
+  "background_noimage_text": {
+    "message": "无背景图片的主题"
+  },
+  "background_bing": {
+    "message": "必应每日图片"
+  },
+  "background_bing_text": {
+    "message": "必应每日图片是显示在必应首页上的每日背景照片. 微软每天都会展示来自世界各地的自然, 建筑或文化的惊艳或有趣的图片"
+  },
+  "bing_permission_toast": {
+    "message": "必应每日图片需要对 bing.com 的访问权限. 您可以在<a href=\"/options.html\">设置页面</a>中启用此权限，选择“Bing 每日图片”选项并确认权限"
+  },
+  "background_external": {
+    "message": "使用网络图片作为背景"
+  },
+  "background_local": {
+    "message": "背景来自本地电脑"
+  },
+  "choose_file": {
+    "message": "图片或视频"
+  },
+  "show_settings_icon": {
+    "message": "显示设置图标"
+  },
+  "show_toolbar": {
+    "message": "显示搜索栏和文件夹选择"
+  },
+  "show_create_column": {
+    "message": "显示用于新建书签的栏"
+  },
+  "show_bookmark_title": {
+    "message": "显示书签标题"
+  },
+  "show_favicon": {
+    "message": "在标题旁显示网站图标"
+  },
+  "open_link_newtab": {
+    "message": "搜索结果在新标签页打开"
+  },
+  "show_contextmenu_item": {
+    "message": "显示在右键菜单"
+  },
+  "drag_and_drop": {
+    "message": "启用拖放"
+  },
+  "auto_generate_thumbnail": {
+    "message": "创建书签时生成缩略图"
+  },
+  "enable_sync": {
+    "message": "开启同步功能"
+  },
+  "advanced_settings": {
+    "message": "高级设置"
+  },
+  "clear_background_locals": {
+    "message": "清除本地文件夹内的图标"
+  },
+  "reset_local_default": {
+    "message": "将本地的设置恢复到默认值"
+  },
+  "reset_sync_text": {
+    "message": "删除服务器上已同步的数据"
+  },
+  "option_not_sync": {
+    "message": "选项未同步"
+  },
+  "custom_style": {
+    "message": "自定义 CSS"
+  },
+  "version": {
+    "message": "版本"
+  },
+  "thumbnails_creation": {
+    "message": "正在生成缩略图: $start$，共 $total$",
+    "placeholders": {
+      "start": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      }
+    }
+  },
+  "thumbnails_update_warn": {
+    "message": "更新缩略图会影响你电脑的性能\n(这取决于你有多少书签, 以及电脑的速度)"
+  },
+  "thumbnails_update_button": {
+    "message": "更新的按钮缩略图"
+  },
+  "thumbnails_update_recursive": {
+    "message": "包含子目录"
+  },
+  "thumbnails_update_recursive_note": {
+    "message": "如果启用了\"$option$\" 选项",
+    "placeholders": {
+      "option": {
+        "content": "$1"
+      }
+    }
+  },
+  "folder_preview": {
+    "message": "使用网站缩略图替代目录图标"
+  },
+  "folder_preview_description": {
+    "message": "启用此设置后, 将显示文件夹中 4 个随机网站的缩略图, 而不是图标或自定义图片."
+  },
+  "backup_settings": {
+    "message": "导入, 导出设置"
+  },
+  "backup_settings_description": {
+    "message": "只备份 “缩略图书签” 的设置, 但不包括书签和缩略图的图标"
+  },
+  "import": {
+    "message": "设置导入"
+  },
+  "export": {
+    "message": "设置导出"
+  },
+  "import_settings_success": {
+    "message": "设置已导入"
+  },
+  "import_settings_failed": {
+    "message": "无法正常读取配置文件"
+  },
+  "without_confirmation": {
+    "message": "删除时不确认"
+  },
+  "services_enable": {
+    "message": "服务快速访问面板"
+  },
+  "services_enable_description": {
+    "message": "常用网络应用和服务的快速链接菜单"
+  },
+  "toggle_clipboard_access": {
+    "message": "从剪贴板读取的权限"
+  },
+  "toggle_clipboard_access_description": {
+    "message": "允许扩展程序从剪贴板中读取数据 (从剪贴板加载书签缩略图). 在书签的右键菜单中, 会出现 “从剪贴板粘贴” 的选项. 如果您对此权限感到担心, 只需不启用即可."
+  },
+  "service_settings_btn": {
+    "message": "调整"
+  },
+  "services_add_title": {
+    "message": "新建"
+  },
+  "services_limit": {
+    "message": "最大支持的数量: $total$",
+    "placeholders": {
+      "total": {
+        "content": "$1"
+      }
+    }
+  },
+  "service_name": {
+    "message": "名称"
+  },
+  "service_link": {
+    "message": "链接"
+  },
+  "error_input_required": {
+    "message": "必须输入字符串"
+  },
+  "error_input_url": {
+    "message": "地址无效"
+  },
+  "thumbnails_update_delay": {
+    "message": "创建缩略图时, 先做一些延迟"
+  },
+  "thumbnails_update_delay_note": {
+    "message": "当页面更新有延迟时很有用, 可以捕捉到网站的缩略图. \n\n 但延迟时间越长, 等待时间就越久"
+  },
+  "close_tab_after_adding_bookmark": {
+    "message": "如果您已将选项添加到书签, 则自动关闭该标签页"
+  },
+  "close_tab_after_adding_bookmark_note": {
+    "message": "仅当通过右键菜单添加时"
+  },
+  "empty_search": {
+    "message": "未找到书签"
+  },
+  "logo_external": {
+    "message": "外部标志"
+  },
+  "logo_external_note": {
+    "message": "外部标志资源的链接. 请注意, 字符串 <code>{{website}}</code> 必须保持不变, 并插入到链接中的正确位置."
+  },
+  "delete_thumbnail": {
+    "message": "删除缩略图"
+  },
+  "show_back_column": {
+    "message": "在书签栏中显示返回上层的图标"
+  },
+  "search_engine": {
+    "message": "默认搜索引擎"
+  },
+  "move_to_start": {
+    "message": "将书签移至文件夹内列表的顶部"
+  },
+  "bookmarks_sorting_type": {
+    "message": "按类别排序"
+  },
+  "sort_by_date": {
+    "message": "按日期排序"
+  },
+  "not_sorting": {
+    "message": "不排序"
+  },
+  "folders_on_top": {
+    "message": "文件夹在最上面"
+  },
+  "folders_at_the_bottom": {
+    "message": "文件夹在最下方"
+  },
+  "bookmarks_sorting_warning": {
+    "message": "如果选择启用排序的任一选项, 拖放时仍会按照排序设置来排序"
+  },
+  "extension_updated_notification": {
+    "message": "插件已更新"
+  },
+  "whats_new": {
+    "message": "最新信息"
+  },
+  "search_autofocus": {
+    "message": "自动将输入光标放在搜索栏上"
+  },
+  "confirm_delete_selected_bookmarks": {
+    "message": "你确定要删除选定的书签吗?"
+  },
+  "button_action_move": {
+    "message": "移动文件夹"
+  },
+  "enable_virtual_pagination": {
+    "message": "虚拟标签页"
+  },
+  "enable_virtual_pagination_note": {
+    "message": "将文档的高度分为几个部分以便快速访问 (实验中)"
+  },
+  "parent_folder": {
+    "message": "父文件夹"
+  },
+  "new_bookmark": {
+    "message": "新书签"
+  },
+  "modal_dismiss": {
+    "message": "解除分组"
+  },
+  "remove_thumbnail": {
+    "message": "删除缩略图"
+  },
+  "thumbnails_update": {
+    "message": "缩略图更新"
+  },
+  "bookmark_context": {
+    "message": "书签右键菜单"
+  },
+  "clear_search": {
+    "message": "清除搜索"
+  },
+  "search_suggestions_permission_tooltip": {
+    "message": "启用搜索自动完成建议需要访问 Google.com (中国地区无法访问)"
+  },
+  "search": {
+    "message": "搜索"
+  },
+  "hide_services_form": {
+    "message": "隐藏服务表格"
+  },
+  "toggle_selected_bookmarks_popup": {
+    "message": "打开网址时切换到新的弹出窗口"
+  },
+  "toggle_services_popup": {
+    "message": "切换带有服务的到新的弹出窗口"
+  },
+  "toggle_search_popup": {
+    "message": "搜索结果在弹出的新窗口中显示"
+  },
+  "open_selected": {
+    "message": "打开选择"
+  },
+  "delete_selected": {
+    "message": "删除选择"
+  },
+  "select_folder": {
+    "message": "选择一个目录"
+  },
+  "remove_service": {
+    "message": "删除 $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "history_back": {
+    "message": "历史回顾"
+  },
+  "incognito_access_note": {
+    "message": "你必须允许在隐私模式下运行"
+  },
+  "notice_host_permissions": {
+    "message": "要创建网站缩略图, 扩展程序需要能够访问网站, 才能捕捉缩略图"
+  },
+  "learn_more": {
+    "message": "了解更多"
+  },
+  "why_use_host_permissions": {
+    "message": "为什么要使用这个权限?"
+  },
+  "host_permissions_info": {
+    "message": "<p>此权限对于生成网站截图是必需的. 但扩展程序不会收集, 跟踪或修改您在网站上的数据. 打开网站的单独窗口后发生的唯一变化是在生成截图之前隐藏网站上的滚动条 (尽量让截图中不出现滚动条). 扩展代码可在 <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. 如果对此权限有疑虑, 可以选择不同意授权, 网站截图功能将不可用, 但扩展程序仍然可以正常运行. </p><p>尝试截取网站截图时会请求此权限 (如果已停用)。您也可以通过打开包含扩展程序详细信息的窗口, 在浏览器设置中管理此权限. </p><p>通常，在 Chrome 和 Edge 等浏览器中, 此权限默认是启用的, 而在 Firefox 中则是禁用的. 因此, 默认行为可能会因浏览器而有所不同.</p>"
+  },
+  "example_string": {
+    "message": "示例: $string$",
+    "placeholders": {
+      "string": {
+        "content": "$1"
+      }
+    }
+  },
+  "undo": {
+    "message": "恢复"
+  }
+}
