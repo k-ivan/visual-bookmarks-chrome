@@ -9,7 +9,7 @@
     "message": "視覺書籤"
   },
   "color_theme": {
-    "message": "色彩佈景"
+    "message": "佈景主題"
   },
   "dark_theme": {
     "message": "暗黑模式"
@@ -47,7 +47,7 @@
     "message": "網址"
   },
   "label_folder": {
-    "message": "目錄"
+    "message": "資料夾"
   },
   "url_field_tip": {
     "message": "輸入網址，如果要建立資料夾，請保留空白"
@@ -156,7 +156,7 @@
     "message": "所有縮圖已刪除"
   },
   "notice_cant_find_id": {
-    "message": "無法按 ID 找到資料夾。或許你還沒有同步過書籤"
+    "message": "無法按照 ID 找到資料夾。或許你還沒有同步過書籤"
   },
   "notice_reset_default_settings": {
     "message": "本機的設定已清除，復原為程式預設"
@@ -220,7 +220,7 @@
     "message": "寬度比例"
   },
   "number_of_columns": {
-    "message": "面寬(左到右的數量)"
+    "message": "畫面寬度(左到右的數量)"
   },
   "vertical_center": {
     "message": "垂直居中"
@@ -250,10 +250,10 @@
     "message": "Bing 每日圖片需要對 bing.com 的存取權限。您可以在<a href=\"/options.html\">設定頁面</a>中啟用此權限，選取「Bing 每日圖片」選項並確認權限"
   },
   "background_external": {
-    "message": "使用網路圖片當作底圖"
+    "message": "使用網路圖片當作背景圖"
   },
   "background_local": {
-    "message": "底圖來自本機電腦"
+    "message": "背景圖來自本機電腦"
   },
   "choose_file": {
     "message": "圖片或影片"
@@ -271,7 +271,7 @@
     "message": "顯示書籤標題"
   },
   "show_favicon": {
-    "message": "在標題旁顯示網站圖標"
+    "message": "在標題旁顯示網站圖示"
   },
   "open_link_newtab": {
     "message": "搜尋結果在新分頁開啟"
@@ -338,7 +338,7 @@
     }
   },
   "folder_preview": {
-    "message": "使用網站縮圖替代目錄圖示"
+    "message": "使用網站縮圖替代資料夾圖示"
   },
   "folder_preview_description": {
     "message": "啟用此設定後，將顯示資料夾中 4 個隨機網站的縮圖，而不是圖示或自訂圖片。"
@@ -368,7 +368,7 @@
     "message": "服務快速存取面板"
   },
   "services_enable_description": {
-    "message": "常用網絡應用程式和服務的快速鏈接菜單"
+    "message": "常用網絡應用程式和服務的快速連結選單"
   },
   "toggle_clipboard_access": {
     "message": "從剪貼簿讀取的權限"
@@ -418,16 +418,16 @@
     "message": "沒有找到書籤"
   },
   "logo_external": {
-    "message": "外部標誌"
+    "message": "外部圖示"
   },
   "logo_external_note": {
-    "message": "外部標誌資源的連結。請注意，字串 <code>{{website}}</code> 必須保持不變，並插入到連結中的正確位置。"
+    "message": "外部圖示資源的連結。請注意，字串 <code>{{website}}</code> 必須保持不變，並插入到連結中的正確位置。"
   },
   "delete_thumbnail": {
     "message": "刪除縮圖"
   },
   "show_back_column": {
-    "message": "在書籤列中顯示回到上層的圖標"
+    "message": "在書籤列中顯示回到上層的圖示"
   },
   "search_engine": {
     "message": "預設的搜尋引擎"
@@ -475,7 +475,7 @@
     "message": "將文件的高度分為幾個部分以利快速存取 (實驗中)"
   },
   "parent_folder": {
-    "message": "父資料夾"
+    "message": "主資料夾"
   },
   "new_bookmark": {
     "message": "新書籤"
@@ -520,7 +520,7 @@
     "message": "刪除選擇"
   },
   "select_folder": {
-    "message": "選擇一個目錄"
+    "message": "選擇一個資料夾"
   },
   "remove_service": {
     "message": "刪除 $service$",
@@ -537,7 +537,7 @@
     "message": "你必須允許在私人模式下執行"
   },
   "notice_host_permissions": {
-    "message": "要建立網站縮圖，擴充功能需要能存取網站，才能抓縮圖"
+    "message": "要建立網站縮圖，你必須允許外掛功能『視覺書籤』能存取網站，才能抓縮圖"
   },
   "learn_more": {
     "message": "了解更多"
@@ -546,10 +546,10 @@
     "message": "為什麼要使用這個權限？"
   },
   "host_permissions_info": {
-    "message": "<p>此權限對於產生網站螢幕截圖是必需的。但擴充功能不會收集、追蹤或修改您在網站上的資料。打開網站的單獨視窗後發生的唯一變動是在產生螢幕截圖之前隱藏網站上的捲軸 (盡量讓螢幕截圖不會有捲軸). 擴充代碼可在 <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. 如果對此此權限有疑慮，可以選擇不同意授權，網站的截圖功能將不可用，但擴充功能仍然可以正常執行。</p><p>嘗試截取網站螢幕截圖時將請求此權限 (如果已停用)。你也可以透過開啟包含有關擴充功能的詳細資訊的視窗來在瀏覽器設定中管理此權限。</p><p>通常，在 Chrome 和 Edge 等瀏覽器中，此權限預設是啟用的，而在 Firefox 中則是停用。因此，預設行為可能會因瀏覽器而有所差異。</p>"
+    "message": "<p>此權限對於產生網站螢幕截圖是必需的。但『視覺書籤』不會收集、追蹤或修改您在網站上的資料。打開網站的單獨視窗後發生的唯一變動是在產生螢幕截圖之前隱藏網站上的捲軸 (盡量讓螢幕截圖不會有捲軸). 擴充代碼可在 <a href=\"https://github.com/k-ivan/visual-bookmarks-chrome\" target=\"_blank\">Github</a>. 如果對此此權限有疑慮，可以選擇不同意授權，網站的截圖功能將無法使用，但『視覺書籤』能仍然可以正常執行。</p><p>嘗試截取網站螢幕截圖時將請求此權限 (如果已停用)。你也可以透過開啟包含有關擴充功能的詳細資訊的視窗來在瀏覽器設定中管理此權限。</p><p>通常，在 Chrome 和 Edge 等瀏覽器中，此權限預設是啟用的，而在 Firefox 中則是停用。因此，預設行為可能會因瀏覽器而有所差異。</p>"
   },
   "example_string": {
-    "message": "示例: $string$",
+    "message": "範例： $string$",
     "placeholders": {
       "string": {
         "content": "$1"
