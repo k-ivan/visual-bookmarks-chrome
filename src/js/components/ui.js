@@ -101,7 +101,6 @@ export default {
         bgEl.style.backgroundImage = `url('${resource}')`;
         $imageLoaded(resource)
           .then(() => {
-            (bgState === 'background_local') && URL.revokeObjectURL(resource);
             document.body.classList.add('has-image');
           })
           .catch(e => {
