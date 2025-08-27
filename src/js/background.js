@@ -104,15 +104,15 @@ async function captureScreen(link, callback) {
             width: THUMBNAIL_POPUP_WIDTH,
             height: THUMBNAIL_POPUP_HEIGHT,
             focused: true
-          }, function(win) {
+          }, function() {
             setTimeout(() => {
-              browser.tabs.captureVisibleTab(win.id, function(dataUrl) {
+              browser.tabs.captureVisibleTab(w.id, function(dataUrl) {
                 callback({
                   capture: dataUrl,
                   title: tabInfo.title
                 });
                 try {
-                  browser.windows.remove(win.id, () => {
+                  browser.windows.remove(w.id, () => {
                     clearTimeout(closeWindow);
                   });
                 } catch (e) {}
