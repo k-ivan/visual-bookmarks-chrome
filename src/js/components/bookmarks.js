@@ -434,8 +434,11 @@ const Bookmarks = (() => {
     dialLoading.hidden = false;
     clearContainer();
 
+    // Firefox may contain a separator bookmark type, so we filter it out to avoid rendering it
+    const bookamrksArr = arr.filter(item => item.type !== 'separator');
+
     // bookmarks ids array
-    const bookmarksIds = arr.map(child => child.id);
+    const bookmarksIds = bookamrksArr.map(child => child.id);
     let childrenBookmarks;
 
     // array of indexDB query promises
@@ -446,7 +449,7 @@ const Bookmarks = (() => {
     // request for thumbnails in folders if the display option is enabled
     if (settings.$.folder_preview) {
       // get children bookmarks for folders
-      childrenBookmarks = getChildrenBookmarks(arr);
+      childrenBookmarks = getChildrenBookmarks(bookamrksArr);
       // get only ids
       const childrenIds = childrenBookmarks.map(child => child.id);
       promiseThumbnailsRequests.push(ImageDB.getAllByIds(childrenIds));
@@ -471,21 +474,21 @@ const Bookmarks = (() => {
 
     // sorting by newest
     if (settings.$.sort_by_date) {
-      arr.sort((a, b) => b.dateAdded - a.dateAdded);
+      bookamrksArr.sort((a, b) => b.dateAdded - a.dateAdded);
     }
 
     // sorting by type folders
     if (settings.$.bookmarks_sorting_type === 'folders_top') {
       // folders at the top
-      arr.sort((a, b) => Object.hasOwn(b, 'children') - Object.hasOwn(a, 'children'));
+      bookamrksArr.sort((a, b) => Object.hasOwn(b, 'children') - Object.hasOwn(a, 'children'));
     } else if (settings.$.bookmarks_sorting_type === 'folders_bottom') {
       // folders at the bottom
-      arr.sort((a, b) => Object.hasOwn(a, 'children') - Object.hasOwn(b, 'children'));
+      bookamrksArr.sort((a, b) => Object.hasOwn(a, 'children') - Object.hasOwn(b, 'children'));
     }
 
     const fragment = document.createDocumentFragment();
 
-    for (let bookmark of arr) {
+    for (let bookmark of bookamrksArr) {
       if (bookmark.url) {
         fragment.appendChild(genBookmark(bookmark));
       } else {
