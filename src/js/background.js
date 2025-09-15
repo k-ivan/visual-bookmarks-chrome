@@ -171,9 +171,14 @@ function handleCreateBookmark(data) {
 
 async function handleCreatedTab(tab) {
   const { settings } = await storage.local.get('settings');
-  if (settings.search_autofocus && NEWTAB_EMPTY_URLS.includes(tab.pendingUrl)) {
+  if (!tab.incognito && settings.search_autofocus && NEWTAB_EMPTY_URLS.includes(tab.pendingUrl)) {
+    // bug in MS Edge causes runtime.getURL to return the chrome-extension namespace, while it opens through the extension namespace.
+    const url = /Edg\//.test(navigator.userAgent)
+      ? browser.runtime.getURL('newtab.html').replace(/^chrome-extension:/, 'extension:')
+      : browser.runtime.getURL('newtab.html');
+
     browser.tabs.create({
-      url: browser.runtime.getURL('newtab.html')
+      url
     });
     browser.tabs.remove(tab.id);
   }
