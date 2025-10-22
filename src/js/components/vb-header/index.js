@@ -322,13 +322,12 @@ class VbHeader extends HTMLElement {
   }
 
   async handleSubmit(e) {
+    e.preventDefault();
     if (this.isBookmarksEngine || !this.inputNode.value.trim()) {
-      e.preventDefault();
       this.inputNode.focus();
       return;
     }
     if (this.isBrowserEngine) {
-      e.preventDefault();
       const searchPermission = await requestPermissions({ permissions: ['search'] });
 
       if (searchPermission) {
