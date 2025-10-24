@@ -148,6 +148,10 @@ dl {
 
 .tbl__setting {
   font-weight: 600;
+
+  small {
+    display: block;
+  }
 }
 
 .tbl__sub {

@@ -199,7 +199,7 @@ function createRow(setting, row = false) {
       ${setting.title}
       ${
         setting.note
-          ? `<div><small class="text-muted">${setting.note}</small></div>`
+          ? `<small class="text-muted">${setting.note}</small>`
           : ``
       }
     </div>
