@@ -438,8 +438,14 @@
   "bookmarks_sorting_type": {
     "message": "Rendezés típus szerint"
   },
+  "sort_by": {
+    "message": "Rendezés"
+  },
   "sort_by_date": {
-    "message": "Rendezés dátum szerint"
+    "message": "Dátum szerint"
+  },
+  "sort_by_alphabet": {
+    "message": "Ábécé sorrendben"
   },
   "not_sorting": {
     "message": "Nincs rendezés"

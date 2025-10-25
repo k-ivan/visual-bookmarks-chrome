@@ -46,7 +46,7 @@ const DEFAULTS = Object.freeze({
   logo_external_url: '',
   search_engine: 'bookmarks',
   move_to_start: false,
-  sort_by_date: false,
+  sort_by: '', // '' | date | alphabet
   bookmarks_sorting_type: '',
   search_autofocus: false,
   enable_virtual_pagination: false

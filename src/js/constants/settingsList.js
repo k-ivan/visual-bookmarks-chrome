@@ -187,18 +187,24 @@ export default [
         title: browser.i18n.getMessage('drag_and_drop'),
         type: 'switch',
         data: {
-          relationToggleId: 'sort_by_date,bookmarks_sorting_type'
+          relationToggleId: 'sort_by,bookmarks_sorting_type'
         }
       },
       {
         group: [
           {
-            id: 'sort_by_date',
-            title: browser.i18n.getMessage('sort_by_date'),
+            id: 'sort_by',
+            title: browser.i18n.getMessage('sort_by'),
             note: browser.i18n.getMessage('bookmarks_sorting_warning'),
-            type: 'switch',
+            type: 'select',
+            options: [
+              { value: '', title: browser.i18n.getMessage('not_sorting') },
+              { value: 'date', title: browser.i18n.getMessage('sort_by_date') },
+              { value: 'alphabet', title: browser.i18n.getMessage('sort_by_alphabet') }
+            ],
             data: {
-              relationToggleId: 'drag_and_drop'
+              relationToggleId: 'drag_and_drop',
+              relationToggleValues: 'date,alphabet'
             }
           },
           {

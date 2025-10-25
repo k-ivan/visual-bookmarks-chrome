@@ -472,9 +472,13 @@ const Bookmarks = (() => {
       setChildrenThumbnails(childrenThumbnails, childrenBookmarks);
     }
 
-    // sorting by newest
-    if (settings.$.sort_by_date) {
+    if (settings.$.sort_by === 'date') {
       bookamrksArr.sort((a, b) => b.dateAdded - a.dateAdded);
+    } else if (settings.$.sort_by === 'alphabet') {
+      bookamrksArr.sort((a, b) => a.title.localeCompare(b.title, undefined, {
+        sensitivity: 'base',
+        numeric: true
+      }));
     }
 
     // sorting by type folders

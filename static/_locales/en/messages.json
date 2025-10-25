@@ -438,8 +438,14 @@
   "bookmarks_sorting_type": {
     "message": "Sort by type"
   },
+  "sort_by": {
+    "message": "Sort by"
+  },
   "sort_by_date": {
-    "message": "Sort by date"
+    "message": "Date"
+  },
+  "sort_by_alphabet": {
+    "message": "Alphabetically"
   },
   "not_sorting": {
     "message": "Not sorted"

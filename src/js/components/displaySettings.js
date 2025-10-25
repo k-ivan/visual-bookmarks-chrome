@@ -39,7 +39,9 @@ function createSelect(setting) {
     {
       html: setting.options
         .map(
-          (option) => `<option value="${option.value}">${option.title}</option>`
+          (option) => {
+            return `<option value="${option.value}"${option.selected ? ' selected' : ''}>${option.title}</option>`;
+          }
         )
         .join('')
     }
