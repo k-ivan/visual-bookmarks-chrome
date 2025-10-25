@@ -413,7 +413,7 @@ class VbHeader extends HTMLElement {
       this.closeSuggest();
     } else if (
       e.code === 'Slash' &&
-      document.activeElement?.tagName !== 'INPUT'
+      this.getActiveElement()?.tagName !== 'INPUT'
     ) {
       e.preventDefault();
       this.inputNode.focus();
@@ -436,6 +436,14 @@ class VbHeader extends HTMLElement {
         break;
       case 'Enter': this.handleEnterSuggest(e); break;
     }
+  }
+
+  getActiveElement() {
+    let el = document.activeElement;
+    while (el && el.shadowRoot && el.shadowRoot.activeElement) {
+      el = el.shadowRoot.activeElement;
+    }
+    return el;
   }
 
   async suggestSearch(query) {
