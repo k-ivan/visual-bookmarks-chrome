@@ -13,16 +13,16 @@
           <use xlink:href="/img/symbol.svg#close"/>
         </svg>
       </button>
-      <form action="#" method="post" class="settings-form">
+      <form action="#" method="post" class="settings-form" novalidate>
         <div class="settings-container">
           <div class="settings-title" data-locale-message="services_add_title">Add</div>
           <div class="group">
             <label for="name" data-locale-message="service_name">Name</label>
-            <input type="text" class="form-control" name="name" id="name" autofocus placeholder="google" data-valid="required">
+            <input type="text" class="form-control" name="name" id="name" autofocus placeholder="google" required data-error-i18n="error_input_required">
           </div>
           <div class="group">
             <label for="link" data-locale-message="service_link">Link</label>
-            <input type="text" class="form-control" name="link" id="link" placeholder="https://google.com" data-valid="required|url">
+            <input type="url" class="form-control" name="link" id="link" placeholder="https://google.com" required data-error-i18n="error_input_url">
           </div>
         </div>
         <button class="settings-save md-ripple" id="ok" data-local-message="btn_save">OK</button>

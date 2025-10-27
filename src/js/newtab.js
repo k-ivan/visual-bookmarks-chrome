@@ -5,10 +5,10 @@ import './components/vb-scrollup';
 import './components/vb-bookmarks-panel';
 
 import Gmodal from 'glory-modal';
-import Validator from 'form-validation-plugin';
 import { settings } from './settings';
 import Bookmarks from './components/bookmarks';
 import Localization from './plugins/localization';
+import { Validator } from './plugins/validator';
 import UI from './components/ui';
 import Ripple from './components/ripple';
 import confirmPopup from './plugins/confirmPopup';
@@ -28,7 +28,7 @@ import {
   checkClipboardImage
 } from './utils';
 import ImageDB from './api/imageDB';
-import { REGEXP_URL_PATTERN, CONTEXT_MENU, LOCAL_PROTOCOLS } from './constants';
+import { CONTEXT_MENU, LOCAL_PROTOCOLS } from './constants';
 import { bookmarksToDelete } from './state';
 import Toast from './components/toast';
 import { storage } from './api/storage';
@@ -130,27 +130,8 @@ async function init() {
 
   const formBookmarkEl = document.getElementById('formBookmark');
 
-  Validator.i18n = {
-    required: browser.i18n.getMessage('error_input_required')
-  };
-
-  Validator.run(formBookmarkEl, {
-    showErrors: true,
-    checkChange: true,
-    checkInput: true,
-    containerSelector: '.group',
-    errorClass: 'has-error',
-    errorHintClass: 'error-hint',
-    validators: {
-      regex: {
-        isValidUrl: {
-          pattern: REGEXP_URL_PATTERN,
-          error: browser.i18n.getMessage('error_input_url')
-        }
-      }
-    },
-    onSuccess: handleSubmitForm,
-    onError: handleFormError
+  Validator(formBookmarkEl, {
+    onSuccess: handleSubmitForm
   });
 
   settings.$.services_enable && runServices();
@@ -766,15 +747,6 @@ async function handleSubmitForm(evt) {
   }
 
   bookmark && modalApi.close();
-}
-
-/**
- * Form submit error handler
- * Set focus to the first field in the array of invalid fields
- * @param {Array<{el: HTMLElement, errors: [string]}>} err
- */
-function handleFormError(err) {
-  return err[0]?.el?.focus();
 }
 
 async function handleResetThumb(evt) {

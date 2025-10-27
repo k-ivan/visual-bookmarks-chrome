@@ -19,7 +19,7 @@
     box-shadow: var(--input-shadow);
   }
 
-  @nest .has-error & {
+  &.has-error {
     border-color: var(--color-warning);
     &:focus {
       box-shadow: var(--input-shadow-error);

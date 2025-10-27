@@ -1,4 +1,4 @@
-import Validator from 'form-validation-plugin';
+import { Validator } from '../../plugins/validator.js';
 import { DragSortify } from '../../plugins/dragSortify';
 import html from './template.html';
 import styles from './index.css';
@@ -17,6 +17,7 @@ class VBServices extends HTMLElement {
   services = [];
   isActive = false;
   hasSettings = false;
+  validatorDestroy = null;
 
   constructor() {
     super();
@@ -65,34 +66,18 @@ class VBServices extends HTMLElement {
       }
     });
 
-    Validator.i18n = {
-      required: browser.i18n.getMessage('error_input_required'),
-      url: browser.i18n.getMessage('error_input_url')
-    };
-
-    Validator.run(this.settingsFormEl, {
-      showErrors: true,
-      checkChange: true,
-      checkInput: true,
-      containerSelector: '.group',
-      errorClass: 'has-error',
-      errorHintClass: 'error-hint',
+    this.validatorDestroy = Validator(this.settingsFormEl, {
       onSuccess: (event) => {
         event.preventDefault();
         this.#addService();
-      },
-      onError: (err) => {
-        err[0].el.focus();
       }
     });
   }
 
   disconnectedCallback() {
     this.#dettachEvents();
-    // FIXME
-    // this.sortableInstance.destroy();
-    // delete this.sortableInstance;
-    Validator.destroy();
+    this.sortableInstance.destroy();
+    this.validatorDestroy?.();
   }
 
   set servicesList(services) {
@@ -181,8 +166,6 @@ class VBServices extends HTMLElement {
     this.settingsTriggerEl.hidden = this.hasSettings;
     this.settingsEl.hidden = !this.hasSettings;
     this.settingsFormEl.name.focus();
-    // FIXME
-    // this.sortableInstance.option('disabled', true);
     this.#toggleServicesLimit();
   }
 
@@ -192,8 +175,6 @@ class VBServices extends HTMLElement {
     this.settingsTriggerEl.hidden = this.hasSettings;
     this.settingsEl.hidden = !this.hasSettings;
     this.settingsFormEl.reset();
-    // FIXME
-    // this.sortableInstance.option('disabled', false);
   }
 
   #toggleServicesLimit() {

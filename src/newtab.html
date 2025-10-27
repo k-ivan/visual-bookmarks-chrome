@@ -39,7 +39,7 @@
   <div class="gmodal" id="modal">
     <div class="gmodal__container has-center">
       <div class="gmodal__dialog">
-        <form class="gmodal__form" id="formBookmark" action="#0">
+        <form class="gmodal__form" id="formBookmark" action="#0" novalidate>
           <div class="gmodal__header">
             <div class="gmodal__title" id="modalHead"></div>
             <button type="button" class="gmodal__close md-ripple" data-gmodal="dismiss" data-ripple-center data-locale-message="modal_dismiss.aria-label" aria-label="Modal dismiss">
@@ -53,15 +53,14 @@
             <div class="gmodal__controls">
               <div class="group">
                 <label class="label" for="title" data-locale-message="label_title">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="Enter bookmark title" data-locale-message="placeholder_input_title"
-                  spellcheck="false" data-valid="required">
+                <input type="text" class="form-control" id="title" placeholder="Enter bookmark title" data-locale-message="placeholder_input_title" spellcheck="false" required data-error-i18n="error_input_required">
               </div>
               <div class="group" id="urlWrap">
                 <div class="gmodal__control-row">
                   <label class="label" for="url" data-locale-message="label_url">URL</label>
                   <span class="gmodal__tip" id="createTip" data-locale-message="url_field_tip">Enter URL or leave it blank if you want to create the folder</span>
                 </div>
-                <input type="text" class="form-control" id="url" placeholder="https://www.google.com" spellcheck="false" data-valid="regex(isValidUrl)">
+                <input type="url" class="form-control" id="url" placeholder="https://www.google.com" spellcheck="false" data-error-i18n="error_input_url">
               </div>
               <div class="group gmodal__select" id="selFolder">
                 <label class="label" for="select-folder" data-locale-message="label_folder"></label>
