@@ -149,7 +149,7 @@ dl {
 .tbl__setting {
   font-weight: 600;
 
-  small {
+  & small {
     display: block;
   }
 }
