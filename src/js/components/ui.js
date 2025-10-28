@@ -136,8 +136,8 @@ export default {
       const circBtnSize = parseInt(window.getComputedStyle(doc).getPropertyValue('--circ-btn-size'));
       // button size + small padding
       // value = left right(increased padding for the scrollbar)
-      const paddingInline = `${circBtnSize + 20}px ${circBtnSize + 30}px`;
-      doc.style.setProperty('--container-padding-inline', paddingInline);
+      // const paddingInline = `${circBtnSize + 20}px ${circBtnSize + 30}px`;
+      doc.style.setProperty('--container-padding-inline', `${circBtnSize + 20}px`);
     }
 
     // Calculate column dimensions

@@ -4,7 +4,7 @@
   padding-inline: var(--container-padding-inline, 0);
 
   @media (max-width: 768px) {
-    --container-padding-inline: 50px 60px;
+    --container-padding-inline: 50px;
   }
 }
 

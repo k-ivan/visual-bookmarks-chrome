@@ -10,7 +10,7 @@
   --vb-popup-btn-radius: 50%;
 
   position: fixed;
-  z-index: 999;
+  z-index: 1010;
   top: 12px;
   right: 20px;
 
