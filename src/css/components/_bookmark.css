@@ -1,8 +1,9 @@
 /* Bookmark */
 .bookmark {
-  display: block;
   position: relative;
   aspect-ratio: var(--bookmark-aspect-ratio);
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   border-radius: var(--bookmark-radius);
   outline: 1px solid rgb(0 0 0 / 10%);
@@ -137,19 +138,13 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 4px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background-color: var(--bookmark-bg);
 }
 
 .bookmark.disable-events {
   pointer-events: none;
-}
-
-.bookmark__wrap {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bookmark-bg);
-  border-radius: inherit;
-  overflow: hidden;
 }
 
 .bookmark__img {
@@ -157,6 +152,9 @@
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background-color: var(--bookmark-bg);
 }
 
 .bookmark__img--logo {
@@ -231,6 +229,7 @@
 
 .bookmark__caption {
   position: relative;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,12 +237,13 @@
   padding-left: 7px;
   padding-right: 7px;
   line-height: 1;
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background: var(--bookmark-caption-bg);
   text-align: center;
-  z-index: 100;
+  overflow: hidden;
+  background: var(--bookmark-caption-bg);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
   &::after {
     content: "";
     position: absolute;
@@ -279,7 +279,7 @@
   left: 0;
   z-index: 999;
   background: var(--bookmark-overlay-bg);
-  border-radius: var(--bookmark-radius);
+  border-radius: inherit;
 }
 
 .dropzone-bookmark {
@@ -297,6 +297,8 @@
   z-index: 1;
   transition: opacity 0.15s linear, visibility 0.15s linear, scale 0.15s linear;
   overflow: hidden;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
   &::after {
     content: "";
     background-image: url("/img/folder-open.svg");
@@ -334,7 +336,6 @@
   position: absolute;
   top: -9999px;
   left: -9999px;
-  display: block;
   pointer-events: none;
   padding: 0;
   opacity: 1 !important;
@@ -347,10 +348,7 @@
   }
 
   &.multiply-ghost {
-    & .bookmark__wrap {
-      position: relative;
-      top: 6px;
-    }
+    padding-top: 6px;
 
     &::before,
     &::after {

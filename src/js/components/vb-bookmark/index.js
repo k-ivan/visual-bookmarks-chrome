@@ -191,26 +191,21 @@ class VbBookmark extends HTMLAnchorElement {
       this.setAttribute('target', '_blank');
     }
 
-    const template = $createElement('div',
-      {
-        class: 'bookmark__wrap'
-      },
+    this.append(
       this.#createContextButton(),
       this.#createBookmarkThumbnail()
     );
 
     if (this.hasTitle) {
-      template.appendChild(this.#createBookmarkCaption());
+      this.append(this.#createBookmarkCaption());
     }
 
     if (this.isDND) {
-      template.appendChild($createElement('div', {
+      this.append($createElement('div', {
         class: 'dropzone-bookmark',
         'data-id': this.id
       }));
     }
-
-    this.appendChild(template);
   }
 
   #logoUrl(url) {
