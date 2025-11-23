@@ -12,6 +12,7 @@ body {
 .app {
   overflow-y: scroll;
   height: 100vh;
+  will-change: transform;
 }
 .aside-controls {
   position: fixed;
