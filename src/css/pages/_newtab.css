@@ -63,7 +63,6 @@ body {
   padding: 0;
   background: rgb(33 33 33 / 50%);
   border-radius: 50%;
-  overflow: hidden;
   cursor: pointer;
   outline: 0;
   &:disabled {
@@ -78,6 +77,9 @@ body {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 .settings-link {
@@ -91,6 +93,20 @@ body {
 
 .update-thumbnails::after {
   background-image: url("/img/camera.svg");
+}
+
+.let-it-snow-btn.is-active {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #33c933;
+  }
 }
 
 /* background image */

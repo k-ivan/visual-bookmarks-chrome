@@ -12,6 +12,7 @@ import { Validator } from './plugins/validator';
 import UI from './components/ui';
 import Ripple from './components/ripple';
 import confirmPopup from './plugins/confirmPopup';
+import { letItSnow } from './plugins/snow';
 import {
   get,
   getSubTree,
@@ -361,6 +362,8 @@ async function handleLoad() {
       }
     });
   }
+
+  letItSnow();
 }
 
 function handlePopstate() {
