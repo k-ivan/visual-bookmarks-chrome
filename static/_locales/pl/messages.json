@@ -255,6 +255,18 @@
   "background_local": {
     "message": "Obraz lub wideo z komputera"
   },
+  "background_effect": {
+    "message": "Efekt tła"
+  },
+  "background_effect_note": {
+    "message": "Funkcja eksperymentalna, może wpływać na wydajność"
+  },
+  "background_effect_distortion": {
+    "message": "Zniekształcenie"
+  },
+  "background_effect_none": {
+    "message": "Brak"
+  },
   "choose_file": {
     "message": "Obraz lub wideo"
   },

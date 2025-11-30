@@ -82,34 +82,36 @@ export default {
 
     if (!resource) return;
 
-    if (resource && resource !== '') {
-      if (hasVideo) {
-        const video = $createElement('video', {
-          src: resource
-        });
-        video.muted = true;
-        video.loop = true;
-        video.autoplay = true;
+    if (hasVideo) {
+      const video = $createElement('video', {
+        src: resource
+      });
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
 
-        bgEl.append(video);
+      bgEl.append(video);
 
-        video.addEventListener('canplay', () => {
-          bgEl.style.opacity = 1;
-          document.body.classList.add('has-image');
-        }, { once: true });
+      video.addEventListener('canplay', () => {
+        bgEl.style.opacity = 1;
+        document.body.classList.add('has-image');
+      }, { once: true });
+    } else {
+      const image = await $imageLoaded(resource).catch(e => {
+        console.warn(`Local background image resource problem: ${e}`);
+      });
+      if (!image) return;
+
+      if (settings.$.background_effect === 'distortion') {
+        const { default: DistortionEffect } = await import('../plugins/effects/distortion');
+        const instance = new DistortionEffect(image);
+        bgEl.append(instance.canvas);
       } else {
         bgEl.style.backgroundImage = `url('${resource}')`;
-        $imageLoaded(resource)
-          .then(() => {
-            document.body.classList.add('has-image');
-          })
-          .catch(e => {
-            console.warn(`Local background image resource problem: ${e}`);
-          })
-          .finally(() => {
-            bgEl.style.opacity = 1;
-          });
       }
+
+      document.body.classList.add('has-image');
+      bgEl.style.opacity = 1;
     }
   },
   calculateStyles() {

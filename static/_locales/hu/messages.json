@@ -255,6 +255,18 @@
   "background_local": {
     "message": "Kép vagy videó számítógépről"
   },
+  "background_effect": {
+    "message": "Háttéreffektus"
+  },
+  "background_effect_note": {
+    "message": "Kísérleti funkció, befolyásolhatja a teljesítményt"
+  },
+  "background_effect_distortion": {
+    "message": "Torzítás"
+  },
+  "background_effect_none": {
+    "message": "Nincs"
+  },
   "choose_file": {
     "message": "Kép vagy videó"
   },

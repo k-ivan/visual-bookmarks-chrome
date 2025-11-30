@@ -196,7 +196,8 @@ function create(setting) {
 
 function createRow(setting, row = false) {
   const classRow = row ? 'tbl__row' : 'tbl';
-  return /* html */ `<div class="${classRow}">
+  const hidden = setting.hidden ? ' hidden' : '';
+  return /* html */ `<div id="setting_${setting.id}" class="${classRow}"${hidden}>
     <div class="tbl__setting">
       ${setting.title}
       ${

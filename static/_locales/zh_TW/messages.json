@@ -255,6 +255,18 @@
   "background_local": {
     "message": "背景圖來自本機電腦"
   },
+  "background_effect": {
+    "message": "背景效果"
+  },
+  "background_effect_note": {
+    "message": "實驗性功能，可能影響效能"
+  },
+  "background_effect_distortion": {
+    "message": "扭曲"
+  },
+  "background_effect_none": {
+    "message": "無"
+  },
   "choose_file": {
     "message": "圖片或影片"
   },

@@ -255,6 +255,18 @@
   "background_local": {
     "message": "Изображение или видео с компьютера"
   },
+  "background_effect": {
+    "message": "Эффект фона"
+  },
+  "background_effect_note": {
+    "message": "Экспериментальная функция, может повлиять на производительность"
+  },
+  "background_effect_distortion": {
+    "message": "Искажение"
+  },
+  "background_effect_none": {
+    "message": "Нет"
+  },
   "choose_file": {
     "message": "Изображение или видео"
   },

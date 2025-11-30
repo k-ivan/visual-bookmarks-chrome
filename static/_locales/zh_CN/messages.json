@@ -255,6 +255,18 @@
   "background_local": {
     "message": "背景来自本地电脑"
   },
+  "background_effect": {
+    "message": "背景效果"
+  },
+  "background_effect_note": {
+    "message": "实验性功能，可能影响性能"
+  },
+  "background_effect_distortion": {
+    "message": "畸变"
+  },
+  "background_effect_none": {
+    "message": "无"
+  },
   "choose_file": {
     "message": "图片或视频"
   },

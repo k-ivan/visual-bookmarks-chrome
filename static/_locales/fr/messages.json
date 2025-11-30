@@ -255,6 +255,18 @@
   "background_local": {
     "message": "Image ou vidéo sur l'ordinateur"
   },
+  "background_effect": {
+    "message": "Effet d’arrière-plan"
+  },
+  "background_effect_note": {
+    "message": "Fonctionnalité expérimentale, peut affecter les performances"
+  },
+  "background_effect_distortion": {
+    "message": "Distorsion"
+  },
+  "background_effect_none": {
+    "message": "Aucun"
+  },
   "choose_file": {
     "message": "Image ou vidéo"
   },

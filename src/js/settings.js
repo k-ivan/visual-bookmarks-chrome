@@ -49,7 +49,8 @@ const DEFAULTS = Object.freeze({
   sort_by: '', // '' | date | alphabet
   bookmarks_sorting_type: '',
   search_autofocus: false,
-  enable_virtual_pagination: false
+  enable_virtual_pagination: false,
+  background_effect: 'none' // none | distortion
 });
 
 const SETTINGS_NOT_SYNCED = ['default_folder_id', 'enable_sync'];

@@ -105,6 +105,17 @@ export default [
           { value: 'background_local', title: browser.i18n.getMessage('background_local') },
           { value: 'background_bing', title: browser.i18n.getMessage('background_bing') }
         ]
+      },
+      {
+        id: 'background_effect',
+        title: browser.i18n.getMessage('background_effect'),
+        note: browser.i18n.getMessage('background_effect_note'),
+        type: 'select',
+        hidden: true,
+        options: [
+          { value: 'none', title: browser.i18n.getMessage('background_effect_none') },
+          { value: 'distortion', title: browser.i18n.getMessage('background_effect_distortion') }
+        ]
       }
     ]
   },

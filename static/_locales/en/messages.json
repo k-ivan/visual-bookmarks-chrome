@@ -255,6 +255,18 @@
   "background_local": {
     "message": "Image or video from computer"
   },
+  "background_effect": {
+    "message": "Background effect"
+  },
+  "background_effect_note": {
+    "message": "Experimental feature, may affect performance"
+  },
+  "background_effect_distortion": {
+    "message": "Distortion"
+  },
+  "background_effect_none": {
+    "message": "None"
+  },
   "choose_file": {
     "message": "Image or video"
   },
