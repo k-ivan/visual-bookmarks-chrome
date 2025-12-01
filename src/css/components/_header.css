@@ -221,12 +221,6 @@
   }
 }
 
-.has-image .header .back {
-  color: rgb(255 255 255 / 70%);
-  border-color: transparent;
-  background-color: rgb(255 255 255 / 25%);
-}
-
 .has-image .header select {
   transition: none;
 }
@@ -235,10 +229,12 @@
   background-image: url("data:image/svg+xml,%0A%3Csvg fill='%23fff' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
 }
 
+.has-image .header .back,
 .has-image .header .form-control:not(:focus) {
   color: rgb(255 255 255 / 70%);
   border-color: transparent;
   background-color: rgb(255 255 255 / 25%);
+  backdrop-filter: blur(10px);
 }
 
 .has-image .header .form-control:focus {
@@ -264,6 +260,6 @@
 }
 
 .header .form-control {
-  transition-property: color, border-color, background-color;
+  transition-property: color, border-color, background-color, backdrop-filter;
   transition-duration: 0.25s;
 }
