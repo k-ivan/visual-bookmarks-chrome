@@ -133,6 +133,7 @@ export function $notifications(message, id, buttons = []) {
 export function $imageLoaded(img) {
   const image = new Image();
   image.src = img;
+  image.crossOrigin = 'anonymous';
   return image.decode().then(() => image);
 }
 
