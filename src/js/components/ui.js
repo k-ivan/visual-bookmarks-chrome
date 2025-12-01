@@ -110,8 +110,10 @@ export default {
         bgEl.style.backgroundImage = `url('${resource}')`;
       }
 
-      document.body.classList.add('has-image');
-      bgEl.style.opacity = 1;
+      window.requestAnimationFrame(() => {
+        document.body.classList.add('has-image');
+        bgEl.style.opacity = 1;
+      });
     }
   },
   calculateStyles() {
