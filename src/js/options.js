@@ -5,7 +5,6 @@ import TabsSlider from 'tabs-slider';
 import { settings } from './settings';
 import Localization from './plugins/localization';
 import Ripple from './components/ripple';
-import AutosizeTextarea from './components/autosizeTextarea';
 import Toast from './components/toast';
 import confirmPopup from './plugins/confirmPopup.js';
 import { getFolders } from './api/bookmark';
@@ -29,7 +28,6 @@ import { containsPermissions, removePermissions, requestPermissions } from './ap
 
 let modalInstance = null;
 let tabsSliderInstance = null;
-let textareaInstance = null;
 let backgroundImage = null;
 
 async function init() {
@@ -80,9 +78,6 @@ async function init() {
     slide: parseInt(localStorage['option_tab_slide']) || 0
   });
 
-  // textarea autosize
-  textareaInstance = new AutosizeTextarea('#custom_style');
-
   // Modal
   modalInstance = new Gmodal(document.getElementById('modal'), {
     closeBackdrop: false
@@ -106,9 +101,7 @@ async function init() {
   tabs.addEventListener('tabChange', function(evt) {
     localStorage['option_tab_slide'] = evt.detail.currentIndex;
   });
-  textareaInstance.el.addEventListener('textarea-autosize', function() {
-    tabsSliderInstance.recalcStyles();
-  });
+  document.getElementById('custom_style').addEventListener('input', () => tabsSliderInstance.recalcStyles());
 
   getOptions();
 
@@ -213,12 +206,6 @@ function getOptions() {
       // update range slider
       if (elOption.type === 'range') {
         $trigger('change', elOption);
-      }
-
-
-      // Triggering event at program input to the textarea(for autosize textarea)
-      if (elOption === textareaInstance.el) {
-        $trigger('input', textareaInstance.el);
       }
     }
   }

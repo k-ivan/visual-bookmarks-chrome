@@ -39,11 +39,11 @@ select.form-control {
 }
 
 textarea {
-  height: 100px;
+  min-height: 100px;
+  max-height: 500px;
   resize: none;
+  field-sizing: content;
   &.is-editor {
-    width: calc(100% - 20px); /* tbl__value padding 10px */
-    box-sizing: content-box;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 }
