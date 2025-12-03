@@ -107,7 +107,7 @@ export default {
         const instance = new DistortionEffect(image);
         bgEl.append(instance.canvas);
       } else {
-        bgEl.style.backgroundImage = `url('${resource}')`;
+        bgEl.append(image);
       }
 
       window.requestAnimationFrame(() => {
