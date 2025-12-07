@@ -363,9 +363,9 @@ async function handleLoad() {
     });
   }
 
-  setTimeout(() => {
+  window.requestAnimationFrame(() => {
     letItSnow();
-  }, 500);
+  });
 }
 
 function handlePopstate() {
