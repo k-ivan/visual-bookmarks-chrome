@@ -363,7 +363,9 @@ async function handleLoad() {
     });
   }
 
-  letItSnow();
+  setTimeout(() => {
+    letItSnow();
+  }, 500);
 }
 
 function handlePopstate() {
