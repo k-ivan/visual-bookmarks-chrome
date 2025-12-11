@@ -30,7 +30,9 @@ export function letItSnow() {
       toggleSnowflake();
     });
 
-    snowActive && toggleSnowflake();
+    snowActive && window.requestIdleCallback(() => {
+      toggleSnowflake();
+    });
   }
 }
 
@@ -43,7 +45,7 @@ function toggleSnowflake() {
 
   import(/* webpackChunkName: "snow" */'./snow.js').then(({ default: Snow }) => {
     window.snowInstance = new Snow({
-      total: 25,
+      total: 30,
       image: '/img/snowflake.webp'
     });
   });
