@@ -1,3 +1,5 @@
+import { $imageLoaded } from '../../utils';
+
 const DEFAULTS = {
   total: 20,
   minSize: 7,
@@ -53,7 +55,7 @@ class Snow {
     for (let i = 0; i < this.options.total; i++) {
       this.flakes.push({
         x: Math.floor(Math.random() * this.width),
-        y: -10,
+        y: this.options.maxSize * -1,
         s: randomMinMax(this.options.minSize, this.options.maxSize),
         d: Math.floor(Math.random() * this.options.total)
       });
@@ -61,19 +63,12 @@ class Snow {
 
     window.addEventListener('resize', this.resize);
 
-    this.loadImage()
-      .then(() => {
+    $imageLoaded(this.options.image)
+      .then((img) => {
+        this.image = img;
         window.requestAnimationFrame(() => this.draw());
       })
       .catch(() => console.warn(`Canvas: image ${this.options.image} not found`));
-  }
-  loadImage() {
-    return new Promise((resolve, reject) => {
-      this.image = new Image();
-      this.image.onload = resolve;
-      this.image.onerror = reject;
-      this.image.src = this.options.image;
-    });
   }
   draw() {
     this.context.clearRect(0, 0, this.width, this.height);
@@ -91,6 +86,7 @@ class Snow {
       this.context.drawImage(this.image, f.x, f.y, f.s, f.s);
       this.context.restore();
     }
+
     this.update();
     this.raf = window.requestAnimationFrame(() => this.draw());
   }
@@ -99,8 +95,8 @@ class Snow {
     this.rotate += 1;
     for (let i = 0; i < this.options.total; i++) {
       const f = this.flakes[i];
-      f.y += (Math.cos(this.angle + f.d) + 1 + f.s / 2) * 0.45;
-      f.x += (Math.sin(this.angle) * 2) * 0.45;
+      f.y += (Math.cos(this.angle + f.d) + 1 + f.s / 2) * 0.2;
+      f.x += (Math.sin(this.angle) * 2) * 0.25;
 
       if (f.x > this.width + 5 || f.x < -5 || f.y > this.height) {
         f.x = Math.floor(Math.random() * this.width);

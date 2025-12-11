@@ -363,9 +363,7 @@ async function handleLoad() {
     });
   }
 
-  window.requestAnimationFrame(() => {
-    letItSnow();
-  });
+  letItSnow();
 }
 
 function handlePopstate() {
