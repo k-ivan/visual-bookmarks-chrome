@@ -99,12 +99,13 @@ body {
   &::after {
     content: "";
     position: absolute;
-    right: -2px;
-    top: 2px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #33c933;
+    right: 2px;
+    top: -4px;
+    background-image: url("/img/hat.webp");
+    width: 30px;
+    height: 21px;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }
 
