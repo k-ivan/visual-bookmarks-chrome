@@ -94,9 +94,17 @@ body {
   background-image: url("/img/camera.svg");
 }
 
-.let-it-snow-btn.is-active {
+.let-it-snow-btn {
   position: relative;
-  &::after {
+
+  & svg {
+    stroke: #fff;
+  }
+
+  &.is-active:not(.has-hat) svg {
+    stroke: greenyellow;
+  }
+  &.is-active.has-hat::after {
     content: "";
     position: absolute;
     right: 2px;
