@@ -159,6 +159,8 @@ export class DragSortify {
   }
 
   #onDragOver(e) {
+    if (!this.draggedItem) return;
+
     e.preventDefault();
     const overElement = e.target.closest(this.options.draggableSelector);
 
