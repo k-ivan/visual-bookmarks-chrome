@@ -50,7 +50,7 @@
     "message": "Folder"
   },
   "url_field_tip": {
-    "message": "Wpisz adres URL lub pozostaw to pole puste, jeśli chcesz utworzyć folder"
+    "message": "Wpisz adres URL lub pozostaw pole puste, jeśli chcesz utworzyć folder"
   },
   "btn_close": {
     "message": "Anuluj"
@@ -134,7 +134,7 @@
     "message": "Zaktualizowano zakładkę"
   },
   "notice_bookmark_removed": {
-    "message": "Zakładka \"<span data-title>$title$</span>\" usunięta",
+    "message": "Usunięto zakładkę \"<span data-title>$title$</span>\"",
     "placeholders": {
       "title": {
         "content": "$1"
@@ -142,7 +142,7 @@
     }
   },
   "notice_folder_removed": {
-    "message": "Folder \"<span data-title>$title$</span>\" usunięty",
+    "message": "Usunięto folder \"<span data-title>$title$</span>\"",
     "placeholders": {
       "title": {
         "content": "$1"
@@ -159,19 +159,19 @@
     "message": "Nie odnaleziono identyfikatora folderu. Możesz nie posiadać zsynchronizowanych zakładek."
   },
   "notice_reset_default_settings": {
-    "message": "Ustawienia lokalne zostały zresetowane"
+    "message": "Przywrócono domyślne ustawienia lokalne"
   },
   "notice_sync_settings_cleared": {
     "message": "Usunięto zsynchronizowane dane"
   },
   "notice_bg_image_updated": {
-    "message": "Obraz tła został zmieniony"
+    "message": "Zmieniono obraz tła"
   },
   "notice_thumbnails_update_complete": {
     "message": "Zakończono aktualizację miniatur"
   },
   "notice_link_copied": {
-    "message": "Link skopiowany"
+    "message": "Skopiowano link"
   },
   "alert_file_type_fail_type": {
     "message": "Zły typ pliku\nPrawidłowy typ pliku ($type$)",
@@ -368,7 +368,7 @@
     "message": "Eksportuj"
   },
   "import_settings_success": {
-    "message": "Ustawienia zostały zaimportowane"
+    "message": "Zaimportowano ustawienia"
   },
   "import_settings_failed": {
     "message": "Nie udało się przetworzyć pliku z ustawieniami"
@@ -541,7 +541,7 @@
     "message": "Wybierz folder"
   },
   "remove_service": {
-    "message": "Usunąć $service$",
+    "message": "Usuń $service$",
     "placeholders": {
       "service": {
         "content": "$1"
@@ -555,7 +555,7 @@
     "message": "Musisz zezwolić rozszerzeniu na działanie w trybie prywatnym"
   },
   "notice_host_permissions": {
-    "message": "Aby tworzyć miniatury stron internetowych, wymagana jest zgoda użytkownika na udzielenie rozszerzeniu dostępu do stron internetowych."
+    "message": "Aby tworzyć miniatury stron internetowych, musisz zezwolić rozszerzeniu na dostęp do ich zawartości."
   },
   "learn_more": {
     "message": "Dowiedz się więcej"
