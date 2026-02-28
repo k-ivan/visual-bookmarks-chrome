@@ -13,7 +13,10 @@
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "action": {
     "default_title": "__MSG_default_title__"
   },
