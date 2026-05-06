@@ -184,10 +184,7 @@ async function handleCreatedTab(tab) {
   }
 }
 
-async function handleCreateThumbnail(id, bookmark, callback) {
-  const { importingBookmarks } = await storage.local.get('importingBookmarks');
-  if (importingBookmarks) return;
-
+function handleCreateThumbnail(id, bookmark, callback) {
   captureScreen(bookmark.url, async function(data) {
     if (data.error) {
       return callback && callback();
@@ -200,6 +197,9 @@ async function handleCreateThumbnail(id, bookmark, callback) {
 }
 
 async function handleBookmarks(eventType, id, bookmark) {
+  const { importingBookmarks } = await storage.local.get('importingBookmarks');
+  if (importingBookmarks) return;
+
   const isBookmarkUrl = bookmark.url || bookmark.node?.url;
   // we will start rebuilding the list of folders only if an event happened to the folder
   // note: in the case of moving, it will also work with a bookmark
@@ -291,7 +291,11 @@ if (!FIREFOX_BROWSER) {
     storage.local.set({ importingBookmarks: true });
   });
   browser.bookmarks.onImportEnded.addListener(() => {
-    storage.local.remove('importingBookmarks');
+    initContextMenu();
+    setTimeout(() => {
+      // avoid race conditions when the handleBookmarks process is running, but the flag has already been removed
+      storage.local.remove('importingBookmarks');
+    }, 500);
   });
 }
 
