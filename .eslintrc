@@ -86,6 +86,14 @@
     "key-spacing": ["error", { "afterColon": true }],
     "comma-dangle": ["error", "never"],
     "padded-blocks": ["error", "never"],
-    "require-await": "error"
+    "require-await": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxBOF": 0,
+        "maxEOF": 0
+      }
+    ]
   }
 }
