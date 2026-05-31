@@ -93,7 +93,6 @@ dl {
   }
 }
 
-
 .special-link {
   margin-bottom: 15px;
 }
@@ -103,6 +102,10 @@ dl {
   display: table;
   width: 100%;
   border-radius: var(--base-radius);
+
+  &:not(:last-child) {
+    margin-bottom: 6px;
+  }
 
   &:focus-within,
   &:hover {
@@ -114,7 +117,9 @@ dl {
       padding: 2px;
       border-radius: var(--base-radius);
       background: linear-gradient(45deg, #4285f4, #b96bd6);
-      mask: conic-gradient(#000 0 0) content-box exclude, conic-gradient(#000 0 0);
+      mask:
+        conic-gradient(#000 0 0) content-box exclude,
+        conic-gradient(#000 0 0);
       pointer-events: none;
     }
   }
@@ -211,7 +216,8 @@ li ul {
 
 code,
 kbd {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family:
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   padding: 0.2em 0.45em;
   font-size: 85%;
 }
