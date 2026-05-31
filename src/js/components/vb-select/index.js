@@ -58,6 +58,14 @@ class VbSelectFolders extends HTMLElement {
     return this.selectNode.value;
   }
 
+  set disabled(value) {
+    this.selectNode.disabled = value;
+  }
+
+  get disabled() {
+    return this.selectNode.disabled;
+  }
+
   #renderOptions(folders) {
     const folderId = this.parentFolderId ? this.parentFolderId : this.folderId;
     const options = [];
