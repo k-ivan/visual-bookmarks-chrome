@@ -5,13 +5,13 @@ import { $uid } from './utils';
  * remove after switching to a new manifest (v3)
  */
 import { storage } from './api/storage';
-import { DEFAULT_FOLDER, FIREFOX_BROWSER } from './constants';
+import { DEFAULT_BOOKMARKS_FOLDER } from './constants';
 
 const DEFAULTS = Object.freeze({
   color_theme: 'os',
   background_image: 'background_noimage',
   background_external: '',
-  default_folder_id: FIREFOX_BROWSER ? DEFAULT_FOLDER.FIREFOX : DEFAULT_FOLDER.CHROME,
+  default_folder_id: DEFAULT_BOOKMARKS_FOLDER,
   dial_columns: 7,
   dial_width: 70, // value in percent (50,60,70,80,90)
   vertical_center: false,

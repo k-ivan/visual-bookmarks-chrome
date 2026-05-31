@@ -186,3 +186,5 @@ export const LOCAL_PROTOCOLS = [
   'edge://',
   'chrome://'
 ];
+
+export const DEFAULT_BOOKMARKS_FOLDER = !FIREFOX_BROWSER ? DEFAULT_FOLDER.CHROME : DEFAULT_FOLDER.FIREFOX;
