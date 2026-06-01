@@ -105,8 +105,12 @@
         radial-gradient(circle, var(--theme-background-2) 50%, transparent 50%),
         radial-gradient(circle, var(--theme-background-2) 50%, transparent 50%);
       background-repeat: no-repeat;
-      background-position: 50% 20%, 50% 90%;
-      background-size: 48px 48px, 80px 7px;
+      background-position:
+        50% 20%,
+        50% 90%;
+      background-size:
+        48px 48px,
+        80px 7px;
       border-radius: var(--vb-services-radius);
     }
   }
