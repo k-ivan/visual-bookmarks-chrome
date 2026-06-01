@@ -96,8 +96,8 @@ class VbPopup extends HTMLElement {
     const target = e.composedPath()[0];
     if (
       this.isActive &&
-      !this.contains(target) && // in a custom popup must contain a target
-      !event.composedPath().includes(this) // should contain our custom popup
+      !this.contains(target) &&
+      !e.composedPath().includes(this)
     ) {
       this.hide();
     }
