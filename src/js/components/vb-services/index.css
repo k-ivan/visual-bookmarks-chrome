@@ -6,7 +6,7 @@
   --vb-popup-radius: var(--vb-services-radius);
   --vb-popup-left: auto;
   --vb-popup-right: -5px;
-  --vb-popup-top: calc(100% + 10px);
+  --vb-popup-y: calc(100% + 10px);
   --vb-popup-btn-radius: 50%;
 
   position: fixed;

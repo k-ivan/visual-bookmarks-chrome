@@ -38,10 +38,10 @@
   transition-timing-function: ease-in-out;
 
   &.is-below {
-    bottom: var(--vb-popup-bottom, 100%);
+    bottom: var(--vb-popup-y, 100%);
   }
   &.is-above {
-    top: var(--vb-popup-top, 100%);
+    top: var(--vb-popup-y, 100%);
   }
 
   &.is-show {

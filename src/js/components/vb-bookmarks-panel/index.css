@@ -1,5 +1,5 @@
 .bookmarks-panel {
-  --vb-popup-bottom: calc(100% + 20px);
+  --vb-popup-y: calc(100% + 20px);
   --vb-popup-btn-radius: 50%;
 
   position: fixed;
