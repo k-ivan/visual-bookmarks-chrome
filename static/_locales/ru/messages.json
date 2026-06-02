@@ -540,6 +540,9 @@
   "select_folder": {
     "message": "Выбор папки"
   },
+  "show_last_opened_folder": {
+    "message": "Показывать последнюю открытую папку"
+  },
   "remove_service": {
     "message": "Удалить $service$",
     "placeholders": {

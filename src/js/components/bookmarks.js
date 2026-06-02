@@ -2,7 +2,7 @@ import { DragSortify } from '../plugins/dragSortify';
 import { multiswap } from '../plugins/dragSortify/multiswap';
 import Toast from './toast';
 import ImageDB from '../api/imageDB';
-import { settings } from '../settings';
+import { settings, LAST_OPENED_FOLDER_ID } from '../settings';
 import { storage } from '../api/storage';
 import {
   move,
@@ -22,7 +22,11 @@ import {
   $notifications,
   $resizeThumbnail
 } from '../utils';
-import { ROOT_FOLDERS, SVG_LOADER } from '../constants';
+import {
+  DEFAULT_BOOKMARKS_FOLDER,
+  ROOT_FOLDERS,
+  SVG_LOADER
+} from '../constants';
 import { bookmarksToDelete } from '../state';
 import  confirmPopup from '../plugins/confirmPopup.js';
 import { requestPermissions } from '../api/permissions';
@@ -59,6 +63,14 @@ const Bookmarks = (() => {
       !settings.$.sort_by_newest
     ) {
       initDrag(container);
+    }
+
+    // Create marker for the last active folder in advance to ensure the correct behavior when this option is used for the first time
+    if (
+      !localStorage.getItem(LAST_OPENED_FOLDER_ID) ||
+      !settings.$.show_last_opened_folder
+    ) {
+      localStorage.setItem(LAST_OPENED_FOLDER_ID, settings.$.default_folder_id);
     }
 
     // Search bookmarks if toolbar enable
@@ -105,6 +117,10 @@ const Bookmarks = (() => {
     window.addEventListener('hashchange', async function() {
       const folderId = startFolder();
       await createSpeedDial(folderId);
+
+      // Save the ID of the last opened folder
+      localStorage.setItem(LAST_OPENED_FOLDER_ID, folderId);
+
       $customTrigger('changeFolder', container, {
         detail: { folderId },
         bubbles: true
@@ -279,6 +295,11 @@ const Bookmarks = (() => {
 
   function startFolder() {
     let folderId = String(settings.$.default_folder_id);
+
+    // If the "Last Opened Folder" option is enabled, get the ID of the last opened folder
+    if (settings.$.show_last_opened_folder) {
+      folderId = localStorage.getItem(LAST_OPENED_FOLDER_ID) ?? DEFAULT_BOOKMARKS_FOLDER;
+    }
 
     if (window.location.hash !== '') {
       folderId = window.location.hash.slice(1);
@@ -960,7 +981,6 @@ const Bookmarks = (() => {
 
     let isHidden = true;
     toggleViewBookmarks(isHidden);
-
 
     return new Promise(resolve => {
       showRemoveBookmarkToast({

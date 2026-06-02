@@ -248,6 +248,14 @@ function relationToggleOption(target) {
     const value = checkedRegexp.test(target.type) ? target.checked : target.value;
     ids.forEach(id => {
       const relationEl = document.getElementById(id);
+
+      // This whole relationship-handling logic needs to be reworked.
+      // For now, this is a dirty workaround for the relation item's action
+      if (target.dataset.relationAction) {
+        relationEl[target.dataset.relationAction] = target.checked;
+        return;
+      }
+
       // disable the related option only if it was initially enabled
       // if relation element => checkbox|radio
       if (checkedRegexp.test(relationEl.type) && relationEl.checked) {
@@ -467,11 +475,12 @@ async function getPermissions() {
 }
 
 async function generateFolderList() {
-  const folders = await getFolders().catch(err => console.warn(err));
+  const folders = await getFolders().catch(console.warn);
   if (folders) {
     const vbSelect = document.getElementById('default_folder_id');
     vbSelect.value = settings.$.default_folder_id;
     vbSelect.folders = folders;
+    vbSelect.disabled = settings.$.show_last_opened_folder;
   }
 }
 

@@ -540,6 +540,9 @@
   "select_folder": {
     "message": "選擇一個資料夾"
   },
+  "show_last_opened_folder": {
+    "message": "顯示上次開啟的資料夾"
+  },
   "remove_service": {
     "message": "刪除 $service$",
     "placeholders": {

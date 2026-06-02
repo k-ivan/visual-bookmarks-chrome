@@ -12,6 +12,7 @@ const DEFAULTS = Object.freeze({
   background_image: 'background_noimage',
   background_external: '',
   default_folder_id: DEFAULT_BOOKMARKS_FOLDER,
+  show_last_opened_folder: false,
   dial_columns: 7,
   dial_width: 70, // value in percent (50,60,70,80,90)
   vertical_center: false,
@@ -153,6 +154,7 @@ const settingsStore = () => {
     async resetLocal() {
       $settings = Object.assign({}, DEFAULTS);
       await storage.local.set({ settings: $settings });
+      localStorage.clear();
     },
 
     /**
@@ -168,3 +170,5 @@ const settingsStore = () => {
 };
 
 export const settings = settingsStore();
+
+export const LAST_OPENED_FOLDER_ID = 'last_opened_folder_id';

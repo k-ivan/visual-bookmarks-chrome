@@ -123,11 +123,24 @@ export default [
     key: browser.i18n.getMessage('general_setting'),
     list: [
       {
-        id: 'default_folder_id',
-        title: browser.i18n.getMessage('default_folder_id'),
-        note: browser.i18n.getMessage('option_not_sync'),
-        type: 'vb-select-folders',
-        options: []
+        group: [
+          {
+            id: 'default_folder_id',
+            title: browser.i18n.getMessage('default_folder_id'),
+            note: browser.i18n.getMessage('option_not_sync'),
+            type: 'vb-select-folders',
+            options: []
+          },
+          {
+            id: 'show_last_opened_folder',
+            title: browser.i18n.getMessage('show_last_opened_folder'),
+            type: 'switch',
+            data: {
+              relationToggleId: 'default_folder_id',
+              relationAction: 'disabled'
+            }
+          }
+        ]
       },
       {
         id: 'search_engine',

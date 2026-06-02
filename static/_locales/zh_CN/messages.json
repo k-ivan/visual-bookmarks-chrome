@@ -540,6 +540,9 @@
   "select_folder": {
     "message": "选择一个目录"
   },
+  "show_last_opened_folder": {
+    "message": "显示上次打开的文件夹"
+  },
   "remove_service": {
     "message": "删除 $service$",
     "placeholders": {
