@@ -81,7 +81,7 @@ class VbSelectFolders extends HTMLElement {
           }
 
           const name = `${prefix} ${folder.title}`;
-          options.push(`<option${folder.id === folderId ? ' selected' : ''} value="${folder.id}">${name}</option>`);
+          options.push(`<option${folder.id === folderId ? ' selected' : ''} value="${folder.id}">${name} (${folder.childrenLength})</option>`);
           if (folder.children.length) {
             processTree(folder.children, pass + 1);
           }

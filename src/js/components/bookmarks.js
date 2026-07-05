@@ -276,14 +276,8 @@ const Bookmarks = (() => {
           item.remove();
           move(id, destination)
             .then(() => {
-              const isFolder = item.hasAttribute('is-folder');
-              // if the folder run the updateFolderList trigger
-              isFolder && $customTrigger('updateFolderList', document, {
-                detail: {
-                  isFolder: true
-                }
-              });
-              document.dispatchEvent(new CustomEvent('vb-bookmarks-panel:close'));
+              $customTrigger('updateFolderList', document);
+              $customTrigger('vb-bookmarks-panel:close', document);
             });
         };
       }
@@ -770,14 +764,7 @@ const Bookmarks = (() => {
         ...(settings.$.move_to_start && { index: 0 })
       })
         .then(() => {
-        // if it is a folder update folderList
-          if (!bookmark.url) {
-            $customTrigger('updateFolderList', document, {
-              detail: {
-                isFolder: true
-              }
-            });
-          }
+          $customTrigger('updateFolderList', document);
           bookmark.remove();
         });
     });
@@ -923,11 +910,7 @@ const Bookmarks = (() => {
 
     bookmark.remove();
 
-    isFolder && $customTrigger('updateFolderList', document, {
-      detail: {
-        isFolder: true
-      }
-    });
+    $customTrigger('updateFolderList', document);
   }
 
   function showRemoveBookmarkToast({
@@ -1008,11 +991,7 @@ const Bookmarks = (() => {
               bookmark.remove();
             }));
 
-            $customTrigger('updateFolderList', document, {
-              detail: {
-                isFolder: true
-              }
-            });
+            $customTrigger('updateFolderList', document);
           }
         }
       });
@@ -1054,11 +1033,7 @@ const Bookmarks = (() => {
           (isFolder ? removeTree : remove)(id)
             .then(() => {
               bookmark.remove();
-              isFolder && $customTrigger('updateFolderList', document, {
-                detail: {
-                  isFolder: true
-                }
-              });
+              $customTrigger('updateFolderList', document);
             });
         }
       }
@@ -1096,13 +1071,14 @@ const Bookmarks = (() => {
         }
         container.querySelector('.bookmark-btn--create').insertAdjacentElement('beforeBegin', bookmark);
 
-        if (!result.url) {
-          $customTrigger('updateFolderList', document, {
-            detail: {
-              isFolder: true
-            }
-          });
-        }
+        $customTrigger('updateFolderList', document);
+        // if (!result.url) {
+        //   $customTrigger('updateFolderList', document, {
+        //     detail: {
+        //       isFolder: true
+        //     }
+        //   });
+        // }
 
         return bookmark;
       });
@@ -1121,28 +1097,14 @@ const Bookmarks = (() => {
       };
       move(id, destination)
         .then(() => {
-          // if it is a folder update folderList
-          if (!result.url) {
-            $customTrigger('updateFolderList', document, {
-              detail: {
-                isFolder: true
-              }
-            });
-          }
+          $customTrigger('updateFolderList', document);
           bookmark.remove();
         });
     } else {
-      // if it is a folder update folderList
-      if (!result.url) {
-        $customTrigger('updateFolderList', document, {
-          detail: {
-            isFolder: true
-          }
-        });
-      }
       // else update bookmark view
       bookmark.title = result.title;
       bookmark.url = result.url ? result.url : `#${result.id}`;
+      $customTrigger('updateFolderList', document);
     }
     Toast.show(browser.i18n.getMessage('notice_bookmark_updated'));
     return bookmark;

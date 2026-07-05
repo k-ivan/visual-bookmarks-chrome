@@ -12,7 +12,8 @@ const recurseFolders = (arr) => {
         title: current.title,
         id: current.id,
         parentId: current.parentId,
-        children: recurseFolders(current.children)
+        children: recurseFolders(current.children),
+        childrenLength: current.children.length
       });
     }
     return accum;

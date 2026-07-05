@@ -256,8 +256,8 @@ class VbHeader extends HTMLElement {
     }
   };
 
-  async handleUpdateFolders(e) {
-    if (e.detail?.isFolder && this.selectNode) {
+  async handleUpdateFolders() {
+    if (this.selectNode) {
       this.selectNode.folders = await getFolders();
     }
   }
