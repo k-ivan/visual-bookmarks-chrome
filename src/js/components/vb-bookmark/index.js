@@ -7,6 +7,13 @@ class VbBookmark extends HTMLAnchorElement {
   #overlayEl = null;
   #_folderChildren = [];
   #externalLogo = false;
+  #iconMap = {
+    chrome: '/img/chrome.svg',
+    about: '/img/firefox.svg',
+    edge: '/img/edge.svg',
+    file: '/img/file-open.svg',
+    default: '/img/protocol.svg'
+  };
 
   constructor() {
     super();
@@ -210,7 +217,7 @@ class VbBookmark extends HTMLAnchorElement {
 
   #logoUrl(url) {
     if (!this.#canDisplayLogo(url)) {
-      return '/img/black-hole.svg';
+      return this.faviconUrl;
     }
 
     return this.#externalLogo
@@ -223,6 +230,11 @@ class VbBookmark extends HTMLAnchorElement {
     return /^https?:\/\/.+|^#.+/.test(urlLink);
   }
 
+  #getDefaultIconForUrl(url) {
+    const key = url.match(/^([a-z][a-z0-9+.-]*):\/\//i)?.[1]?.toLowerCase();
+    return this.#iconMap[key] ?? this.#iconMap.default;
+  }
+
   get serviceLogo() {
     return this.#externalLogo;
   }
@@ -232,7 +244,7 @@ class VbBookmark extends HTMLAnchorElement {
 
   get faviconUrl() {
     if (!this.#canDisplayLogo()) {
-      return '/img/black-hole.svg';
+      return this.#getDefaultIconForUrl(this.url);
     }
     return faviconURL(this.url);
   }
