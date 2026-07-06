@@ -231,7 +231,7 @@ class VbBookmark extends HTMLAnchorElement {
   }
 
   #getDefaultIconForUrl(url) {
-    const key = url.match(/^([a-z][a-z0-9+.-]*):\/\//i)?.[1]?.toLowerCase();
+    const key = url.match(/^([a-z][a-z0-9+.-]*):/i)?.[1]?.toLowerCase();
     return this.#iconMap[key] ?? this.#iconMap.default;
   }
 
