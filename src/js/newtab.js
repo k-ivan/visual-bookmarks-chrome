@@ -268,54 +268,32 @@ function dispatchSelectedBookmarks() {
 async function showControlMultiplyBookmarks() {
   dispatchSelectedBookmarks();
 
-  const panelNode = document.getElementById('bookmarks-panel');
-  if (panelNode) return;
+  if (document.getElementById('bookmarks-panel')) return;
 
-
-  const panel = $createElement('vb-bookmarks-panel', {
+  const vbBookmarksPanel = $createElement('vb-bookmarks-panel', {
     id: 'bookmarks-panel',
     class: 'bookmarks-panel'
   });
-  panel.selectedFolder = window.location.hash.slice(1) || settings.$.default_folder_id;
-  panel.folders = await getFolders();
+  vbBookmarksPanel.selectedFolder = window.location.hash.slice(1) || settings.$.default_folder_id;
+  vbBookmarksPanel.folders = await getFolders();
 
-  document.body.append(panel);
-
-  // animate panel actions
-  panelActions.tweenActive = true;
-  panelActions.tween = panel.animate([
-    { transform: 'translate3D(0, 100%, 0)' },
-    { transform: 'translate3D(0, 0, 0)' }
-  ], {
-    duration: 200,
-    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    fill: 'forwards'
-  });
+  document.body.append(vbBookmarksPanel);
+  vbBookmarksPanel.show();
 }
 
-function hideControlMultiplyBookmarks() {
-  if (!document.getElementById('bookmarks-panel')) return;
+async function hideControlMultiplyBookmarks() {
+  const vbBookmarksPanel = document.getElementById('bookmarks-panel');
+  if (!vbBookmarksPanel) return;
   // we need reset reset lastSelectedBookmark
   lastSelectedBookmark = null;
-
-  if (!panelActions.tweenActive) return;
 
   multipleSelectedBookmarks.forEach(bookmark => delete bookmark.dataset.selected);
   multipleSelectedBookmarks.length = 0;
 
   dispatchSelectedBookmarks();
 
-  // document.dispatchEvent(
-  //   new CustomEvent('vb:bookmarks:select', {
-  //     detail: multipleSelectedBookmarks
-  //   })
-  // );
-
-  panelActions.tween.playbackRate = -1;
-  panelActions.tween.onfinish = () => {
-    panelActions.tweenActive = false;
-    document.getElementById('bookmarks-panel')?.remove();
-  };
+  await vbBookmarksPanel.hide();
+  vbBookmarksPanel.remove();
 }
 
 function handleMultipleBookmarks(evt) {
@@ -459,7 +437,6 @@ function openLocalProtocol(url) {
     url
   });
 }
-
 
 async function handleMenuOpen(evt) {
   // when opening the context menu,

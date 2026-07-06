@@ -157,6 +157,30 @@ class VbBookmarksPanel extends HTMLElement {
     );
   }
 
+  #animationInstance = null;
+
+  show() {
+    this.#animationInstance = this.animate([
+      { transform: 'translate3D(0, 100%, 0)' },
+      { transform: 'translate3D(0, 0, 0)' }
+    ], {
+      duration: 200,
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      fill: 'both'
+    });
+  }
+
+  hide() {
+    this.#animationInstance.reverse();
+
+    return new Promise((resolve) => {
+      this.#animationInstance.onfinish = () => {
+        this.hidden = true;
+        return resolve();
+      };
+    });
+  }
+
   close() {
     document.dispatchEvent(new CustomEvent('vb-bookmarks-panel:close'));
   }
