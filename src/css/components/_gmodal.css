@@ -45,12 +45,13 @@ body.gmodal-open {
   &.has-animate .gmodal__container {
     will-change: transform, opacity;
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.96);
     transition-property: opacity, transform;
     transition-duration: 150ms;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
   &.has-animate.is-shown .gmodal__container {
+    transition-duration: 250ms;
     opacity: 1;
     transform: none;
   }
@@ -109,7 +110,9 @@ body.gmodal-open {
   min-height: auto;
   border-radius: var(--base-radius);
   background-color: var(--modal-background);
-  box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+  box-shadow:
+    0 3px 6px rgb(0 0 0 / 16%),
+    0 3px 6px rgb(0 0 0 / 23%);
 }
 
 .gmodal__dialog {
@@ -125,7 +128,9 @@ body.gmodal-open {
     position: relative;
     min-height: auto;
     border-radius: var(--base-radius);
-    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+    box-shadow:
+      0 3px 6px rgb(0 0 0 / 16%),
+      0 3px 6px rgb(0 0 0 / 23%);
   }
 }
 

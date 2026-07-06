@@ -31,16 +31,19 @@
   background-color: var(--theme-background-2);
   border-radius: var(--vb-popup-radius, var(--base-radius));
   box-shadow: var(--vb-popup-shadow, none);
-  transform: translateY(10px);
+  will-change: visibility, opacity, transform;
+  transform: scale(0.97);
   visibility: hidden;
   transition-property: visibility, opacity, transform;
-  transition-duration: 0.15s, 0.15s, 0.15s;
-  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s, 0.2s, 0.2s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 
   &.is-below {
+    transform-origin: bottom center;
     bottom: var(--vb-popup-y, 100%);
   }
   &.is-above {
+    transform-origin: top center;
     top: var(--vb-popup-y, 100%);
   }
 
