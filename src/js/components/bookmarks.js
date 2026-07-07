@@ -138,7 +138,9 @@ const Bookmarks = (() => {
           if (thumbnail.children) {
             // if there are thumbnails in the children, clear them from memory too
             thumbnail.children.forEach(item => {
-              item.blobUrl && URL.revokeObjectURL(item.blobUrl);
+              if (item.blobUrl) {
+                URL.revokeObjectURL(item.blobUrl);
+              }
             });
           }
           // delete an inaccessible item from Map
@@ -434,7 +436,7 @@ const Bookmarks = (() => {
 
       THUMBNAILS_MAP.set(key, {
         id: key,
-        ...(parentFolderThumb && parentFolderThumb),
+        ...parentFolderThumb,
         children: thumbnails[key]
       });
     });
@@ -521,25 +523,29 @@ const Bookmarks = (() => {
       && container.dataset?.parentFolder
       && settings.$.show_back_column;
 
-    hasBack && container.prepend(
-      $createElement('button', {
-        id: 'bookmark-back',
-        class: 'bookmark-btn bookmark-btn--back md-ripple',
-        'aria-label': browser.i18n.getMessage('parent_folder')
-      }, $createElement('span', {
-        class: DROPZONE_SELECTOR.replace('.', ''),
-        'data-id': container.dataset?.parentFolder
-      }))
-    );
+    if (hasBack) {
+      container.prepend(
+        $createElement('button', {
+          id: 'bookmark-back',
+          class: 'bookmark-btn bookmark-btn--back md-ripple',
+          'aria-label': browser.i18n.getMessage('parent_folder')
+        }, $createElement('span', {
+          class: DROPZONE_SELECTOR.replace('.', ''),
+          'data-id': container.dataset?.parentFolder
+        }))
+      );
+    }
 
-    hasCreate && container.append(
-      $createElement('button', {
-        id: 'add',
-        class: 'bookmark-btn bookmark-btn--create md-ripple',
-        'data-create': 'New',
-        'aria-label': browser.i18n.getMessage('new_bookmark')
-      })
-    );
+    if (hasCreate) {
+      container.append(
+        $createElement('button', {
+          id: 'add',
+          class: 'bookmark-btn bookmark-btn--create md-ripple',
+          'data-create': 'New',
+          'aria-label': browser.i18n.getMessage('new_bookmark')
+        })
+      );
+    }
     dialLoading.hidden = true;
   }
 
@@ -677,9 +683,9 @@ const Bookmarks = (() => {
 
     isGeneratedThumbs = false;
 
-    showNotice && $notifications(
-      browser.i18n.getMessage('notice_thumbnails_update_complete')
-    );
+    if (showNotice) {
+      $notifications(browser.i18n.getMessage('notice_thumbnails_update_complete'));
+    }
 
     $customTrigger('thumbnails:updated', container);
     progressToastTween.reverse();
@@ -861,7 +867,7 @@ const Bookmarks = (() => {
     let hostPermissions = access;
     try {
       hostPermissions = await checkHostPermissions();
-    } catch (error) {}
+    } catch (err) {}
 
     if (!hostPermissions) return;
 
@@ -1050,7 +1056,9 @@ const Bookmarks = (() => {
     }
 
     const thumbnail = THUMBNAILS_MAP.get(id);
-    thumbnail && URL.revokeObjectURL(thumbnail.blobUrl);
+    if (thumbnail) {
+      URL.revokeObjectURL(thumbnail.blobUrl);
+    }
     THUMBNAILS_MAP.delete(id);
 
     return Promise.all(
