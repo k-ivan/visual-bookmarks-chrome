@@ -67,13 +67,13 @@ class VbBookmark extends HTMLAnchorElement {
     if (this.#externalLogo) {
       imageEl.classList.add('bookmark__img--external');
     }
-    imageEl.style.backgroundImage = `url('${this.#logoUrl(this.url)}')`;
+    imageEl.style.backgroundImage = `url('${this.#getLogoUrl(this.url)}')`;
   }
 
   #updateFavicon() {
     if (this.hasFavicon) {
       const faviconEl = this.querySelector('.bookmark__favicon');
-      faviconEl.src = this.faviconUrl;
+      faviconEl.src = this.#getFaviconUrl();
     }
   }
 
@@ -123,7 +123,7 @@ class VbBookmark extends HTMLAnchorElement {
           el.style.backgroundImage = `url('${child.image}')`;
         } else {
           el.classList.add('bookmark__img--logo');
-          el.style.backgroundImage = `url('${this.#logoUrl(child.url)}')`;
+          el.style.backgroundImage = `url('${this.#getLogoUrl(child.url)}')`;
         }
         fragment.appendChild(el);
       });
@@ -150,7 +150,7 @@ class VbBookmark extends HTMLAnchorElement {
         class: 'bookmark__favicon',
         width: 16,
         height: 16,
-        src: this.isFolder ? '/img/folder.svg' : this.faviconUrl,
+        src: this.isFolder ? '/img/folder.svg' : this.#getFaviconUrl(),
         alt: ''
       });
       caption.appendChild(favicon);
@@ -166,26 +166,27 @@ class VbBookmark extends HTMLAnchorElement {
   }
 
   #createBookmarkThumbnail() {
-    const thumbnail = $createElement('div', { 'data-thumb': '' });
+    const thumbnail = $createElement('div', { 'data-thumb': '', class: 'bookmark__img' });
 
     if (this.image) {
-      thumbnail.classList.add('bookmark__img');
       thumbnail.classList.toggle('bookmark__img--contain', this.isCustomImage || this.isFolder);
       thumbnail.style.backgroundImage = `url('${this.image}')`;
-    } else if (!this.isFolder) {
-      thumbnail.classList.add('bookmark__img', 'bookmark__img--logo');
-      thumbnail.classList.toggle('bookmark__img--external', this.#externalLogo);
-      thumbnail.style.backgroundImage = `url('${this.#logoUrl(this.url)}')`;
     } else if (this.isFolder) {
       if (this.hasFolderPreview) {
         thumbnail.classList.add('bookmark__summary-folder');
         const children = this.#renderFolderPreview();
-        children
-          ?  thumbnail.appendChild(children)
-          : thumbnail.classList.add('bookmark__img', 'bookmark__img--folder');
+        if (children) {
+          thumbnail.appendChild(children);
+        } else {
+          thumbnail.classList.add('bookmark__img--folder');
+        }
       } else {
-        thumbnail.classList.add('bookmark__img', 'bookmark__img--folder');
+        thumbnail.classList.add('bookmark__img--folder');
       }
+    } else {
+      thumbnail.classList.add('bookmark__img--logo');
+      thumbnail.classList.toggle('bookmark__img--external', this.#externalLogo);
+      thumbnail.style.backgroundImage = `url('${this.#getLogoUrl(this.url)}')`;
     }
 
     return thumbnail;
@@ -215,19 +216,9 @@ class VbBookmark extends HTMLAnchorElement {
     }
   }
 
-  #logoUrl(url) {
-    if (!this.#canDisplayLogo(url)) {
-      return this.faviconUrl;
-    }
-
-    return this.#externalLogo
-      ? this.#externalLogo.replace('{{website}}', $getDomain(url))
-      : faviconURL(url, 32);
-  }
-
   #canDisplayLogo(url) {
     const urlLink = url ?? this.url;
-    return /^https?:\/\/.+|^#.+/.test(urlLink);
+    return /^https?:\/\/.+/.test(urlLink);
   }
 
   #getDefaultIconForUrl(url) {
@@ -235,18 +226,28 @@ class VbBookmark extends HTMLAnchorElement {
     return this.#iconMap[key] ?? this.#iconMap.default;
   }
 
+  #getLogoUrl(url) {
+    if (!this.#canDisplayLogo(url)) {
+      return this.#getDefaultIconForUrl(url);
+    }
+
+    return this.#externalLogo
+      ? this.#externalLogo.replace('{{website}}', $getDomain(url))
+      : faviconURL(url, 32);
+  }
+
+  #getFaviconUrl(url = this.url) {
+    if (!this.#canDisplayLogo(url)) {
+      return this.#getDefaultIconForUrl(url);
+    }
+    return faviconURL(url);
+  }
+
   get serviceLogo() {
     return this.#externalLogo;
   }
   set externalLogo(value) {
     this.#externalLogo = value;
-  }
-
-  get faviconUrl() {
-    if (!this.#canDisplayLogo()) {
-      return this.#getDefaultIconForUrl(this.url);
-    }
-    return faviconURL(this.url);
   }
 
   get hasOverlay() {
