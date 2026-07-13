@@ -31,17 +31,6 @@
   }
 }
 
-select,
-select.form-control {
-  padding-right: 28px;
-  background-image: var(--select-icon);
-  background-size: 18px;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 5px) center;
-  appearance: none;
-  filter: var(--select-icon-color);
-}
-
 textarea {
   min-height: 100px;
   max-height: 500px;
@@ -137,4 +126,111 @@ textarea {
 .switch__input:checked + .switch__label::after {
   background-color: var(--switch-active-circle);
   transform: translate(100%, -50%);
+}
+
+select,
+select.form-control {
+  padding-right: 28px;
+  background-image: var(--select-icon);
+  background-size: 18px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 5px) center;
+}
+
+@supports not (appearance: base-select) {
+  select {
+    appearance: none;
+  }
+}
+
+@supports (appearance: base-select) {
+  select,
+  ::picker(select) {
+    appearance: base-select;
+  }
+  ::picker(select) {
+    margin-block: 0.3rem;
+
+    color: var(--input-text-color);
+    border: var(--input-border);
+    border-radius: var(--input-radius);
+    background-color: var(--input-bg);
+    max-height: 600px;
+
+
+    border: 1px solid var(--color-primary);
+    width: fit-content;
+    scrollbar-width: thin;
+  }
+
+  .vb-select-folders::before {
+    flex-shrink: 0;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-image: var(--select-folder);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+
+  select,
+  select.form-control {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg);
+
+    &:open {
+      border-color: var(--color-primary);
+    }
+
+    &::picker-icon {
+      display: none;
+    }
+
+    & selectedcontent {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      gap: 10px;
+      line-height: 1;
+    }
+
+    & option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 16px;
+
+      &:checked {
+        color: #fff;
+        background-color: var(--color-primary);
+      }
+
+      &::checkmark {
+        order: 1;
+        margin-left: auto;
+      }
+    }
+  }
+  .vb-select-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 6px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+    white-space: nowrap;
+    border-radius: 4px;
+    background: var(--theme-invert-alpha-10);
+    font-variant-numeric: tabular-nums;
+
+    & span {
+      display: none;
+    }
+  }
 }

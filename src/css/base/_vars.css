@@ -71,6 +71,7 @@
   --input-bg: var(--theme-background-input);
   --input-text-color: inherit;
   --select-icon: url("/img/select-arrow.svg");
+  --select-folder: url("/img/select-dark-folder.svg");
   --input-radius: var(--base-radius);
 
   /* Buttons */
@@ -135,6 +136,8 @@
   /* services popup */
   --vb-services-background: var(--theme-background);
   --vb-services-skeleton-background: #ddd;
+
+  color-scheme: light;
 }
 
 .dark {
@@ -175,6 +178,7 @@
   --input-placeholder-focus-color: hsl(0deg 0% 50% / 70%);
   --input-border: 1px solid transparent;
   --select-icon: url("/img/select-arrow-light.svg");
+  --select-folder: url("/img/select-folder.svg");
 
   /* Options  dark theme */
   --options-background: var(--theme-background);
@@ -202,4 +206,6 @@
   /* services popup */
   --vb-services-background: var(--theme-background-2);
   --vb-services-skeleton-background: var(--theme-background-3);
+
+  color-scheme: dark;
 }
