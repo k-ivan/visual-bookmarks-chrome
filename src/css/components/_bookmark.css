@@ -237,9 +237,7 @@
   padding-right: 7px;
   line-height: 1;
   white-space: nowrap;
-  text-overflow: ellipsis;
   text-align: center;
-  overflow: hidden;
   background: var(--bookmark-caption-bg);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
@@ -268,6 +266,9 @@
   min-width: 0;
   font-weight: 600;
   color: var(--bookmark-caption-color);
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .bookmark__overlay {
