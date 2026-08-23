@@ -34,14 +34,6 @@ body.gmodal-open {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 
-  @nest .gmodal-open &::-webkit-scrollbar-thumb {
-    background-color: #999;
-  }
-
-  @nest .gmodal-open &::-webkit-scrollbar-thumb:hover {
-    background-color: #ccc;
-  }
-
   &.has-animate .gmodal__container {
     will-change: transform, opacity;
     opacity: 0;
@@ -58,6 +50,14 @@ body.gmodal-open {
   &.is-hidden {
     z-index: 9997;
   }
+}
+
+.gmodal-open .gmodal::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+.gmodal-open .gmodal::-webkit-scrollbar-thumb:hover {
+  background-color: #ccc;
 }
 
 .gmodal--popup .gmodal__container--popup {
@@ -265,12 +265,13 @@ body.gmodal-open {
     outline-offset: 2px;
   }
 
-  @nest .gmodal__custom-image:hover & {
-    opacity: 0.7;
-  }
   & svg {
     fill: currentcolor;
   }
+}
+
+.gmodal__custom-image:hover .gmodal__custom-reset {
+  opacity: 0.7;
 }
 
 .gmodal__footer button + button {

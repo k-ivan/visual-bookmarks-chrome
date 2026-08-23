@@ -1,15 +1,20 @@
 const path = require('path');
 const webpack = require('webpack');
+const { getManifest } = require('./manifest.config.js');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const lightningcss = require('lightningcss');
+const browserslist = require('browserslist');
 const WebpackBar = require('webpackbar');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
+const BROWSER = process.env.BROWSER || 'chrome';
+
 module.exports = (env, arg) => {
-  const isDev = arg.mode === 'development'
   return {
     mode: arg.mode,
     experiments: {
@@ -23,10 +28,10 @@ module.exports = (env, arg) => {
       newtab: './src/js/newtab.js',
       options: './src/js/options.js',
       background: './src/js/background.js',
-      theme: './src/js/theme.js',
+      theme: './src/js/theme.js'
     },
     output: {
-      path: path.join(__dirname, process.env.BROWSER === 'firefox' ? '/extension_firefox' : '/extension_chrome'),
+      path: path.join(__dirname, BROWSER === 'firefox' ? '/extension_firefox' : '/extension_chrome'),
       filename(pathData) {
         return pathData.chunk.name === 'background' ? '[name].js' : 'js/[name].js';
       },
@@ -51,11 +56,8 @@ module.exports = (env, arg) => {
         {
           test: /\.js$/,
           exclude: [/node_modules/],
-          // include: path.resolve(__dirname, 'src/js/components'),
-          use: [{
-            loader: 'babel-loader',
-            options: { presets: ['@babel/env'] }
-          }]
+          loader: 'esbuild-loader',
+          options: { target: 'chrome105' }
         },
         {
           // ccs-loader for web-components
@@ -67,8 +69,7 @@ module.exports = (env, arg) => {
               options: {
                 url: false
               }
-            },
-            'postcss-loader'
+            }
           ]
         },
         {
@@ -81,13 +82,17 @@ module.exports = (env, arg) => {
               options: {
                 url: false
               }
-            },
-            'postcss-loader'
+            }
           ]
         }
       ]
     },
     optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 0,
+        name: 'shared'
+      },
       // splitChunks: {
       //   cacheGroups: {
       //     // defaultVendors: {
@@ -110,8 +115,14 @@ module.exports = (env, arg) => {
           // do not extract to separate file
           extractComments: false,
           terserOptions: {
-            output: { comments: /@?license/i, },
+            output: { comments: /@?license/i },
             compress: { passes: 1 }
+          }
+        }),
+        new CssMinimizerPlugin({
+          minify: CssMinimizerPlugin.lightningCssMinify,
+          minimizerOptions: {
+            targets: lightningcss.browserslistToTargets(browserslist('chrome >= 105 or firefox >= 128'))
           }
         })
       ]
@@ -122,35 +133,25 @@ module.exports = (env, arg) => {
         verbose: false,
         cleanStaleWebpackAssets: false
       }),
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: 'static',
-            transform(content, path) {
-              if (process.env.BROWSER === 'firefox' && path.includes('manifest.json')) {
-                const manifest = JSON.parse(content.toString());
-
-                delete manifest.background.service_worker
-                delete manifest.browser_action;
-                delete manifest.options_page;
-                delete manifest.minimum_chrome_version
-
-                manifest.background.scripts = ['background.js'];
-                manifest.permissions = manifest.permissions.filter(p => p !== 'background');
-                manifest.browser_specific_settings = {
-                  gecko: {
-                    id: '{876119d0-ddb9-47bb-9620-bc8d2489e857}',
-                    strict_min_version: '128.0'
-                  }
-                }
-
-                return JSON.stringify(manifest, null, 2);
+      {
+        apply(compiler) {
+          compiler.hooks.thisCompilation.tap('GenerateManifestPlugin', (compilation) => {
+            compilation.hooks.processAssets.tap(
+              {
+                name: 'GenerateManifestPlugin',
+                // stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
+              },
+              () => {
+                const manifest = getManifest(BROWSER);
+                const json = JSON.stringify(manifest, null, 2);
+                compilation.emitAsset('manifest.json', new webpack.sources.RawSource(json));
               }
-
-              return content
-            }
-          }
-        ]
+            );
+          });
+        }
+      },
+      new CopyWebpackPlugin({
+        patterns: [{ from: 'static' }]
       }),
       new SVGSpritemapPlugin(`./src/icons/**/*.svg`, {
         output: {
@@ -171,9 +172,7 @@ module.exports = (env, arg) => {
           prefix: false
         }
       }),
-      new MiniCssExtractPlugin({
-        filename: 'css/[name].css'
-      }),
+      new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
       ...['newtab', 'options'].map(name => {
         return new HtmlWebpackPlugin({
           template: `./src/${name}.html`,
@@ -185,16 +184,15 @@ module.exports = (env, arg) => {
             removeScriptTypeAttributes: true
           },
           chunks: [name]
-        })
+        });
       }),
-      new webpack.EnvironmentPlugin({
-        BROWSER: 'chrome'
-      }),
-      process.env.BROWSER !== 'firefox' && new webpack.BannerPlugin({
+      new webpack.EnvironmentPlugin({ BROWSER: 'chrome' }),
+      BROWSER !== 'firefox' && new webpack.BannerPlugin({
         banner: 'if (typeof browser === "undefined") { browser = chrome; }',
         raw: true,
-        entryOnly: false
+        entryOnly: false,
+        test: /\.js$/
       })
     ]
-  }
+  };
 };

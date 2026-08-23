@@ -1,6 +1,7 @@
 import styles from './index.css';
 import { $createElement } from '../../utils';
 import { CONTEXT_MENU } from '../../constants';
+import '../vb-popup';
 
 class VbBookmarksPanel extends HTMLElement {
   panel = null;

@@ -168,11 +168,10 @@
   line-height: 20px;
   text-transform: capitalize;
   padding-bottom: 3px;
-
-  @nest .list:not(.is-edit) .item:hover & {
-    white-space: normal;
-    word-wrap: break-word;
-  }
+}
+.list:not(.is-edit) .item:hover .item-name {
+  white-space: normal;
+  word-wrap: break-word;
 }
 .item-remove {
   display: none;

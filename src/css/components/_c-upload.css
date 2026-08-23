@@ -117,8 +117,8 @@
   & svg {
     fill: #fff;
   }
+}
 
-  @nest .c-upload__preview:hover & {
-    opacity: 0.85;
-  }
+.c-upload__preview:hover .c-upload__remove {
+  opacity: 0.85;
 }

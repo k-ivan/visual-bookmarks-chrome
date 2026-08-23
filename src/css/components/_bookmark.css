@@ -241,6 +241,7 @@
   background: var(--bookmark-caption-bg);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
+  overflow: clip;
   &::after {
     content: "";
     position: absolute;

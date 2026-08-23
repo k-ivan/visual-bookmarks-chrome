@@ -24,7 +24,11 @@
   min-height: calc(100vh - 115px);
   align-content: center;
 
-  @nest .hidden-toolbar & {
+  /* @nest .hidden-toolbar & {
     min-height: calc(100vh - 60px);
-  }
+  } */
+}
+
+.hidden-toolbar .grid--vcenter {
+  min-height: calc(100vh - 60px);
 }

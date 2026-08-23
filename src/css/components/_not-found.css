@@ -15,10 +15,10 @@
   max-width: 450px;
   color: var(--notfound-color);
   border-radius: 3px;
+}
 
-  @nest .has-image & {
-    background-color: var(--notfound-background);
-  }
+.has-image .not-found__wrap {
+  background-color: var(--notfound-background);
 }
 
 .not-found__icon {
