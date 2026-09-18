@@ -169,7 +169,7 @@ async function init() {
       class: 'circ-btn update-thumbnails',
       'aria-label': browser.i18n.getMessage('thumbnails_update')
     }, {
-      html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#capture_fill"/></svg>`
+      html: `<svg width="20" height="20"><use xlink:href="/img/symbol.svg#capture_outline"/></svg>`
     });
     document.getElementById('aside_controls').appendChild(generateThumbsBtn);
 
