@@ -235,7 +235,6 @@
   height: min(35%, 30px);
   padding-left: 7px;
   padding-right: 7px;
-  line-height: 1;
   white-space: nowrap;
   text-align: center;
   background: var(--bookmark-caption-bg);
