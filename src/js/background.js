@@ -46,8 +46,8 @@ async function captureScreen(link, callback) {
   browser.windows.create({
     url: link,
     state: 'normal',
-    left: 1e5,
-    top: 1e5,
+    left: screen.availWidth - 1,
+    top: screen.availHeight - 1,
     width: 1,
     height: 1,
     type: 'popup'
